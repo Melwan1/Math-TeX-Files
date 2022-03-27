@@ -1,0 +1,225 @@
+\section{Sommes}
+
+Soient $m,n \in \N$ tels que $m \leq n$, $a_m,a_{m+1},...,a_n \in \C$. \\
+La somme $a_m + a_{m+1}+...+a_n$ se note :
+$$ \strong{\sum_{k=m}^{n}a_k} $$
+\begin{remarque}[Convention]
+Si $m > n, \sum_{k=m}^{n}a_k=0$.
+\end{remarque}
+Autre relation : $$\sum_{k \in \llbracket m,n \rrbracket} a_k$$
+
+Si $i,j \in \N : \llbracket i,j \rrbracket = \{ k \in \N \mid i \leq k \leq j \}$ et $\llbracket i,j \rrbracket = \varnothing$ si $i>j$. \\
+On note $\sum_{i \in I} a_i$ la somme $a_{i_1}+a_{i_2}+...+a_{i_p}$ (si $I = {i_1,i_2,...,i_p}$). \\
+Plus généralement : soit $E$ un ensemble fini et $f : E \to \C$ une application. On notera $\sum_{x \in E} f(x)$ la somme $f(x_1)+f(x_2)+...+f(x_n)$ (si $E={x_1,...,x_n}$). \\
+
+\begin{proposition}{Propriétés sur les sommes}{PropSommes1}
+\begin{enumerate}
+	\item Si $E$ est un ensemble fini, $f,g : E \to \C$ et si $\lambda \in \C$ alors : 
+	\begin{enumerate}
+		\item $\sum_{x \in E} (f(x)+g(x)) = \sum_{x \in E}f(x) + \sum_{x \in E}g(x)$ ;
+		\item $\lambda \sum_{x \in E} f(x) = \sum_{x \in E} (\lambda f(x))$.
+	\end{enumerate}
+	\item \strong{Sommation par paquets} : $E$ un ensemble fini, $f : E \to \C$, $E_1,...E_n$ des parties de $E$ telles que : $E_1 \cup E_2 \cup ... \cup E_n = E$ et $E_i \cap E_j = \varnothing$ (pour $i \neq j$), alors : \\
+	$\sum_{x \in E} f(x) = \sum_{i=1}^{n} \left(\sum_{x \in E_i} f(x)\right)$
+\end{enumerate}
+\end{proposition}
+
+\begin{exemple}[Exemples]
+\begin{enumerate}
+	\item $E = \llbracket 1,9 \rrbracket, a : k \in E \mapsto a_k \C$, \\
+	$E_1 = \{1,3,6\}, E_2 = \{2,4,8,9\}, E_3 = \{5,7\}$, alors : \\
+	$$ \sum_{k=1}^{9}a_k = \underbrace{(a_1+a_3+a_6)}_{\sum_{k\in E_1}a_k}\;+\underbrace{(a_2+a_4+a_8+a_9)}_{\sum_{k \in E_2}a_k}\;+\underbrace{(a_5+a_7)}_{\sum_{k \in E_3}a_k} = \sum_{i=1}^{3} 	\left(\sum_{k \in E_i}a_k\right)$$
+	
+	\item De même : 
+	$$ \sum_{k=0}^{n}a_k = \sum_{\substack{k=0 \\ k \text{ pair}}}^{n} a_k + \sum_{\substack{k=0 \\ k \text{ impair}}}^{n}$$
+\end{enumerate}
+\end{exemple}
+
+\begin{proposition}{Changement d'indice}{ChgtIndice}
+$E,F$ deux ensembles finis (de même cardinal), $f : E \to \C$, $\phi : F \to E$ bijective (chaque $x \in E$ admet un unique antécédent par $F$), alors : \\
+$\sum_{x \in E} f(x) = \sum_{y \in F}f(\varphi(y))$ : en effet, si $y$ décrit $F$ alors $\varphi(y)$ décrit $E$.
+\end{proposition}
+
+\begin{exemple}
+\begin{enumerate}
+	\item $E = {1,2,3,4}, F = {a,b,c,d}, f : E \to \C, \varphi : F \to E$ définie par : $\varphi(a)=2, \varphi(b)=3, \varphi(c)=1, \varphi(d)=4$. \\
+	$\sum_{x \in E} f(x) = f(1)+f(2)+f(3)+f(4)$ et \\
+	$\sum{y \in F} f(\varphi(y)) = f(\varphi(a))+f(\varphi(b))+f(\varphi(c))+f(\varphi(d)) = f(1)+f(2)+f(3)+f(4)$.
+	\item $\sum_{k=0}^{n}a_k = \sum_{k=0}^{n} a_{n-k}$.
+\end{enumerate}
+\end{exemple}
+
+\begin{proposition}{Téléscopage}{SommesTéléscopiques}
+On a :
+\begin{center}
+\mathbox{\sum_{k=m}^{n} (a_{k+1}-a_k) = a_{n+1}-a_m}
+\end{center}
+\end{proposition}
+
+\begin{exemple}
+Soit $z$ un nombre complexe, $n$ un entier naturel, $S = \sum_{k=0}^{n} z^k$. \\
+On a : $zS-S = \sum_{k=0}^{n} \left(z^{k+1}-z^k\right) = z^{n+1}-1$ \\
+De plus, $\sum_{k=0}^{n} \left(z^{k+1}-z^k\right) = (z-1)S$. \\
+On obtient = $(z-1)S = (z-1)\sum_{k=0}^{n}z^k = z^{n+1}-1 \; (\forall z \in \C, \forall n \in \N)$. \\
+\textbox{Si $z \neq 1$, $\sum_{k=0}^{n}z^k = \frac{z^{n+1}-1}{z-1}$.}
+\end{exemple}
+
+\begin{corollaire}{Factorisation de $a^n-b^n$}{IdentitéRemarquableN}
+Soient $a,b \in \C, n \in \N^*$. On a :
+\begin{center}
+\textbox{$a^n-b^n = (a-b)\sum_{k=0}^{n-1} a^kb^{n-1-k}$}.
+\end{center}
+\end{corollaire}
+
+\begin{principedemo}{}
+Si $b \neq 0$, appliquer la formule de la somme d'une suite géométrique au complexe $z=\frac{a}{b}$.
+\end{principedemo}
+
+\begin{demo}{}
+Soient $a,b \in \C, n \in \N^*$. \\
+Si $b \neq 0$, alors $(\frac{a}{b}-1)\sum_{k=0}^{n-1}(\frac{a^k}{b^k})=\frac{a^n}{b^n}-1$. \\
+En multipliant par $b^n$ :
+$$a^n-b^n=(\frac{a}{b}-1)b \cdot b^{n-1}\left(\sum_{k=0}^{n-1}\frac{a^k}{b^k}\right) = (a-b)\sum_{k=0}^{n-1}a^kb^{n-1-k}$$
+D'où $\forall a \in \C, \forall b \in \C^*, \forall n \in \N^* : a^n-b^n = (a-b)(a^{n-1}+a^{n-2}b+a^{n-3}b^2+...+ab^{n-2}+b^{n-1})$. \\
+Cette égalité est aussi vraie pour $b=0$ et pour $n=0$.
+\end{demo}
+
+Ainsi, $a^3-b^3 = (a-b)(a^2+ab+b^2)$ \\
+$a^3+b^3 = (a+b)(a^2-ab+b^2)$ \\
+$a^4-b^4 = (a-b)(a^3+a^2b+ab^2+b^3)$ \\
+$a^4-b^4 = (a+b)(a^3-a^2b+ab^2-b^3)$.
+
+\begin{application}{Calcul de la somme des $n$ premiers carrés.}{CalculSommeCarrés}
+$S_p = \sum_{k=1}^{n} k^p \; (p \in \N)$. \\
+$S_0 = \sum_{k=1}^{n}1 = n, \quad S_1 = \sum{k=1}^{n} k = \frac{n(n+1)}{2}$. \\
+Quid $S_2$ ? \\
+On a : $\sum_{k=1}^{n}\left((k+1)^2-k^2\right) = 2S_1+S_0 = n^2+2n$. \\ \\
+On procède de même pour $S_2$ : \\
+$\sum_{k=1}^{n}\left((k+1)^3-k^3\right) = (n+1)^3-1 = 3S_2 + 3S_1 + S_0$ soit \mathbox{S_2 = \frac{n(n+1)(2n+1)}{6}}. \\
+
+Deuxième méthode : \\
+$S_1 = \sum_{k=1}^{n}k = \sum_{k=1}{n}(n+1-k)$ \\
+(si $k$ décrit $\llbracket 1,n \rrbracket$, alors $n+1-k$ aussi, $k \in \llbracket 1,n \rrbracket \mapsto n+1-k \in \llbracket 1,n \rrbracket$ est bijective). \\
+On a alors : $2S_1 = n(n+1) \Longleftrightarrow S_1 = \frac{n(n+1)}{2}$. \\ \\
+De même pour $S_2$ : \\
+$S_2 = \sum_{k=1}^{n} k^2 = \sum_{k=1}^{n}(n+1-k)^2$
+
+\end{application}
+
+\begin{application}{Exercice}{CalculSommeCubes}
+Trouver la valeur de $S_3$ en utilisant la deuxième méthode.
+\end{application}
+
+\section{Coefficients du binôme}
+
+\begin{remarque}[Rappel]{}
+si $n \in \N^*$, alors $n! = \Pi_{k=1}^{n}k = n(n-1)...3 \cdot 2 \cdot 1$; \\
+et, par convention : $0! = 1$.
+\end{remarque}
+
+\begin{definition}{Coefficients du binôme}{}
+\textbox{Pour $n \in \N$ et $k \in \llbracket 0,n \rrbracket$, $\binom{n}{k} = \frac{n!}{k!(n-k)!}$}, \\
+et, par convention, pour $k > n, \binom{n}{k}=0$.
+\end{definition}
+
+\begin{proposition}{Propriétés algébriques sur les coefficients du binôme}{}
+\begin{enumerate}
+	\item $\binom{n}{0} = 1$ ;
+	\item $\binom{n}{1} = n$ ;
+	\item $\binom{n}{2} = \frac{n(n-1)}{2}$ ;
+	\item Pour $k \in \llbracket 0,n \rrbracket, \; \binom{n}{k} = \binom{n}{n-k}$ ;
+	\item Pour $k \in \llbracket 1,n \rrbracket, \; k \binom{n}{k} = n \binom{n-1}{k-1}$ ;
+	\item Relation de Pascal : Pour $k,n \in \N : \; \binom{n}{k}+\binom{n}{k+1}=\binom{n+1}{k+1}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{demo}{}
+Preuve de \textbf{5)}. \\
+Soient $k,n \in \N, k \leq n$.
+$$k \cdot \binom{n}{k} = k\dfrac{n!}{k!(n-k)!} = \dfrac{n}{(k-1)!(n-k)!} = n\dfrac{(n-1)!}{(k-1)!(n-1-(k-1))!} = n \cdot \binom{n-1}{k-1}$$
+Preuve de la relation de Pascal \textbf{6)} : \\
+Soient $k,n \in \N, k \leq n-1$. \\
+On a : 
+$$ \binom{n}{k}+\binom{n}{k+1} = \dfrac{n!}{k!(n-k)!}+\dfrac{n!}{(k+1)!(n-k-1)!} = \dfrac{n!(k+1+n-k)}{(k+1)!(n-k)!} = \dfrac{(n+1)n!}{(k+1)!(n+1-(k+1))!} = \binom{n+1}{k+1}$$
+Si $k=n$, $\binom{n}{k}+\binom{n}{k+1}=1+0=1=\binom{n+1}{k+1}$. \\
+Si $k>n$, $\binom{n}{k}+\binom{n}{k+1}=0+0=0=\binom{n+1}{k+1}$. \\
+D'où : 
+$$\mathbox{\forall k,n \in \N, \binom{n}{k}+\binom{n}{k+1}=\binom{n+1}{k+1}}$$
+\end{demo}
+
+\begin{corollaire}{Caractérisation des coefficients du binôme}{CoefBinomeEntiers}
+$\forall k ,n \in \N : \binom{n}{k} \in \N$.
+\end{corollaire}
+
+\begin{demo}{}
+Soit $H_n : \forall k, \binom{n}{k} \in \N$.
+$\star$ Soit $k \in \N$. $\binom{0}{k} = 
+\begin{cases}
+1 & \text{ si } k=0 \\
+0 & \text{ si } k \geq 1
+\end{cases}$, on a bien $\binom{0}{k} \in \N$. \\
+
+$\star$ Soit $n \in \N$. Supposons $H_n$ vrai et montrons $H_{n+1}$. \\
+Soit $k \in \N$. \\
+Si $k=0$, alors $\binom{n+1}{0} = 1 \in \N$. \\
+Si $k \geq 1, \; \binom{n+1}{k} = \binom{n}{k-1}+\binom{n}{k}$. Par hypothèse de récurrence, $\binom{n}{k-1}$ et $\binom{n}{k}$ sont des entiers naturels. \\
+D'où, pour tout $k \in \N : \binom{n+1}{k}$ est un entier naturel. \\
+$H_{n+1}$ est donc vrai. \\
+D'après le principe de récurrence, $H_n$ est vraie pour tout entier naturel $n$.
+\end{demo}
+
+\begin{theoreme}{Formule du binôme de Newton}{BinomeNewton}
+Soit $n \in \N, a,b \in \C$ alors $(a+b)^n = \sum_{k=0}^{n}\binom{n}{k}a^kb^{n-k} = \sum_{k=0}^{n}\binom{n}{k}a^{n-k}b^k$.
+\end{theoreme}
+
+\begin{principedemo}{}
+Par récurrence, effectuer un changement d'indice dans l'une des deux sommes.
+\end{principedemo}
+
+\begin{demo}{}
+Pour $n \in \N$, soit $H_n$ l'énoncé : $(a+b)^n = \sum_{k=0}^{n}\binom{n}{k}a^kb^{n-k}$. \\
+$H_0$ est vrai : $(a+b)^0 = 1$ et $\sum_{k=0}^{0}\binom{0}{k}a^kb^{0-k} = \binom{0}{0}a^0b^0 = 1$, donc $(a+b)^0 = \sum_{k=0}^{0}\binom{0}{k}a^kb^{0-k}$. \\
+Soit $n \in \N$, supposons que $H_n$ est vraie et montrons $H_{n+1}$. \\ \\
+$(a+b)^{n+1} = (a+b)(a+b)^n \\
+\overset{[HR]}{=} (a+b)\sum_{k=0}^{n}\binom{n}{k}a^kb^{n-k}\\
+= \sum_{k=0}^{n}\binom{n}{k}a^{k+1}b^{n-k} + \sum_{k=0}^{n}\binom{n}{k}a^kb^{n+1-k}$. \\
+Posons $j=k+1$ : \\
+$\sum_{k=0}^{n}\binom{n}{k}a^{k+1}b^{n-k} = \sum_{j=1}{n+1}\binom{n}{j-1}a^jb^{n-(j-1)} \\
+= \sum_{j=1}^{n+1}\binom{n}{j-1}a^jb^{n+1-j}$. \\
+D'où : \\
+$(a+b)^{n+1} = \sum{k=1}^{n+1}\binom{n}{k-1}a^kb^{n+1-k} + \sum_{k=0}^{n}a^kb^{n+1-k} \\
+= \binom{n}{n}a^{n+1}b^0 + \sum_{k=1}^{n}\left(\binom{n}{k-1}+\binom{n}{k}\right)a^kb^{n+1-k} + \binom{n}{0}a^0b^{n+1} \\
+= \binom{n+1}{n+1}a^{n+1}b^0 + \sum_{k=1}^{n}\binom{n+1}{k}a^kb^{n+1-k} + \binom{n+1}{0}a^0b^{n+1} \\
+= \sum_{k=0}^{n+1}\binom{n+1}{k}a^kb^{n+1-k}$, CQFD. \\ \\
+Par principe de récurrence, $H_n$ est vrai pour tout $n \in \N$.
+\end{demo}
+
+\begin{application}{}{AppCoefBinome}
+\begin{enumerate}
+	\item pour $n \in \N$, $2^n = (1+1)^n = \sum_{k=0}^{n} \binom{n}{k}1^k1^{n-k} = \sum_{k=0}^{n} \binom{n}{k}$. \\
+	Pour $n \in \N^* : 0 = 0^n = (-1+1)^= \sum_{k=0}^{n} \binom{n}{k}(-1)^k$.
+	D'où, pour $n \in \N^* : \\
+	2^n + 0^n = \sum_{k=0}^{n}(1+(-1)^k)\binom{n}{k} \\
+	= \sum_{\substack{k=0 \\ k \text{ impair}}}^{n} 0 + \sum_{\substack{k=0 \\ k \text{ pair}}}^{n} 2 \cdot \binom{n}{k} \\
+	= 2\cdot \sum_{\substack{k \in \llbracket 0,n \rrbracket \\ k \text{ pair}}} \binom{n}{k} \\
+	= 2 \cdot \sum_{p \in \N \cap [0,\frac{n}{2}]} \binom{n}{2p}$. \\
+	D'où $\sum_{p \in \N \cap [0,\frac{n}{2}]} \binom{n}{2p} = 2^{n-1}$. \\
+	De plus, si $n \geq 1 : \\
+	2^n=\sum_{k=0}^{n}\binom{n}{k}\\
+	= \underbrace{\sum_{\substack{k \text{ pair} \\ k \in \llbracket 0,n \rrbracket}}\binom{n}{k}}_{2^{n-1}} + \sum_{\substack{k \text{ impair} \\ k \in \llbracket 0,n \rrbracket}}\binom{n}{k}$ \\
+	Donc : $\sum_{\substack{k \text{ impair} \\ k \in \llbracket 0,n \rrbracket}}\binom{n}{k} = \sum_{p \in \N \cap [0,\frac{n-1}{2}]}\binom{n}{2p+1} = 2^{n-1}$.
+	
+	\item $X \hookrightarrow \mathcal{B}(n,p)$, $n\geq 1$. $X$ à valeurs dans $\llbracket 0,n \rrbracket$ et \\
+	$\forall k \in \llbracket 0,n \rrbracket : \mathbb{P}(X=k) = \binom{n}{k}p^k(1-p)^{n-k}$. \\
+	On a : $\mathbb{E}(X) = \sum_{k=0}^n k \mathbb{P}(X=k) = \sum_{k=0}^{n} k \cdot \binom{n}{k}p^k(1-p)^{n-k} \\
+	= 0 + /sum_{k=1}^{n}k \cdot \binom{n}{k}p^k(1-p)^{n-k} \\
+	= n \left(\sum_{k=1}{n}\binom{n-1}{k-1}p^k(1-p)^{n-k}\right) \\
+	= n \sum_{k=0}^{n-1}\binom{n-1}{k}p^k(1-p)^{n-k-1}\\
+	 = np(p+1-p)^{n-1} \\
+	 =np$.
+\end{enumerate}
+\end{application}
+
+\begin{theoreme}{Théorème de Dirichlet}{ThmDirichlet}
+Soit $a,b \in \N$ deux entiers premiers entre eux. Alors il y a une infinité de nombres premiers de la forme $ka+b$ (\ie congrus à $b$ modulo $a$).
+\end{theoreme}
