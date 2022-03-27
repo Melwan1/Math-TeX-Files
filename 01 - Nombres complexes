@@ -1,0 +1,618 @@
+\section{Construction de $\C$}
+
+On considère l'ensemble $\R^2 = \{ (a,b) \mid a,b \in \R \}$, on a : $(a,b) = (c,d) \Longleftrightarrow
+\begin{cases}
+a = c \\
+b = d
+\end{cases}$ \\ \\
+On définit deux lois $+$ et $\times$ par $\forall (a,b), (c,d) \in \R^2 : (a,b) + (c,d) = (a+c),(b+d) \quad (a,c) \times (b,d) = (ac-bd,ad+bc)$.
+
+\begin{proposition}{Lois internes sur $\R^2$}{PropLoisInternesCplx}
+\begin{enumerate}
+	\item $+$ est associative ($\forall x,y,z \in \R^2, x+(y+z) = (x+y)+z$) ; \\
+		$+$ admet un élément neutre : $(0,0)$ ; \\
+		Tout élément $x = (a,b) \in \R^2$ admet un opposé (il existe $y = (c,d)$ tel que $x=y = y+x = (0,0)$), et l'opposé de $(a,b)$ est $(-a,-b)$. \\
+		On dit que \strong{$(\R^2,+)$} \Strong{est un groupe}. \\ \\
+		$+$ est commutative : $\forall x,y \in \R^2, x+y = y+x$. \\
+		On dit que \strong{$(\R^2,+)$} \Strong{est un groupe commutatif / groupe abélien}.
+	
+	\item $\times$ est associative, admet un élément neutre $(1,0)$, est distributive par rapport à $+$. \\
+		On dit que \strong{$(\R^2,+,\times)$} \Strong{est un anneau}. \\ \\
+		$\times$ est commutative. \\
+		On dit que \strong{$(\R^2,+,\times)$} \Strong{est un anneau commutatif}. \\ \\
+		Tout élément $x = (a,b) \in \R^2 \setminus {(0,0)}$ admet un inverse pour $\times$ \\
+		(il existe $y$ tel que $x\times y = y \times x = (1,0)$.) et l'inverse de $(a,b)$ est $\left(\frac{a}{a^2+b^2}, \frac{-b}{a^2+b^2}\right)$. \\
+		On dit que \strong{$(\R^2,+,\times)$} \Strong{est un corps commutatif}.
+\end{enumerate}
+\end{proposition}
+
+On note $\C$ l'ensemble $\R^2$, muni de $+$ et $\times$ ainsi construit. \\ \\
+$\varphi : a \in \R \mapsto (a,0) \in \C$ : $\varphi$ est injective  ($a \neq b \Longrightarrow (a,0) \neq (b,0)$). \\
+$\varphi(a+b) = (a+b,0) = (a,0) + (b,0) = \varphi(a) + \varphi(b)$ \\
+$\varphi(ab) = (ab,0) = (a,0) \times (b,0) = \varphi(a)\varphi(b)$. \\
+On voit donc que $\R$ s'identifie à l'ensemble $\{(a,0) \mid a \in \R \}$. \\
+On convient donc d'écrire, pour $a$ réel, $a$ le complexe $(a,0)$, donc $(0,0)$ se note $0$, $(1,0)$ se note $1$. \\
+Pour $z,z' \in \C$, on note $zz'$  au lieu de $z \times z'$. \\ \\
+Soit $i = (0,1)$, alors $i^2 = (0,1) \times (0,1) = (-1,0) = -1$. \\
+De plus, si $z = (a,b) \in \C$, alors $z = (a,0) + (0,b) = (a,0) + i \cdot (b,0) = a+ib$ (avec l'identification précédente). \\
+Ainsi, tout $z \in \C$ s'écrit $z = a+ib$ pour un unique couple $(a,b) \in \R^2$. \\
+$a$ est la partie réelle de $z$ et se note $\Re(z)$ ; \\
+$b$ est la partie imaginaire de $z$ et se note $\Im(z)$. \\
+On note $\overline{z}$ le complexe $\overline{z} = \Re(z) - i \cdot \Im(z)$, pour $z \in \C$, et $\overline{z}$ s'appelle le conjugué de $z$. \\
+
+\begin{proposition}{Conjugué d'un complexe}{PropConjCplx}
+\begin{enumerate}
+	\item $\forall z,z' \in \C$ : $\overline{z+z'} = \overline{z \vphantom{z'}}+\overline{z'}$ \\
+		$\overline{zz'} = \overline{z \vphantom{z'}} \cdot \overline{z'}$ \\
+		$\overline{\overline{z}} = z$. \\
+		On en déduit : $\forall z \in \C, \forall n \in \N, \overline{z^n \vphantom{z}} = \overline{z}^n$, et pour $z \in \C^*, \overline{\dfrac{1}{z}} = \dfrac{1}{\overline{z}}$.
+	\item On a, pour $z \in \C$ : \\
+	$\Re(z) = \frac{z+\overline{z}}{2}$ \\
+	$\Im(z) = \frac{z-\overline{z}}{2i}$, donc $\frac{1}{i} = -i$.\\
+	$z \in \R \Longleftrightarrow \Im(z) = 0 \Longleftrightarrow z = \overline{z}$
+	On note $i\R$ l'ensemble des complexes du type $ib$ avec $b \in \R$ ($i\R$ est l'ensemble des imaginaires purs). \\
+	$z \in i \R \Longleftrightarrow \Re(z) = 0 \Longleftrightarrow z = - \overline{z}$. 
+\end{enumerate}
+\end{proposition}
+
+\begin{demo}{}
+Egalité du conjugué de l'inverse et de l'inverse du conjugué : \\
+Si $z \in \C^*$, on a, en notant $\frac{1}{z}$ l'inverse de $z$, alors \\
+$1 = z \cdot \frac{1}{z}$, d'où $\overline{1}=1= \overline{z \frac{1}{z}} = \overline{z \vphantom{\frac{1}{z}}} \cdot \overline{\frac{1}{z}}$
+\end{demo}
+
+\begin{remarque}{}
+Pour $z,z' \in \C : zz'=0 \Longleftrightarrow z=0 \text{ ou } z'=0$. \\
+Il est clair que $\forall z \in \C : 0z = z \cdot 0 = 0.$ \\
+Supposons que $z$ n'est pas nul, alors $0 = \frac{1}{z} \cdot 0 = \frac{1}{z} \cdot zz' = z'$.
+\end{remarque}
+
+\newpage
+
+\section{Module}
+
+\begin{remarque}
+Soit $z = a+ib \in \C$ (sous-entendu $a,b \in \R$). \\
+$z\overline{z} = (a+ib)(a-ib) = a^2 + b^2 \geq 0$.
+\end{remarque}
+
+\begin{definition}{Module}{Module}
+Si $z \in \C$, le module de $z$ est $\abs{z} = \sqrt{z \overline{z}} = \sqrt{a^2+b^2}$ (si $z = a+ib$, avec $a,b \in \R$)
+\end{definition}
+
+\begin{proposition}{Module}{PropModule}
+\begin{enumerate}
+	\item Si $z\in \C$, on a $\abs{z} \in \R_+$ et $\abs{z} = 0 \Longleftrightarrow z=0$. \\
+		Si $z \in \C^*, \frac{1}{z} = \frac{\overline{z}}{z\overline{z}} = \frac{\overline{z}}{\abs{z}^2}$.
+	\item Pour $z,z \in \C : \abs{zz'} = \abs{z} \cdot \abs{z'}$
+	\item Si $x \in \R$ alors $\underbrace{\abs{x}}_{\text{module}} = \sqrt{x \overline{x}} = \sqrt{x^2} = \underbrace{\abs{x}}_{\text{valeur absolue}}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{remarque}
+$z = a+ib, z' = c+id$ alors $zz' = ac-bd + i \cdot (ad+bc)$. \\
+$\abs{zz'}^2 = \abs{z}^2 \abs{z'}^2$ donne : $(a^2+b^2)(c^2+d^2) = (ac-bd)^2(ad+bc)^2$, c'est l'identité de Lagrange.
+\end{remarque}
+
+\begin{corollaire}{Module d'un inverse et d'une puissance}{}
+Si $z \in \C^*, \abs{\frac{1}{z}} = \frac{1}{\abs{z}}$ et $\forall n \in \Z, \abs{z^n} = \abs{z}^n$.
+\end{corollaire}
+
+\begin{demo}{}
+Soit $z \in \C^*, 1 = z \cdot \frac{1}{z}$, d'où $1 = \abs{1} = \abs{z \cdot \frac{1}{z}} = \abs{z} \cdot \abs{\frac{1}{z}}$.
+\end{demo}
+
+\begin{proposition}{}{}
+Pour $z \in \C,$ \\
+$\abs{\Re(z)} \leq \abs{z}$ avec égalité si et seulement si $z \in \R$ (\ie $\Im(z) = 0$). \\
+$\abs{\Im(z)} \leq \abs{z}$ avec égalité si et seulement si $z \in i\R$
+\end{proposition}
+
+\begin{demo}{}
+$\abs{z}^2 = \Re(z)^2 + \Im(z)^2 \geq \Re(z)^2$. \\
+$\abs{z} = \sqrt{\abs{z}^2} \geq \sqrt{\Re(z)^2} = \abs{Re(z)}$.
+\end{demo}
+
+\begin{remarque}[Inégalité de Cauchy-Schwarz dans $\R^2$]{CauchySchwarz}
+Pour $a,b,c,d \in \R = \abs{ac-bd} \leq \sqrt{a^2+b^2} \cdot \sqrt{c^2+d^2}$. \\
+Et, dans $\R^n$ : pour $a_1,...a_n, b_1,...,b_n \in \R$, \\
+$\displaystyle{\sum_{k=1}^{n} a_kb_k} \leq \sqrt{\displaystyle{\sum_{k=1}^{n}a_k^2}} \cdot \sqrt{\displaystyle{\sum_{k=1}^{n} b_k^2}}$
+\end{remarque}
+
+\begin{demo}
+Soit $z = a+ib, z' = c-id$. On a $\abs{\Re(zz')} \leq \abs{zz'} = \abs{z} \cdot \abs{z'}$, ce qui donne l'inégalité voulue.
+\end{demo}
+
+\begin{proposition}{Inégalité triangulaire}{InegTri}
+Soit $z,z' \in \C$, Alors : \\
+$\abs{\abs{z}-\abs{z'}} \leq \abs{z+z'} \leq \abs{z}+\abs{z'}$ ; \\
+$\abs{\abs{z}-\abs{z'}} \leq \abs{z-z'} \leq \abs{z}+\abs{z'}$. 
+\end{proposition}
+
+\begin{demo}
+Côté clair : \\
+$\Delta = \left( \abs{z}+\abs{z'} \right)^2 - \abs{z+z'}^2 = \left(\abs{z}+\abs{z'}\right)^2 - \left(\abs{z}^2+\abs{z'}^2 + \overline{z} \cdot z' + z \cdot \overline{z'} \right) \\
+= 2 \abs{z} \cdot \abs{z'} - \underbrace{(z \cdot \overline{z'} + \overline{z \cdot \overline{z'}})}_{2 \Re(zz')}$. \\
+Or $\Re(zz') \leq \abs{\Re(zz')} \leq \abs{zz'} = \abs{z} \cdot \abs{z'}$. \\
+Donc $\Delta \geq 0$. \\ \\
+Côté obscur : \\
+$\abs{z} = \abs{z+z'-z'} \leq \abs{z+z'} + \abs{z'}$. Donc $\abs{z}-\abs{z'} \leq \abs{z+z'}$. \\
+De même, $\abs{z'}-\abs{z} \leq \abs{z+z'}$. D'où $\abs{\abs{z}-\abs{z'}} \leq \abs{z+z'}$.
+\end{demo}
+
+\begin{corollaire}{inégalité triangulaire généralisée à $n$ complexes}{InegTri2}
+Pour $n \in \N^*$ et $z_1,...,z_n \in \C$ : \\
+$\abs{\displaystyle{\sum_{k=1}^{n} z_k}} \leq \displaystyle{\sum_{k=1}^{n} \abs{z_k}}$.
+\end{corollaire}
+
+\newpage
+
+\section{Argument}
+
+\begin{remarque}[Notation]{}
+Pour $\theta \in \R$, note $e^{i\theta}$ le complexe $e^{i\theta} = \cos \theta + i \cdot \sin \theta$. \\
+Pour $\theta, \varphi \in \R$ : 
+\begin{align*}
+e^{i\theta} e^{i \varphi} &= (\cos \theta + i \cdot \sin \theta)(\cos \varphi + i \cdot \sin \varphi) \\
+&= \cos \theta \cos \varphi - \sin \theta \sin \varphi - i ( \sin \theta \cos \varphi + \cos \theta \sin \varphi) \\
+&= \cos(\theta+\varphi) +i \cdot \sin(\theta+\varphi) = e^{i(\theta+\varphi)}.
+\end{align*}
+
+\end{remarque}
+
+Valeurs remarquables : $e^{i0} = 1, e^{i\pi} = -1, e^{i\frac{\pi}{2}} = i$. \\
+Pour $\theta \in \R, e^{i \theta} e^{-i \theta} = e^{i(\theta-\theta)} = e^{i0} = 1$. \\
+Donc $e^{i\theta} \in \C^*$ et $\frac{1}{e^{i\theta}} = e^{-i\theta}$ \\
+On a alors, $\forall n \in \Z, \forall \theta \in \R, \left(e^{i\theta}\right)^n = e^{in\theta}$ (de Moivre). \\
+Pour $\theta \in \R : e^{i\theta} = 1 \Longleftrightarrow \cos \theta = 1 \Longleftrightarrow \theta \in 2\pi\Z$. \\
+On a $\abs{e^{i\theta}}^2 = \cos^2 \theta + \sin^2 \theta = 1$.
+
+\begin{remarque}[Notation]{}
+\end{remarque}
+On note $\mathbb{U} = \{z \in \C \mid \abs{z}=1 \}$. \\
+Aussi, $\forall \theta \in \R : e^{i \theta} \in \mathbb{U}$ ; \\
+$ \forall z \in \mathbb{U}, \frac{1}{z} = \overline{z}$. \\
+Pour $z \in \mathbb{U}$, il existe $\theta \in \R$ tel que $z = e^{i\theta}$ \\
+(soit $z = a+ib \in \mathbb{U}$, avec $a,b \in \R$. Alors $1 = \abs{z}^2 = a^2+b^2$, donc, d'après le TD1, il existe $\theta \in \R$ tel que $a=\cos \theta$ et $b=\sin \theta$, d'où $z = e^{i\theta}$)
+\textbf{Bilan} : $\mathbb{U} = \{ e^{i\theta} \mid \theta \in \R \}$. \\
+$e^{i\theta} = e^{i\varphi} \Longleftrightarrow
+\begin{cases}
+\cos \theta = \cos \varphi \\
+\sin \theta = \sin \varphi
+\end{cases}
+\Longleftrightarrow \varphi \equiv \theta \mod{2\pi} \Longleftrightarrow \varphi \in \theta + 2\pi \Z := \{ \theta + 2k\pi \mid k \in \Z \}$.
+
+\begin{definition}{Argument d'un complexe}{ArgCplx}
+Soit $z \in \C^*$. Il existe $\theta \in \R$ tel que $z = \abs{z}e^{i\theta}$. Par définition, $\text{Arg}(z)$ est l'ensemble des réels $\theta$ tels que $z = \abs{z}e^{i\theta}$. Si $\theta \in \text{Arg}(z)$ alors $\text{Arg}(z)=\theta + 2\pi \Z$.
+\end{definition}
+
+\begin{demo}{}
+$\abs{\frac{z}{\abs{z}}} = \frac{\abs{z}}{\abs{z}} = 1$, donc $\abs{\frac{z}{\abs{z}}} \in \mathbb{U}$ et il existe bien $\theta \in \R$ tel que $\frac{z}{\abs{z}} = e^{i\theta}$.
+\end{demo}
+
+\begin{remarque}
+\begin{enumerate}
+	\item Si $z=0$ alors $z = 0 e^{i\theta}$ pour tout réel $\theta$. \\
+		Si $z \in \C^*$ et $\theta \in \text{Arg}(z)$. On a, pour $\varphi \in \R$ : \\
+		$\varphi \in \text{Arg}(z) \Longleftrightarrow  z = \abs{z}e^{i\varphi} \Longleftrightarrow e^{i\theta} = e^{i \varphi} (\abs{z} \neq 0) \Longleftrightarrow \varphi \in \theta+2\pi\Z$.
+	
+	\item $z,z' \in \C, \theta \in \text{Arg}(z), \varphi \in \text{Arg}(z')$, alors $zz' = \abs{z}e^{i\theta} \abs{z'}e^{i\varphi} = \abs{zz'}e^{i(\theta+\varphi)}$ \\
+	Donc $\varphi + \theta \in \text{Arg}(zz')$
+	\item $z,z' \in \C, \theta \in \text{Arg}(z), \varphi \in \text{Arg}(z')$, alors $\frac{z}{z'} = \frac{\abs{z}e^{i\theta}}{\abs{z'}e^{i\varphi}} = \abs{\frac{z}{z'}}e^{i(\theta-\varphi)}$. \\
+	Donc $\theta - \varphi \in \text{Arg}\left(\frac{z}{z'}\right)$.
+\end{enumerate}
+\end{remarque}
+
+\begin{definition}{Ecriture trigonométrique d'un complexe}{EcritureTrigoCplx}
+Soit $z \in \C$. On appelle \Strong{écriture trigonométrique} de $z$ tout couple $(\rho,\theta)$ tel que $z = \rho e^{i\theta}$
+\end{definition}
+
+Les écritures trigonométriques de $0$ sont $(0,\theta)$ où $\theta \in \R$. \\
+Si $z \in \C^*$ on a vu que si $\theta \in \text{Arg}(z)$ alors $(\abs{z},\theta)$ est une écriture trigonométrique de $z$. \\
+Soit $(r,\varphi) \in \R^2$. On a $z = re^{i\varphi} \Longleftrightarrow z = \abs{z}e^{i\theta} = re^{i\varphi}$ \\
+Supposons $re^{i\varphi} = \abs{z}e^{i\theta}$, alors $\abs{re^{i\theta}} = \abs{\abs{z}e^{i\theta}}$ \ie $\abs{r} = \abs{z}$. \\
+Donc, si $r>0$, on a $\abs{z}=r$ puis $\abs{z}e^{i\varphi} = \abs{z}e^{i\theta} \Longleftrightarrow e^{i\theta} = e^{i\varphi}$ donc $\varphi \in \theta + 2\pi\Z$ ; \\
+Si $r<0$ on a $\abs{z}=-r$, donc $-\abs{z}e^{i\varphi} = \abs{z}e^{i\theta} \Longleftrightarrow e^{i\varphi} = -e^{i\theta} = e^{i(\theta+\pi)}$ \ie $\theta \equiv \theta + \pi \mod{2\pi}$. \\ \\
+Réciproquement, on vérifie : $\forall \varphi \in \theta + 2\pi\Z, z = \abs{z}e^{i\varphi}$ et $\forall \varphi \in \theta + \pi + 2 \pi \Z, z = -\abs{z}e^{i\varphi}$. \\ \\
+\textbf{Bilan :} Les écritures trigonométriques de $z$ sont les couples $(\abs{z}, \theta)$ et $(-\abs{z},\theta+\pi)$ où $\theta \in \text{Arg}(z)$. \\ \\
+
+Si $(\rho, \theta)$ est une écriture trigonométrique de $z$, et $(\rho',\theta')$ une écriture trigonométrique de $z'$, alors : \\
+$(\rho\rho',\theta+\theta')$ est une écriture trigonométrique de $zz'$, \\
+et $(\frac{\rho}{\rho'}, \theta-\theta')$ est une écriture trigonométrique de $\frac{z}{z'}$ (si $z' \neq 0$) \\
+Si $z \neq 0, \forall n \in \Z, (\rho^n,n\theta)$ est une écriture trigonométrique de $z^n$.
+
+\begin{application}{}
+Soit $a,b \in \R$ et $z = a+ib$. Pour $x \in \R, a \cos x + b \sin x = \Re(\overline{z}e^{ix})$
+		Ecrivons d'autre part $z = re^{i\theta}$ avec $r>0 (r = \abs{z})$. $\overline{z}e^{ix} = re^{-i\theta}e^{ix} = re^{i(x-\theta)}$. \\
+		Donc $\Re(\overline{z}e^{ix}) = r\cos(x-\theta) = \sqrt{a^2+b^2} \cos(x-\theta)$. \\
+\end{application}
+
+\begin{application}{Polynômes de Tchebychev ($1^{\text{ère}}$ espèce)}{}
+Soit $n \in \N$, il existe $T_n$ fonction polynomiale du type $t \mapsto a_0 + a_1t + ... + a_nt^n$ telle que $\forall \theta \in \R, \cos(n\theta) = T_n(\cos \theta)$. \\
+\strong{$n=0$} \quad $\forall \theta \in \R, \cos(0 \cdot \theta) = 1 = T_0 (\cos \theta)$ où $T_0 : t \in \R \mapsto 1 \in \R$. \\
+\strong{$n=1$} \quad $\forall \theta \in \R, \cos(1 \cdot \theta) = \cos \theta = T_1(\cos \theta)$ où $T_1 : t \in \R \mapsto t \in \R$. \\
+\strong{$n=2$} \quad $\forall \theta \in \R, \cos(2 \cdot \theta) = 2 \cos^2 \theta -1 = T_2(\cos \theta)$ où $T_2 : t \in \R \mapsto 2t^2-1 \in \R$. \\
+\strong{$n=3$} \quad $\forall \theta \in \R$, 
+\begin{align*}
+\cos(3 \cdot \theta) &= \cos(2\theta + \theta) \\
+&= \cos 2\theta \cos \theta - \sin 2\theta \sin \theta \\
+&= 2 \cos^3 \theta - \cos \theta - 2 \cos \theta \sin^2 \theta \\
+&= 4 \cos^3 \theta - 3 \cos \theta \\
+&= T_3(\cos \theta) \text{ où } T_3 : t \in \R \mapsto 4t^3-3t \in \R.
+\end{align*}
+\strong{$n \in \N, n \geq 4$} \quad Pour $\theta \in \R, \cos(n\theta) = \Re\left(e^{in\theta}\right) = \Re\left(\left(e^{i\theta}\right)^n\right)$. \\ \\
+Or $\left(e^{i\theta}\right)^n = \left(i \cdot \sin \theta + \cos \theta \right)^n = \displaystyle{\sum_{k=0}^{n} \binom{n}{k} \, i^k (\sin \theta)^k (\cos \theta)^{n-k}}$. \\
+On a $i^2 = -1$ donc pour $p \in \N : i^{2p} = (-1)^p$, et $i^{2p+1} = i (-1)^p$. \\
+Donc $\forall k \in \N, i^k = 
+\begin{cases}
+\pm 1 & \text{ si } k \text{ est pair} \\
+\pm i & \text{si } k  \text{ est impair}
+\end{cases}$ \\
+D'où $\left(e^{i\theta}\right)^n  = \displaystyle{\sum_{\substack{k \in \llbracket 0,n \rrbracket \\ k \text{ pair}}} \binom{n}{k} \, i^k (\sin \theta)^k (\cos \theta)^{n-k} + \sum_{\substack{k \in \llbracket 0,n \rrbracket \\ k \text{ impair}}} \binom{n}{k} \, i^k (\sin \theta)^k (\cos \theta)^{n-k}}$ \\ \\
+On en déduit : \\
+\begin{align*}
+\cos(n\theta) &= \Re\left(\left(e^{i\theta}\right)^n\right) \\
+&= \displaystyle{\sum_{\substack{k \in \llbracket 0,n \rrbracket \\ k \text{ pair}}} \binom{n}{k} \, i^k (\sin \theta)^k (\cos \theta)^{n-k}} \\
+&= \displaystyle{\sum_{p \in \N \cap [0,\frac{n}{2}]} \binom{n}{2p} \, i^{2p} (\sin \theta)^{2p} (\cos \theta)^{n-2p}} \\
+&= \displaystyle{\sum_{p \in \N \cap [0,\frac{n}{2}]} \binom{n}{2p} \, (-1)^p (\sin \theta)^{2p} (\cos \theta)^{n-2p}} \\
+&= \displaystyle{\sum_{p \in \N \cap [0,\frac{n}{2}]} \binom{n}{2p} \, (\cos^2 \theta -1)^p (\cos \theta)^{n-2p}} \\
+&= T_n(\cos \theta) \text{ où } \forall t \in \R, T_n(t) = \displaystyle{\sum_{p \in \N \cap [0, \frac{n}{2}]} \binom{n}{2p} (t^2-1)^p t^{n-2p}}.
+\end{align*}
+\end{application}
+
+\begin{application}{Polynômes de Tchebychev de rang $3$ et $4$}{AppTchebychev1}
+Retrouver $T_3$ et deviner $T_4$. \\
+Soit $t \in \R$ : 
+\begin{center}
+$T_3(t) = \displaystyle{\sum_{p=0}^{1} \binom{3}{2p} (t^2-1)^p t^{3-2p}} = 4t^3-3t$.
+\end{center}
+De même, $\forall t \in \R$,
+\begin{center}
+$T_4(t) = \displaystyle{\sum_{p=0}^{2} \binom{4}{2p} (t^2-1)^p t^{4-2p} = \binom{4}{0}(t^2-1)^0t^{4-0} + \binom{4}{2}(t^2-1)^1t^{4-2} + \binom{4}{4}(t^2-1)^2 t^{4-4}}$
+\end{center}
+D'où $\forall t \in \R, T_4(t) = 8t^4 - 8t^2+1$.
+\end{application}
+
+\begin{application}{Polynômes de Tchebychev de $2^{\text{ème}}$ espèce}{Tchebychev2}
+Soit $n \in \N$, montrer qu'il existe un polynôme $U_n$ tel que $\forall \theta \in \R \setminus \pi \Z, \dfrac{\sin((n+1)\theta)}{\sin \theta} = U_n (\cos \theta)$.
+\end{application}
+
+\begin{application}{Formules d'Euler}{FormEuler}
+$\forall \theta \in \R : \cos \theta = \Re(e^{i\theta}) = \dfrac{e^{i\theta} + e^{-i\theta}}{2}$ et $\sin \theta = \dfrac{e^{i\theta} - e^{-i\theta}}{2i}$. \\ \\
+Calculer $I = \displaystyle{\int_{0}^{\frac{\pi}{2}} \sin^6 t \: \text{d}t}$. \\ \\
+Pour $t \in \R$ : \\
+\begin{align*}
+\sin^6 t &= \left(\dfrac{e^{it}-e^{-it}}{2i}\right)^6 \\
+&= -\dfrac{\left(e^{it}-e^{-it}\right)^6}{64} \\
+&= -\dfrac{1}{64}(e^{i6t} - 6e^{i5t}e^{-it} + 15e^{i4t}e^{-2it} -20 e^{i3t}e^{-i3t} + 15 e^{i2t}e^{-i4t} - 6 e^{it}e^{-i5t} + e^{i6t}) \\
+&=-\dfrac{1}{64}(e^{i6t} - 6e^{i4t}+15 e^{i2t} - 20 + 15 e^{-i2t} - 6 e^{-i4t} + e^{-i6t}) \\
+&=-\dfrac{1}{64}(e^{i6t}+e^{-i6t} - 6(e^{i4t}+e^{-i4t}) + 15(e^{i2t}+e^{-i2t}) - 20) \\
+&=-\dfrac{1}{64}(2 \cos(6t) - 12 \cos(4t) + 30 \cos(2t) - 20) \\
+&=-\dfrac{1}{32}(\cos(6t)-6 \cos(4t)+15\cos(2t)-10)
+\end{align*}
+Donc \\
+\begin{align*}
+I &= -\dfrac{1}{32} \displaystyle{\int_{0}^{\frac{\pi}{2}} (\cos 6t - 6 \cos 4t + 15 \cos 2t - 10) \text{d}t} \\
+&=-\dfrac{1}{32}\left[\dfrac{1}{6}\sin 6t - \dfrac{2}{3}\sin 4t + \dfrac{5}{2} \sin 2t - 10t \right]_{0}^{\frac{\pi}{2}} \\
+&= -\dfrac{1}{32}\left(\dfrac{1}{6}\sin 3\pi - \dfrac{2}{3}\sin 2\pi + \dfrac{5}{2}\sin \pi  - 5\pi \right)
+\end{align*}
+d'où \mathbox{I = \dfrac{5\pi}{32}}.
+\end{application}
+
+\begin{application}{Noyau de Dirichlet}{NoyauDirichlet}
+\textbf{Prélude :} Pour $\theta \in \R$ : \\ \\
+$1+ e^{i\theta} = e^{i\frac{\theta}{2}} \left(e^{-i \frac{\theta}{2}} + e^{i \frac{\theta}{2}} \right) = e^{i \frac{\theta}{2}}(2 \cos \frac{\theta}{2}) = 2 \cos \frac{\theta}{2}e^{i \frac{\theta}{2}}$ \\
+$e^{i\theta}-1 = e^{i\frac{\theta}{2}} \left( e^{i \frac{\theta}{2}} - e^{i \frac{\theta}{2}} \right) = e^{i \frac{\theta}{2}}(2i \sin \frac{\theta}{2}) = 2i \sin \frac{\theta}{2}e^{i \frac{\theta}{2}}$ \\
+------------------------------------------------------------------- \\
+Pour $t \in \R$ et $n \in \N$ : $D_n(t) = \displaystyle{\sum_{k=-n}^{n}e^{ikt} = 1+ \sum_{k=1}^{n}(e^{ikt}+e^{-ikt}) = 1+ 2 \sum_{k=1}^{n} \cos kt}$ ; \\ \\
+$F_n(t) = \dfrac{1}{n+1} \displaystyle{\sum_{k=1}^{n} D_k(t)}$ \\ \\
+$\forall t \in \R \setminus 2\pi \Z, n \in \N : D_n(t) = 1+ 2\cos(\frac{n}{2}t) \dfrac{\sin(\frac{n+1}{2}t)}{\sin \frac{t}{2}} = \dfrac{\sin(n+\frac{1}{2})t}{\sin \frac{t}{2}}$. \\
+Si $t$ est congru à $0$ modulo $2\pi$, alors pour $n \in \N : D_n(t) = \displaystyle{\sum_{k=-n}^{n} 1 = 2n+1}$.
+On a alors \mathbox{\forall t \in \R \setminus 2\pi \Z, \forall n \in \N : F_n(t) = \dfrac{\sin^2 (n+1)\frac{t}{2}}{(n+2) \sin \frac{t}{2}}}.
+\end{application}
+
+\begin{application}{Calcul exact de $\cos \frac{2\pi}{5}$ et $\sin \frac{2\pi}{5}$}{Cosinus2piSur5}
+Notons $x=\cos \frac{2\pi}{5}$ et $\omega = e^{2i\frac{\pi}{5}}$. On a $x = \Re(\omega)$, $x = \frac{\omega + \overline{\omega}}{2} = \dfrac{\omega + \frac{1}{\omega}}{2}$. \\
+$\omega^5 = 1 \Longleftrightarrow \omega^5-1=0 \Longleftrightarrow (\omega-1)(\omega^4+\omega^3+\omega^2+\omega+1) = 0$ \\
+Donc $1+\omega + \omega^2 + \omega^3 + \omega^4 = 0$ et $\omega^4 = \dfrac{1}{\omega}$ et $\omega^3 = \dfrac{1}{\omega^2}$. \\
+D'où $1+\omega+\dfrac{1}{\omega}+\omega^2+\dfrac{1}{\omega^2} = 0$, donc $1+2x+(2x)^2-2=0 \Longleftrightarrow (2x)^2+2x-1=0$. \\
+Donc \textbox{$2x$ est racine de $u^2+u-1 = 0$.} \\ \\
+$4x^2+2x-1=0$. $\Delta = 20$ donc $x=\dfrac{-2-\sqrt{20}}{8}$ ou $x=\dfrac{-2+\sqrt{20}}{8}$ donc \textbox{$x=\dfrac{-1-\sqrt{5}}{4}$ ou $x=\dfrac{-1+\sqrt{5}}{4}$}. \\ \\
+Or $x = \cos \frac{2\pi}{5} > 0$ donc $x=\dfrac{-1+\sqrt{5}}{4}$. \\ \\
+D'où \mathbox{\cos \frac{2\pi}{5} = \dfrac{-1+\sqrt{5}}{4}}. \\
+
+De plus, \\
+$\cos^2 \frac{2\pi}{5} + \sin^2 \frac{2\pi}{5} = 1 \Longleftrightarrow \sin^2 \frac{2\pi}{5} = 1 - \left(\dfrac{-1+\sqrt{5}}{4}\right) = \dfrac{5-\sqrt{5}}{4}$ \\
+D'où $\sin \frac{2\pi}{5} = \dfrac{1}{4} \sqrt{10-2\sqrt{5}}$. \\
+Notons $x = \cos \frac{\pi}{5}$, on a $\sqrt{1-x^2} = \sin \frac{\pi}{5}$ \\
+De plus, $\cos \frac{2\pi}{5} = 2 \cos^2 \frac{\pi}{5} -1 = 2x^2-1 = \dfrac{-1+\sqrt{5}}{4}$ \\ \\
+donc $2x^2 = \dfrac{3+\sqrt{5}}{4}$ soit $x^2 = \dfrac{3+\sqrt{5}}{8}$ \\ \\
+Donc $\cos \frac{\pi}{5} = \dfrac{\sqrt{3+\sqrt{5}}}{2\sqrt{2}} = \dfrac{\sqrt{6+2\sqrt{5}}}{4} = \dfrac{\sqrt{5}+1}{4}$ \\ \\
+et $\sin \frac{\pi}{5} = \dfrac{\sin \frac{2\pi}{5}}{2 \cos \frac{\pi}{5}} = \dfrac{\sqrt{5 - \sqrt{5}}}{1+\sqrt{5}} = - \dfrac{\sqrt{5-\sqrt{5}} - \sqrt{25 - 5\sqrt{5}}}{4}$
+\end{application}
+
+\begin{remarque}[Rappel]{Interprétation géométrique des complexes}{}
+Le plan est rapporté à un repère orthonormé $(\Omega,\overrightarrow{e_1}, \overrightarrow{e_2})$. \\
+Soit $M(a,b)$. $\overrightarrow{\Omega M} = a \overrightarrow{e_1} + b \overrightarrow{e_2}$ et $\vec{u} = x\overrightarrow{e_1}+y\overrightarrow{e_2}$. \\
+On appelle affixe de $M$ le complexe $a+ib$, l'affixe de $\vec{u}$ le complexe $x+iy$. \\
+L'application qui à un point $N$ fait correspondre son affixe est une bijection. De même : $\vec{v} \mapsto \text{affixe}(\vec{v})$ est bijective. \\
+On a : $\Omega M = \sqrt{a^2+b^2} = \abs{a+ib}$, $\abs{\abs{\vec{u}}} = \sqrt{x^2+y^2} = \abs{x+iy}$. \\
+Soit $\theta$ une mesure de $(\overrightarrow{e_1},\overrightarrow{\Omega M})$. \\
+On a : $\cos \theta = \dfrac{a}{\Omega M}, \sin \theta = \dfrac{b}{\Omega M}$, donc $a+ib = \Omega M \cos \theta + i \Omega M \sin \theta = \sqrt{a^2+b^2} e^{i\theta}$. \\
+Donc $\theta \in \text{Arg}(a+ib)$. \\
+Inversement, tout élément de $\text{Arg}(a+ib)$ est une mesure de $(\overrightarrow{e_1},\overrightarrow{\Omega M})$.
+\end{remarque}
+
+\begin{remarque}{Cas d'égalité dans l'inégalité triangulaire}{}
+$On a : \abs{\displaystyle{\sum_{k=1}^{n}z_k}} = \displaystyle{\sum_{k=1}^{n} \abs{z_k}} \Longleftrightarrow$ il existe $\theta \in \R, r_1,...,r_n \in \R_+$ tels que $\forall k \in \llbracket 1,n \rrbracket, z_k = r_ke^{i\theta}$.
+\end{remarque}
+
+\begin{demo}{}
+\begin{enumerate}
+	\item Cas réel : \\
+		$n \in \N, x_1,...,x_n \in \R$. On sait que $\abs{\displaystyle{\sum_{k=1}^{n}x_k}} \leq \displaystyle{\sum_{k=1}^{n} \abs{x_k}}$ \\
+		Fait : $u_1,...,u_n \in \R_+$, alors $\displaystyle{\sum_{i=1}^{n} u_i} = 0 \Longleftrightarrow \forall i \in \llbracket 1,n \rrbracket, u_i = 0$. \\ \\
+		Supposons que $\abs{\displaystyle{\sum_{i=1}^{n} x_i}} = \displaystyle{\sum_{i=1}^{n} \abs{x_i}}$. \\
+		\begin{enumerate}
+			\item $\displaystyle{\sum_{i=1}^{n} x_i} \geq 0$. On a : \\ \\
+				$\displaystyle{\sum_{i=1}^{n}\abs{x_i}} = \abs{\displaystyle{\sum_{i=1}^{n} x_i}} = \displaystyle{\sum_{i=1}^{n}x_i}$. \\ \\
+				D'où $\displaystyle{\sum_{i=1}^{n} (\abs{x_i}-x_i)} = 0$, donc $\forall i \in \llbracket 1,n \rrbracket, \abs{x_i}-x_i = 0$ \ie $x_i \geq 0$. \\
+			\item $\displaystyle{\sum_{i=1}^{n} x_i} \leq 0$. On a : \\ \\
+				$\displaystyle{\sum_{i=1}^{n}\abs{x_i}} = \abs{\displaystyle{\sum_{i=1}^{n} x_i}} = -\displaystyle{\sum_{i=1}^{n}x_i}$. \\ \\
+				D'où $\displaystyle{\sum_{i=1}^{n} (\abs{x_i}+x_i)} = 0$, donc $\forall i \in \llbracket 1,n \rrbracket, \abs{x_i}+x_i = 0$ \ie $x_i \leq 0$. \\
+		\end{enumerate}
+		
+		Ainsi, si $\displaystyle{\sum_{i=1}^{n} \abs{x_i}} = \abs{\displaystyle{\sum_{i=1}^{n} x_i}}$, alors $x_1,...,x_n$ sont tous de même signe. \\
+		Réciproquement, si les $x_i$ sont tous de même signe, il y a bien égalité. \\
+	
+	\item Cas complexe : 
+		Soient $z_1,...,z_n \in \C$. \\
+		Supposons : $\underbrace{\abs{\displaystyle{\sum_{k=1}^{n} z_k}}}_{Z} = \displaystyle{\sum_{k=1}^{n} \abs{z_k}}$. \\
+		On écrit $Z = re^{i\theta}$, avec $r \geq 0$ ($r = \abs{Z}$). \\
+		On a : $\displaystyle{\sum_{k=1}^{n} \abs{z_k}} = \abs{Z} = r = Ze^{-i\theta} = e^{-i\theta} \displaystyle{\sum_{k=1}^{n} z_k = \sum_{k=1}^{n} \left(z_ke^{-i\theta}\right)}$. \\ \\
+		On écrit, pour $1 \leq k \leq n : z_k e^{-i\theta} = a_k + ib_k$, avec $a_k,b_k \in \R$. \\ \\
+		On a donc $\displaystyle{\sum_{k=1}^{n} \abs{z_k} = \sum_{k=1}^{n}a_k + i \sum{k=1}^{n}b_k}$. \\ \\
+		En identifiant parties réelles et imaginaires, \\ \\
+		$\displaystyle{\sum_{k=1}^{n}b_k = 0}$ et $\displaystyle{\sum_{k=1}^{n}a_k = \sum_{k=1}^{n} \abs{z_k}}$ \ie $\displaystyle{\sum_{k=1}^{n} (\abs{z_k}-a_k)} = 0$. \\ \\
+		Or pour $1 \leq k \leq n, a_k = \Re(z_ke^{-i\theta}) \leq \abs{\Re(z_ke^{-i\theta})} \leq \abs{z_ke^{-i\theta}} = \abs{z_k}$. \\ \\
+		On a : $\displaystyle{\sum_{k=1}^{n} (\abs{z_k}-a_k) = 0}$ et $\forall k \in \llbracket 1,n \rrbracket, \abs{z_k}-a_k = 0$. Donc, $\forall k \in \llbracket 1,n \rrbracket, a_k = \abs{z_k}$. \\
+		On en déduit que les inégalités précédentes sont en fait des égalités, \\
+		\ie $\forall k \in \llbracket 1,n \rrbracket, a_k \geq 0$ et $\forall k \in \llbracket 1,n \rrbracket, z_ke^{-i\theta} \in \R$ \\
+		ce qui donne $z_ke^{-i\theta} = a_k \in \R$ donc $z_k=a_ke^{i\theta}$ où $a_k \geq 0$ et enfin $z_k = \abs{z_k}e^{i\theta}$ \\
+		Ainsi, \textbox{les $z_k$ ont même argument.} \\ \\
+		Réciproquement, s'il existe $\theta \in \R$ et $a_1,...,a_n \in \R_+$ tels que $z_k = a_ke^{i\theta}$, on a \\ \\
+		$\abs{\displaystyle{\sum_{k=1}^{n}z_k}} = \abs{e^{i\theta} \displaystyle{\sum_{k=1}^{n}a_k}} = \displaystyle{\sum_{k=1}^{n}a_k = \sum_{k=1}^{n} \abs{z_k}}$. \\ \\
+		\textbf{Bilan :} $\abs{\displaystyle{\sum_{k=1}^{n}z_k}} = \displaystyle{\sum_{k=1}^{n} \abs{z_k}} \Longleftrightarrow$ il existe $\theta \in \R, r_1,...,r_n \in \R_+$ tels que $\forall k \in \llbracket 1,n \rrbracket, z_k = r_ke^{i\theta}$.
+\end{enumerate}
+\end{demo}
+
+\begin{application}{Lemme magique}
+Soit $z \in \C, A \in \R_+$. Alors $\abs{z} \leq A \Longleftrightarrow \forall u \in \C, \abs{\Re(zu)} \leq A \abs{u}$.
+\end{application}
+
+\begin{demo}{}
+$\Longrightarrow$ On suppose que $\abs{z} \leq A$. Soit $u \in \C$. On a $\abs{\Re(zu)} \leq \abs{zu} = \abs{z}\: \abs{u}$ donc $\abs{\Re(zu)} \leq A \abs{u}$. \\
+$\Longleftarrow$ On suppose que $\forall u \in \C : \abs{\Re(zu)} \leq A \abs{u}$. \\
+En choisissant $u=\overline{z}$, on a $\abs{\Re(z\overline{z})} \leq A \abs{\overline{z}}$ \ie $\abs{z}^2 \leq A \abs{z}$. \\
+Si $z \neq 0$, alors $\abs{z} > 0$ donc $\abs{z} \leq A$. \\
+Si $z=0$, on a boen $\abs{z} = 0 \leq A$.
+\end{demo}
+
+\begin{exemple}
+On sait que $\forall n \in \N, \forall x_1,...,x_n \in \R$, \\ \\
+$\abs{\displaystyle{\sum_{k=1}^{n}z_k}} \leq \displaystyle{\sum_{k=1}^{n} \abs{x_k}}$. Soit $n \in \N, z_1,...,z_n \in \C$. \\ \\
+Montrer que : $\abs{\displaystyle{\sum_{k=1}^{n} z_k }} \leq \displaystyle{\sum_{k=1}^{n} \abs{z_k}}$. \\ \\
+Soit $Z = \displaystyle{\sum_{k=1}^{n} z_k} \in \C$, et $A = \displaystyle{\sum_{k=1}^{n} \abs{z_k}} \in \R_+$. \\ \\
+On veut prouver $\abs{Z} \leq A$, ce qui équivaut à $\forall u \in \C, \abs{\Re(Zu)} \leq A \abs{u}$. \\ \\
+Soit $u \in \C$. On a $Zu = \displaystyle{\sum_{k=1}^{n} uz_k}$. \\ \\
+Alors $\Re(Zu) = \Re\left(\displaystyle{\sum_{k=1}^{n}uz_k} \right) = \displaystyle{\sum_{k=1}^{n} \Re(uz_k)}$. \\ \\
+D'après l'inégalité triangulaire, cas réel, on a $\abs{\Re(Zu)} = \abs{\displaystyle{\sum_{k=1}^{n} \Re(uz_k)}} \leq \displaystyle{\sum_{k=1}^{n} \abs{\Re(uz_k)}}$. \\ \\
+Or, pour $1 \leq k \leq n, \abs{\Re(uz_k)} \leq \abs{uz_k} = \abs{u} \abs{z_k}$. \\ \\
+Donc $\displaystyle{\sum_{k=1}^{n} \abs{\Re(uz_k)}} \leq \displaystyle{\sum_{k=1}^{n} \abs{u} \: \abs{z_k}} = A \abs{u}$.
+\end{exemple}
+
+\newpage
+
+\section{Racines $n^{\text{ièmes}}$}
+
+\subsection{Racines carrées}
+
+\begin{definition}{Racines carrée}{RacineCarréeDef}
+Soit $z\in \C, \omega \in \C$. On dit que $\strong{\omega}$ \Strong{est une racine carrée} de $z$ si $\strong{\omega^2=z}$.
+\end{definition}
+
+$0$ admet une racine carrée : $0$. \\
+Soit $z \in \C^*$. On écrit $z = re^{i\theta}$ avec $r>0$ ($r=\abs{z}$). Alors $\omega = \sqrt{r}e^{i\frac{\theta}{2}}$ est une racine carrée de $z$. \\
+De plus, pour $u \in \C, u^2 =z \Longleftrightarrow u^2 = \omega^2 \Longleftrightarrow (u-\omega)(u+\omega)=0 \Longleftrightarrow u=\omega \text{ ou } u = -\omega$. \\
+Ainsi, \textbox{tout $z\in \C^*$ admet exactement $2$ racines carrées opposées.}
+
+\begin{remarque}[Recherche pratique]{RechPratique}
+On se donne $z \in \C^*$. \\
+\textbf{Cas 1 :} On dispose d'une écriture trigonométrique "sympathique" de $z$. $z = re^{i\theta}$, et $\theta$ connu. \\
+Alors les racines carrées de $z$ sont $\pm \sqrt{r}e^{i \frac{\theta}{2}}$. \\
+Exemple : Racines carrées de $i$ : \quad $i = e^{i\frac{\pi}{2}} \Longrightarrow$ les racines carrées de $i$ sont $\pm e^{i\frac{\pi}{4}} = \pm \left(\dfrac{\sqrt{2}}{2} + i \dfrac{\sqrt{2}}{2}\right)$. \\
+\textbf{Cas 2 :} $z \in \R$. \\
+Si $z \in \R_+^*$, les racines carrées de $z$ sont $\pm \sqrt{z}$. \\
+Si $z \in \R_-^*$, les racines carrées de $z$ sont $\pm i \sqrt{-z}$. \\
+\textbf{Cas 3 - Cas général : } \\
+$z = a+ib \in \C^*$. On cherche les racines carrées de $z$ sous la forme $\omega = x+iy$ avec $(x,y)$ à déterminer. \\
+$\omega$ est racine carrée de $z \Longleftrightarrow \omega^2=z \Longleftrightarrow \omega^2 = z$ et $\abs{\omega}^2 = \abs{z} \\
+\Longleftrightarrow 
+\begin{cases}
+x^2-y^2  &=a \\
+2xy &=b \\
+x^2+y^2 &= \sqrt{a^2+b^2}
+\end{cases}$
+$(1)+(3)$ donne $x^2$ (donc $x$ au signe près), $(3)-(1)$ donne $y^2$ (donc $y$ au signe près), et $(2)$ donne le signe de $xy$.
+\end{remarque}
+
+\begin{exemple}{Racines carrées de $1+2i$}
+Soit $\omega = x+iy \in \C$. \\
+$\omega^2 = 1+2i \Longleftrightarrow
+\begin{cases}
+x^2-y^2 &=1 \\
+2xy &=2 \\
+x^2+y^2 &=\sqrt{5}
+\end{cases}
+\Longleftrightarrow
+\begin{cases}
+2x^2 &= 1+\sqrt{5} \\
+2y^2 &= \sqrt{5}-1 \\
+xy &= 1
+\end{cases}
+\Longleftrightarrow
+\begin{cases}
+x &= \pm \sqrt{\frac{1+\sqrt{5}}{2}} \\
+y &= \pm \sqrt{\frac{\sqrt{5}-1}{2}} \\
+xy &= 1
+\end{cases} \\
+\Longleftrightarrow
+\begin{cases}
+x &= \sqrt{\frac{1+\sqrt{5}}{2}} \\
+y &= \sqrt{\frac{\sqrt{5}-1}{2}}
+\end{cases}
+\text{ ou }
+\begin{cases}
+x &= - \sqrt{\frac{1+\sqrt{5}}{2}} \\
+y &= - \sqrt{\frac{\sqrt{5}-1}{2}}
+\end{cases}$ \\ \\
+Les racines carrées de $1+2i$ sont donc : $\pm \left(\sqrt{\frac{1+\sqrt{5}}{2}} + i \sqrt{\frac{\sqrt{5}-1}{2}} \right)$.
+\end{exemple}
+
+\newpage
+
+\subsection{Equation du second degré}
+
+Soit $a \in \C^*, b,c \in \C$, $\forall z \in \C, P(z) = az^2+bz+c$. \\
+Pour $z \in \C, P(z) = a(z^2+\frac{b}{a}z+\frac{c}{a}) = a\left[\left(z+\frac{b}{2a}\right)^2-\frac{b^2}{4a^2} + \frac{c}{a}\right] = a \left[\left(z+\frac{b}{2a}\right)^2-\frac{b^2-4ac}{4a^2}\right]$ \\ \\
+On note $\Delta = b^2-4ac$. Soit $\delta$ une racine carrée de $\Delta$ (qu'on sait trouver en pratique). \\
+Alors $P(z) = a \left[\left(z+\frac{b}{2a}\right)^2-\left(\frac{\delta}{2a}\right)^2\right] = a \left(z+ \frac{b+\delta}{2a} \right) \left(z + \frac{b-\delta}{2a}\right) = a \left(z- \frac{-b-\delta}{2a} \right) \left(z- \frac{-b+\delta}{2a} \right)$. \\
+Ceci montre que $P$ admet deux racines dans $\C$ (une racine de $P$ est un élément $z \in \C$ tel que $P(z)=0$), qui sont $\dfrac{-b\pm \delta}{2a}$ (éventuellement confondues si $\delta = \Delta = 0$, on parle alors de racine double).
+
+\subsection{Racines $n^{\text{ièmes}}$}
+
+\begin{definition}{Racine $n^{\text{ième}}$}
+Soit $n \in \N^*, z \in \C, \omega \in \C$. On dit que \strong{$\omega$} \Strong{est une racine} \strong{$n^{\text{ième}}$} de $z$ lorsque $\strong{\omega^n = z}$.
+\end{definition}
+
+$0$ est l'unique racine $n^{\text{ième}}$ de $0$. \\
+Soit $z \in \C^*$, on écrit $z = \abs{z}e^{i\theta}$ où $\theta \in \text{Arg}(z)$. \\
+Les éventuelles racines $n^{\text{ièmes}}$ de $z$ sont à rechercher dans $\C^*$. \\
+Soit $\omega \in \C^*$, on écrit $\omega = re^{i\varphi}$ avec $r>0$. \\
+$\omega^n = z \Longleftrightarrow r^n e^{in\varphi} = \abs{z}e^{i\theta} \Longleftrightarrow r^n e^{in\varphi} = \abs{z}e^{i\theta}$ et $\abs{r^n e^{in\varphi}} = \abs{\abs{z}e^{i\theta}} \Longleftrightarrow r^n e^{in\varphi} = \abs{z}e^{i\theta}$ et $r^n = \abs{z} \\
+\Longleftrightarrow e^{in\varphi} = e^{in\varphi} = e^{i\theta}$ et $r= \sqrt[n]{\abs{z}} \Longleftrightarrow r = \sqrt[n]{\abs{z}}$ et $n\varphi \equiv \theta \mod[2\pi] \\
+\Longleftrightarrow r = \sqrt[n]{\abs{z}}$ et il existe $k \in \Z$ tel que $\varphi = \dfrac{\theta+2k\pi}{n}$. \\
+Notons $R_n(z)$ l'ensemble des racines $n^{\text{ièmes}}$ de $z$. Alors \mathbox{R_n(z) = \{ \sqrt[n]{\abs{z}} e^{i\frac{\theta+2k\pi}{n}} \mid k \in \Z \}} \\
+Soit $k \in \Z : k = nq+r$ avec $r \in \llbracket 0,n-1 \rrbracket$. \\ \\
+$e^{i \frac{2k\pi}{n}} = e^{i\frac{2(nq+r)\pi}{n}} = e^{i \frac{2r\pi}{n} + 2q\pi} = e^{i \frac{2r\pi}{n}}$. \\
+On en déduit : \mathbox{R_n(z) = \{ \sqrt[n]{\abs{z}}e^{i\frac{2k\pi}{n}} \mid k \in \llbracket 0,n-1 \rrbracket \}} \\ \\
+Soient $k,\ell \in \llbracket 0,n-1 \rrbracket$ avec $\ell \neq k$ (par exemple $\ell > k$). \\
+Si $\sqrt[n]{\abs{z}} e^{i \frac{\theta+2k\pi}{n}} = \sqrt[n]{\abs{z}}e^{i\frac{\theta+2\ell \pi}{n}}$ alors $e^{i \frac{theta + 2(\ell-k)\pi}{n}} = 1$ \\
+\ie $\dfrac{2(\ell-k)}{n} \in 2\pi\Z$ \ie il existe $m \in \Z$ tel que $\dfrac{2(\ell-k)}{n} = 2m\pi$ \ie $\ell-k = mn$. \\
+On obtient $n \lvert \ell-k$, ce qui est impossible puisque $1 \leq \ell-k  < n \\
+\Longrightarrow$ les nombres complexes $\sqrt[n]{\abs{z}} e^{i\frac{\theta+2k\pi}{n}}$ (obtenus pour $k$ décrivant $\llbracket 0,n-1 \rrbracket$) sont deux à deux distincts.
+
+Donc : \textbox{$R_n(z)$ est fini, à $n$ éléments.}
+
+\begin{theoreme}{Ensemble des racines $n^{\text{ièmes}}$}{ThmRacN}
+SOit $z \in \C^*, n \in \N^*$. Alors $z$ admet exactement $n$ racines $n^{\text{ièmes}}$ distinctes dans $\C$. Plus précisément, si $\theta$ est un argument de $z$ alors l'ensemble $R_n(z)$ des racines $n^{\text{ièmes}}$ est : 
+\begin{align*}
+R_n(z) &= \{ \sqrt[n]{\abs{z}}e^{i \frac{\theta+2k\pi}{n}} \mid k \in \llbracket 0,n-1 \rrbracket \} \\
+&= \{ \sqrt[n]{\abs{z}}e^{i \frac{\theta+2k\pi}{n}} \mid k \in \Z \}
+\end{align*}
+\end{theoreme}
+
+\subsection{Groupe $\mathbb{U}_n$ des racines $n^{\text{ièmes}}$ de $1$}
+
+\begin{definition}{Groupe $\mathbb{U}_n$}{}
+Avec les notations précédentes, $\mathbb{U}_n = R_n(1) = \{z \in \C \mid z^n = 1 \}$.
+\end{definition}
+
+\begin{remarque}
+$(\C,\times)$ est un groupe : si $a,b \in \C^*$, alors $ab \in \C^*$, $\times$ est associative, admet un neutre ($1$) et tout $z \in \C^*$ admet un inverse $\frac{1}{z}$.
+\end{remarque}
+
+On a $\mathbb{U}_n \subset C^*$. $1 \in \mathbb{U}_n$, si $z,z' \in \mathbb{U}_n$ alors $(zz')^n = z^nz'^n = 1\cdot 1 = 1$. \\
+Donc $zz' \in \mathbb{U}_n$ et $\left(\frac{1}{z}\right)^n = \frac{1}{z^n} = \frac{1}{1} = 1$, donc $\frac{1}{z} \in \mathbb{U}_n$. \\
+On dit que $\mathbb{U}_n$ est un sous-groupe de $\C^*$.
+Notation : $\mathbb{U}$ est l'ensemble des complexes de module $1$.
+On a aussi :$\mathbb{U}_n \subset \mathbb{U}$ : si $z \in \mathbb{U}_n$ alors $z^n = 1$ d'où $\abs{z^n} = \abs{1}=1$ puis $\abs{z} = \sqrt[n]{1} = 1$ donc $z \in \mathbb{U}$.
+
+\begin{remarque}
+$\mathbb{U}$ est aussi un sous-groupe de $(C^*,\times)$.
+\end{remarque}
+
+On a $\abs{1}=1$ et un argument de $1$ est $0$, donc \mathbox{\mathbb{U}_n= \{ e^{2i \frac{k \pi}{n}} \mid k \in \llbracket 0,n-1 \rrbracket \} = \{ e^{2i \frac{k \pi}{n}} \mid k \in \Z \}}.
+
+\begin{remarque}[Représentation dans le plan complexe]{}
+Les points de $\mathbb{U}_n$ correspondent aux sommets d'un polygône régulier à $n$ côtés. \\
+La longueur d'un côté est $\abs{e^{i \frac{2\pi}{n}}-1} = \abs{e^{i \frac{\pi}{n}} 2i \sin \frac{\pi}{n}} = 2 \sin \frac{\pi}{n}$. \\
+On a $\mathbb{U}_1 = \{1\}, \mathbb{U}_2 = \{-1,1\}, \mathbb{U}_3 = \{1,\underbrace{e^{2i \frac{\pi}{3}}}_{j},\underbrace{e^{4i \frac{\pi}{3}}}_{j^2}\}$. \\
+$j = e^{2i \frac{\pi}{3}} = -\dfrac{1}{2} + i \dfrac{\sqrt{3}}{2}$. \\
+On a : $1 = j^3 = j^2j$, donc $j^2 = \frac{1}{j}$, or $1=\abs{j}^2 = j\overline{j} \Longrightarrow \overline{j} = \frac{1}{j} = j^2$. \\
+Puis $0 = j^3-1 = \underbrace{(j-1)}_{\neq 0}(1+j+j^2)$ d'où $1+j+j^2=0$. \\
+$\mathbb{U}_4 = \{ e^{i \frac{k \pi}{2}} \mid k \in \llbracket 0,3 \rrbracket \} = \{1,e^{i \frac{\pi}{2}}, e^{i\pi}, e^{3i \frac{\pi}{2}} \} = \{ \pm 1, \pm i \}$.
+
+\textbf{Cas général} ($n$ quelconque) :
+$\mathbb{U}_n = \{e^{\frac{2ik \pi}{n}} \mid 0 \leq k \leq n-1 \} = \{e^{\frac{2ik \pi}{n}} \mid k \in \Z \}$. \\
+Soit $\omega = e^{\frac{2i\pi}{n}}$. Pour $k \in \Z, e^{\frac{2ik\pi}{n}} = \omega^k \Longrightarrow \mathbb{U}_n = \{1,\omega,\omega^2,...,\omega^{n-1} \} = \{w^k \mid k \in \Z \}$. \\
+Pour $n \geq 2$, on a $\omega \neq 1$. \\
+$0 = \omega^n-1 = \underbrace{\omega-1}_{\neq 0}(1+\omega+...+\omega^{n-1})$. Donc \mathbox{1+\omega + ... + \omega^{n-1} = 0} ou encore \mathbox{\displaystyle{\sum_{u \in \mathbb{U}_n} u = 0}}.
+\end{remarque}
+
+\newpage
+
+\section{Exponentielle complexe}
+
+\begin{definition}{Exponentielle complexe}{ExpCplxDef}
+Pour $z\in \C$, on pose $\text{exp}(z) = e^{\Re(z)}e^{i\Im(z)} = e^{\Re(z)}(\cos \Im(z) + i \sin \Im(z))$
+\end{definition}
+
+\begin{remarque}
+Si $z\in \R$, alors $\text{exp}(z) = e^z$ (exponentielle réelle de $z$).
+\end{remarque}
+
+\begin{proposition}{Propriété 1}{ExpCplx1}
+Pour $z,z' \in \C$ : $\text{exp}(z+z') = \text{exp}(z) \cdot \text{exp}(z')$
+\end{proposition}
+
+\begin{demo}{}
+Soit $z,z' \in \C$. \\
+$\text{exp}(z+z') = e^{\Re(z+z')}e^{i \Im(z+z')} = e^{\Re(z)}e^{\Re(z')}e^{i\Im(z)}e^{i\Im(z')} = e^{\Re(z)}e^{i\Im(z)} \cdot e^{\Re(z')} e^{i \Im(z')} = \text{exp}(z)\text{exp}(z')$. \\
+\end{demo}
+On a : $\text{exp} 0 = 1$ et donc, pour $z \in \C : 1= \text{exp} 0 = \text{exp}(z-z) = \text{exp}(z)\text{exp}(-z)$. \\
+Donc \textbox{$\text{exp}(z) \in \C^*$ et $\dfrac{1}{\text{exp}(z)} = \text{exp}(-z)$}.
+
+\begin{proposition}{Propriété 2}{ExpCplx2}
+Pour $n \in \Z$ et $z \in \C : \text{exp}(z)^n = \text{exp}(nz)$.
+\end{proposition}
+
+\begin{demo}{}
+Soit $z \in \C$. Pour $n \in \N$, soit $H_n : (\text{exp} \: z)^n = \text{exp}(nz)$.\\
+$H_0$ est vraie : $(\text{exp}(z))^0 = 1 = \text{exp}(0z)$. \\
+Si $n \in \N$ est tel que $H_n$ est vraie alors \\
+$(\text{exp} \: z)^{n+1} = (\text{exp}(z))^n \text{exp} \: z \overset{[\text{HR}]}{=} \text{exp}(nz)\text{exp} \: z = \text{exp}(nz+z) = \text{exp}((n+1)z)$ \\
+donc $H_{n+1}$ est vraie. \\
+Par principe de récurrence, $H_n$ est vraie pour tout $n \in \N$. \\ \\
+Puis, si $m \in \N^*$ et $n = -m$, $(\text{exp} z)^n = (\text{exp} z)^{-m} = \dfrac{1}{(\text{exp} \: z)^m} \overset{m \in \N}{=} \dfrac{1}{\text{exp}(mz)} = \text{exp}(-mz) = \text{exp}(nz)$. 
+\end{demo}
+
+Pour $z \in \C : \abs{\text{exp} \: z} = e^{\Re(z)}$ \\
+Pour $z \in \C : \text{exp}\: z = 1 \Longleftrightarrow z \in 2i\pi\Z := \{2ik\pi \mid k \in \Z \}$.
+
+\begin{demo}{}
+$\Longleftarrow$ Soit $k \in \Z$. $\text{exp}(2ik\pi) = e^0e^{2ik\pi} = 1$. \\
+$\Longrightarrow$ On suppose $\text{exp} \: z = 1$, alors $1 = \abs{1} = \abs{\text{exp} \: z} = e^{\Re(z)}$ donc $\Re(z) = 0$. \\
+D'où $1 = \text{exp}(z) = e^{i \Im(z)}$, d'où $\Im(z) \in 2\pi\Z$ puis $z = i \Im(z) \in 2i\pi \Z$. \\
+\end{demo}
+
+Pour $z,z' \in \C, \text{exp}(z) = \text{exp}(z') \Longleftrightarrow$ il existe $k \in \Z$ tel que $z' = z + 2ik\pi$.
+
+\begin{demo}{}
+$\text{exp}(z) = \text{exp}(z) \Longleftrightarrow \text{exp}(z')\text{exp}(-z)=1 \Longleftrightarrow \text{exp}(z'-z)=1 \Longleftrightarrow z'-z \in 2i\pi\Z$.
+\end{demo}
+
+Soit $\omega \in \C$. On écrit $\omega = re^{i\theta}$ avec $r>0$ ($r = \abs{\omega}$ et $\theta \in \text{Arg}(\omega)$). \\
+Si $z_0 = \ln r+ i\theta$, alors il est clair que $\text{exp}(z_0) = \omega$. Puis, pour $z \in \C$ :  \\
+$\text{exp}(z) = \omega \Longleftrightarrow \text{exp}(z) = \text{exp}(z_0) \Longleftrightarrow$ il existe $k \in \Z, z = z_0+2ik\pi \\
+\Longleftrightarrow$ l'ensemble des antécédents de $\omega$ par exp est $\{\ln \abs{\omega}+i\theta+2ik\pi \mid k \in \Z \}$.
