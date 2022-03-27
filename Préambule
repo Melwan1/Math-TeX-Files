@@ -1,0 +1,719 @@
+% Langue et encodage
+% ------------------
+
+\usepackage[utf8]{inputenc} % Encodage
+\usepackage[french]{babel} % Langue
+    \AddThinSpaceBeforeFootnotes
+    \FrenchFootnotes
+\usepackage[T1]{fontenc}
+
+
+% Polices et caractères spéciaux
+% ------------------------------
+
+    % Symboles
+    \usepackage{amsmath}
+    \usepackage{amsfonts}
+    \usepackage{amssymb}
+    \usepackage{fourier-orns}
+    %\usepackage{yfonts} Pour les symboles frakture de Computer Modern
+    \newcommand{\ie}{\textit{i.e. }}
+
+    % Police
+    \usepackage{kpfonts}
+    \usepackage[ttdefault, scaled=0.9]{sourcecodepro}
+
+    % Couleur
+    \usepackage[dvipsnames]{xcolor}
+    \newcommand{\activecolor}{Red!90!Black}
+    \newcommand{\Strong}[1]{{\bfseries\mathversion{bold}\color{\activecolor}#1}}
+    \newcommand{\strong}[1]{{\color{\activecolor}#1}}
+
+
+% Liens hypertexte
+% ----------------
+
+\usepackage{hyperref}
+\usepackage[french]{cleveref}
+
+
+% Dessins et boîtes
+% -----------------
+
+    % Tikz
+    \usepackage{tikz, tikz-3dplot}
+    \usepackage{tkz-tab}
+        % A enlever prochainement
+        \usepackage{pgfplots}
+        \pgfplotsset{compat=1.16}
+        \usepackage{cellspace}
+        \pgfplotsset{compat=newest}
+		\pgfplotsset{plot coordinates/math parser=false}
+		\pgfplotsset{
+		    every non boxed x axis/.style={
+		        xtick align=center,
+		        enlarge x limits=true,
+		        x axis line style={line width=0.8pt, -latex}
+		},
+		    every boxed x axis/.style={}, enlargelimits=false
+		}
+		\pgfplotsset{
+		    every non boxed y axis/.style={
+		        ytick align=center,
+		        enlarge y limits=true,
+		        y axis line style={line width=0.8pt, -latex}
+		},
+		    every boxed y axis/.style={}, enlargelimits=false
+		}
+		\usetikzlibrary{
+		   arrows.meta,
+		  intersections,
+		}
+    
+    % tcolorbox package
+    \usepackage[listings, theorems, skins, xparse, breakable]{tcolorbox}
+        % Encadrés texte
+        \newtcbox{\textbox}[1][]{
+            standard jigsaw,
+            on line,
+            arc = 0.15 cm,
+            colframe = \activecolor,
+            opacityback = 0,
+            left = 1pt,
+            right = 1 pt,
+            top = 1 pt,
+            bottom = 1 pt,
+            #1
+            }
+        \newtcbox{\mathbox}[1][]{
+            standard jigsaw,
+            on line,
+            math upper,
+            arc = 0.15 cm,
+            colframe = \activecolor,
+            opacityback = 0,
+            left = 1pt,
+            right = 1 pt,
+            top = 1 pt,
+            bottom = 1 pt,
+            #1
+            }
+        \newcommand*\circled[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+        
+    % Images
+    \usepackage{graphicx}
+
+
+% Structure du document
+% ---------------------
+
+    % Documents scindés
+    \usepackage{import}
+    
+    % Marges
+    \usepackage[left=1.5cm,right=1.5cm,top=2.3cm,bottom=1.7cm]{geometry}
+    
+    % Plusieurs colonnes
+    \usepackage{multicol}
+    
+    % Pages blanches
+    \usepackage{afterpage}
+    \newcommand\emptypage{
+        \null
+        \thispagestyle{empty}
+        \addtocounter{page}{-1}
+        \newpage
+    }
+        
+    % Listes
+    \frenchbsetup{StandardLists=true} % à inclure si on utilise \usepackage[french]{babel}
+    \usepackage{enumitem}
+    \setenumerate[1]{label=\bfseries\arabic*)}
+    \setenumerate[2]{label=\bfseries\alph*)}
+    \setitemize[1]{label=\mathversion{bold}$\cdot$}
+    \setitemize[2]{label=\mathversion{bold}$\cdot$}
+    
+    % Gestion des titres
+    \usepackage[explicit]{titlesec}
+        % En-têtes et pieds de pages
+        \usepackage{fancyhdr, etoolbox}
+        \pagestyle{fancy}
+            % Affichage des parties et des chapitres dans l'en-tête
+            \makeatletter
+            \patchcmd{\@part}% <cmd>
+                {\markboth{}{}}% <search>
+                {\partmark{#1}}% <replace>
+                {}{}% <success><failure>
+            \makeatother
+            \renewcommand{\partmark}[1]{\markboth{\thepart\ -- #1}{}}
+            \renewcommand{\chaptermark}[1]{\markright{\thechapter) #1}}
+            \renewcommand{\sectionmark}[1]{}
+            % Contenu de l'en-tête
+            \setlength{\headsep}{0.5cm}
+            \renewcommand{\headrulewidth}{1pt}
+            \fancyhead[L]{\small\sffamily\bfseries\nouppercase{\leftmark}}
+            \fancyhead[C]{}
+            \fancyhead[R]{\small\sffamily\mathversion{sf}\nouppercase{\rightmark}}
+	        % Contenu du pied de page
+	        \renewcommand{\footrulewidth}{1pt}
+	        \fancyfoot[L]{}
+	        \fancyfoot[C]{\small\sffamily\thepage}
+	        \fancyfoot[R]{}
+	        % Pages plain (première page de partie/chapitre
+            \fancypagestyle{plain}{%
+                \fancyhead{} % get rid of headers
+                \renewcommand{\headrulewidth}{0pt}
+                \renewcommand{\footrulewidth}{1pt}
+            }
+        % Parties
+        \newtcolorbox{partie}
+            {enhanced,
+             arc = 0 cm,
+             boxrule = 0pt,
+             toprule = 2pt,
+             bottomrule = 2pt,
+             colback = Orange!50, % Couleur du fond du cadre
+             colframe = Orange, % Couleur du cadre
+             halign = flush center,
+             valign = center,
+             fontupper=\Huge\scshape\color{White},
+             left skip = -1.5 cm,
+             right skip = -1.5 cm,
+             height = 3 cm
+            }
+        \titleformat{\part}
+            [block]
+            {\gdef\partlabel{}
+             \vfill\centering\sffamily\LARGE}
+            {\color{Orange} \rule[5pt]{5cm}{2pt} \quad \bfseries Partie \thepart \quad \rule[5pt]{5cm}{2pt}}
+            {0cm}
+            {\begin{partie}
+             \partlabel#1
+             \end{partie}}
+            [\vspace{2cm}\vfill]
+        \titlespacing*{\chapter}
+            {0cm} % Espacement gauche
+            {0cm} % Espacement haut
+            {0cm} % Espacement bas
+        % Chapitres
+        \newtcolorbox{chapitre}
+            {enhanced,
+             sidebyside,
+             sidebyside gap=0.5cm,
+             sidebyside align=top,
+             lefthand width = 4.5cm,
+             arc = 0.25 cm,
+             colback = Orange!50, % Couleur du fond du cadre
+             colframe = Orange, % Couleur du cadre
+             halign = flush left,
+             lower separated=false,
+             halign lower = flush right,
+             fontupper = \huge\sffamily\mathversion{sf}\color{white},
+             fontlower = \huge\sffamily\mathversion{sf}\color{white},
+             left = 0.3cm,
+             right = 0.3cm,
+             top = 0.1cm,
+             bottom = 0.1cm,
+             leftupper = 0.5cm,
+             overlay =
+                 {\begin{scope}[shift={([yshift = -1pt, xshift = -5pt]frame.north east)}]
+                      \node (0, 0) [above left] {\normalsize\sffamily\color{Orange}{\leftmark}};
+                  \end{scope}
+                 }
+            }
+        \titleformat{\chapter}
+            [block]
+            {\gdef\chapterlabel{}
+             \begin{chapitre}
+             }
+            {\tcbox[before skip=-0.9cm, after skip=0cm, arc = 0.25 cm, colframe = Orange, colback = White, coltext = Orange, fontupper = \LARGE\sffamily, left = 0.15 cm, right = 0.15 cm, top = 0.15 cm, bottom = 0.15 cm]{Chapitre \thechapter}}
+            {0cm}
+            {\tcblower\chapterlabel#1}
+            [\end{chapitre}]
+        \titlespacing*{\chapter}
+            {0cm} % Espacement gauche
+            {-0.5cm} % Espacement haut
+            {0.5cm} % Espacement bas
+        % Sections
+        \newtcolorbox{sections}{
+             enhanced,
+             sharp corners,
+             rounded corners = north,
+             arc = 0.25 cm,
+             boxrule = 0pt,
+             bottomrule = 2pt,
+             colback = Orange!50, % Couleur du fond du cadre
+             colframe = Orange, % Couleur du cadre
+             halign = flush left,
+             left = 0.1 cm,
+             right = 0.1 cm,
+             top = 0.1 cm,
+             bottom = 0 cm
+             }
+        \titleformat{\section}
+            [block]
+            {\gdef\sectionlabel{}
+             \begin{sections}
+             \LARGE\sffamily\mathversion{sf}\color{white}}
+            {\thesection}
+            {0cm}
+            {\sectionlabel#1}
+            [\end{sections}]
+        \titlespacing*{\section}
+            {0cm} % Espacement gauche
+            {0.75cm} % Espacement haut
+            {0.25cm} % Espacement bas
+        \renewcommand{\thesection}{\arabic{section})\;}
+        % Sous-sections
+        \newtcolorbox{sous_sections}
+            {enhanced,
+             arc = 0 cm,
+             skin = empty,
+             borderline south = {1pt}{0pt}{Orange},
+             halign = flush left,
+             left = 0 cm,
+             right = 0 cm,
+             top = 0 cm,
+             bottom = 0 cm
+            }
+        \titleformat{\subsection}
+            [block]
+            {\gdef\subsectionlabel{}
+             \begin{sous_sections}
+             \Large\sffamily\mathversion{sf}\color{Orange}}
+            {\thesubsection}
+            {0cm}
+            {\subsectionlabel#1}
+            [\end{sous_sections}]
+        \renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection})\;}
+        % Sous-sous-section
+        \setcounter{secnumdepth}{3} % Numéroter les sous-sous-sections (3 = niveau de profondeur correspondant aux sous-sous-sections)
+        \newtcolorbox{sous_sous_sections}
+            {enhanced,
+             arc = 0 cm,
+             skin = empty,
+             borderline south = {1pt}{0pt}{Orange},
+             halign = flush left,
+             left = 0 cm,
+             right = 0 cm,
+             top = 0 cm,
+             bottom = 0 cm
+            }
+        \titleformat{\subsubsection}
+            [block]
+            {\gdef\subsubsectionlabel{}
+             \begin{sous_sous_sections}
+             \large\sffamily\mathversion{sf}\color{Orange}}
+            {\thesubsubsection}
+            {0cm}
+            {\subsubsectionlabel#1}
+            [\end{sous_sous_sections}]
+        \renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection})\;}
+        % Table des matières
+        \usepackage{minitoc}
+        \usepackage{titletoc}
+            % Mise en forme de la table des matières
+	        \setcounter{tocdepth}{0}
+            % \renewcommand{\frenchcontentsname}{Table des matières} % Pour changer le titre de la table des matières
+            \titlecontents{part}
+                [0.3cm] % ie, 1.5em (chapter) + 2.3em
+                {\normalsize\bfseries\mathversion{bold}}
+                {\contentslabel{0.75cm}}
+                {}
+                {\titlerule*[0.25cm]{.}\contentspage\hspace*{0.3cm}}
+                [\smallskip]
+            \titlecontents{chapter}
+                [1.8cm] % ie, 1.5em (chapter) + 2.3em
+                {\normalsize}
+                {\contentslabel{0.75cm}}
+                {}
+                {\titlerule*[0.25cm]{.}\contentspage\hspace*{0.3cm}}
+                [\smallskip]
+            \newtcolorbox{tablematieres}{
+                enhanced,
+                breakable,
+	            arc = 0.25 cm,
+	            colframe = Orange,
+	            colback = Orange!15,
+	            left = -0.1 cm,
+	            right = -0.1 cm,
+	            top = 0 cm,
+	            bottom = -0.05 cm,
+	            boxrule = 0 cm
+            }
+            \newcommand{\tablematiere}{
+            \begin{tablematieres}
+            \dominitoc
+            \tableofcontents
+            \pagebreak
+            \end{tablematieres}
+            }
+	        % Mise en forme des sommaires
+	        \mtcselectlanguage{francais}
+	        \mtcsettitle{minitoc}{} % Titre
+	        \def\mtifont{\LARGE\sffamily\bfseries} % Police du titre
+	        \mtcsetrules{minitoc}{off} % Lignes autours
+	        \setcounter{minitocdepth}{3} % Profondeur
+            \dottedcontents{section}%
+                [0.75 cm] % Marge à gauche
+                {\normalsize\bfseries\mathversion{bold}} % Code avant
+                {0.75 cm} % Largeur du label
+                {0.25 cm} % Espacement des points
+            \dottedcontents{subsection}%
+                [2 cm] % Marge à gauche
+                {\normalsize} % Code avant
+                {1.25 cm} % Largeur du label
+                {0.25 cm} % Espacement des points
+            \dottedcontents{subsubsection}%
+                [3.75 cm] % Marge à gauche
+                {\normalsize} % Code avant
+                {1.75 cm} % Largeur du label
+                {0.25 cm} % Espacement des points
+            \newtcolorbox{sommaires}{
+                enhanced,
+                breakable,
+	            arc = 0.25 cm,
+	            title = Sommaire,
+	            colbacktitle = Orange!50,
+	            fonttitle = \LARGE\sffamily,
+	            colframe = Orange,
+	            colback = Orange!15,
+	            left = -0.6 cm,
+	            right = -0.6 cm,
+	            top = -0.3 cm,
+	            bottom = -0.5 cm,
+	            lefttitle = 0.2 cm,
+	            righttitle = 0.2 cm,
+	            toptitle = 0.2 cm,
+	            bottomtitle = 0.2 cm,
+	            boxrule = 0 cm,
+	            titlerule = 2 pt
+            }
+            \newcommand{\sommaire}{
+            \begin{sommaires}
+            \minitoc
+            \pagebreak
+            \end{sommaires}
+            }
+    
+    % Encadrés
+        % Définitions
+        \tcbset{
+            defstyle/.style = {
+                code = \renewcommand{\activecolor}{Green!90!Black},
+                enhanced,
+                breakable,
+                arc = 0.25 cm,
+	            colback = Green!10!White,
+	            colframe = Green!90!Black,
+	            fonttitle = \sffamily\bfseries\mathversion{boldsf},
+	            separator sign = {~:},
+	            left = 0.1 cm,
+	            right = 0.1 cm,
+	            top = 0.1 cm,
+	            bottom = 0.1 cm,
+	            toptitle = 0.1 cm,
+	            bottomtitle = 0.1 cm,
+	            before skip = 0.1 cm,
+	            after skip = 0.4 cm
+	        }
+        }
+        \newtcbtheorem[number within = chapter, number freestyle = \noexpand\arabic{\tcbcounter}, crefname={définition}{définitions}]
+            {definition}
+            {Définition}
+            {defstyle}
+            {def}
+        \newtcbtheorem[use counter from = definition, crefname={définitions}{définitions}]
+            {definitions}
+            {Définitions}
+            {defstyle}
+            {def}
+        \newtcbtheorem[use counter from = definition, crefname={vocabulaire}{vocabulaires}]
+            {vocabulaire}
+            {Vocabulaire}
+            {defstyle}
+            {def}
+        \newtcbtheorem[use counter from = definition, crefname={vocabulaires}{vocabulaires}]
+            {vocabulaires}
+            {Vocabulaires}
+            {defstyle}
+            {def}
+        % Propositions
+        \tcbset{
+            propstyle/.style = {
+                code = \renewcommand{\activecolor}{Red!90!Black},
+                enhanced,
+                breakable,
+                arc = 0.25 cm,
+	            colback = Red!10!White,
+	            colframe = Red!90!Black,
+	            fonttitle = \sffamily\bfseries\mathversion{boldsf},
+	            separator sign = {~:},
+	            left = 0.1 cm,
+	            right = 0.1 cm,
+	            top = 0.1 cm,
+	            bottom = 0.1 cm,
+	            toptitle = 0.1 cm,
+	            bottomtitle = 0.1 cm,
+	            before skip = 0.1 cm,
+	            after skip = 0.4 cm
+	        }
+        }
+        \newtcbtheorem[number within = chapter, number freestyle = \noexpand\arabic{\tcbcounter}, crefname={proposition}{propositions}]
+            {proposition}
+            {Proposition}
+            {propstyle}
+            {prop}
+        \newtcbtheorem[use counter from = proposition, crefname={propositions}{propositions}]
+            {propositions}
+            {Propositions}
+            {propstyle}
+            {prop}
+        \newtcbtheorem[use counter from = proposition, crefname={théorème}{théorèmes}]
+            {theoreme}
+            {Théorème}
+            {propstyle}
+            {prop}
+        \newtcbtheorem[use counter from = proposition, crefname={théorème}{théorèmes}]
+            {theoremes}
+            {Théorèmes}
+            {propstyle}
+            {prop}
+        \newtcbtheorem[use counter from = proposition, crefname={corollaire}{corollaires}]
+            {corollaire}
+            {Corollaire}
+            {propstyle}
+            {prop}
+        \newtcbtheorem[use counter from = proposition, crefname={corollaires}{corollaires}]
+            {corollaires}
+            {Corollaires}
+            {propstyle}
+            {prop}
+        \newtcbtheorem[use counter from = proposition, crefname={lemme}{lemmes}]
+            {lemme}
+            {Lemme}
+            {propstyle}
+            {prop}
+        \newtcbtheorem[use counter from = proposition, crefname={lemmes}{lemmes}]
+            {lemmes}
+            {Lemmes}
+            {propstyle}
+            {prop}
+        % Démonstrations
+        \newtcolorbox{principedemo}[1]{
+            enhanced,
+            code = \renewcommand{\activecolor}{Violet!90!Black},
+            breakable,
+            skin = empty,
+            borderline west = {1pt}{0pt}{Violet!90!Black},
+            title = Principe de démonstration \hfill \normalfont\sffamily (démonstration page \pageref{demo:#1}),
+            fonttitle = \color{Violet!90!Black}\sffamily\bfseries\mathversion{boldsf},
+            left = 0.1 cm,
+            right = 0 cm,
+            top = 0 cm,
+            bottom = 0 cm,
+            toptitle = 0 cm,
+            bottomtitle = 0 cm,
+	        before skip = 0.1 cm,
+	        after skip = 0.4 cm
+            }
+        \newtcolorbox{demo}[1][Démonstration]{
+            enhanced,
+            code = \renewcommand{\activecolor}{Violet!90!Black},
+            breakable,
+            skin = empty,
+            borderline west = {1pt}{0pt}{Violet!90!Black},
+            title = #1,
+            fonttitle = \sffamily\bfseries\mathversion{boldsf},
+            coltitle = Violet!90!Black,
+            left = 0.1 cm,
+            right = 0.1 cm,
+            top = 0.1 cm,
+            bottom = 0 cm,
+            toptitle = 0 cm,
+            bottomtitle = 0 cm,
+            before skip = 0.1 cm,
+            after skip = 0.4 cm
+            }
+        \newtcolorbox{demonstration}[1]{
+            enhanced,
+            code = \renewcommand{\activecolor}{Violet!90!Black},
+            label = demo:#1,
+            breakable,
+            skin = empty,
+            borderline south = {1pt}{0pt}{Violet!90!Black},
+            title = \Cref{prop\string:#1} : \nameref{prop\string:#1} \hfill \normalfont\sffamily(\cpageref{prop\string:#1}),
+            fonttitle = \sffamily\bfseries\mathversion{boldsf},
+            coltitle = Violet!90!Black,
+            left = 0 cm,
+            right = 0 cm,
+            top = 0 cm,
+            bottom = 0.3 cm,
+            toptitle = 0.1 cm,
+            bottomtitle = 0 cm,
+            before skip = 0.1 cm,
+            after skip = 0.2 cm
+            }
+        % Remarques
+        \newtcolorbox{remarque}[1][Remarque]{
+            enhanced,
+            breakable,
+            skin = empty,
+            borderline west = {1pt}{0pt}{Black},
+            title = #1,
+            fonttitle = \color{Black}\sffamily\bfseries\mathversion{boldsf},
+            left = 0.1 cm,
+            right = 0 cm,
+            top = 0 cm,
+            bottom = 0 cm,
+            toptitle = 0 cm,
+            bottomtitle = 0 cm,
+	        before skip = 0.1 cm,
+	        after skip = 0.4 cm
+            }
+        % Exemples & applications
+        \newtcolorbox{exemple}[1][Exemple]{
+            enhanced,
+            code = \renewcommand{\activecolor}{RoyalBlue!90!Black},
+            breakable,
+            skin = empty,
+            borderline west = {1pt}{0pt}{RoyalBlue!90!Black},
+            title = #1,
+            fonttitle = \color{RoyalBlue!90!Black}\sffamily\bfseries\mathversion{boldsf},
+            left = 0.1 cm,
+            right = 0 cm,
+            top = 0 cm,
+            bottom = 0 cm,
+            toptitle = 0 cm,
+            bottomtitle = 0 cm,
+	        before skip = 0.1 cm,
+	        after skip = 0.4 cm
+            }
+        \tcbset{
+            appstyle/.style = {
+	            code = \renewcommand{\activecolor}{RoyalBlue!90!Black},
+	            enhanced,
+	            breakable,
+                skin = empty,
+                borderline west = {1pt}{0pt}{RoyalBlue!90!Black},
+	            fonttitle = \sffamily\bfseries\mathversion{boldsf},
+	            coltitle = RoyalBlue!90!Black,
+	            separator sign = {~:},
+	            left = 0.1 cm,
+	            right = 0.1 cm,
+	            top = 0.1 cm,
+	            bottom = 0 cm,
+	            toptitle = 0 cm,
+	            bottomtitle = 0.1 cm,
+	            before skip = 0.1 cm,
+	            after skip = 0.4 cm
+	        }
+        }
+        \newtcbtheorem[number within = chapter, number freestyle = \noexpand\arabic{\tcbcounter}, crefname={application}{applications}]
+            {application}
+            {Application}
+            {appstyle}
+            {app}
+        \newtcbtheorem[use counter from = application, crefname={applications}{applications}]
+            {applications}
+            {Applications}
+            {appstyle}
+            {app}
+        % Méthode
+        \tcbset{
+            methstyle/.style = {
+                code = \renewcommand{\activecolor}{Goldenrod!90!Black},
+                enhanced,
+                breakable,
+                arc = 0.25 cm,
+	            colback = Goldenrod!10!White,
+	            colframe = Goldenrod!90!Black,
+	            fonttitle = \sffamily\bfseries\mathversion{boldsf},
+	            separator sign = {~:},
+	            left = 0.1 cm,
+	            right = 0.1 cm,
+	            top = 0.1 cm,
+	            bottom = 0.1 cm,
+	            toptitle = 0.1 cm,
+	            bottomtitle = 0.1 cm,
+	            before skip = 0.1 cm,
+	            after skip = 0.4 cm
+	        }
+        }
+        \newtcbtheorem[number within = chapter, number freestyle = \noexpand\arabic{\tcbcounter}, crefname={méthode}{méthodes}]
+            {methode}
+            {Méthode}
+            {methstyle}
+            {meth}
+        \newtcbtheorem[use counter from = methode, crefname={méthodes}{méthodes}]
+            {methodes}
+            {Méthodes}
+            {methstyle}
+            {meth}
+
+
+% Outils mathématiques
+% --------------------
+
+    % Tilde plus grand
+\makeatletter
+\def\oversortoftilde#1{\mathop{\vbox{\m@th\ialign{##\crcr\noalign{\kern3\p@}%
+      \sortoftildefill\crcr\noalign{\kern3\p@\nointerlineskip}%
+      $\hfil\displaystyle{#1}\hfil$\crcr}}}\limits}
+
+\def\sortoftildefill{$\m@th \setbox\z@\hbox{$\braceld$}%
+  \braceld\leaders\vrule \@height\ht\z@ \@depth\z@\hfill\braceru$}
+\makeatother
+\newcommand{\bigtilde}{\oversortoftilde}
+
+    % Espacements entre les points virgules
+    \makeatletter
+    \def\fixmathspacing#1#2#3{%
+    \def#1{#3}%
+    \expandafter\addto\csname \expandafter\ifx
+    \csname mathoptions@on\endcsname\relax% detect nath.sty
+    check@mathfonts\else mathoptions@on\fi\endcsname{%
+    \catcode`#212 \mathcode`#2"8000
+    \begingroup\lccode`~`#2\lowercase{\endgroup\def~}{#1}}
+    }
+    \makeatother
+    \fixmathspacing{\fixedsemicolon}{;}{\mathclose{}\mathpunct{}\mathpunct{\mathchar"603B}}
+    
+    % Ensembles
+    \let\ensembleNombre\mathbb
+    \newcommand*\N{\ensembleNombre{N}}
+    \newcommand*\Z{\ensembleNombre{Z}}
+    \renewcommand*\D{\ensembleNombre{D}}
+    \newcommand*\Q{\ensembleNombre{Q}}
+    \newcommand*\R{\ensembleNombre{R}}
+    \newcommand*\C{\ensembleNombre{C}}
+    \newcommand*\F{\ensembleNombre{F}}
+    \newcommand*\K{\ensembleNombre{K}}
+    \renewcommand*\L{\ensembleNombre{L}}
+    
+    % Différentielle
+    \renewcommand*\d{\mathrm{d}}
+    \newcommand*\derive[2][t]{\dfrac{\d #2}{\d #1}}
+    
+    % Nouveux opérateurs (\DeclareMathOperator{•}{•})
+    \DeclareMathOperator{\coefdom}{coefdom}
+    \DeclareMathOperator{\Adh}{Adh}
+    \DeclareMathOperator{\Int}{Int}
+        
+    % Fonctions
+    \newcommand*\ent[1]{\left\lfloor #1\right\rfloor}
+    \newcommand*\norme[1]{\left\lVert #1\right\rVert}
+    \newcommand*\abs[1]{\left\lvert #1\right\rvert}
+    \DeclareMathOperator{\sh}{sh}
+    \DeclareMathOperator{\ch}{ch}
+    \DeclareMathOperator{\thp}{th}
+    
+    % Raccourcis
+    \newcommand*\APCR[1][n_0]{\exists #1 \in \mathbb{N}, \; \forall n \geqslant #1}
+    \newcommand*\ev[1][$\K$]{#1-espace vectoriel}
+    \newcommand*\evs[1][$\K$]{#1-espaces vectoriels}
+    \newcommand*\sev{sous-espace vectoriel}
+    \newcommand*\sevs{sous-espaces vectoriels}
+    \DeclareMathOperator{\vect}{Vect}
+    \DeclareMathOperator{\mat}{Mat}
+    \DeclareMathOperator{\bc}{bc}
