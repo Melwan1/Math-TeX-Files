@@ -1,0 +1,224 @@
+\section{Fonctions puissances} 
+
+\subsection{Rappels : Fonction logarithme et exponentielle}
+\begin{definition}{Fonction logarithme}{}
+$\ln$ est l'unique primitive sur $\R^*_+$ de $x\mapsto \frac{1}{x}$, avec $x>0$, qui s'annule en 1 : 
+\begin{center}
+    Pour $x>0$, $\ln x = \displaystyle \int_{1}^{x} \frac{\mathrm{d}t}{t}$
+\end{center}
+\end{definition}
+
+\begin{propositions}{Opérations et limites pour la fonction $\ln$}{}
+$\forall a,b \in \R^*_+$,$\forall n \in \Z$ on a : 
+\begin{itemize}
+\begin{multicols}{3}
+\item $\ln (ab) = \ln (a) + \ln (b)$
+\item $\ln (\frac{1}{a})=-\ln a$
+\item $\ln(a^n) = n \ln a$
+\end{multicols} 
+\end{itemize}
+
+\begin{itemize}
+    \begin{multicols}{2}
+    \item $\displaystyle\lim_{x\to 0^+} x\ln x = 0$
+    \item $\displaystyle\lim_{x\to 0^+} \ln x = -\infty$
+    \item $\displaystyle\lim_{x\to +\infty} \ln x = +\infty$
+    \item $\displaystyle\lim_{x\to +\infty} \frac{\ln x}{x} = 0$
+    \end{multicols}
+\end{itemize}
+\begin{center}
+    $\forall x > 0$, $\ln x \leq x-1 \Longleftrightarrow \forall t > -1$, $\ln (1+t) \leq t$
+\end{center}
+\end{propositions}
+
+\begin{definition}{Fonction exponentielle}{}
+Par définition, $\exp$ est la réciproque de $\ln$, \ie, pour $x,y\in \R$ : 
+\begin{center}
+    $y= \exp x \Longleftrightarrow y>0$ et $x=\ln y$
+\end{center}
+$\exp$ est à valeur dans $\R^*_+$, dérivable : 
+\begin{itemize}
+    \begin{multicols}{2}
+    \item $\exp' = \exp$
+    \item $\exp 0 = 1$
+    \end{multicols}
+\end{itemize}
+\end{definition}
+
+\begin{propositions}{Opérations et limites pour la fonction $\exp$}{}
+$\forall a,b \in \R$,$\forall n \in \Z$ on a : 
+\begin{itemize}
+\begin{multicols}{3}
+\item $\exp (a+b) = \exp (a)$ $\exp (b)$
+\item $\exp (-a) = (\frac{1}{\exp a})$
+\item $\exp (na) = (\exp a)^n$
+\end{multicols} 
+\end{itemize}
+
+\begin{itemize}
+    \begin{multicols}{2}
+    \item $\displaystyle\lim_{x\to -\infty} x\exp x = 0$
+    \item $\displaystyle\lim_{x\to -\infty} \exp x = 0$
+    \item $\displaystyle\lim_{x\to +\infty} \exp x = +\infty$
+    \item $\displaystyle\lim_{x\to +\infty} \frac{\exp x}{x} = +\infty$
+    \end{multicols}
+\end{itemize}
+\begin{center}
+    $\forall x \in \R$, $\exp x \geq x+1 $
+\end{center}
+
+Pour $x>0$, et pour $n \in \Z$ on a : 
+\begin{center}
+    $x^n=\exp \ln (x^n) = \exp (n\ln x)$
+\end{center}
+\end{propositions}
+
+\subsection{Définition et Propriétés}
+\begin{definition}{Fonction puissance}{}
+Soit $\alpha \in\R$, pour $x >0$, on pose : 
+\begin{center}
+    $x^\alpha = \exp (\alpha \ln x)$
+\end{center}
+\end{definition}
+
+\begin{propositions}{Opérations et limites pour la fonction puissance}{}
+\begin{itemize}
+    \item Soit $\alpha \in \R$, pour $x,y \in \R^*_+$, on a $x^\alpha > 0$ : \\
+    $\mathbox{x^\alpha y^\alpha = (xy)^\alpha}$
+    
+    \item Soit $\alpha, \beta \in \R$ et $x>0$ :\\
+    $\mathbox{(x^\alpha)^\beta = x^{\alpha \beta}}$ \: \: \: \: \: $\mathbox{x^{\alpha + \beta} = x^\alpha x^\beta}$
+    
+    \item On pose $e = \exp 1$ (donc $\ln e = 1$), alors pour $x\in \R$ :\\
+    $e^x = \exp (x \ln e)$\\ $\mathbox{e^x= \exp x}$
+    
+    \item Pour $x > 0$, $x^0=\exp 0 = 1$, donc pour $\alpha \in \R$ : \\
+    $1=x^0=x^{\alpha + (-\alpha)} = x^\alpha x^{-\alpha} \Longrightarrow \mathbox{x^{-\alpha} = \dfrac{1}{x^\alpha}}$
+\end{itemize}
+\end{propositions}
+
+\begin{demo}
+\begin{itemize}
+    \item $x^\alpha y^\alpha = \exp (\alpha \ln x) \exp (\alpha \ln y)$\\
+    $x^\alpha y^\alpha = \exp (\alpha (\ln x + \ln y))$\\
+    $x^\alpha y^\alpha = \exp (\alpha (\ln (xy))$\\
+    \strong{$x^\alpha y^\alpha = (xy)^\alpha$}
+    
+    \item $(x^\alpha)^\beta = \exp ( \beta (\ln x^\alpha))$\\
+    $(x^\alpha)^\beta = \exp ( \beta \alpha \ln x)$ avec $\ln x^\alpha = \alpha \ln x$\\
+    \strong{$(x^\alpha)^\beta = x^{\alpha \beta}$}\\
+    \\
+    $x^{\alpha + \beta} = \exp ((\alpha + \beta)\ln x)$\\
+    $x^{\alpha + \beta} = \exp (\alpha \ln x) \exp (\beta \ln x)$ \\
+    \strong{$x^{\alpha + \beta} = x^\alpha x^\beta$}
+    
+\end{itemize}
+\end{demo}
+
+\begin{propositions}{Comparaisons logarithme - puissance - exponentielle}{}
+\begin{enumerate}
+    \item Pour $\alpha > 0$ 
+    \begin{center}
+        \strong{$\dfrac{\ln x}{x^\alpha} \xrightarrow[x \to + \infty]{} 0$} \: \: \: et \: \: \: \strong{$x^\alpha \ln x \xrightarrow[x \to 0^+]{} 0$}
+    \end{center}
+    On a même pour $\beta \in \R$
+    \begin{center}
+        \strong{$\dfrac{\abs{\ln x}^\beta}{x^\alpha} \xrightarrow[x \to + \infty]{} 0$} \: \: \: et \: \: \: \strong{$x^\alpha \abs{\ln x}^\beta \xrightarrow[x \to 0^+]{} 0$}
+    \end{center}
+    
+    \item Pour $\alpha > 0$
+    \begin{center}
+        $\dfrac{e^x}{x^\alpha} \xrightarrow[x \to + \infty]{} + \infty$ \: \: \: et \: \: \: $\abs{x}^\alpha e^x \xrightarrow[x \to - \infty]{} 0$
+    \end{center}
+\end{enumerate}
+\end{propositions}
+
+\pagebreak 
+
+\section{Fonctions hyperboliques}
+\begin{definition}{Sinus hyperbolique et cosinus hyperbolique}{}
+Pour $x \in \R$, on pose : 
+\begin{itemize}
+\begin{multicols}{2}
+\item Sinus hyperbolique : $\sh x = \dfrac{e^x - e^{-x}}{2}$ 
+\item Cosinus hyperbolique : $\ch x = \dfrac{e^x + e^{-x}}{2}$
+\end{multicols}
+\end{itemize}
+
+\begin{itemize}
+    \item $\sh $ et $\ch$ sont bien définies, dérivables (indéfiniment) 
+    \item $\sh $ est \strong{impaire} et $\ch$ est \strong{paire}\\
+    \textbox{$\sh'= \ch$ et $\ch'= \sh$}
+    \item Pour $x \in \R$ : \\
+    $\ch x + \sh x = e^x$ et $\ch x - \sh x = e^{-x}$\\
+    \\
+    D'où, on a : $1 = e^x e^{-x} = (\ch x + \sh x)(\ch x - \sh x)$\\
+    $\mathbox{\ch^2 x - \sh^2 x = 1}$\\
+    \\
+    De plus : $\forall x \in \R$, $\ch x > 0$ et $\ch^2 x =1+ \sh^2x \geq 1$. Donc \textbox{$\ch x \geq 1$}
+\end{itemize}
+\end{definition}
+
+\begin{remarque}[Étude de la fonction $\sh$]
+Pour $x\in \R$, $\sh'(x)= \ch(x)$ $>0$\\
+$\sh$ est strictement croissante de $\R$ dans $\R$
+\begin{itemize}
+\begin{multicols}{2}
+    \item $\sh 0$ $=$ $0$
+    \item $\displaystyle\lim_{+ \infty} \sh = +\infty$ et $\displaystyle\lim_{- \infty} \sh = -\infty$
+    \item \begin{tikzpicture}
+    \tkzTabInit{$x$ /1, $\sh(x)$ /1.5} {$-\infty$ , $+\infty$}
+    \tkzTabVar{-/ $-\infty$, +/ $+\infty$}
+    \tkzTabVal{1}{2}{0.5}{$0$}{0} 
+\end{tikzpicture}
+\end{multicols}
+\end{itemize}
+On a donc : 
+\begin{itemize}
+\begin{multicols}{2}
+\item $\forall x > 0$, $\sh x >0$
+\item $\forall x < 0$, $\sh x <0$
+\end{multicols}
+\end{itemize}
+\end{remarque}
+
+\begin{remarque}[Étude de la fonction $\ch$]
+Pour $x\in \R$, $\ch'(x)= \sh(x)$, donc positif si $x>0$ et négatif si  $x<0$
+
+\begin{itemize}
+\begin{multicols}{2}
+    \item $\ch 0$ $=$ $1$
+    \item $\displaystyle\lim_{+ \infty} \ch$ $=$ $\displaystyle\lim_{- \infty} \ch = +\infty$
+\end{multicols}
+\end{itemize}
+\begin{tikzpicture}
+    \tkzTabInit{$x$ /1, $\ch(x)$ /1.5} {$-\infty$, 0 , $+\infty$}
+    \tkzTabVar{+/ $+\infty$, -/ 1, +/ $+\infty$}
+\end{tikzpicture}
+\end{remarque}
+
+\begin{remarque}[Formulaire de trigonométrie hyperbolique]
+Soient $a,b \in \R$ : 
+\begin{center}
+    $\ch (a+b) = \dfrac{e^{a+b}+ e^{-(a+b)}}{2} = \dfrac{1}{2} (e^a e^b + e^{-a} e^{-b})$\\
+    $\ch (a+b) = \dfrac{1}{2} ((\ch a + \sh a )(\ch b +\sh b) + (\ch a - \sh a)(\ch b -\sh b))$\\
+    $\mathbox{\ch (a+b) = \ch a \ch b + \sh a \sh b}$
+\end{center}
+En changeant $b$ par $-b$: 
+\begin{center}
+    $\mathbox{\ch (a-b)= \ch a \ch b - \sh a \sh b}$
+\end{center}
+Avec $a=b$:
+\begin{center}
+    $\ch (2a)= \ch^2 a + \sh^2 a = 2\ch^2 a - 1$\\ \strong{$\ch (2a)= 1+2\sh^2 a$}
+\end{center}
+\end{remarque}
+
+\begin{remarque}
+Pour passer d'une formule de trigonométrie classique à la formule de trigonométrie hyperbolique analogue, il suffit de remplacer : 
+\begin{itemize}
+    \item $\cos$ par $\ch$
+    \item $\sin$ par $i \sh$
+\end{itemize}
+\end{remarque}
+
