@@ -1,0 +1,1043 @@
+\documentclass[12pt,a4paper]{report}
+\input{00 - preambule}
+
+\begin{document}
+
+\section{Construction de $K[X]$ $(pH)$}
+
+    \subsection{Anneau des suites à support fini}
+
+    \begin{definition}{Suites à support fini}{}
+    Soit $(a_n)_{n \in \mathbb{N}}$ une suite. On dit que $(a_n)$ est une \Strong{suite à support fini} si $\exists N \in \mathbb{N}$ tel que \strong{$\forall n > N : a_n = 0$}. On note alors \strong{$\mathbb{K}^{(\mathbb{N})}$} l'ensemble des suites d'éléments de $\mathbb{K}$ à support fini.
+    \end{definition}
+    
+    \begin{proposition}{Lois de composition internes dans $\mathbb{K}^{(\mathbb{N})}$}{LCIPolynomes}
+    Soient $(a_n)_{n \in \mathbb{N}}, (b_n)_{n \in \mathbb{N}} \in \mathbb{K}^{(\mathbb{N})}$, on définit alors deux lois de composition interne :
+    \begin{itemize}
+        \item La LCI $+$ (somme) par : \strong{$(a_n) + (b_n) = (s_n) : \begin{array}[t]{rcl} \mathbb{N} & \rightarrow & \mathbb{K} \\ n & \mapsto & a_n + b_n \end{array}$}
+        \item La LCI $\times$ (produit) par : \strong{$ (a_n) \times (b_n) = (p_n) : \begin{array}[t]{rcl} \mathbb{N} & \rightarrow & \mathbb{K} \\ n & \mapsto & \displaystyle \sum_{i + j = n} a_i b_j = \sum_{k = 0}^n a_k b_{n-k} \end{array}$}
+    \end{itemize}
+    \end{proposition}
+    
+    
+    \begin{demo}
+    Soient $(a_n)_{n \in \mathbb{N}}, (b_n)_{n \in \mathbb{N}} \in \mathbb{K}^{(\mathbb{N})}$, il s'agit de montrer que $(s_n)$ et $(p_n)$ sont à support fini. $(a_n)$ et $(b_n)$ sont à support fini, donc $\exists N, M \in \mathbb{N}$ tels que $\forall n > N : a_n = 0$ et $\forall n > M : b_n = 0$.
+    \begin{itemize}
+        \item Donc $\forall n > \max(N, M) : s_n = a_n + b_n = 0$ car $a_n = 0$ et $b_n = 0$, d'où $(s_n)$ est à support fini ;
+        \item Donc $\displaystyle \forall n > N + M : p_n = \sum_{k = 0}^n a_k b_{n-k} = 0$ ; car soit $k > N \Rightarrow a_k = 0$ ; ou soit $k \leqslant N \Rightarrow n-k > M \Rightarrow b_{n-k} = 0$ ; donc $p_n = 0$, d'où $(p_n)$ est à support fini.
+    \end{itemize}
+    \end{demo}
+
+    
+    \begin{proposition}{Anneau des des suites à support fini}{}
+    \strong{$\left(\mathbb{K}^{(\mathbb{N})}, +, \times\right)$} est un \strong{anneau commutatif} de neutres \strong{$0_{\mathbb{K}^{(\mathbb{N})}} = (0_\mathbb{K})_{n \in \mathbb{N}}$} et \strong{$1_{\mathbb{K}^{(\mathbb{N})}} = (\delta_{0,n})_{n \in \mathbb{N}}$}.
+    \end{proposition}
+    
+    \begin{remarque}
+    Rappel : Le terme \strong{$\delta_{i,j} = \left\{ \begin{array}{rl} 1 & \text{si} \quad i = j \\ 0 & \text{sinon} \end{array} \right.$} est appelé \Strong{symbole de Kronecker}.
+    \end{remarque}
+    
+    \begin{remarque}
+    Pour la suite (par soucis de simplicité) on notera $(f(n))$ la suite $(u_n) : \begin{array}[t]{rcl} \mathbb{N} & \rightarrow & \mathbb{K} \\ n & \mapsto & f(n) \end{array}$
+    \end{remarque}
+    
+    \begin{demo}
+    Soient $(a_n)_{n \in \mathbb{N}}, (b_n)_{n \in \mathbb{N}}, (c_n)_{n \in \mathbb{N}} \in \mathbb{K}^{(\mathbb{N})}$ :
+    \begin{itemize}
+        \item $\left(\mathbb{K}^{(\mathbb{N})}, +\right)$ est un groupe commutatif :
+        \begin{itemize}
+            \item $+$ est associative : $ \left\lbrace \begin{array}{r} \left( (a_n) + (b_n) \right) + (c_n) = (a_n + b_n) + (c_n) = (a_n + b_n + c_n) \\ (a_n) + \left( (b_n) + (c_n) \right) = (a_n) + (b_n + c_n) = (a_n + b_n + c_n) \end{array} \right.$ ;
+            \item $(0_\mathbb{K})$ est neutre pour $+$ : $(a_n) + (0_\mathbb{K}) = (a_n + 0_\mathbb{K}) = (a_n) = (0_\mathbb{K} + a_n) = (0_\mathbb{K}) + (a_n)$ ;
+            \item Tout $(a_n)$ admet un opposé : $(a_n) + (-a_n) = (a_n - a_n) = (0_\mathbb{K}) \Rightarrow -(a_n) = (-a_n)$ ;
+            \item $+$ est commutative : $(a_n) + (b_n) = (a_n + b_n) = (b_n + a_n) = (b_n) + (a_n)$.
+        \end{itemize}
+        
+        \item $\left(\mathbb{K}^{(\mathbb{N})}, \times\right)$ est un monoïde commutatif :
+        \begin{itemize}
+            \item $\times$ est associative :
+            \begin{align*}
+                ((a_n) \times (b_n)) \times (c_n) &= \left(\sum_{k = 0}^n a_k b_{n-k} \right) \times (c_n) = \left(\sum_{k = 0}^n \left(\sum_{\ell = 0}^k a_\ell b_{k-\ell}\right) c_{n-k} \right) = \left(\sum_{0 \leqslant \ell \leqslant k \leqslant n} a_\ell b_{k-\ell}c_{n-k}  \right) \\
+                (a_n) \times ((b_n) \times (c_n)) &= (a_n) \times \left(\sum_{k = 0}^n b_k c_{n-k} \right) = \left( \sum_{k = 0}^n a_k \left(\sum_{\ell = 0}^{n-k} b_\ell c_{n-k-\ell} \right) \right) = \left( \sum_{0 \leqslant \ell \leqslant k \leqslant n} a_{n-k}b_\ell c_{k - \ell} \right) \\
+                &= \left(\sum_{\ell = 0}^n \sum_{k = \ell}^n a_{n -k} b_\ell c_{k - \ell}\right) = \left(\sum_{\ell = 0}^n \sum_{k = \ell}^n a_{k - \ell} b_\ell c_{n - k}\right) = \left(\sum_{k = 0}^n \sum_{\ell = 0}^k a_{k - \ell} b_\ell c_{n - k}\right) \\
+                &= \left(\sum_{k = 0}^n \sum_{\ell = 0}^k a_{\ell} b_{k - \ell} c_{n - k}\right) = \left(\sum_{0 \leqslant \ell \leqslant k \leqslant n} a_\ell b_{k-\ell}c_{n-k}  \right)
+            \end{align*}
+            \item $(\delta_{0,n})$ est neutre pour $\times$ : $\displaystyle (a_n) \times (\delta_{0,n}) = \left(\sum_{k = 0}^n a_k \delta_{0,n-k} \right) = (a_n) = \left(\sum_{k = 0}^n \delta_{0,k} a_{n-k} \right) = (\delta_{0,n}) \times (a_n)$ ;
+            \item $\times$ est commutative : $\displaystyle (a_n) \times (b_n) = \left(\sum_{k = 0}^n a_k b_{n-k} \right) = \left(\sum_{k = 0}^n b_{n-k} a_k \right) = \left(\sum_{k = 0}^n b_k a_{n - k} \right) = (b_n) \times (a_n)$ ;
+        \end{itemize}
+        \item $\times$ est distributive par rapport à $+$ :
+        \begin{align*}
+            (a_n) \times ((b_n) + (c_n)) &= (a_n) \times (b_n + c_n) = \left(\sum_{k = 0}^n a_k (b_{n-k} + c_{n-k}) \right) = \left(\sum_{k = 0}^n a_k b_{n-k} + a_k c_{n-k} \right) \\
+            &= \left(\sum_{k = 0}^n a_k b_{n-k} + \sum_{k = 0}^n a_k c_{n-k} \right) = \left(\sum_{k = 0}^n a_k b_{n-k} \right) + \left( \sum_{k = 0}^n a_k c_{n-k} \right) \\
+            &= (a_n) \times (b_n) + (a_n) \times (c_n)
+        \end{align*}
+    \end{itemize}
+    \end{demo}
+    
+    
+    \subsection{Anneau des polynômes}
+    
+    \begin{definition}{Indéterminée}{}
+    On appelle \Strong{indéterminée} notée \strong{$X$} la suite à support fini dans $\mathbb{K}$ : \strong{$X = (\delta_{1,n})_{n \in \mathbb{N}}$}.
+    \end{definition}
+    
+    
+    \begin{proposition}{Itéré d'indéterminées}{ItereIndeterminees}
+    $\forall k \in \mathbb{N}$ : \strong{$X^k = (\delta_{k, n})_{n \in \mathbb{N}}$}.
+    \end{proposition}
+    
+    \begin{demo}
+    On pose $\mathcal{H}_k : X^k = (\delta_{k, n})_{n \in \mathbb{N}}$.\\
+    Par définition $\mathcal{H}_0$ est vraie : $X^0 = 1_{\mathbb{K}^{(\mathbb{N})}} = (\delta_{0,n})$.\\
+    Supposons que $\mathcal{H}_k$ soit vraie pour un certain rang $k$. Alors :
+    \begin{gather*}
+        X^{k+1} = X^k \times X = (\delta_{k,n}) \times (\delta_{1,n}) = \left(\sum_{\ell = 0}^n \delta_{k,\ell} \delta_{1,n-\ell} \right) = (\delta_{k+1,n}) \\
+        \text{En effet :}\quad \delta_{k, \ell} = \left\lbrace \begin{array}{rl} 1 & \text{si}\quad \ell = k \\ 0 & \text{sinon} \end{array} \right. \quad\text{et}\quad \delta_{1, n - \ell} = \left\lbrace \begin{array}{rl} 1 & \text{si} \quad n - \ell = 1 \Leftrightarrow \ell = n -1 \\ 0 & \text{sinon} \end{array} \right. \\
+       \text{Donc :}\quad \sum_{\ell = 0}^n \delta_{k,\ell} \delta_{1,n-\ell} = \left\lbrace \begin{array}{rl} 1 & \text{si} \quad n - 1 = k \Leftrightarrow n = k + 1 \\ 0 & \text{sinon} \end{array} \right. = \delta_{k+1,n}
+    \end{gather*}
+    \end{demo}
+    
+    \begin{definition}{Coefficients de $\mathbb{K}$ dans $\mathbb{K}^{(\mathbb{N})}$}{}
+    On définit l'application \strong{$\varphi : \begin{array}[t]{rcl} \mathbb{K} & \rightarrow & \mathbb{K}^{(\mathbb{N})} \\ \lambda & \mapsto & (\lambda \delta_{0,n})_{n \in \mathbb{N}} \end{array}$}
+    \end{definition}
+    
+    
+    \begin{proposition}{Propriétés de $\varphi$}{}
+    \strong{$\varphi$} est un \strong{morphisme d'anneaux} injectif de $(\mathbb{K}, +, \times)$ dans $\left(\mathbb{K}^{(\mathbb{N})}, +, \times \right)$.
+    \end{proposition}
+    
+    \begin{demo}
+    $\forall \lambda, \mu \in \mathbb{K}$
+    \begin{itemize}
+        \item $\varphi$ est un morphisme de groupes de $(\mathbb{K}, +)$ dans $(\mathbb{K}^{(\mathbb{N})}, +)$ :
+        $$ \varphi(\lambda + \mu) = ((\lambda + \mu) \delta_{0,n}) = (\lambda \delta_{0,n} + \mu \delta_{0,n}) = \varphi(\lambda) + \varphi(\mu) $$
+        \item $\varphi$ est un morphisme de monoïdes $(\mathbb{K}, \times)$ dans $(\mathbb{K}^{(\mathbb{N})}, \times)$ :
+        $$ \varphi(\lambda \times \mu) = ((\lambda \times \mu) \delta_{0,n}) = \left( \sum_{k = 0}^n \lambda\delta_{0,k} \mu\delta_{0,n-k} \right) = \varphi(\lambda) \times \varphi(\mu) $$
+        \item $\varphi(1) = (\delta_{0,n}) = 1_{\mathbb{K}^{(\mathbb{N})}}$
+        \item $\varphi$ est injective : $ \varphi(\lambda) = \varphi(\mu) \Leftrightarrow (\lambda\delta_{0,n}) = (\mu\delta_{0,n}) \Rightarrow \lambda = \mu $
+    \end{itemize}
+    \end{demo}
+    
+    \begin{corollaire}{Propriétés de $\varphi(\mathbb{K})$}{}
+    \strong{$\varphi(\mathbb{K})$} est un \strong{sous-anneau} de $\mathbb{K}^{(\mathbb{N})}$ isomorphe à $\mathbb{K}$
+    \end{corollaire}
+    
+    
+    \begin{demo}
+    $f$ est un morphisme d'anneaux de $A$ dans $B \Rightarrow f(A)$ est un sous-anneau de $B$.
+    \end{demo}
+    
+
+    \begin{proposition}{Linéarité des éléments de $\mathbb{K}^{(\mathbb{N})}$}{CoefficientIndeterminee}
+    Soient $(a_n)_{n \in \mathbb{N}} \in \mathbb{K}^{(\mathbb{N})}$ et $\lambda \in \mathbb{K}$ : \strong{$\varphi(\lambda) \times (a_n) = (\lambda a_n)$}.
+    \end{proposition}
+    
+    
+    \begin{remarque}
+    Par soucis de simplification on notera \strong{$\lambda (a_n) = \varphi(\lambda) \times (a_n)$}.
+    \end{remarque}
+    
+    \begin{demo}
+    Soient $(a_n)_{n \in \mathbb{N}} \in \mathbb{K}^{(\mathbb{N})}$ et $\lambda \in \mathbb{K}$ : $\displaystyle \lambda(a_n) = (\lambda \delta_{0,n}) \times (a_n) = \left( \sum_{k=0}^n \lambda \delta_{0,k} a_{n-k} \right) = (\lambda a_n) $
+    \end{demo}
+    
+    
+    
+    \begin{corollaire}{Coefficient d'une indéterminée}{}
+    Soient $\lambda \in \mathbb{K}$ et $k \in \mathbb{N}$ : \strong{$\lambda X^k = (\lambda\delta_{k,n})$}.
+    \end{corollaire}
+    
+    
+    \begin{definition}{Anneau des polynômes à une indéterminée}{}
+    On appelle \Strong{anneau des polynômes à une indéterminée} l'anneau $\left( \mathbb{K}^{(\mathbb{N})}, +, \times \right)$ noté \strong{$\mathbb{K} [X]$}.
+    \end{definition}
+    
+    
+    
+    \begin{proposition}{\'Ecriture des polynôme à une indéterminée}{}
+    Soit $(\lambda_n)_{n \in \mathbb{N}} \in \mathbb{K}[X]$ une suite à support fini telle que pour $N \in \mathbb{N}$ : $\lambda_N \neq 0$ et $\forall n > N, \lambda_n = 0$.\\
+    Alors $P = (\lambda_n)$ peut s'écrit de façon unique : $\displaystyle \strong{P = \sum_{k = 0}^N \lambda_k X^{k}} $.
+    \end{proposition}
+    
+    
+    \begin{demo}
+    Soit $(\lambda_n)_{n \in \mathbb{N}} \in \mathbb{K}[X]$, donc $\exists N \in \mathbb{N}$ tel que $\forall n > N : \lambda_n = 0$. Ainsi :
+    $$ (\lambda_n) = (\lambda_0, \lambda_1, ..., \lambda_N, 0, ...) = \lambda_0 1_{\mathbb{K}[X]} + \lambda_1 X + ... + \lambda_N X^N = \sum_{k = 0}^N \lambda_k X^k $$
+    \end{demo}
+
+
+\section{Anneau des polynômes à une indéterminée}
+    \subsection{Définitions et propriétés}
+    
+        \begin{definition}{Polynôme}{}
+        L'anneau$(K[X],+,\times)$ est l'anneau des polynômes à une indéterminée à coefficient dans $K$\\
+        Tout $P\in K[X]$ s'écrit de la façon unique : \\
+        \strong{\[ P= \sum_{k\in \mathbb{N}} \lambda_{k} X^{k} \]}
+        \\
+        $X$ est \strong{l'indéterminée}, $\lambda_{k}$ sont les \strong{coefficients de P}, $\lambda_{0}$ est le \strong {terme constant de $P$}\\
+        $\lambda_{k}X^{k}$ est le monôme d'indice $k$
+        \end{definition}
+        
+        
+        \begin{definition}{Degré}{}
+        Soit $P=\sum_{k\in \mathbb{N}} \lambda_{k} X^{k} \in K[X]\setminus \left\lbrace 0\right\rbrace$\\
+        \strong{$$\deg P = \max \left\lbrace k \in \mathbb{N}\mid \lambda_{k} \neq 0\right\rbrace $$}
+        \\
+        Si $d = \deg P, \lambda_{d}$ s'appelle le \strong{coefficient dominant} de $P$\\
+        $$P = \lambda_{0} + \lambda_{1}X + ... + \lambda_{d}X^{d} $$
+        Si $\lambda_{d}=1$, on dit que $P$ est \strong{unitaire}\\
+        \end{definition}
+     
+        
+        \begin{propositions}{Généralités sur le degré et le coefficient dominant}{GenDC}
+        \begin{enumerate}
+        \item Par convention : \strong{$\deg 0 = -\infty$}
+        \item $\deg(PQ)=\deg P + \deg Q$
+        \item $\coefdom (PQ) = \coefdom(P) \coefdom (Q)$
+        \item $K[X]$ est un anneau intègre : \strong{$PQ = 0 \Longleftrightarrow P=0$ ou $Q=0$}
+        \item Les inversibles de l'anneau $K[X]$ sont les éléments de $K^{*}$
+        \item $\deg(P+Q) \leq \max(\deg P, \deg Q)$
+        \end{enumerate}
+        \end{propositions}
+        
+        \begin{principedemo}{GenDC}
+        \textbf{2)} Étudier les cas : $P=0$ ou $Q=0$ puis $Q$ et $P\neq 0$
+        \end{principedemo}
+        
+        
+        \begin{definition}{Fonction polynomiale}{}
+        Soit $P=\sum_{k\in \mathbb{N}} \lambda_{k} X^{k} \in K[X]$, pour $t \in K$, on pose : \\
+        \strong{$$\widetilde{P} (t) = \sum_{k=0}^{n} a_{k} t^{k} $$}
+        $\widetilde{P}$ est une application de $K$ dans $K$ appelée fonction polynomiale associée à $P$
+        \end{definition}
+        
+        
+        \begin{propositions}{Propriétés sur les fonctions polynomiales}{}
+        \begin{enumerate}
+        \item $\widetilde{1}$ est l'application $t \mapsto 1$
+        \item $\widetilde{X}$ est $Id_{K}$
+        \item Pour $P,Q \in K[X]$, $t\in K$, on a :
+        \begin{center}
+            $\widetilde{P+Q} (t)=\widetilde{P} (t)+\widetilde{Q} (t)$ et $\widetilde{PQ}(t)= \widetilde{P}(t)\widetilde{Q}(t)$
+        \end{center}
+        \end{enumerate}
+        \end{propositions}
+        
+        \begin{definition}{Racine}{}
+        $t \in K$ est racine de $P \in K[X]$ lorsque $\widetilde{P}(t)=0$, on dit que $t$ est un zéro de $P$
+        \end{definition}
+   
+
+\section{Division euclicienne et conséquences}
+    \subsection{Divisibilité}
+    
+        \begin{definition}{Divisibilité}{}
+        Soient $A, B \in \mathbb{K}[X]$. \\
+        On dit que $A$ \strong{divise} $B$, et on écrit : $A\mid B$ s'il existe $C$ tel que :
+        \begin{center}
+            \Strong{$B=AC$}
+        \end{center}
+        $A$ est un \Strong{diviseur} de $B$ ou $B$ est un \Strong{multiple} de $A$
+        \end{definition}
+    
+        \begin{definition}{Polynômes associés}{}
+        Soient $A, B \in \mathbb{K}[X]$ et $\lambda \in \mathbb{K}^*$.\\
+        On dit que \strong{$B$ est \Strong{associé} à $A$} lorsque (les propositions sont équivalentes) :
+        \begin{multicols}{2}
+        \begin{enumerate}
+            \item \strong{$B \mid A$ et $A \mid B$} ;
+            \item \strong{$B = \lambda A$}.
+        \end{enumerate}
+        \end{multicols}
+        \end{definition}
+        
+        \begin{propositions}{}{prop11}
+        \begin{enumerate}
+        \item Soient $A, B, C, U, V \in \mathbb{K}[X]$ \\
+        Transitivité : \strong{$A \mid B$ et $B \mid C \Rightarrow A \mid C$} \\
+        Combinaisons linéaires : \strong{$A \mid B$ et $A \mid C \Rightarrow A \mid BU + CV$} 
+        \item \strong{$A \mid B \Rightarrow \deg(A) \leqslant \deg(B)$}
+        \item Si $A$ et $B$ sont \strong{associés} et que $A$ et $B$ sont \strong{unitaires} alors \strong{$A = B$}.
+        \end{enumerate}
+        \end{propositions}
+        
+        \begin{demo}
+        \textbf{2)}\\
+        Soient $A, B \in \mathbb{K}[X]^*$.\\
+        Si $A \mid B$ alors $\exists C \in \mathbb{K}[X]$ tel que $B = AC$.\\
+        Ainsi $\deg(B) = \deg(AC) = \underbrace{\deg(A)}_{\in \mathbb{N}} + \underbrace{\deg(C)}_{\in \mathbb{N}} \geqslant \deg(A)$.\\
+        \textbf{3)}\\
+        Soient $A, B \in \mathbb{K}[X]$.\\
+        Si $A$ et $B$ sont associés, alors $\exists \lambda \in \mathbb{K}^*$ tel que $A = \lambda B$.\\
+        Si de plus $A$ et $B$ sont unitaires : $1 = \text{coefdom}(A) = \text{coefdom}(\lambda B) = \lambda\, \text{coefdom}(B) = \lambda$ \\
+        d'où $A = B$\\
+        \end{demo}
+    
+        \begin{definition}{Polynômes irréductibles}{}
+        Soit $P \in \mathbb{K}[X]$. On dit que $P$ est un \Strong{polynôme irréductible} lorsque \strong{$\deg(P) \geqslant 1$} ($P$ n'est pas constant) et que les seuls diviseurs de $P$ sont :
+        \begin{multicols}{2}
+        \begin{enumerate}
+            \item Les \strong{constantes} $\lambda \in \mathbb{K}^*$ ;
+            \item Les \strong{polynômes associés} à $P$.
+        \end{enumerate}
+        \end{multicols}
+        On note aussi \strong{$\mathcal{I}$} l'ensemble des polynômes \strong{irréductibles et unitaire}.
+        \end{definition}    
+        
+        \begin{proposition}{Polynôme de degré 1}
+        Tout polynôme $P \in \mathbb{K}[X]$ de degré \strong{$\deg(P) = 1$} est \strong{irréductible}.
+        \end{proposition}
+        
+        \begin{demo}
+        Soit $P \in \mathbb{K}[X]$ tel que $\deg(P) = 1$. Soit $Q \in \mathbb{K}[X]$ un diviseur de $P$.\\
+        Alors $\exists C \in \mathbb{K}[X]$ tel que $P = QC$. Donc $\deg(P) = \deg(QC) = \deg(Q) + \deg(C) = 1$. Donc :
+        \begin{itemize}
+            \item $\deg(Q) = 0$ et $\deg(C) = 1$, donc $Q = \lambda \in \mathbb{K}^*$ ;
+            \item $\deg(Q) = 1$ et $\deg(C) = 0$, donc $C = \lambda \in \mathbb{K}^* \Rightarrow P = \lambda Q \Rightarrow Q$ est associé à $P$.
+        \end{itemize}
+        \end{demo}
+        
+        \begin{proposition}{Polynômes non irréductibles}{}
+        Soit $A\in K[X]$ non constant \\
+        $A$ n'est pas irréductible $\Longleftrightarrow A=BC$ avec $B,C\in K[X]$ non constants
+        \end{proposition}
+        
+        \begin{demo}
+        Soit $A \in \mathbb{K}[X], \deg(P) \geqslant 1$.
+        \begin{itemize}
+            \item[$\Rightarrow$] Alors $P$ admet un diviseur $A$ non nul, non constant et non associé à $P$ ; et $\exists B \in \mathbb{K}[X]$ tel que $P = AB$ donc $\deg(P) = \deg(AB) = \underbrace{\deg(A)}_{\geqslant 1} + \deg(B) \geqslant 1$.\\
+            Si $\deg(B) = 0$, alors $A$ est associé à $P$ ce qui contredit contredit l'hypothèse, donc $\deg(B) \geqslant 1$.
+            \item[$\Leftarrow$] Alors $\deg(P) = \deg(AB) = \underbrace{\deg(A)}_{\geqslant 1} + \underbrace{\deg(B)}_{\geqslant 1} \Rightarrow 1 \leqslant \deg(A) < \deg(P)$. Donc $A$ n'est ni constant et ni associé à $P$ car sinon $\deg(A) = \deg(P)$ (ce qui contredit l'inégalité du dessus).
+        \end{itemize}
+        \end{demo}
+   
+
+    \subsection{Division euclidienne dans $K[X]$}
+        \begin{theoreme}{Division euclidienne}{DivEu}
+        Soient $A \in \mathbb{K}[X]$ et $B \in \mathbb{K}[X]^*$.\\
+        Il \strong{existe} un \strong{unique} couple $(Q, R) \in \mathbb{K}[X]^2$ appelé \Strong{division euclidienne} de $A$ par $B$ tel que :
+        \begin{enumerate}
+            \item \strong{$A = QB + R$} 
+            \item \strong{$\deg(R) < \deg(B)$}
+        \end{enumerate}
+        
+        $Q$ et $R$ sont alors respectivement appelés le \strong{quotient} et le \strong{reste}.
+        \end{theoreme}
+    
+        \begin{principedemo}{DivEu}
+        \textbf{Unicité} :Étudier deux couples $(Q_{1}, R_{1})$ et $(Q_{2}, R_{2})$, vérifiant 1) et 2), on aboutit à une relation entre $B$, $Q$ et $R$. Ensuite, voir la situation où $Q_{1} \neq Q_{2}$, on examinera les degrés\\
+        \textbf{Existence} : [Récurrence]
+        \end{principedemo}
+
+    \subsection{Racines et factorisation}
+    
+        \begin{theoreme}{Racines et divisibilité}{}
+        Soient $P \in \K[X]$ et $a \in \K$ : 
+        \center \strong{$a$ est racine} de $P$ $\Leftrightarrow$ \strong{$(X - a) \mid P$} dans $\K[X]$.
+        \end{theoreme}
+    
+        \begin{demo}
+        Soient $P \in \K[X]$ et $a \in \K$.
+        \begin{itemize}
+            \item[$\Rightarrow$] Supposons que $a$ soit racine de $P$.\\
+            Considérons $(Q, R) \in \K[X]^2$ la division euclidienne de $P$ par $(X - a)$.\\
+            Ainsi : $P = (X - a)Q + R$ ; avec $\deg(R) < \deg(X - a) = 1$ donc $R = \lambda \in \K$.\\
+            Or, $\widetilde{P}(a) = (a - a)\widetilde{Q} + \lambda \Leftrightarrow \lambda = 0$. D'où $(X - a) \mid P$.
+            \item[$\Leftarrow$] Supposons que $(X - a) \mid P$. Donc $\exists Q \in \K[X]$ tel que $P = (X-a)Q$.\\
+            Ainsi $\widetilde{P}(a) = (a - a)\widetilde{Q}(a) = 0$. D'où $a$ est racine de $P$.\\
+        \end{itemize}
+        \end{demo}
+    
+        \begin{propositions}{Conséquences}{CRacine}
+        \begin{enumerate}
+            \item Soit $P \in \K[X]$ avec $\deg(P) \geqslant2 $ : 
+            \begin{center}
+            \strong{$P$ est irréductible} dans $\K[X] \Rightarrow$ \strong{$P$ n'a pas de racines} dans $\K$.
+            \end{center}
+            \begin{remarque}
+            La réciproque est fausse, sauf pour le cas qui suit : \\
+            \end{remarque}
+            \item Soit $P \in \mathbb{K}[X]$ avec \strong{$2 \leqslant \deg(P) \leqslant 3$} :
+            \begin{center}
+            \strong{$P$ est irréductible} dans $\K[X] \Leftrightarrow$ \strong{$P$ n'a pas de racines} dans $\K$
+            \end{center}
+            \item Soient $P \in \K[X]$ et $a_1, a_2, ..., a_n$ distincts dans $\K$ :
+            \begin{center}
+            \strong{$a_1, a_2, ..., a_n$ sont racines} de $P \Leftrightarrow$ \strong{$\displaystyle \prod_{i = 1}^n (X - a_i) \mid P$} dans $\K[X]$
+            \end{center}
+            \item Soit $P \in \K[X]\setminus \lbrace0\rbrace, n=\deg P$, alors : 
+            \begin{center}
+                \strong{$P$ admet au plus $n$ racines} dans $\K$.
+            \end{center}
+            \item Soit $P \in \K[X]$ de degré $n \geq 1$\\
+            On suppose que $P$ admet $n$ racines distinctes $a_{1},a_{2},...,a_{n}\in K$, et $c=\coefdom(P)$ alors : 
+            \begin{center}
+                \strong{$P=c(X-a_{1})...(X-a_{n})$}
+            \end{center}
+        \end{enumerate}
+        \end{propositions}
+        
+        \begin{demo}
+        \textbf{1)}\\
+        Explication : en effet, si $P$ a une racine $a\in K$, $X-a$ divise $P$, et $X-a$ n'est pas constant, ni associé à $P$ ( car $1=\deg (X-a)< \deg P$ )\\
+        \\
+        \textbf{2)} \\
+        $\Longrightarrow$ Djavu !\\
+        $\Longleftarrow$ Par contraposée \\
+        Montrons que : Si $P$ n'est pas irréductible alors $P$ a une racine. \\
+        Supposons $P$ non irréductible : $P=AB$ avec $A,B\in K[X]$, $\deg A$ $ \geq 1, \deg B \geq 1$
+        \begin{center}
+        $ \underbrace{\deg P}_{\in \lbrace2,3\rbrace} = \underbrace{\deg A} _{\geq 1} + \underbrace{\deg B}_{\geq 1}$
+        \end{center}
+        On en déduit : $\deg A =1$ ou $\deg B =1$\\
+        Supposons par exemple $\deg A=1$\\
+        $A=aX+b$ avec $a\in K^*$, alors $x=-\frac{b}{a}$ est racine de $A$, donc aussi racine de $P$\\
+        \\
+        \textbf{3)}\\
+        $\Longleftarrow$ Obvious ! \\
+        $\Longrightarrow$ Par récurrence sur $n$
+        \\
+        \textbf{4)}\\
+        Si $a_{1},...,a_{n}$ sont des racines distinctes de $P$ alors $\displaystyle \prod^{r}_{i=1} (X-a_i)$ divise $P$, et vu que $P\neq 0$, ceci implique : 
+        \begin{center}
+            $\deg \displaystyle \prod^{r}_{i=1} (X-a_i) \leq \deg P$   (\ie $r\leq n$) 
+        \end{center}
+        \textbf{5)}\\
+        On a $\displaystyle \prod_{i = 1}^n (X - a_i) \mid P$ donc $P$ s'écrit : $P=T \displaystyle \prod^{r}_{i=1} (X-a_i)$ avec $T \in K[X]\setminus \lbrace0\rbrace$\\
+        $n=\deg P = \deg T+n $, on a alors : $\deg T = 0$ d'où $T= c \in K^*$\\
+        Donc $P=c\displaystyle \prod^{r}_{i=1} (X-a_i)$ puis $\coefdom(P) = \coefdom (c\displaystyle \prod^{r}_{i=1} (X-a_i))=c$
+        \end{demo}
+    
+        \begin{corollaire}{}{}
+        \begin{itemize}
+            \item Soit $n\in \mathbb{N}$ \\
+            Soit $P\in K[X]$ tel que $\deg P \leq n$\\
+            Si $P$ admet $n+1$ racines distinctes dans $K$ alors $P=0$\\
+            \\
+            Soient $P,Q\in K[X]$ tel que $\deg P \leq n$ et $\deg Q \leq n$\\
+            Si $\widetilde{P}$ et $\widetilde{Q}$ coïncide en $n+1$ éléments distincts alors $P=Q$
+            \item Soit $P\in K[X]$\\
+            Si $P$ a une infinité de racines alors $P=0$
+            \item Soient $P,Q\in K[X]$\\
+            Si $\widetilde{P}$ et $\widetilde{Q}$ coïncide en une infinité de points alors $P=Q$
+            \item Si $K$ est infini alors, pour $P,Q\in K[X]$
+            \begin{center}
+                $P=Q \Longleftrightarrow \widetilde{P}=\widetilde{Q} (\forall t\in K, \widetilde{P}(t)=\widetilde{Q}(t))$
+            \end{center}
+        \end{itemize}
+        \end{corollaire}
+    
+        \begin{application}{}{}
+        Petit Théorème de Fermat, Polynôme de Tchebychev ( Pafnouty for ever <3 ) ...  
+        \end{application}
+
+    \subsection{Polynômes interpolateurs de Lagrange}
+        \begin{definition}{Polynômes interpolateurs de \textsc{Lagrange}}{}
+        Soient $n \in \N$, $x_0, x_1, ..., x_n$ distincts dans $\K$.\\
+        On appelle \Strong{polynômes interpolateurs de \textsc{Lagrange}} les polynômes \strong{$\displaystyle L_i = \prod_{\substack{j = 0 \\ j \neq i}}^n \dfrac{X - x_j}{x_i - x_j}$}.
+        \end{definition}
+        
+        
+        \begin{theoreme}{Interpolation de \textsc{Lagrange}}{InterLagrange}
+        Soient $n \in \N$, $(x_0, y_0), (x_1, y_1), ..., (x_n, y_n)$ distincts dans $\K^2$.\\
+        Il \strong{existe} un \strong{unique} polynôme $P \in \K_n[X]$ tel que $\forall i \in \llbracket 0 ; n \rrbracket : \strong{P(x_i) = y_i}$. Il s'agit de \strong{$\displaystyle P = \sum_{i = 0}^n y_i L_i$}.
+        \end{theoreme}
+    
+        \begin{principedemo}{InterLagrange}
+        \textbf{Unicité}\\
+        \textbf{Existence}
+        \end{principedemo}
+
+
+
+\section{Arithmétique dans $K[X]$}
+    \subsection{PGCD et Bézout}
+        \begin{theoreme}{PGCD}{}
+        Soient $A, B \in \K[X]$.\\
+        Il \strong{existe} un \strong{unique} $D \in \K[X]$ \strong{nul} ou \strong{unitaire} appelé \Strong{PGCD} de $A$ et de $B$ tel que :
+        \begin{multicols}{2}
+        \begin{enumerate}
+        \item \strong{$D \mid A$} et \strong{$D \mid B$} ;
+        \item $\forall P \in \K[X]$ : \strong{$P \mid A$} et \strong{$P \mid B$} $\Rightarrow$ \strong{$P \mid D$}.
+        \end{enumerate}
+        \end{multicols}
+        On note alors \strong{$D = A \wedge B$}.
+        \end{theoreme}
+        
+        \begin{demo}
+        \textbf{Unicité} : \\
+        Si $D_1$ et $D_2$ conviennent alors on a $D_1 \mid D_2$ et $D_2 \mid D_1$ \\
+        D'où $D_1 = D_2$ (car $D_1$, $D_2$ sont nuls ou unitaires)  
+        \\
+        \textbf{Existence} : \\
+        Soit $H=AK[X]+BK[X]=\lbrace AU + BV \mid U,V \in K[X]\rbrace$\\
+        On a : 
+        \begin{itemize}
+            \item $H$ est un sous-groupe de $(K[X],+)$
+            \item $\forall S \in K[X], \forall P \in H, SP \in H$
+        \end{itemize}
+        On a $A,B \in H$, donc en supposant $A$ ou $B$ non nul, $H\neq \lbrace 0 \rbrace$\\
+        L'ensemble $\lbrace \deg P \mid P\in H \setminus \lbrace0\rbrace \rbrace$ n'est pas vide donc a un minimum $m$. On peut considérer $P\in H$ de degré $m$ et on note : $D=\frac{1}{\coefdom(P)} P$\\
+        $D$ est unitaire, de degré $m$, et appartenant à $H$\\
+        ......
+        \end{demo}
+        
+        \begin{remarque}[Remarques]
+        Soient $A,B \in K[X], D=A\wedge B$
+        \begin{enumerate}
+            \item $D=0 \Longleftrightarrow A=B=0$
+            \item $D$ est en fait l'unique polynôme $\delta$, nul ou unitaire tel que : \\
+            $\lbrace AU + BV \mid U,V \in K[X]\rbrace = \delta K[X]$\\
+            Comme $D$ appartient à $DK[X]$, il existe : $U,V \in K[X]$ tel que $D= AU+BV$ \strong{(Bézout I)}
+            \item Les polynômes $\delta \in K[X]$ qui vérifient $\delta$ divisent $A$ et $B$, et pour tout $P$ divisant $A$ et $B$, $P$ divise $\delta$, soit \strong{les polynômes associés à $D$}
+            \item $A \mid B \Longleftrightarrow D$ associé à $A$
+        \end{enumerate}
+        \end{remarque}
+        
+        \begin{application}{Algorithme d'\textsc{Euclide}}{}
+        Soient $A, B \in \K[X]$ tel que $\deg(A) \geqslant \deg(B)$.\\
+        Pour déterminer le PGCD de $A$ et de $B$ :
+        \begin{enumerate}
+        \item Déterminer $(Q, R)$ la division euclidienne de $A$ par $B$ ;
+        \item Successivement, déterminer $(Q_k, R_k)$ la division euclidienne du dernier diviseur ($B$ ou $R_{k-2}$) par le dernier reste ($R_{k-1}$) jusqu'à obtenir un reste nul ($R_N$) ;
+        \item Le dernier reste non nul ($R_{N-1}$) est le PGCD de $A$ et de $B$.
+        \end{enumerate}
+        \end{application}
+    
+        \begin{definition}{Nombres premiers}{}
+        $A, B \in K[X]$ sont premiers entre eux lorsque : $A\wedge B=1$
+        \end{definition}
+        
+        \begin{theoreme}{Bézout II}{}
+        $A$ et $B$ premiers entre eux $\Longleftrightarrow \exists U,V \in K[X], AU + BV = 1$
+        \end{theoreme}
+        
+        \begin{demo}
+        Démonstration analogue à celle dans $\Z$
+        \end{demo}
+        
+    \subsection{Gauss et ses variantes}
+        \begin{demo}
+        Dans cette partie, les démonstrations sont analogues à celles dans $\Z$ \\ (cf : Chapitre 8 - Arithmétique dans $\Z$)
+        \end{demo}
+        
+        \begin{theoreme}{Théorème de Gauss}{}
+        $A,B,C \in K[X]$\\
+        On suppose $A \mid BC$ et $A\wedge B=1$, alors : $A\mid C$
+        \end{theoreme}
+        
+        \begin{lemme}{Lemme d'Euclide}{}
+        Soient $A, B, P \in \K[X]$ tel que $P$ est irréductible. Alors $\strong{P \mid AB} \Rightarrow$ \strong{$P \mid A$ ou $P \mid B$}.
+        \end{lemme}
+        
+        \begin{lemme}{Polynômes irréductibles}{}
+        Soient $A, P \in \K[X]$ tel que $P$ est irréductible. Alors \strong{$P \mid A$} ou \strong{$P \wedge A = 1$}.
+        \end{lemme}
+        
+        \begin{corollaire}{Généralisation du lemme d'Euclide}{}
+        Soient $n \in \N$ et $A_1, A_2, ..., A_n \in \K[X]$ tels que $P$ est irréductible.\\
+        Alors \strong{$\displaystyle P \mid \prod_{i = 1}^n A_i$} $\Rightarrow \exists i \in \llbracket 1 ; n \rrbracket$ tel que \strong{$P \mid A_i$}.
+        \end{corollaire}
+        
+        \begin{propositions}{Variantes du théorème de Gauss}{}
+        Soient $n \in \N$ et $A, A_1, A_2, ..., A_n, B, C \in \K[X]$.
+        \begin{itemize}
+        \item \textbf{Variante 1} : Polynômes premiers entre-eux 
+        \begin{center}
+            $\strong{A \wedge C = B \wedge C = 1} \Rightarrow \strong{(AB) \wedge C = 1}$ 
+        \end{center}
+        
+            \begin{itemize}
+                \item $\forall i \in \llbracket 1 : n \rrbracket : \strong{A_i \wedge C = 1} \Rightarrow \strong{\left( \displaystyle \prod_{i = 1}^n A_i \right) \wedge C = 1}$ ;
+                \item $\strong{A \wedge B = 1} \Rightarrow \forall \alpha, \beta \in \N : \strong{A^\alpha \wedge B^\beta = 1}$ ;
+            \end{itemize}
+        
+        \item \textbf{Variante 2} : Divisibilité de produits 
+        \begin{center}
+            \strong{$A \mid C$}, \strong{$B \mid C$} et $\strong{A \wedge B = 1} \Rightarrow \strong{AB \mid C}$
+        \end{center}
+            
+            \begin{itemize}
+                \item $\forall i, j \in \llbracket 1 ; n \rrbracket, i \neq j : \strong{A_i \mid C}$ et $\strong{A_i \wedge A_j = 1} \Rightarrow \displaystyle \strong{\prod_{i = 1}^n A_i \mid C}$ ;
+            \end{itemize}
+        \end{itemize}
+        \end{propositions}
+        
+        \begin{theoreme}{Ensemble des polynômes irréductibles unitaires}{}
+        On note $I$ l'ensemble des polynômes irréductibles unitaires de $K[X]$\\
+        Si $A \in K[X] \setminus \lbrace 0\rbrace$, $A$ s'écrit : 
+        \begin{center}
+            $A=cP_1 ... P_r$ \: \: \: avec $c\in K^*$, $r\in \N$, et $P_1 ,... P_r \in I$
+        \end{center}
+        Cette écriture est unique à l'ordre près des termes
+        \end{theoreme}
+        
+        \begin{demo}
+        \textbf{Existence}: [Récurrence forte ]\\
+        Si $A$ est constant, c'est clair \\
+        \strong{$H_n$: Tout $A \in K[X]$ de degré $n$ s'écrit : $A=cP_1 ... P_r$ avec $c\in K^*$, $r\in \N^*$, et $P_1 ,... P_r \in I$}\\
+        \\
+        \strong{$H_1$} est vraie : \\
+        Soit $A \in K[X]$ de degré 1, $A=aX+b$ avec $a\neq0$ : $A=a\underbrace{(X+\frac{b}{a})}_{irreductible}$\\
+        \\
+        Soit $n \in \N^*$, supposons : $\forall k \in \llbracket1,n\rrbracket$, $H_k$ est vraie \\
+        Soit $A\in K[X]$ tel que $\deg A = n+1$
+        \begin{itemize}
+            \item Si $A$ eest irréductible, on écrit, avec $a=\coefdom (A)$ : $A=a \frac{A}{a}$ ( irréductible unitaire ) 
+            \item Si $A$ n'est pas irréductible, $A$ s'écrit $A=BC$ avec $1\leq \deg B \leq n$, $1\leq \deg C \leq n$
+        \end{itemize}
+        Par H.R. : \\
+        $B=bP_1 ... P_r$ avec $b\in K^*$, $r\in \N^*$, et $P_1 ,... P_r \in I$ \\
+        $C=cQ_1 ... Q_s$ avec $c\in K^*$, $s\in \N^*$, et $Q_1 ,... Q_s \in I$ \\
+        D'où $A=BC= bcP_1 ... P_r Q_1 ... Q_s$ \\
+        Donc $H_n$ est vraie pour tout $n\geq 1$ \\
+        \\
+        \textbf{Unicité}: \\
+        Supposons $cP_1 ... P_r=dQ_1 ... Q_s$ ($c,d\in K^*$, $r,s\in \N^*$, et $P_i , Q_j\in I$)\\
+        En considérant les coefficients dominants, on obtient : $c=d$ reste $P_1 ... P_r = Q_1 ... Q_s$\\
+        On montre comme dans $\Z$ que ceci impose : $r=s$ et $P_i = Q_i$ ($1\leq i \leq r$)
+        \end{demo}
+        
+        \begin{theoreme}{Théorème bis}{}
+        Soit $P\in K[X]$ non constant, alors $P$ s'écrit : 
+        \begin{center}
+            $P=cP_1^{\alpha_1} ... P_s^{\alpha_s}$ 
+            avec $c\in K^*$, $s\in \N^*$, $P_1 ,... P_s \in I$ distincts, $\alpha_1 , ..., \alpha_s \in \N^*$
+        \end{center}
+        \end{theoreme}
+        
+        \begin{remarque}
+        $P,Q \in K[X]\setminus\lbrace 0 \rbrace$, alors on peut toujours écrire : \\
+        $P=cP_1^{\alpha_1} ... P_s^{\alpha_s}$ \: \: \: $Q=dP_1^{\beta_1} ... P_s^{\beta_s}$ \\
+        \\
+        $P_1 ,... P_s \in I$ distincts, avec $c,d \in K^*, s \in \N^*$, $\alpha_i, \beta_i \in \N^*$ \\
+        \\
+        On a alors : $P\wedge Q=P_1^{\min (\alpha_1 , \beta_1)} ... P_s^{\min (\alpha_s , \beta_s)}$
+        \end{remarque}
+
+    \subsection{Valuation P-adique et PPCM}
+    
+    \begin{definition}{Valuation P-adique}{}
+    Soit $P\in I$, pour $A\in K[X]\setminus \lbrace 0 \rbrace$: 
+    \begin{itemize}
+        \item $V_P (A) = 0$ si $P$ ne divise pas $A$
+        \item $V_P (A) =$ exposant de $P$ dans la décomposition de $A$ si $P$ divise $A$
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}{PPCM}{}
+    Soient $A,B \in K[X]$, il existe un unique $M\in K[X]$, nul ou unitaire tel que :
+    \begin{itemize}
+        \item $A \mid M$ et $B\mid M$
+        \item $ \forall P \in K[X]$, $A\mid P$ et $B\mid P \Longrightarrow M\mid P$
+    \end{itemize}
+    $M$ s'appelle le $PPCM$ de $A$ et $B$, se note $A \wedge B$
+    \end{definition}
+    
+    \begin{propositions}{}{}
+    \begin{itemize}
+    \begin{multicols}{2}
+        \item Pour $P \in I$ : 
+        \\$V_P (A)= \max \lbrace k \in \N \mid P^k$ divise $A \rbrace$
+        \item Pour $A,B \in K[X] \setminus \lbrace 0 \rbrace :$ \\
+        $V_P (AB) = V_p (A) + V_P (B)$ \\
+        $V_P (A+B) \geq \min (V_p (A),V_P (B))$
+        \item $A \mid B \Longleftrightarrow \forall P \in I, V_P (A) \geq V_P (B)$
+        \item $A \wedge B = \displaystyle \prod_{P\in I} P^{\min (V_p (A),V_P (B))}$
+        \item $A \vee B = \displaystyle \prod_{P\in I} P^{\max (V_p (A),V_P (B))}$
+        \item Tout $A \in K[X]\setminus \lbrace0\rbrace$ s'écrit :  $A = a \displaystyle \prod_{P\in I} P^{V_p (A)}$
+    \end{multicols}
+        
+    \end{itemize}
+    \end{propositions}
+
+
+
+\section{Racines multiples}
+\begin{definition}{Ordre et racine}{}
+Soit $P \in \K[X]$ non constant et $a\in \K$ une (éventuelle) racine de $P$\\
+On appelle \strong{ordre de multiplicité} de a dans $P$ l'entier $V_{X-a}(P)\geq 1$ \\
+(On sait que $X-a$ divise $P$ donc $V_{X-a}(P)\geq 1$)\\
+\\
+On dit que $a$ est une \strong{racine simple} de $P$ lorsque $V_{X-a} (P) =1$\\
+(Ceci équivaut à $X-a \mid P$ et $(X-a)^2 \nmid P$)\\
+\\
+On dit que $a$ est une \strong{racine multiple} si $V_{X-a}(P) \geq 2$ (ceci équivaut à $(X-a)^2\mid P$) \\
+\\
+L'\strong{ordre de multiplicité} de $a$ dans $P$ est donc $\max \lbrace k \in \N \mid (X-a)^k \text{divise } P \rbrace$
+\end{definition}
+
+\begin{remarque}
+Soit $P \in \K[X] \setminus \lbrace 0 \rbrace$ et $x \in \K$\\
+$V_{X-x} (P) = 0 \Longleftrightarrow X-x$ ne divise pas $P$ $\Longleftrightarrow x$ n'est pas racine de $P$
+\end{remarque}
+
+\begin{theoreme}{}{}
+Soit $P \in \K[X]$ de degré $n\in \N^*$\\
+Soit $r\in \N^*, x_1 , ..., x_r$ distincts dans $\K$ et $\beta_1 , ..., \beta_r \in \N^*$\\
+Pour $1 \leq x \leq r$, si $(X-x_i)^{\beta_i}$ divise $P$ alors $\displaystyle \prod^r_{i=1} (X-x_i)^{\beta_i}$ divise $P$ \\
+(D'où $\beta_1 + ...+ \beta_r \leq n$ : $P$ admet donc au plus $n$ racines)\\
+Si $\beta_1 + ...+ \beta_r = n$ et si $(X-x_i)^{\beta_i}$ divise $P$, alors $P$ s'écrit : $\mathbox{P=c\prod^r_{i=1} (X-x_i)^{\beta_i}} \text{ où } c \in \K^*$\\
+($c$ est nécessairement le $\coefdom(P)$)
+\end{theoreme}
+
+\begin{demo}
+
+\end{demo}
+
+\begin{remarque}
+On a alors nécessairement $\lbrace x_1 , ..., x_r \rbrace$ est l'ensemble des racines de $P$ dans $\K$ et, pour $1 \leq i \leq r$, $\beta_i$ est l'ordre de multiplicité de $x_i$
+\end{remarque}
+
+
+\section{Polynômes scindés et relations racines-coefficients}
+
+\begin{definition}{}{Polynôme scindé}
+Soit $K$ un corps, $P\in\K[X]$ non-constant.\\
+On dit que $P$ est \strong{scindé} sur $\K$ si $P$ est un \strong{produit de polynômes de degré 1}. \\
+\\
+\ie si $P$ s'écrit $P=c(X-x_1)...(X-x_n)$ avec $c\in \K^*, x_1 ,..., x_n \in \K$
+\end{definition}
+
+\begin{remarque}
+À venir ••• \\ 
+\end{remarque}
+
+\begin{definition}{Corps algébriquement clos}{}
+Soit $\mathbb{K}$ un corps. Les assertions suivantes sont équivalentes (\textit{LASSE}:
+\begin{enumerate}
+\item tout $P \in \K[X]$ non-constant admet une racine dans $\K$
+\item les polynômes irréductibles de $\mathbb{K}\left[X\right]$ sont les
+polynômes de degré 1.
+\item tout $P \in \K[X]$ non constant est scindé sur $\K$
+\end{enumerate}
+Lorsqu'une de ces conditions est vérifiée, on dit que $\mathbb{K}$
+est algébriquement clos.
+\end{definition}
+
+\begin{demo}
+
+\end{demo}
+
+\begin{theoreme}{Théorème d'Alembert-Gauss}{}
+$\C$ est un corps algébriquement clos
+\end{theoreme}
+
+
+
+\subsection{Fonctions symétriques élémentaires}
+Soit $n \geq 2$, on définit $\sigma_1 ,..., \sigma_n \in \mathcal{F}(\K^n, \K)$ :
+\begin{eqnarray*}
+\sigma_{1}\left(x_1 , ..., x_n\right) & = & \sum^n_{i=1} {x_{i}}\\
+\sigma_{2}\left(x_1 , ..., x_n\right) & = & \sum_{i<j} {x_{i}x_{j}}\\
+\vdots\\
+\sigma_{k}\left(x_1 , ..., x_n\right) & = & \sum_{1\leqslant i_{1}<\cdots<i_{k}\leqslant n} {x_{i_{1}}x_{i_{2}}\cdots x_{i_{k}}}\\
+\vdots\\
+\sigma_{n}\left(x_1 , ..., x_n\right) & = & \prod^n_{i=1} {x_{i}}
+\end{eqnarray*}
+De façon alternative : $\mathbox{\sigma_k (x_1, ..., x_n) = \displaystyle\sum_{A \in P_k (n)} \displaystyle\prod_{l\in A} x_l}$
+
+\begin{exemple}
+$n=2$ : $\sigma_1 (x_1 ,x_2) =  x_1 + x_2$ \: \: \: $\sigma_2 (x_1 , x_2) =  x_1 x_2$ \\
+$n=3$ : $\sigma_1 (x_1 ,x_2, x_3) =  x_1 + x_2 + x_3$ \: \: \: $\sigma_2 (x_1 , x_2 , x_3) =  x_1 x_2 + x_1 x_3 + x_2 x_3$ \: \: \: $\sigma_3 (x_1 ,x_2, x_3) =  x_1 x_2 x_3$
+\end{exemple}
+
+\begin{definition}{Fonction symétrique}{}
+$f : \K^n \to K$ est symétrique si : \\
+\textbox{$\forall \sigma \in S_n, \forall (x_1 , ..., x_n) \in \K^n, f(x_{\sigma(1)}, ..., x_{\sigma(n)}) = f(x_1 , ..., x_n)$}\\
+\\
+Ici les fonctions symétriques élémentaires sont des facteurs symétriques \\
+De plus si $(t_1 , ..., t_n) \in \K^n \to P(t_1 , ..., t_n)$ est polynomiale et symétrique \\
+Alors il existe $Q : \K^n \to \K$ polynomiale tel que : \\
+\textbox{$\forall (t_1 , ..., t_n)\in \K^n, P(t_1 , ..., t_n) = Q(\sigma_1(t_1 , ..., t_n),..., \sigma_n(t_1 , ..., t_n))$}
+\end{definition}
+
+\begin{theoreme}{}{}
+Soit $n\in \N^*$, $n\geq 2$
+\begin{enumerate}
+    \item $\forall x_1 , ..., x_n \in \K$, \\
+    $\displaystyle \prod^n_{i=1} (X+x_i) = X^n + \sum^{n-1}_{k=0} \sigma_{n-k} (x_1, ..., x_n)X^k$ 
+    \item $\forall x_1 , ..., x_n \in \K$, \\
+    $\displaystyle \prod^n_{i=1} (X+x_i) = X^n + \sum^{n-1}_{k=0} (-1)^{n-k}\sigma_{n-k} (x_1, ..., x_n)X^k$ 
+\end{enumerate}
+\end{theoreme}
+
+\begin{corollaire}{Relation racine-coefficient}{}
+Soit $P \in \K[X]$, de degré $n\geq 1$\\
+On écrit $P=a_0 + a_1 X + ...+ a_n  X^n$ avec $a_n \neq 0$\\
+\\
+On suppose que $P$ est scindé sur $\K$ et on écrit aussi :
+\begin{center}
+    $P= a_n \prod^n_{i=1} (X-x_i)$ 
+\end{center} 
+Alors : $\mathbox{\forall k \in \llbracket 0, n-1 \rrbracket, a_n (-1)^{n-k} \sigma_{n-k}(x_1 ,..., x_n) = a_k}$ \ie \textbox{$\frac{a_k}{a_n} = \sigma_{n-k}(x_1 ,..., x_n)(-1)^{n-k}$}
+\end{corollaire}
+
+\begin{demo}
+
+\end{demo}
+
+\section{Composition}
+
+\begin{definition}{Composition}{}
+Soit $P = \sum_{k\in \N} a_k X^k \in \K[X]$, pour $Q \in \K[x]$, on pose :
+\center $\mathbox{P\circ Q= \sum_{k\in \N} a_k Q^k}$ 
+\end{definition}
+
+\begin{propositions}{}{}
+\begin{enumerate}
+    \item $\forall \lambda \in \K^*$, $Q\in \K[X]$, $\lambda\circ Q =\lambda$
+    \item Pour $Q \in \K[X]$, $X\circ Q = Q\circ X = Q$
+    \item Pour $P_1, P_2 \in \K[X]$ et $Q \in \K[X]$\\
+    $(P_1 + P_2)\circ Q = P_1 \circ Q + P_2 \circ Q$\\
+    $(P_1 P_2)\circ Q = P_1 \circ Q$ $P_2 \circ Q$
+    \item Pour $P,Q \in \K[X]$\\
+    $\widetilde{P\circ Q}=\widetilde{P}\circ \widetilde{Q}$
+    \item Pour $P,Q,R \in \K[X]$ \\
+    $(P\circ Q)\circ R = P \circ (Q \circ R))$
+    \item Si $Q \in \K[X]$ n'est pas constant alors $\forall P \in \K[X]$, $\mathbox{\deg (P\circ Q)= \deg P \deg Q}$\\  et si $P \neq 0$, $\mathbox{\coefdom(P\circ Q) = \coefdom (P) \coefdom(Q)^{\deg P}}$
+\end{enumerate}
+\end{propositions}
+
+\begin{demo}
+
+\end{demo}
+
+
+\section {Étude de $\mathbb{C}[X]$ et de $\mathbb{R}[X]$}
+    \subsection{Cas de $\mathbb{C}[X]$}
+    \subsection{Cas de $\mathbb{R}[X]$}
+
+
+\section{Polynôme dérivé}
+Dans cette section, $\K$ est un sous-corps de $\C$
+
+\begin{definition}{Polynôme dérivé}{}
+Pour $P = \displaystyle\sum_{k\geq 0} a_k X^k \in \K[X]$\\
+On appelle \strong{polynôme dérivé} de $P$, et on note $P'$ le polynôme : $\mathbox{P' = \sum_{k\geq 1} k a_k X^{k-1} }$
+\end{definition}
+
+\begin{exemple}
+$P=a_0 + a_1 X + ... + a_N X^N$\\
+$P'= a_1 + ... + 2a_2 X +... + Na_N X^{N-1}$
+\end{exemple}
+
+\begin{propositions}{Propriétés sur la dérivation}{}
+\begin{enumerate}
+    \item Si $\deg = N \geq 1$ alors \Strong{$\deg P' = N-1$} et $\coefdom (P') = N\coefdom (P)$
+    \item Si $P$ est constant ($\deg P \leq 0$) alors $P' =0$ et finalement, \Strong{$P' = 0 \Longleftrightarrow P \text{ est constant}$}
+    \item On note $D : P \in \K[X] \mapsto P' \in \K[X]$ ($D$ est la dérivation)\\
+    Pour $P,Q \in \K[X]$, $\mathbox{D(P+Q)=D(P)+D(Q)}$
+    \item Pour $P,Q \in \K[X]$, $\mathbox{D(PQ)=D(P)Q+D(Q)P}$ ($(PQ)' = P'Q + PQ'$)
+    \item Pour $n \in \N^*$, et $P\in \K[X]$, $\mathbox{D(P^n)=nP'P^{n-1}}$
+    \item Pour $P,Q \in \K[X]$, $\mathbox{D(P\circ Q)= D(Q) \times D(P) \circ Q = Q' \times P'\circ Q}$
+    \item Soit $f : t \in \R \mapsto \widetilde{P}(t) \in \K$, il est clair que $f$ est dérivable et $f'(t) =  \widetilde{P'} (t)$\\
+\end{enumerate}
+\end{propositions}
+
+\begin{demo}
+\textbf{6)} : \\
+On écrit $P = a_0 + a_1 X + ... + a_n X^n$, alors $P\circ Q = a_0 + a_1 Q + ... + a_n Q^n$\\
+$D(P\circ Q) = D(a_0)+D(a_1 Q) + ...+ D(a_n Q^n)$\\
+Pour $1\leq k \leq n$, $D(a_k Q^k) = a_k D(Q^k) = a_k kQ'Q^{k-1}$, d'où $D(P\circ Q) = \displaystyle\sum^n_{k=1} ka_k Q'Q^{k-1} = Q' \times P'\circ Q$
+\end{demo}
+
+
+
+\subsection{Formule de Leibniz / Dérivé successive}
+$D \in \mathcal{F}(\K[X], \K[X])$, $(\mathcal{F}(\K[X], \K[X]), \circ)$ est un monoïde\\
+Donc on peut définir $D^k$ pour $k \in \N$: 
+\begin{itemize}
+    \item $D^0 = \mathrm{Id}_{\K[X]}$
+    \item $\forall k \in \N, D^{k+1}=D^k \circ D = D \circ D^k$\\
+    Autrement dit, pour $P \in \K[X]$, $D^0(P)=P$ et $\forall k \in \N, D^{k+1}(P)=(D^k (P))'$\\
+    On notera aussi $P^{(k)}$ au lieu de $D^k (P)$ pour $k \in \N$ 
+    \item $P^{(1)}= P'$, $P^{(2)}= P''$ et $P^{(3)}= P'''$
+\end{itemize}
+
+\begin{proposition}{}{}
+Soit $P \in \K[X]$ et $n\in \N$ : $\mathbox{P^{(n)}=0 \Longleftrightarrow \deg P < n}$
+\end{proposition}
+
+\begin{demo}
+
+\end{demo}
+
+\begin{remarque}
+Soit $a \in \K$, \textit{quid} $D^k ((X-a)^n)$ ? \\
+\textit{Left to the reader !}
+\end{remarque}
+
+\begin{application}{}{}
+Soit $P \in \K[X]$, de degré $n$, $P = a_0 + a_1 X + ... + a_n X^n $ \\
+$D^n (P) = D^n (A + a_n X^n) = D^n (A) + a_n D^n (X^n)$ or $D^n (A) = 0$ puisque $\deg A < n$\\
+D'où $\mathbox{D^n (P) = n! a_n = n! \coefdom(P)}$\\
+\\
+\textbf{Exercice} : \\ 
+Pour $A,B \in \K[X], \lambda \in \K$ et $n \in \N$ \\
+$D^n (A+B)= D^n (A) + D^n (B) $\\
+$D^n (\lambda A) = \lambda D^n (A)$
+\end{application}
+\pagebreak
+
+\begin{theoreme}{Formule de Leibniz}{}
+Soit $n\in \N$, $A,b \in \K[X]$, alors : 
+\begin{center}
+    $\mathbox{D^n (AB)=\sum^n_{k=0} {{n}\choose{k}} D^k (A) D^{n-k}(B)}$ \ie $\mathbox{(AB)^{(n)} = \sum^n_{k=0}  {{n}\choose{k}} A^{(k)} B^{(n-k)}}$
+\end{center}
+\end{theoreme}
+
+\begin{principedemo}{}
+Par récurrence ...
+\end{principedemo}
+
+
+
+\subsection{Formule de Taylor et conséquences}
+
+\begin{theoreme}{}{}
+Soit $P,A,B \in \K[X]$, alors : 
+\begin{center}
+    $\mathbox{P\circ (A+B) = \sum_{k\in \N} \frac{P^{(k)} \circ A}{k!} B^k}$ qu'on écrit aussi : $\mathbox{P(A+B)= \sum_{k\in \N} \frac{P^{(k)}(A)}{k!} B^k}$
+\end{center}
+\end{theoreme}
+
+\begin{demo}
+
+\end{demo}
+
+\begin{propositions}{Conséquences}{}
+Soit $P \in \K[X]$, $P = \displaystyle \sum_{k\in \N} a_k X^k$
+\begin{enumerate}
+    \item Avec $A=0$ et $B=X$\\
+    $P \circ (0+X) = \displaystyle\sum_{k\in \N} \frac{P^{(k)} \circ 0}{k!} X^k$ \: \: \: \ie $\mathbox{P = \sum_{k\in \N} \frac{P^{(k)}(0)}{k!} X^k} $ Donc $a_k = \frac{P^{(k)} (0)}{k!}$
+    
+    \item Soit $a \in \K$, avec $A=a$ et $B=X-a$, on obtient la \Strong{formule de Taylor} : 
+    \begin{center}
+        $\mathbox{P = \sum_{k \in \N} \frac{P^{(k)}(a)}{k!} (X-a)^k}$
+    \end{center}
+    \item Soit $h \in \K$, avec $A=h$ et $B=X$, on obtient : 
+    \begin{center}
+        $P(X+h)= \displaystyle\sum_{k\in \N} \frac{P^{(k)}(h)}{k!} X^k$
+    \end{center}
+\end{enumerate}
+\end{propositions}
+
+\begin{theoreme}{}{}
+Soit $P \in \K[X]$, $a\in \K$, $k\in \N^*$, pour $0\leq j \leq k-1$
+\begin{center}
+    $(X-a)^k$ divise $P \Longleftrightarrow P^{(j)} (a) = 0$
+\end{center}
+\end{theoreme}
+\begin{demo}
+
+\end{demo}
+
+
+
+\begin{corollaire}{Caractérisation avec les dérivées successives de l'ordre de multiplicité}{}
+Soit $P \in \K[X]$, $a\in \K$, $k\in \N^*$ 
+\begin{center}
+    $a$ est racine de $P$ d'ordre $k \Longleftrightarrow (X-a)^k$ divise $P$ et $(X-a)^{k+1}$ ne divise pas $P$ \\
+    $\Longleftrightarrow 0 = P(a) = ... = P^{(k-1)} (a)$ et $P^{(k)} (a) \neq 0$ 
+\end{center}
+
+\textbf{Corollaire Bis :} $a$ est racine multiple de $P \Longleftrightarrow a$ est racine de $P$ et $P'$ \\
+\textbf{Corollaire Ter :} \\
+$P$ n'a que des racines simples dans $\C \Longleftrightarrow P$ et $P'$ n'ont aucune racine commune dans $\C$ \\$\Longleftrightarrow P\wedge P' =1$  
+\end{corollaire}
+
+\pagebreak
+
+
+\section*{Démonstrations}
+
+
+\begin{demonstration}{GenDC}
+    \textbf{2)}
+    \begin{itemize}[label=\mathversion{bold}$\cdot$, leftmargin=*]
+        \item Si $P = 0$ ou $Q = 0$, on a par exemple $Q = 0$, donc $PQ = 0$\\
+        D'où $\deg(PQ) = -\infty = N - \infty$ (car $N \neq +\infty$).
+        \item\label{DemoDegreProduit} Si $P \neq 0$ et $Q \neq 0$, alors : $\quad \displaystyle P = \sum_{k = 0}^N \lambda_k X^{k} \quad\text{et}\quad Q = \sum_{k = 0}^M \mu X^{k} $\\
+        Ainsi : $\quad \displaystyle P \times Q = \sum_{k \in \mathbb{N}} \left( \sum_{\ell = 0}^k \lambda_\ell \mu_{k - \ell} \right) X^k$\\
+        Or, si $k = M + N$, alors pour $\ell = N$ on a $k - \ell = M$ donc $\lambda_\ell \neq 0$ et $\mu_{k-\ell} \neq 0$ ; d'où $\lambda_k \mu_k \neq 0$.\\
+        De plus, si $k > M + N$, alors soit $\ell > N$ donc $\lambda_\ell = 0$, ou soit $\ell \leqslant N \Rightarrow k-\ell > M$ donc $\mu_{k - \ell} = 0$ ; d'où $\lambda_\ell \mu_{k - \ell} = 0$.\\
+        On en conclut donc que $\deg(PQ) = N + M$.
+    \end{itemize}
+
+    \textbf{4)} 
+    \begin{itemize}[label=\mathversion{bold}$\cdot$, leftmargin=*]
+        \item Supposons $P$ inversible dans $K[X]$ alors il existe $Q \in K[X]$ tel que $PQ = 1$\\
+         d'où $\deg 1 = \deg (PQ) = \deg P+ \deg Q$ \\
+        ($\deg 1 = 0$ et $\deg P, \deg Q \in \mathbb{N}$)\\
+        \\
+        D'où $\deg P = \deg Q = 0$ :\\
+        $P$ et $Q$ sont des polynômes constants (\ie du type $\lambda X^{0}$) non nuls\\
+        \item Réciproquement, si $\lambda \in K^{*}$, le polynôme constant $\lambda$ est inversible d'inverse le polynôme constant $1/\lambda$\\
+    \end{itemize}
+    
+    \textbf{6)} 
+     \begin{itemize}[label=\mathversion{bold}$\cdot$, leftmargin=*]
+        \item Si $P = 0$ ou $Q = 0$, on a par exemple $Q = 0$, donc $P + Q = P$.\\
+        D'où $\deg(P + Q) = N = \max(N, M)$. 
+        \item Si $P \neq 0$ et $Q \neq 0$, alors : $\quad \displaystyle P = \sum_{k = 0}^N \lambda_k X^{k} \quad\text{et}\quad Q = \sum_{k = 0}^M \mu X^{k} $\\
+        Ainsi : $\quad \displaystyle P + Q = \sum_{k = 0}^N \lambda_k X^{k} + \sum_{k = 0}^M \mu X^{k} = \sum_{k \in \mathbb{N}} (\lambda_k + \mu_k) X^{k}$\\
+        Or, si $k = \max(N, M)$, alors : $\lambda_k \neq 0$ ou $\mu_k \neq 0$ ; d'où $\lambda_k + \mu_k \neq 0$ (à moins que $\lambda_k = -\mu_k$).\\
+        De plus, si $k > \max(N, M)$, alors : $\lambda_k = 0$ et $\lambda_k = 0$ ; d'où $\lambda_k + \mu_k = 0$.\\
+        On en conclut que $\deg(P + Q) \leqslant \max(N, M)$.
+    \end{itemize}
+\end{demonstration}
+
+\begin{demonstration}{DivEu}
+Soient $A \in \mathbb{K}[X]$ et $B \in \mathbb{K}[X]^*$.
+    \begin{itemize}
+        \item \textsc{Existence} : par récurrence forte sur $\deg(A)$\\
+        Soit $\mathcal{H}_n : \forall A \in \mathbb{K}_n[X]$, $\exists (Q, R) \in \mathbb{K}[X]^2, \deg(R) < \deg(B) : A = QB + R$.\\
+        $\mathcal{H}_0$ est vraie : soit $A = a \in \mathbb{K}^*$, ainsi :
+        \begin{itemize}
+            \item Si $A = 0$, alors le couple $(0, 0)$ convient car $\deg(0) < 0 \leqslant \deg(B)$ et $0 = 0 \times B + 0$ ;
+            \item Si $A \neq 0$ et $\deg(B) > \deg(A) = 0$, alors $(0, A)$ convient car $A = 0 \times B + A$ ;
+            \item Si $A \neq 0$ et $\deg(B) = 0$, alors $B = b \in \mathbb{K}^*$ et $(ab^{-1}, 0)$ (possible car tout éléments non nul d'un corps est inversible) convient car $\deg(0) = - \infty < 0 = \deg(B)$ et $A = ab^{-1}b + 0 = a$.
+        \end{itemize}
+        Supposons que $\mathcal{H}_n$ soit vraie pour un certain rang $n$. Soit $A \in \mathbb{K}[X], \deg(A) = n + 1$.
+        \begin{itemize}
+            \item Si $\deg(B) > \deg(A)$ alors $(0, A)$ convient car $A = 0 \times B + A$ ;
+            \item Si $\deg(B) \leqslant \deg(A)$ alors on considère $a = \text{coefdom}(A) \in \mathbb{K}^*$ et $b = \text{coefdom}(B) \in \mathbb{K}^*$.\\
+            Soit $m = \deg(A) - \deg(B) \in \mathbb{N}$. On considère $C = A - D$ avec $D = \dfrac{a}{b}X^m B$.\\
+            Donc $\deg(D) = \deg(X^m) + \deg(B) = n + 1 - \deg(B) + \deg(B) = n + 1$ ;\\
+            Et $\text{coefdom}(D) = \dfrac{a}{b} \text{coefdom}(X) \, \text{coefdom}(B) = \dfrac{a}{b} b = a$.\\
+            Or, $\deg(A) = n + 1$ et $\text{coefdom}(A) = a$, donc $\deg(C) \leqslant n$.\\
+            Ainsi, d'après $\mathcal{H}_n$ : $\exists (Q, R) \in \mathbb{K}[X]^2, \deg(R) < \deg(B)$ tel que $C = QB + R$.\\
+            Or, $A = C + \dfrac{a}{b}X^m B \Leftrightarrow A = QB + R + \dfrac{a}{b}X^m B = \left(Q + \dfrac{a}{b}X^m\right) B + R$. Donc $\left(Q + \dfrac{a}{b}X^m, R\right)$ convient.
+        \end{itemize}
+        Par récurrence forte, $\mathcal{H}_n$ est donc vraie $\forall n \in \mathbb{N}$.
+        
+        \item \textsc{Unicité} : soient $(Q_1, R_1)$ et $(Q_2, R_2)$, deux couples qui conviennent, on a alors :
+        \begin{align*}
+            &Q_1 B + R_1 = Q_2 B + R_2
+            \Leftrightarrow (Q_1 - Q_2)B = R_2 - R_1 \\
+            \Rightarrow\quad &\deg(Q_1 - Q_2) + \deg(B) < \deg(B)
+            \Leftrightarrow \deg(Q_1 - Q_2) < 0
+            \Leftrightarrow \deg(Q_1 - Q_2) = - \infty \\
+            \Leftrightarrow\quad &Q_1 - Q_2 = 0
+            \Leftrightarrow Q_1 = Q_2
+            \Leftrightarrow R_1 = R_2
+        \end{align*}
+    \end{itemize}
+\end{demonstration}
+
+\begin{demonstration}{InterLagrange}
+\textbf{Unicité} : \\
+Si $P$ et $Q$ conviennent alors $\widetilde{P}(x_{i})=y_{i}=\widetilde{Q}(x_{i})$ \\
+$\widetilde{P}$ et $\widetilde{Q}$ coïncident en $n+1$ points distincts, $\deg P \leq n$ et $\deg Q \leq n$\\
+Donc $P=Q$ \\
+\\
+\textbf{Existence}: \\
+Soit $i\in \llbracket0,n\rrbracket$, $j\in \llbracket0,n\rrbracket \setminus \lbrace i\rbrace$, cherchons $L_{i} \in K[X]$ tel que : \\
+\begin{center}
+$\deg L_{i} \leq n$ \: \: et \: \:$\widetilde{L_{i}}(x_{i})=1$ \: \: \: $\widetilde{L_{i}}(x_{j})=0$
+\end{center}
+
+En construction .... 
+\end{demonstration}
+
+\end{document}
