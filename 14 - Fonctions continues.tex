@@ -1,0 +1,369 @@
+\documentclass[12pt,a4paper]{report}
+\input{00 - preambule}
+
+\begin{document}
+
+\chapter{Fonctions continues}
+
+\section{Définition et exemples}
+\subsection{Définitions}
+
+Dans la suite, $\mathbb{K} = \mathbb{R}$ ou $\mathbb{K} = \mathbb{C}$.  $\mathcal{D}$ est une partie non vide de $\mathbb{R}$ (très souvent, $\mathcal{D}$ est un intervalle, ou une réunion finie d'intervalles.)
+
+\begin{definition}{Continuité d'une fonction}{}
+Soit $f : \mathcal{D} \rightarrow \mathbb{K}$. \newline
+$\star$ Soit $x_0 \in \mathcal{D}$. Les assertions suivantes sont équivalentes : 
+\begin{enumerate}
+\item \textbf{Définition topologique :} \\Pour tout voisinage $V$ de $f(x_0)$ dans $\mathbb{K}$, il existe un voisinage $U$ de $x_0$ dans $\mathbb{R}$ tel que $f(U \cap \mathcal{D}) \subset V$, soit
+\begin{center}
+    $\forall V \in \mathcal{V}_\mathbb{K}(f(x_0))$, $\exists U \in \mathcal{V}_\mathbb{R}(x_0)$ : $\underbrace{f(U \cap \mathcal{D}) \subset V}_{\forall x \in U\cap \mathcal{D}, f(x) \in V}$ 
+\end{center}
+
+
+\item Pour tout $\varepsilon > 0$, il existe $\alpha > 0$ tel que
+\newline $\forall x \in \mathcal{D}, \lvert x-x_0 \rvert \leq \alpha \Longrightarrow \lvert f(x)-f(x_0) \leq \varepsilon$, soit
+\begin{center}
+    $\forall \varepsilon > 0, \exists \alpha > 0, \forall x \in \mathcal{D}, \lvert x-x_0 \rvert \leq \alpha \Longrightarrow \lvert f(x)-f(x_0) \leq \varepsilon$
+\end{center}
+
+
+\item \textbf{Définition séquentielle :} \\Pour toute suite $(u_n)_{n \in \mathbb{N}}$ de points de $\mathcal{D}$ qui converge vers $x_0$, la suite $(f(u_n))_{n \in \mathbb{N}}$ converge vers $f(x_0)$.
+
+\end{enumerate}
+
+
+\noindent $\star \star$ On dit que $f$ est continue sur $\mathcal{D}$ si $f$ est continue en tout point de $\mathcal{D}.$
+\end{definition}
+
+\begin{demo}{}
+\textbf{1) $\Longrightarrow 2)$}\\
+Soit $\varepsilon > 0$, $V=\lbrace z\in K \mid \lvert f(x) -z \rvert \leq \varepsilon \rbrace$ est un voisinage de $f(x_0)$ dans $K$ \\
+On peut donc trouver $U \in \mathcal{V}_\R (x_0)$ tel que $f(U\cap D) \subset V$ \\
+$U$ est voisinage de $x_0$ dans $\R$ donc il existe $\alpha > 0$ tel que $[x_0 - \alpha, x_0 + \alpha ]\subset U$\\
+\\
+Soit $x\in \mathcal{D}$ tel que $\lvert x-x_0 \rvert \leq \alpha$, on a alors $x\in [x_0 - \alpha , x_0 + \alpha] \subset U$ \\
+D'où $x\in U \cap D$ donc $f(x) \in V$, autrement dit : $\lvert f(x) - f(x_0)\rvert \leq \varepsilon$
+\\
+\textbf{2) $\Longrightarrow$ 3)}\\
+Soit $(U_n)$ une suite de points de $\mathcal{D}$ tel que $U_n \xrightarrow[n \rightarrow + \infty] {} x_0$\\
+Montrons que : $f(U_m) \xrightarrow[n \rightarrow + \infty]{} f(x_0)$\\
+Soit $\varepsilon > 0$, on dispose de $\alpha > 0$ tel que, pour tout $x$ dans $\mathcal{D}$ : 
+\begin{center}
+    $\lvert x-x_0 \rvert \leq \alpha \Longrightarrow \lvert f(x) - f(x_0) \rvert \leq \varepsilon$
+\end{center}
+$u$ converge vers $x_0$ donc il existe $n_0 \in \N$ tel que : 
+\begin{center}
+    $\forall n \geq n_0$, $\lvert U_n - x_0 \rvert \leq \alpha$
+\end{center}
+Soit $n\geq n_0$, on a : $U_n \in \mathcal{D}$ et $\lvert U_n -x_0 \rvert \leq \alpha$\\
+Donc $ \lvert f(U_n) - f(x_0) \rvert \leq \varepsilon$, on a bien vérifié : 
+\begin{center}
+    $\forall \varepsilon > 0$, $\exists n_0 \in \N$, $\forall n \geq n_0$, $\lvert f(U_n) - f(x_0)\rvert \leq \varepsilon$
+\end{center}
+\textbf{3) $\Longrightarrow$ 1)}\\
+\Strong{Par contraposée} \\
+Supposons non \textbf{1)} : $\exists V \in \mathcal{V}_{K} (f(x_0)), \forall U \in \mathcal{V}_{\R} (x_0), \exists x \in \mathcal{D} \cap U, f(x) \notin V$\\
+En particulier, si $n\in \N^*$ avec $U_n = [x_0 - \frac{1}{n}, x_0 + \frac{1}{n}]$, on a $U_n \in \mathcal{V}_{\R} (x_0)$. \\ Donc il existe $U_n \in \mathcal{D}\cap U_n$ tel que $f(U_n) \notin V$\\
+$(U_n)_{n \in \N^*}$ converge vers $x_0$ ( car $\forall n\geq 1, \lvert U_n - x_0\rvert \leq \frac{1}{n}$) mais $(f(U_n))$ ne converge pas vers $f(x_0)$, car pour tout $n$, $f(U_n) \notin V$\\
+\\
+$\Longrightarrow$ Assertion non \textbf{3)}
+\end{demo}
+
+\subsection{Exemples}
+Si $\lambda \in \mathbb{K}$ alors $x \in \mathcal{D} \mapsto \lambda$ est continue.
+
+\begin{demo}
+\underline{Preuve} : Soit $x_0 \in \mathcal{D}, \varepsilon > 0$, soit $\alpha > 0$ quelconque.
+\newline Pour $x \in \mathcal{D}$ tel que $\lvert x-x_0 \rvert \leq \alpha$, on a $\lvert f(x)-f(x_0) \rvert = \lvert \lambda - \lambda \rvert = 0 \leq \varepsilon$
+\end{demo}
+
+
+\subsubsection{Fonctions lipschitziennes}
+\begin{definition}{Fonction lipschitzienne}{}
+$f : \mathcal{D} \rightarrow \mathbb{K}$ est lipschitzienne s'il existe $k \in \mathbb{R}_+$ tel que :
+\begin{center}
+    $\forall x,y \in \mathcal{D}, \lvert f(x)-f(y) \rvert \leq k \lvert x-y \rvert$.
+\end{center}
+
+On dit alors que $f$ est $k$-lip.
+\end{definition}
+
+\begin{exemple}[Exemple : Fonctions lipschitziennes]
+\begin{enumerate}
+\item Pour $\alpha,\beta \in \mathbb{K}, t \in \mathcal{D} \mapsto \alpha t + \beta$ est $\lvert \alpha \rvert$-lip.
+\item $\sin$ et $\cos$ sont $1$-lip.
+\end{enumerate}
+\end{exemple}
+
+\begin{proposition}{Lien entre fonction lipschitzienne et continue}{}
+Si $f$ est lipschitzienne alors $f$ est continue.
+\end{proposition}
+
+\begin{demo}{}
+Soit $x_0 \in \mathcal{D}$, $\varepsilon > 0$ \\
+Soit $k>0$ tel que $\forall x,y \in \mathcal{D}$, $\lvert f(x)-f(y)\rvert \leq k\lvert x-y\rvert$ et posons $ \alpha = \frac{\varepsilon}{k}$\\
+Alors, si $x\in \mathcal{D}$ est tel que $ \lvert x-x_0 \rvert \leq \alpha $, on a $\lvert f(x) -f(x_0) \rvert \leq k\lvert x-x_0 \rvert$ $\leq k\alpha = \varepsilon$\\
+$\Longrightarrow f$ est continue en $x_0$
+\end{demo}
+
+\begin{remarque}
+Soit $f : t \mapsto t^2 $(dans $\mathbb{R}$). $f$ est continue : 
+\newline Soit $x_0 \in \mathbb{R}, (u_n)$ une suite de réels qui converge vers $x_0$. \newline D'après les théorèmes généraux, $u_n^2 \xrightarrow[n \rightarrow +\infty]{} x_0^2 = f(x_0)$, donc $f$ est continue en $x_0$.
+\end{remarque}
+
+
+\subsubsection{Fonctions uniformément continues}
+\begin{definition}{Fonction uniformément continue}{}
+$f : \mathcal{D} \rightarrow \mathbb{K}$ est uniformément continue si : \newline $\forall \varepsilon > 0, \exists \alpha_\varepsilon > 0, \forall x,y \in \mathcal{D}, \lvert x-y \rvert \leq \alpha_\varepsilon \Longrightarrow \lvert f(x)-f(y) \rvert \leq \varepsilon$
+\end{definition}
+
+\begin{remarque}
+$f$ lipschitzienne $\Longrightarrow f$ uniformément continue
+\end{remarque} 
+
+\begin{exemple}[Exemple : Étude de la fonction racine]
+Soit $f : x \rightarrow \sqrt{x}$ (dans $\mathbb{R}_+$)
+\newline \textbf{Rappel :} $\forall u,v \in \mathbb{R}_+, \lvert \sqrt{u} - \sqrt{v} \rvert \leq \sqrt{\lvert u-v \rvert}$.
+\newline Soit $\varepsilon > 0$. Posons $\alpha = \varepsilon^2$. \newline Pour $x,y \in \mathbb{R}_+$ tel que $\lvert x-y \rvert \leq \alpha$, on a 
+$\lvert \sqrt{x}-\sqrt{y}  \rvert \leq \sqrt{\lvert x-y \rvert} \leq \sqrt{\alpha} \leq \varepsilon$. 
+\newline \newline
+Supposons $f$ lipschitzienne, soit $k \in \mathbb{R}$ tel que : \newline $\forall x,y \in \mathbb{R}_+, \lvert \sqrt{x} - \sqrt{y} \rvert \leq k \lvert x-y \rvert$. \newline
+En particulier, pour $x > 0, \sqrt{x} \leq kx$ ie $\dfrac{1}{\sqrt{x}} \leq k$, ceci est faux pour $x = \dfrac{1}{(k+1)^2}$
+\end{exemple}
+
+On a $f$ uniformément continue $\Longrightarrow f$ continue. \newline
+
+\begin{remarque}
+\textbf{Réciproque fausse : } Soit $f : t \in \mathbb{R}_+ \longrightarrow t^2$,  et pour $n \in \mathbb{N}^*, x_n = n$ et $y_n = n + \frac{1}{n}$
+\noindent On a $y_n - x_n \xrightarrow[n \rightarrow +\infty]{} 0$ et $f(y_n) - f(x_n) = 2 + \frac{1}{n^2} \geq 2$.
+\newline Soit $\varepsilon = 1$. Si $f$ est uniformément continue, il existe $\alpha > 0$ tel que $\forall u,v \in \mathbb{R}_+, \lvert u-v \rvert \leq \alpha \Longrightarrow \lvert f(x) - f(y) \rvert \leq 1$.
+\newline Or, pour $n$ assez grand, $\lvert y_n - x_n \rvert \leq \alpha$ mais $\lvert f(y_n) - f(x_n) \rvert \geq 2 > 1$.
+\end{remarque}
+
+
+\textbf{Bilan : } $f : \mathcal{D} \rightarrow \mathbb{K}$ : $f$ lipschitzienne $\Longrightarrow f$ uniformément continue $\Longrightarrow f$ continue (et aucune des réciproques n'est vraie).
+\newline \newline On a une réciproque partielle :
+
+\begin{theoreme}{Théorème de Heine}{}
+On suppose que $\mathcal{D}$ est fermé et borné (c'est le cas par exemple si $D = \left[a,b\right]$ avec $a,b \in \mathbb{R}, a < b$). Soit $f : \mathcal{D} \rightarrow \mathbb{K}$ continue. Alors $f$ est uniformément continue.
+\end{theoreme}
+
+\begin{principedemo}{}
+
+\end{principedemo}
+
+
+\begin{proposition}{Petite Histoire - Continuité et voisinages}{}
+Soit $f : \mathcal{D} \rightarrow \mathbb{R}$ continue en $x_0 \in \mathcal{D}$.
+Si $\alpha < f(x_0)$ alors $f$ est à valeurs supérieures à $\alpha$ au voisinage de $x_0$. \newline
+Il existe un voisinage de $x_0$ tel que : $\forall x \in \mathcal{U} \cap \mathcal{D}, f(x) \geq \alpha$.
+\newline (Il existe donc $r > 0$ tel que $\forall x \in \mathcal{D}, \lvert x-x_0 \rvert \leq r \Longrightarrow f(x) \geq \alpha$ : en effet, il suffit de choisir $r > 0$ tel que $\left[x_0-r,x_0+r\right] \in \mathcal{U}$)
+\end{proposition}
+
+\begin{principedemo}{}
+
+\end{principedemo}
+
+\begin{remarque}
+Donc, si $f(x_0) > 0$, on a en choisissant $m \in \left] 0, f(x_0) \right[ : f$ est à valeurs supérieures à $m$ donc strictement positives au voisinage de $x_0$ : 
+\newline $\exists r > 0, \forall x \in \mathcal{D}, \lvert x-x_0 \rvert \leq r \Longrightarrow f(x) \geq m > 0$. \newline
+De même, si $\beta > f(x_0)$, on aura $f$ à valeurs inférieures à $\beta$ au voisinage de $x_0$ (car $\left] -\infty, \beta \right[$ est alors au voisinage de $f(x_0)$). \newline En particulier, si $f(x_0) < 0$, et si on prend un $M \in \left] f(x), 0 \right[$, alors $f(x) \leq M < 0$ au voisinage de $x_0$.\\
+\\
+\end{remarque}
+
+
+\section{Théorèmes généraux}
+
+\begin{theoreme}{Opérations}{}
+Soit $f, g : \mathcal{D} \rightarrow \mathbb{K}, x_0 \in \mathcal{D}, \lambda \in \mathbb{K}$. On suppose $f,g$ continues en $x_0$. Alors :
+\begin{enumerate}
+\item $\lambda f + g$     , $fg$     et $\frac{1}{f}$ (si $f$ ne s'annule pas) sont continues en $x_0$.
+\item Si $\mathbb{K}=\mathbb{R}$, alors $\rm{inf}(f,g) ,  \rm{sup}(f,g) , f^+ , f^-$ sont continues en $x_0$.
+\item Si $\mathbb{K}=\mathbb{C}$, alors $\Re(f)$,$\Im(f)$, $\overline{f}$ sont continues en $x_0$.
+\end{enumerate}
+\end{theoreme} 
+
+\pagebreak
+
+\begin{theoreme}{Extension à un domaine}{}
+Soit $f, g : \mathcal{D} \rightarrow \mathbb{K}, \lambda \in \mathbb{K}$. On suppose $f,g$ continues sur $\mathcal{D}$. Alors :
+\begin{enumerate}
+\item $\lambda f + g$     , $fg$     et $\dfrac{1}{f}$ (si $f$ ne s'annule pas) sont continues sur $\mathcal{D}$.
+\item Si $\mathbb{K}=\mathbb{R}$, alors $\rm{inf}(f,g) ,  \rm{sup}(f,g) , f^+ , f^-$ sont continues sur $\mathcal{D}$.
+\item Si $\mathbb{K}=\mathbb{C}$, alors $\Re(f)$,$\Im(f)$, $\overline{f}$ sont continues sur $\mathcal{D}$.
+\end{enumerate}
+\end{theoreme} 
+
+\begin{tcolorbox}[colback=gray!5!white,colframe=gray!75!black,title=Parenthèse - Opérations sur les fonctions à valeurs dans $\mathbb{R}$ ou $\mathbb{C}$]
+Soit $X$ un ensemble non vide. Pour $f,g \in \mathcal{F}(X,\mathbb{K})$ et $\lambda \in \mathbb{K}$.
+\newline $f+g$ est l'application $x \in X \mapsto f(x) + g(x)$,
+\newline $\lambda f$ est l'application $x \in X \mapsto \lambda f(x)$,
+\newline $fg$ est l'aplication $x \in X \mapsto f(x)g(x)$,
+\newline $\lvert f \rvert$ est l'application $x \in X \mapsto \lvert f(x) \rvert$,
+\newline Si $f$ ne s'annule pas, $\dfrac{1}{f}$ est l'application $x \in X \mapsto \dfrac{1}{f(x)}$,
+\begin{enumerate}
+\item Si $\mathbb{K} = \mathbb{R}$,
+\par $\rm{inf}(f,g)$ est l'application $x \in X \mapsto \rm{min}\left(f(x),g(x)\right)$,
+\par $\rm{sup}(f,g)$ est l'application $x \in X \mapsto \rm{max}\left(f(x),g(x)\right)$,
+\par $f^+$ est l'application $x \in X \mapsto \rm{max}\left(f(x),0\right)$,
+\par $f^-$ est l'application $x \in X \mapsto - \rm{min}\left(f(x),0\right)$,
+\item Si $\mathbb{K} = \mathbb{C}$,
+\par $\Re(f)$ est l'application $x \in X \mapsto \Re\left(f(x)\right)$,
+\par $\Im(f)$ est l'application $x \in X \mapsto \Im\left(f(x)\right)$,
+\par $\overline{f}$ est l'application $x \in X \mapsto \overline{f(x)}$
+\par On a : $f = \Re(f) + i \Im(f)$
+\par $\Re(f) = \dfrac{f + \overline{f}}{2}$
+\par $\Im(f) = \dfrac{f - \overline{f}}{2i}$
+
+\end{enumerate}
+\end{tcolorbox}
+
+Le théorème 2.1 se démontre très facilement grâce à la définition séquentielle.\\
+
+\begin{principedemo}{}
+
+\end{principedemo}
+
+\begin{exemple}[Exemples : Continuité d'un quotient de fonctions polynomiales]{}
+On sait que $x \in \mathcal{D} \mapsto x$ est continue, et même lipschitzienne. Donc, par produit : \newline $\forall k \in \mathbb{N}, x \in \mathcal{D} \mapsto x^k$ est continue. \newline Puis, pour $\lambda \in \mathbb{K}, x \in \mathcal{D} \mapsto \lambda x^k$ est continue.
+\newline Par somme, si $P \in \mathbb{K}\left[X\right]$, alors $t \mapsto \widetilde{P}(t)$ est continue sur $\mathcal{D}$.
+\newline Par quotient, si $Q \in \mathbb{K}\left[X\right]$ est tel que $\widetilde{Q}(t) \neq 0$ pour $t \in \mathcal{D}$ alors  $t \mapsto \dfrac{\widetilde{P}(t)}{\widetilde{Q}(t)}$ est continue sur $\mathcal{D}$
+\end{exemple}
+
+\begin{theoreme}{Composition}{}
+Soit $f : \mathcal{D} \rightarrow \Delta \subset \mathbb{R}$ continue, \newline $g : \Delta \rightarrow \mathbb{K}$ continue.
+\newline Alors $g \circ f$ est continue.
+
+\end{theoreme}
+
+\begin{principedemo}{}
+
+\end{principedemo}
+
+\begin{proposition}{Composition par l'exponentielle complexe}{}
+Soit $f : \mathcal{D} \rightarrow \mathbb{C}$ continue. Alors $\rm{exp} \circ f$ est continue.
+\end{proposition}
+
+\begin{remarque}
+\begin{enumerate}
+\item $g : \mathcal{D} \rightarrow \mathbb{C}$ est continue $\Longleftrightarrow \Re(g)$ et $\Im(g)$ sont continues ;
+\item $\rm{ln}$ et $t \mapsto e^t$ (exp réelle) sont continues. $\sin$ et $\cos$ aussi.
+\end{enumerate}
+\end{remarque}
+
+\section{Théorème des valeurs intermédiaires}
+\begin{theoreme}{Version n°1}{}
+Soit $I$ intervalle non vide de $\mathbb{R}$, $f:I\longrightarrow\mathbb{R}$
+continue. Alors $f\left(I\right)$ est un intervalle.
+\end{theoreme}
+
+\begin{theoreme}{Version n°1 bis}{}
+Soit $I$ un intervalle de $\R$, $f:I \rightarrow \R$ continue \\
+Si $\alpha$ et $\beta$ sont 2 valeurs prises par $f$ alors tout réel compris entre $\alpha$ et $\beta$ est aussi une valeur prise par $f$.
+\end{theoreme}
+
+\begin{theoreme}{Version n°2}{}
+Soient $a,b\in\mathbb{R}$ avec $a<b$ et $f:\left[a,b\right]\longrightarrow\mathbb{R}$
+continue. Si $f(a)f(b)\leqslant0$, alors il existe un point $c \in [a,b]$ tel que $f(c)=0$.\\
+(si $f$ prend des valeurs positives et des valeurs négatives alors $f$ s'annule)
+\end{theoreme}
+
+\begin{demo}
+\begin{itemize}
+    \item \textbf{Version n°1 $\Longleftrightarrow$ Version n°1 bis } \\
+    $\forall \alpha, \beta \in f(I)$, $[\alpha, \beta] \subset f(I)$ \\
+    \ie $f(I)$ est une partie convexe de $\R$, autrement dit un intervalle \\
+    \\
+    \item \textbf{Version n°1 $\Longleftrightarrow$ Version n°2 } \\
+    $\Longrightarrow$ $[a,b]$ est un intervalle donc $f([a,b])$ aussi donc : $[f(a),f(b)]\subset f([a,b])$\\
+    Or, si $f(a)f(b) \leq 0$ alors $0\in [f(a), f(b)]$, donc $0\in f([a,b])$\\
+    \\
+    $\Longleftarrow$ Soient $\alpha, \beta \in f(I)$ avec $\alpha < \beta$. Montrons que : $[\alpha, \beta] \subset f(I)$ (On montre que $f(I)$ est convexe de $\R$)\\
+    Soit $\gamma \in [\alpha, \beta]$, on dispose de $a,b \in I$ avec $f(a)=\alpha , f(b)=\beta$\\
+    On a par exemple : $a<b$\\
+    Soit $g:t \in [a,b] \rightarrow f(t) - \gamma \in \R$ \\
+    $g$ est continue car $f$ l'est : $g(a)g(b)= \underbrace{(\alpha - \gamma)}_{\leq 0} \underbrace{(\beta - \gamma)}_{\geq 0} \leq 0$\\
+    D'après la \textbf{Version n°2}, $g$ s'annule : il existe $c\in [a,b]$ tel que $g(c)=0$ \ie $f(c)=\gamma$
+    
+\end{itemize}
+\end{demo}
+
+\begin{demo}
+\textbf{Preuve de Version n°2}\\
+\textbf{Méthode 1 : Coup de coeur de O. S. au lycée St-L.}\\
+\\
+\textbf{Méthode 2 : Dichotomie (Classique)}\\
+\end{demo}
+
+\begin{application}{Un marcheur}{}
+Un marcheur parcourt $20 km$ en $4h$.\\ 
+Montrons qu'il y a un intervalle de temps de $1h$ pendant lequel il a parcouru $5 km$.\\
+\end{application}
+
+\begin{application}{Exercice}{}
+$a<b$, $f:[a,b] \rightarrow [a,b]$ continue \\
+Montrer que $f$ a un point fixe (\ie il existe $x\in [a,b]$ tel que $f(x) =x$)
+\end{application}
+
+\begin{remarque}[Remarques]
+\begin{itemize}
+    \item $E = $ partie entière \\
+    $E(\R)=\Z$. $\Z$ n'est pas un intervalle donc $t \mapsto E(t)$ n'est pas continue.\\
+    On en déduit $t \mapsto Frac(t)$ n'est pas continue. 
+    \item $D=\R^*$\\
+    $f:D \rightarrow \R$\\
+    $t\mapsto \left\{\begin{array}{ll} 0 & \mbox{si} \mbox{ } t<0 \\ 1 & \mbox{si} \mbox{ } t>0
+    \end{array}\right.$ \\
+    $f$ est continue mais $f(D)= \lbrace 0,1 \rbrace$ n'est pas un intervalle, ici $D$ n'est pas un intervalle. 
+\end{itemize}
+\end{remarque}
+
+\pagebreak
+ 
+\section{Continuité et fermés bornés}
+\begin{theoreme}{}{}
+Soit $D$ une partie fermée bornée de $\R$, \\
+$f:D \mapsto \K$ continue, alors $f(D)$ est un fermé borné dans $\K$
+\end{theoreme}
+
+\begin{demo}
+
+\end{demo}
+
+\begin{application}{}{}
+Soient $a,b \in \R$, $f:[a,b] \rightarrow \R$ continue, alors $f$ est bornée et atteint ses bornes :\\
+il existe $c,d \in [a,b]$ tel que $\forall x \in [a,b], f(c) \leq f(x) \leq f(d)$
+\end{application}
+
+\begin{demo}
+$[a,b]$ est un fermé borné de $\R$ donc $f([a,b])$ est une partie fermée et bornée de $\R$ \\
+$\alpha = \inf f([a,b])$ et $\beta = \sup f([a,b])$\\
+$\alpha$ est adhérent à $f(D)$ donc appartient à $f(D)$ car $f(D)$ est fermé : \\
+il existe $c \in [a,b], \alpha = f(c)$, de même, $\exists d \in [a,b], \beta = f(d)$
+\end{demo}
+
+\begin{remarque}
+Ce théorème est valable pour $f : D \rightarrow \R$ avec $D$ une partie fermée bornée de $\R$
+\end{remarque}
+
+\begin{theoreme}{Image d'un segment par une application continue réelle}{}
+$f : [a,b] \rightarrow \R$ continue ($a<b$)\\
+Alors $f([a,b])$ est un segment 
+\end{theoreme}
+
+\begin{demo}
+D'après le théorème précédent, il existe $c, d \in [a,b]$ tel que : \\
+\begin{center}
+    $\forall x \in [a,b]$, $f(c) \leq f(x) \leq f(d)$
+\end{center}
+Donc $f([a,b])\subset [f(c),f(d)]$\\
+$[a,b]$ est un intervalle donc \strong{TVI}, $f([a,b])$ aussi \\
+Or $f(c) \in f([a,b])$ et $f(d) \in f([a,b])$\\
+Donc $[f(c),f(d)] \subset f([a,b])$
+\end{demo}
+
+\begin{remarque}[Attention !!!]
+
+\end{remarque}
+
+\end{document}
