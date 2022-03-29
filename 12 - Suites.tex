@@ -1,0 +1,954 @@
+\documentclass[12pt,a4paper]{report}
+\input{00 - preambule}
+
+\begin{document}
+
+\section{Généralités}
+
+\begin{definition}{Suite}{}
+Si $E$ est un ensemble non vide, une suite d'éléments de $E$ est une application $u : \mathbb{N} \rightarrow E$. Pour $n \in \mathbb{N}$, on note $u_n$ (au lieu de $u(n)$) l'image de $n$ par $E$. $u_n$ est un élément de $E$, c'est le terme d'indice $n$ de la suite $u$. La suite $u$ est également notée $(u_n)_{n \in \mathbb{N}}$
+\end{definition}
+
+\begin{remarque}
+Soit $A$ une partie infinie de $\mathbb{N}$ et $u : A \rightarrow E$ une application. Soit $\varphi : \mathbb{N} \rightarrow A$ l'unique bijection strictement croissante de $\mathbb{N}$ dans $A$ alors $v = u \circ \varphi$ est une suite d'éléments de $E$ : on dira encore que $u$ est une suite d'éléments de $E$ (indexée par $A$), notée $(u_n)_{n \in A}$. 
+\end{remarque}
+
+\begin{exemple}
+$u_n = \left(\dfrac{1}{n}\right)_{n \geq 1}$
+\newline On note $E^\mathbb{N}$ l'ensemble des suites d'éléments de $E$.
+\end{exemple} 
+
+\begin{definition}{Extraction}{}
+On appelle extraction toute application $\varphi : \mathbb{N} \rightarrow \mathbb{N}$ strictement croissante.
+\end{definition}
+
+\begin{exemple}
+$n \mapsto n+1$, $n \mapsto 2n$, $n \mapsto 2n+1$, $n \mapsto n^2$ ....
+\end{exemple}
+
+\begin{definition}{Sous-suite}{}
+Si $u \in E^\mathbb{N}$, on appelle sous-suite de $u$ (ou encore suite extraite de $u$ toute suite $v$ pour laquelle il existe une extraction $\varphi$ telle que : $\forall n \in \mathbb{N}, v_n = u_{\varphi(n)}$ (ie telle que $v = u \circ \varphi$))
+\end{definition}
+
+\begin{remarque}
+Si $v$ est une sous-suite de $u$ et $w$ une sous-suite de $v$ alors $w$ est une sous-suite de $u$ : 
+\newline En effet, il existe $\varphi,\psi : \mathbb{N} \rightarrow \mathbb{N}$ strictement croissantes telles que : \newline $\forall n \in \mathbb{N}, v_n = u_{\varphi(n)}, w_n = v_{\psi(n)}$. 
+\newline D'où : $\forall n \in \mathbb{N}, w_n = u_{\varphi(\psi(n))} = u_{\varphi \circ \psi (n)}$ et $\varphi \circ \psi$ est bien strictement croissante de $\mathbb{N}$ dans $\mathbb{N}$.
+\end{remarque}
+
+
+\begin{definition}{Opérations}{}
+Soit $\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$. On définit les opérations suivantes : pour $u,v \in \mathbb{K}^*$ et $\alpha \in \mathbb{K}$ : 
+\begin{enumerate}
+\item $u+v$ est la suite $w$ définie par : $\forall n \in \mathbb{N} : w_n = u_n + v_n$ ;
+\item $uv$ est la suite $w$ définie par : $\forall n \in \mathbb{N} : w_n = u_nv_n$ ;
+\newline Lorsque $u_n \neq 0$ pour tout $n$, on note $\dfrac{1}{u}$ la suite $w$ définie par : $\forall n \in \mathbb{N} : w_n = \dfrac{1}{u_n}$ ;
+\item $\alpha u$ est la suite $w$ définie par : $\forall n \in \mathbb{N}, w_n = \alpha u_n$ ;
+\item $\lvert u \rvert$ est la suite $w$ définie par : $\forall n \in \mathbb{N}, w_n = \lvert u_n \rvert$ ;
+\item Si $\mathbb{K} = \mathbb{R}$, $\rm{inf}$$(u,v)$ est la suite $w$ définie par : $\forall n \in \mathbb{N} : w_n = \rm{min}$$(u_n,v_n)$ ;
+\newline $\rm{sup}$$(u,v)$ est la suite $w$ définie par : $\forall n \in \mathbb{N} : w_n = \rm{max}$$(u_n,v_n)$ ; 
+\newline Si on note $0$ la suite nulle (celle dont tous les termes sont nuls), $u^+ = \rm{sup}$$(u,0)$, $u^- = -\rm{inf}$$(u,0)$
+\newline ie $u^+_n = 
+\begin{cases}
+u_n &\rm{si } \: u_n \geq 0 \\
+0 & \rm{sinon}
+\end{cases}$
+, $u^-_n = 
+\begin{cases}
+-u_n &\rm{si } \: u_n \leq 0 \\
+0 & \rm{sinon}
+\end{cases}$
+
+\item Si $\mathbb{K} = \mathbb{C}$. Si $u \in \mathbb{C}^\mathbb{N}$,
+\newline $\Re(u)$ est la suite $v$ définie par : $\forall n \in \mathbb{N} : v_n = \Re(u_n)$ ;
+\newline $\Im(u)$ est la suite $v$ définie par : $\forall n \in \mathbb{N} : v_n = \Im(u_n)$ ;
+\newline $\overline{u}$ est la suite $v$ définie par : $\forall n \in \mathbb{N} : v_n = \overline{u_n}$.
+\newline On a : 
+\newline $u = \Re(u) + i\cdot  \Im(u)$
+\newline $\Re(u) = \dfrac{u+ \overline{u}}{2}$ et $\Im(u) = \dfrac{u - \overline{u}}{2i}$ ;
+\newline $\lvert u \rvert ^2 = \Re(u)^2 + \Im(u)^2 = u\cdot\overline{u}$.
+
+\end{enumerate}
+\end{definition}
+
+\begin{remarque}
+Pour $u,v \in \mathbb{R}^\mathbb{N}$, on note $u \leq v$ pour signifier que : $\forall n \in \mathbb{N} : u_n \leq v_n$.
+\newline $u \geq 0$ signifie : $\forall n \in \mathbb{N} : u_n \geq 0$.
+\newline On a : si $u \in \mathbb{R}^\mathbb{N}$, $ u^+ \geq 0$, $u^- \geq 0$, et $u = u^+ + u^-$, $\lvert u \rvert = u^+ + u^-$.
+\end{remarque}
+
+
+\begin{application}{Exercice}{}
+Pour $u,v \in \mathbb{R}^\mathbb{N}$, $\rm{inf}$ $(u,v)$ $= \frac{1}{2} (u+v - \lvert u-v \rvert)$ et $\rm{sup}$ $(u,v)$ $= \frac{1}{2} (u+v + \lvert u-v \rvert)$
+\newline Pour le prouver, il suffit de voir que si $a$ et $b$ sont des réels tels que $a \leq b$, alors \newline $a = \frac{1}{2} (a+b - \lvert a-b \rvert)$ et $b = \frac{1}{2} (a+b + \lvert a-b \rvert)$
+\newline $u$ est réelle (ie $\forall n \in \mathbb{N}, u_n \in \mathbb{R}$) si et seulement si $u = \overline{u}$ si et seulement si $\Im(u)=0$.
+\end{application}
+
+
+\begin{definition}{Notions spécifiques aux suites réelles}{}
+Soit $u \in \mathbb{R}^\mathbb{N}$
+\begin{enumerate}
+
+\item $u$ est minorée s'il existe $m \in \mathbb{R}$ tel que : $\forall n \in \mathbb{N}, u_n \geq m$. \newline Ceci équivaut à $\{u_n \mid n \in \mathbb{N} \}$ est une partie minorée de $\mathbb{R}$. Dans ce cas, on note $\underset{n \in \mathbb{N}}{\rm{inf}} u_n$ la borne inférieure de $\{u_n \mid n \in \mathbb{N} \}$.
+
+\item $u$ est majorée s'il existe $M \in \mathbb{R}$ tel que : $\forall n \in \mathbb{N}, u_n \leq M$. \newline Ceci équivaut à $\{u_n \mid n \in \mathbb{N} \}$ est une partie majorée de $\mathbb{R}$. Dans ce cas, on note $\underset{n \in \mathbb{N}}{\rm{sup }} \: u_n$ la borne supérieure de $\{u_n \mid n \in \mathbb{N} \}$.
+\item $u$ est bornée si elle est minorée et majorée.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}{}{prop1}
+Soit $u \in \mathbb{R}^\mathbb{N}$. $u$ bornée $\Longleftrightarrow \lvert u \rvert$ majorée.
+\end{proposition}
+
+\begin{principedemo}{prop1}
+$\Longleftarrow$ Appliquer la définition d'une suite majorée et utiliser une propriété sur les valeurs absolues.
+\newline $\Longrightarrow$ Appliquer la définition d'une suite bornée et majorer $u$ et $-u$ pour majorer $\lvert u \rvert$.
+\end{principedemo}
+
+
+\begin{definition}{Monotonie d'une suite}{}
+\begin{enumerate}
+\item $u$ est croissante lorsque : $\forall n,m \in \mathbb{N} : n \leq m \Longrightarrow u_n \leq u_m$ \newline (ceci équivaut à $\forall n \in \mathbb{N} : u_n \leq u_{n+1}$).
+\item $u$ est strictement croissante lorsque : $\forall n,m \in \mathbb{N} : n < m \Longrightarrow u_n < u_m$ \newline (ceci équivaut à $\forall n \in \mathbb{N} : u_n < u_{n+1}$).
+\item $u$ est décroissante lorsque : $\forall n,m \in \mathbb{N} : n \leq m \Longrightarrow u_n \geq u_m$ \newline (ceci équivaut à $\forall n \in \mathbb{N} : u_n \geq u_{n+1}$).
+\item $u$ est strictement décroissante lorsque : $\forall n,m \in \mathbb{N} : n < m \Longrightarrow u_n > u_m$ \newline (ceci équivaut à $\forall n \in \mathbb{N} : u_n > u_{n+1}$).
+\item Si $u$ est croissante ou décroissante, on dit que $u$ est monotone.
+\item Si $u$ est strictement croissante ou strictement décroissante, on dit que $u$ est strictement monotone.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}{A partir d'un certain rang}{}
+Soit $\rm{P}$ $(n)$ (avec $n \in \mathbb{N}$) un prédicat sur $\mathbb{N}$. On écrira $\rm{P}$ $(n)$ est vrai APCR s'il existe $n_0 \in \mathbb{N}$ tel que :
+\begin{center}
+$\forall n \geq n_0$, $ \rm{P}$ $(n)$ est vrai.    
+\end{center} 
+\end{definition}
+
+\begin{exemple}[Exemples]
+\begin{enumerate}
+\item Une suite $u$ est constante s'il existe $a \in \mathbb{K}$ tel que $\forall n \in \mathbb{N}$, $u_n = a$.
+\item Une suite $u$ est stationnaire si elle est constante APCR  \newline (ie s'il existe $a \in \mathbb{K}$ et $n_0 \in \mathbb{N}$ tel que : $\forall n \geq n_0$, $u_n=a$).
+\end{enumerate}
+\end{exemple}
+
+
+\newpage
+
+\section{Convergence}
+\subsection{Définition et exemples}
+
+\begin{definition}{Convergence}{}
+Soit $u \in \mathbb{K}^\mathbb{N}$.
+\begin{enumerate}
+\item Soit $\ell \in \mathbb{K}$. On dit que $u$ converge vers $\ell$ lorsque : $\forall \varepsilon > 0, \exists n_0 \in \mathbb{N}, \forall n \geq n_0, \lvert u_n - \ell \rvert \leq \varepsilon$.
+\item On dit que $u$ est convergente s'il xiste $\ell \in \mathbb{K}$ tel que $u$ converge vers $\ell$. Dans le cas contraire, on dit que $u$ est divergente.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}{Existence et unicité de la limite d'une suite convergente}{prop2}
+Si $u \in \mathbb{K}^\mathbb{N}$ est une suite convergente alors il existe un unique $\ell \in \mathbb{K}$ tel que $u$ converge vers $\ell$. $\ell$ s'appelle alors la limite de ma suite et on note $\ell = \rm{lim}$\,$u$ ou $\ell = \underset{n \rightarrow +\infty}{\rm{lim}}$ $u_n$.
+\end{proposition}
+
+\begin{principedemo}{prop2}
+Supposer que $u$ converge vers deux réels distincts, appliquer la définition de la convergence et majorer la différence des deux valeurs de convergence à partir d'un certain rang.
+\end{principedemo}
+
+
+\begin{remarque}[Remarques]
+\begin{enumerate}
+\item $\mathbb{K}=\mathbb{R}$, $u \in \mathbb{R}^\mathbb{N}$ converge vers $\ell \in \mathbb{R}$ si et seulement si \newline $\forall \varepsilon > 0, \exists n_0 \in \mathbb{N}, \forall n \geq n_0, u_n \in \left[\ell - \varepsilon ; \ell + \varepsilon \right]$.
+\newline \newline $\mathbb{K}=\mathbb{C}$, $u \in \mathbb{C}^\mathbb{N}$ converge vers $\ell \in \mathbb{C}$ si et seulement si \newline $\forall \varepsilon > 0, \exists n_0 \in \mathbb{N}, \forall n \geq  n_0, u_n \in \overline{\mathcal{D}}(\ell, \varepsilon)$ (disque fermé de centre $\ell$ et de rayon $\varepsilon$)
+\newline \newline Si $\ell_1$ et $\ell_2$ sont deux réels distincts, on peut trouver $\varepsilon > 0$ tel que $\left[\ell_1-\varepsilon;\ell_1+\varepsilon\right] \cap \left[\ell_2-\varepsilon;\ell_2+\varepsilon\right] = \varnothing$.
+\newline $\varepsilon = \dfrac{\lvert \ell_1-\ell_2\rvert}{4}$ fonctionne. Si $u$ converge vers $\ell_1$ et $\ell_2$ alors pour $n$ assez grand on aurait 
+\newline $u_n \in \left[\ell_1-\varepsilon;\ell_1+\varepsilon\right]$ et $u_n \in \left[\ell_2-\varepsilon;\ell_2+\varepsilon\right]$, \footnote{\emph{Aaaaargh !}}
+\newline De même, si $\ell_1$ et $\ell_2$ sont deux complexes distincts, on peut trouver $\varepsilon > 0$ tel que \newline $\overline{D}(\ell_1,\varepsilon)  \; \cap \; \overline{D}(\ell_2,\varepsilon) = \varnothing$ \quad ($\varepsilon = \dfrac{\lvert \ell_1 - \ell_2 \rvert}{4}$.)
+\item Soit $u \in \mathbb{K}^\mathbb{N}$, $\ell \in \mathbb{K}$, $k \in \mathbb{R}^*_+$. Supposons $\forall \varepsilon > 0, \exists n_0 \in \mathbb{N}, \forall n \geq n_0, \lvert u_n - \ell \rvert \leq \varepsilon$
+\newline alors $u$ converge vers $\ell$ : soit $\varepsilon > 0, \varepsilon_1 = \dfrac{\varepsilon}{k}$ : il existe $n_0 \in \mathbb{N}$ tel que : $\forall n \geq n_0, \lvert u_n-\ell \rvert \leq k\varepsilon_1 \leq \varepsilon$...
+\item $u$ converge vers $\ell \Longleftrightarrow (u_n-\ell)_{n \in \mathbb{N}}$ converge vers $0 \Longleftrightarrow (\lvert u_n - \ell\rvert)_{n \in \mathbb{N}}$ converge vers $0$.
+\item Une façon de prouver la convergence d'une suite :
+
+\begin{theoreme}{Principe de comparaison}{Pcomparaison}
+Soit $u \in \mathbb{K}^\mathbb{N}$, $\ell \in \mathbb{K}$, $v \in \mathbb{R}^\mathbb{N}$. On suppose $\lvert u_n -\ell \rvert \leq v_n$ APCR et $v$ converge vers $0$. Alors $u$ converge vers $\ell$.
+\end{theoreme}
+\begin{principedemo}{Pcomparaison}
+Appliquer les définitions des hypothèses.
+\end{principedemo} 
+\end{enumerate}
+\end{remarque}
+
+
+\begin{exemple}[Exemples]
+\begin{enumerate}
+\item Soit $u$ une suite stationnaire. : il ei-xiste $a \in \mathbb{K}$ et $n_0 \in \mathbb{N}$ tels que $\forall n \geq n_0$, $u_n=a$.
+\newline Soit $\varepsilon > 0$, alors pour $n \geq n_0$, on a $\lvert u_n - a \rvert = 0 \leq \varepsilon$. Donc la suite $u$ converge vers $a$/
+\item $\left(\dfrac{1}{n}\right)_{n \geq 1}$ converge vers 0. 
+\newline Soit $\varepsilon > 0$. $\mathbb{N}$ n'est pas majoré dans $\mathbb{R}$ donc on peut trouver $n_0 \in \mathbb{N}$ tel que $n_0 \geq \dfrac{1}{\varepsilon} \geq 0$.
+\item Soit $a \in \left[0 ; 1 \right[$. Alors $(a^n)_{n \in \mathbb{N}}$ converge vers $0$.
+\begin{proposition}{Inégalité de Bernoulli}{IngBer}
+Pour $h \in \mathbb{R}_+$, et $n \in \mathbb{N}$, $(1+h)^n \geq 1+nh$.
+\end{proposition}
+\begin{principedemo}{IngBer}
+Par récurrence sur $n$.
+\end{principedemo}
+
+$\star$ \; Si $a=0$, la suite $(a^n)_{n \in \mathbb{N}}$ stationne à $0$ pour $n \geq 1$ donc converge vers $0$.
+\newline $\star \star$ Si $0 < a < 1$, soit $\varepsilon > 0$, $\frac{1}{a} > 1$ donc on peut écrire $\dfrac{1}{a} = 1+h$ avec $h>0$.
+\newline $\mathbb{R}$ est archimédien donc on peut trouver $n_0 \in \mathbb{N}^*$ tel que $n_0h > \dfrac{1}{\varepsilon}$. D'où, pour $n \geq n_0$ :
+\newline $\dfrac{1}{a^n} = \left(\dfrac{1}{a}\right)^n = (1=h)^n \geq 1+nh \geq 1+n_0h > n_0h > \dfrac{1}{\varepsilon} > 0$.
+\newline D'où $0 < a^n < \varepsilon$, ce qui prouve $\lvert a^n - 0 \rvert < \varepsilon$ pour $n \geq n_0$.
+
+\item Soit $z \in \mathbb{C}$. $(z^n)_{n \in \mathbb{N}}$ converge $\Longleftrightarrow z=1$ ou $\lvert z \rvert < 1$.
+
+\begin{principedemo}{ex4}
+$\Longleftarrow$ Utiliser l'exemple 3.
+\end{principedemo}
+
+
+\item Une façon de prouver la convergence d'une suite vers $0$ : 
+\begin{theoreme}{}{thconv}
+Soit $u \in \mathbb{R}^\mathbb{N}$. On suppose que = $\forall n \in \mathbb{N}$, $u_n > 0$ et $\left(\dfrac{u_{n+1}}{u_n}\right)_{n \in \mathbb{N}}$ converge vers $\ell \in \left[0,1\right[$, alors $u$ converge vers $0$.
+\end{theoreme}
+
+\begin{principedemo}{thconv}
+Prendre $\varepsilon$ tel que $\ell + \varepsilon < 1$, appliquer la définition de la convergence de la suite quotient puis faire un produit téléscopique. Enfin, utiliser l'exemple 3. \\
+\end{principedemo} 
+
+\end{enumerate}
+
+\begin{application}{}{app}
+Si $z \in \mathbb{C}, \dfrac{z^n}{n!} \xrightarrow[n \rightarrow +\infty]{} 0$.
+\end{application} 
+
+\begin{principedemo}{app}
+Poser $(u_n)_{n \in \mathbb{N}}$ la suite $\left(\dfrac{z^n}{n!}\right)$, montrer la convergence de $\lvert u \rvert$ vers $0$ pour montrer la convergence de $u$ vers $0$. Etudier le quotient $\dfrac{\lvert u_{n+1}\rvert }{\lvert u_n \rvert}$
+\end{principedemo}
+
+\end{exemple}
+
+\subsection{Propriétés des suites convergentes}
+
+\begin{theoreme}{}{convbor}
+Toute suite convergente est bornée.
+\end{theoreme}
+
+\begin{principedemo}{convbor}
+Pour une suite $u$ convergente, majorer $\lvert u \rvert$ en utilisant la définition de la convergence d'une suite.
+\end{principedemo}
+
+
+\begin{theoreme}{}{ssconvl}
+Soit $u \in \mathbb{K}^\mathbb{N}$ une suite convergente, de limite $\ell \in \mathbb{K}$, alors toute sous-suite de $u$ converge vers $\ell$.
+\end{theoreme}
+
+\begin{principedemo}{ssconvl}
+Appliquer la définition d'une suite convergente, extraire une sous-suite de $u$ et montrer que la sous-suite vérifie bien la définition de la convergence vers $\ell$. Pour cela, utiliser le lemme suivant :
+\end{principedemo}
+
+\begin{lemme}{}{lssconvl}
+Soit $\varphi : \mathbb{N} \rightarrow \mathbb{N}$ strictement croissante, alors : $\forall n \in \mathbb{N} : \varphi(n) \geq n$.
+\end{lemme}
+
+\begin{principedemo}{lssconvl}
+Par réccurence sur $n$, utiliser la stricte croissance de $\varphi$.
+\end{principedemo}
+
+
+\begin{exemple}
+Pour $n \in \mathbb{N}$, on pose $u_n = (-1)^n$. On a : $u_{2n} \xrightarrow[n \rightarrow + \infty]{} 1$ ($(u_{2n})$ est constante égale à $1$) et $u_{2n+1} \xrightarrow[n \rightarrow + \infty]{} -1$ 
+Si $u$ converge, toute sous suite de $u$ est convergente de même limite que $u$. Ici, on a deux sous-suites de $u$ qui convergent, mais vers des réels différents. Donc $u$ n'est pas convergente.
+\end{exemple}
+
+\begin{theoreme}{Convergence de sous-suites particulières}{sspar}
+Soit $u \in \mathbb{K}^\mathbb{N}$, on suppose que les suites $(v_n)_{n \in \mathbb{N}} = (u_{2n})_{n \in \mathbb{N}}$ et $(w_n)_{n \in \mathbb{N}} = (u_{2n+1})_{n \in \mathbb{N}}$ convergent vers $\ell$. Alors $u$ converge vers $\ell$.
+\end{theoreme}
+
+\begin{principedemo}{sspar}
+Appliquer la définition de la convergence des suites $v$ et $w$ et montrer que $u$ est convergente à l'aide de la définition (attention au rang !)
+\end{principedemo}
+
+
+\begin{theoreme}{Opérations sur les suites convergentes}{gen}
+Soit $u,v \in \mathbb{K}^\mathbb{N}$ deux suites convergentes de limites respectives $\lambda, \mu \in \mathbb{K}$. Soit $\alpha \in \mathbb{K}$. Alors : 
+\begin{enumerate}
+\item $\alpha u + v$ converge vers $\alpha \lambda + \mu$
+\item $uv$ converge vers $\lambda \mu$
+\item $\lvert u \rvert$ converge vers $\lvert \lambda \rvert$
+\item On suppose de plus : $\forall n \in \mathbb{N}, u_n \neq 0$ et $\lambda \neq 0$ alors $\dfrac {1}{u}$ converge vers $\dfrac{1}{\lambda}$
+\item Si $\mathbb{K}=\mathbb{R}$ :
+\newline $\rm{inf}$$(u,v)$ converge vers $\rm{min}$$(\lambda,\mu)$
+\newline $\rm{sup}$$(u,v)$ converge vers $\rm{max}$$(\lambda,\mu)$
+\item Si $\mathbb{K}=\mathbb{C}$ :
+\newline $\Re(u)$ converge vers $\Re(\lambda)$
+\newline $\Im(u)$ converge vers $\Im(\lambda)$
+\newline $\overline u$ converge vers $\overline \lambda$
+\end{enumerate}
+\end{theoreme}
+
+\begin{principedemo}{gen}
+Appliquer la définition de la convergence de $u$ et $v$.
+\end{principedemo}
+
+
+\begin{remarque}
+Soit $u$ une suite réelle convergente de limite $\ell \in \mathbb{R}.$
+\begin{enumerate}
+
+\item Si $a < \ell$ alors $u_n \geq a$ APCR (prendre $\varepsilon = \ell - a > 0$ et appliquer la définition de la convergence.)
+\item Si $\ell < b$ alors $u_n \leq b$ APCR (prendre $\varepsilon = b - \ell > 0$)
+\item Si $\ell > 0$ alors $u$ est minorée par une constante strictement positive APCR. (prendre $a \in \left]0,\ell\right[$ et appliquer 1.)
+\newline SI $\ell < 0$ alors $u$ est majorée par une constante strictement négative APCR (prendre $b \in \left]\ell,0\right[$ et appliquer 2.)
+\end{enumerate}
+\end{remarque}
+
+\begin{remarque}
+Soit $u \in \mathbb{C}^\mathbb{N}$, $\alpha, \beta \in \mathbb{R}$, $\ell = \alpha + i \cdot \beta$
+\newline $u$ converge vers $\ell \Longleftrightarrow \Re(u)$ converge vers $\Re(\ell) = \alpha$ et $\Im(u)$ converge vers $\Im(\ell) = \beta$.
+\newline $\Longrightarrow$ cf \textbf{5.}
+\newline $\Longleftarrow u = \Re(u) + i \cdot \Im(u)$ donc par 1. $u$ converge vers $\Re(\ell) + i \cdot \Im(\ell) = \ell$.
+\end{remarque}
+
+
+\newpage
+
+\section{Cas des suites réelles}
+\subsection{Divergence vers $+\infty$/$-\infty$}
+
+\begin{definition}{Divergence vers $+\infty$}{}
+Soit $u \in \mathbb{R}^\mathbb{N}$. On dit que  $u$ tend vers $+\infty$ lorsque:
+\newline $\forall M \in \mathbb{R}, \exists n_0 \in \mathbb{N}, \forall n \geq n_0, u_n \geq M$.
+\end{definition}
+
+\begin{application}{}{}
+Ceci équivaut à : $\forall M > 0, \exists n_0 \in \mathbb{N}, \forall n \geq n_0, u_n \geq M$ ou encore à $\forall k \in \mathbb{N}, \exists n_0 \in \mathbb{N}, \forall n \geq n_0, u_n \geq k$.
+\end{application} 
+
+\begin{definition}{Divergence vers $-\infty$}{}
+Soit $u \in \mathbb{R}^\mathbb{N}$. On dit que  $u$ tend vers $-\infty$ lorsque:
+\newline $\forall M \in \mathbb{R}, \exists n_0 \in \mathbb{N}, \forall n \geq n_0, u_n \leq M$.
+\end{definition}
+
+\begin{remarque}
+\begin{enumerate}
+\item Si $u$ tend vers $+\infty$, $u$ n'est pas majorée donc pas convergente. Si $u$ tend vers $-\infty$, $u$ n'est pas minorée donc pas convergente.
+\item On écrira $u_n \xrightarrow[n \rightarrow +\infty]{} +\infty$ pour signifier que $u$ tend vers $+\infty$, de même pour $u_n \xrightarrow[n \rightarrow +\infty]{} -\infty$.
+\item Faits : 
+\begin{enumerate}
+\item Soient $u,v \in \mathbb{R}^\mathbb{N}$. On suppose $u_n \leq v_n$ APCR. Alors : 
+\begin{enumerate}
+\item Si $u$ tend vers $+\infty$, $v$ aussi
+\item Si $v$ tend vers $-\infty$, $u$ aussi
+\end{enumerate}
+\begin{demo}
+Soit $M \in \mathbb{R}$, tel que $u_n \leq v_n$ pour $n \geq n_1$, et $n_2 \in \mathbb{N}$ tel que $u_n \geq M$ pour $n \geq n_2$. \newline Alors, pour $n \geq \rm{max}$ $(n_1,n_2)$, $v_n \geq u_n \geq M$.
+\end{demo}
+
+\item $u \in \mathbb{R}^\mathbb{N}$ tend vers $+\infty$ si et seulement si $-u$ tend vers $-\infty$.
+\item Soient $u,v \in \mathbb{R}^\mathbb{N}$. On suppose $u$ tend vers $+\infty$ et $v$ minorée (c'est le cas si $v_n \xrightarrow[n \rightarrow +\infty]{} +\infty$ ou si $v$ est convergente). Alors $u+v$ tend vers $+\infty$.
+
+\begin{demo}
+Soit $M,m \in \mathbb{R}$ tels que pour $n \in \mathbb{N}$, $v_n \geq m$. On dispose de $n_0 \in \mathbb{N}$ tel que : $\forall n \geq n_0, u_n \geq M-m$, d'où $\forall n \geq n_0, u_n+v_n \geq M$.
+\end{demo}
+
+\end{enumerate}
+\begin{remarque}
+Si $v_n \xrightarrow[n \rightarrow +\infty]{} +\infty$ alors $v$ est minorée.
+\end{remarque}
+
+\begin{demo}
+$M = 1$. il existe $n_0 \in \mathbb{N}$ tel que : $\forall n \geq n_0 : v_n \geq 1$.
+\newline Pour $n \in \llbracket 0,n_0-1 \rrbracket$, $v_n \geq \rm{min}$ $(v_0,...,v_{n_0-1})$.
+\newline Donc, $\forall n, v_n \geq \rm{min}$ $(1,m)$.
+\end{demo}
+
+\item Soient $u,v\in \mathbb{R}^\mathbb{N}$. On suppose que $u$ tend vers $+\infty$ et $v$ minorée APCR par une constante $m > 0$ (ceci se produit par exemple si $v$ converge vers $\ell \in \mathbb{R}^*_+$, ou si $v$ tend vers $+\infty$). Alors $uv$ tend vers $+\infty$.
+
+%Il manque la démonstration ici
+
+\item On suppose $u \in \mathbb{R}^\mathbb{N}$ tend vers $+\infty$ et $u_n \neq 0$ pour tout $n$, alors $\dfrac{1}{u_n} \xrightarrow[n \rightarrow +\infty]{} 0$.
+\begin{demo}
+Soit $\varepsilon > 0$, soit $n_0 \in \mathbb{N}$ tel que : $\forall n \geq n_0, u_n \geq \dfrac{1}{\varepsilon} > 0$. D'où, pour tout $n \geq n_0$, $0 \leq \dfrac{1}{u_n} \leq \varepsilon$ (et $\lvert \dfrac{1}{u_n}-0 \rvert = \dfrac{1}{u_n} \leq \varepsilon$).
+\end{demo} 
+\end{enumerate}
+\end{remarque}
+
+\begin{remarque}
+Si $u$ est une suite d'éléments de $\mathbb{R}^*_+$ qui converge vers $0$, alors $\dfrac{1}{u}$ tend vers $+\infty$.
+\end{remarque}
+
+
+\begin{exemple}[Exemples : Limite de quotient de polynômes]
+On a $n \xrightarrow[n \rightarrow +\infty]{} +\infty$. Donc par produit, $\forall k \in \mathbb{N}^*, n^k \xrightarrow[n \rightarrow +\infty]{} +\infty$.
+\newline Si $a > 1$ alors $a^n \xrightarrow[n \rightarrow +\infty]{} +\infty$.
+\newline \newline Soient $P,Q \in \mathbb{R}\left[X\right]$. $P = a_0 + a_1 X+...+a_dX^d, \quad Q = b_0 + b_1 X + ... b_m X^m$, avec $d,m \in \mathbb{N}, a_d \neq 0, b_m \neq 0$.
+\newline Pour $n \in \mathbb{N}, \dfrac{P(n)}{Q(n)} = \dfrac{a_0 + a_1 n + ... + a_d n^d}{b_0 + b_1 n + ... b_m n^m} = \dfrac{a_d}{b_m}n^{d-m}\left(\dfrac{1+\frac{1}{a_d}\left(\frac{a_{d-1}}{n}+...+\frac{a_0}{n^d}\right)}{1+\frac{1}{b_m}\left(\frac{b_{m-1}}{n}+...+ \frac{b_0}{n^m}\right)}\right)$
+\newline \newline Donc, si $d > m$, on a $n^{d-m} \xrightarrow[n \rightarrow +\infty]{} +\infty$
+\newline donc $\dfrac{P(n)}{Q(n)} \xrightarrow[n \rightarrow +\infty]{} 
+\begin{cases}
++\infty & \rm{si } \: \frac{a_d}{b_m} > 0 \\
+-\infty & \rm{si } \: \frac{a_d}{b_m} < 0
+\end{cases}$
+\newline Si $d=m$ alors $\dfrac{P(n)}{Q(n)} \xrightarrow[n \rightarrow +\infty]{}\dfrac{a_d}{b_m}$
+\newline Si $d<m$ : $n^{d-m} \xrightarrow[n \rightarrow +\infty]{} 0$ et $\dfrac{P(n)}{Q(n)} \xrightarrow[n \rightarrow +\infty]{} 0$.
+\end{exemple}
+
+\begin{remarque}{Attention aux formes indéterminées : $\infty-\infty$, $0\cdot \infty$}
+Dans ces situations, on ne peut rien affirmer de général.
+\end{remarque}
+
+\begin{exemple}
+Avec $u$ et $v$ qui tendent vers $+\infty$ quid $u-v$ ?
+\begin{enumerate}
+\item On peut avoir convergence vers $\ell \in \mathbb{R}$.
+\newline Pour $n \in \mathbb{N} : u_n = n+\ell, v_n = n$, $u_n - v_n \xrightarrow[n \rightarrow +\infty]{} \ell$.
+\item On peut avoir divergence vers $+\infty$
+\newline Pour $n \in \mathbb{N} : u_n = 2n, v_n=n$.
+\item On peut avoir divergence bornée : 
+\newline Pour $n \in \mathbb{N} : u_n = n + (-1)^n, v_n = n$.
+\end{enumerate}
+\end{exemple}
+
+\begin{application}{}{}
+Montrer que dans le cas où $u$ tend vers $0$ et $v$ tend vers $+\infty$, on ne peut rien affirmer de général sur $uv$.
+\end{application} 
+
+
+\subsection{Ordre et limites}
+\begin{theoreme}{Conservation des inégalités larges par passage à la limite}{inglim}
+Soit $u,v \in \mathbb{R}^\mathbb{N}$ deux suites convergentes telles que $u_n \leq v_n$ APCR, alors $\underset{n \rightarrow +\infty}{\rm{lim}}$$u_n \leq \underset{n \rightarrow +\infty}{\rm{lim}}$$v_n$.
+\end{theoreme}
+
+\begin{principedemo}{inglim}
+Nommer les limites de $u$ et $v$, procéder par l'absurde. Supposer que $\underset{n \rightarrow +\infty}{\rm{lim}}$$u_n > \underset{n \rightarrow +\infty}{\rm{lim}}$$v_n$, prendre deux réels strictement compris entre les deux limites, majorer $v$ et minorer $u$ et aboutir à une contradiction sur $u$ et $v$ APCR.
+\end{principedemo} 
+
+
+\begin{remarque}[Remarque : Attention !]
+Les inégalités strictes ne se conservent pas en général par passage à la limite ! 
+\newline Si $u$ et $v$ sont deux suites convergentes réelles telles que $u_n < v_n$ APCR, on peut avoir $\underset{n \rightarrow +\infty}{\rm{lim}}$$u_n = \underset{n \rightarrow +\infty}{\rm{lim}}$$v_n$
+\end{remarque}  
+
+\begin{exemple}
+Pour $n \in \mathbb{N} : u_n = 0, \; v_n = \dfrac{1}{n+1}$.
+\end{exemple} 
+
+\begin{theoreme}{Théorème des gendarmes}{thgen}
+Soient $u,v,w \in \mathbb{R}^\mathbb{N}$. On suppose $u,w$ convergentes de même limite $\ell \in \mathbb{R}$ et que : $u_n \leq v_n \leq w_n$ APCR. Alors $v$ converge vers $\ell$.
+\end{theoreme}
+
+\begin{principedemo}{thgen}
+Appliquer la définition de la convergence de $u$ et $w$ et de APCR puis majorer $\lvert v_n - \ell \rvert$ à partir d'un certain rang.
+\end{principedemo}
+
+
+\subsection{Suites monotones}
+\begin{theoreme}{}{th3}
+Soit $u \in \mathbb{R}^\mathbb{N}$.
+\begin{enumerate}
+\item On suppose que $u$ est croissante.
+\begin{enumerate} 
+\item Si $u$ est majorée, $u$ converge (vers $\underset{n \in \mathbb{N}}{\rm{sup}}$ $\: u_n$).
+\item Si $u$ n'est pas majorée alors $u$ tend vers $+\infty$.
+\end{enumerate}
+\item On suppose que $u$ est décroissante.
+\begin{enumerate}
+\item Si $u$ est minorée, $u$ converge (vers $\underset{n \in \mathbb{N}}{\rm{inf}}$ $\: u_n$).
+\item Si $u$ n'est pas minorée alors $u$ tend vers $-\infty$.
+\end{enumerate}
+\end{enumerate}
+\end{theoreme}
+
+
+\begin{principedemo}{th3}
+\textbf{1. a.} Prendre $u$ croissante, trouver un réel qui ne majore pas $u$, le traduire et utiliser la croissance de $u$.
+\newline \textbf{b.} Appliquer la définition de "non majorée" puis utiliser la croissance de $u$.
+\end{principedemo}
+
+
+\begin{exemple}[Exemples - Suites particulières]
+ Pour $n \in \mathbb{N}^* : H_n = \sum_{k=1}^n \frac{1}{k}$. Il est clair que $(H_n)_{n \geq 1}$ est croissante.
+\begin{enumerate}
+\item Pour $n \in \mathbb{N}^* : H_{2n}-H_n = \sum_{k=n+1}^{2n} \frac{1}{k} \geq \sum_{k=n+1}^{2n} \frac{1}{2n} = \frac{1}{2}$.
+\newline Supposons $(H_n)_{n\geq 1}$ converge vers $\ell \in \mathbb{R}$. Alors $H_{2n} \xrightarrow[n \rightarrow +\infty]{} \ell$ (car $(H_{2n})_{n \geq 1}$ est une sous-suite de $H$)
+\newline Or, $\forall n \geq 1 : H_{2n}-H_n \geq \dfrac{1}{2}$.
+\newline Si $n \rightarrow +\infty$ (conservation des inégalités larges par passage à la limite) : $\ell-\ell \geq \dfrac{1}{2}$, c'est absurde.
+\newline $H$ ne converge pas. Comme $H$ est croissante, on a $H_n \xrightarrow[n \rightarrow +\infty]{} +\infty$.
+\item Soit $k \in \mathbb{N}^*$.
+\newline On a : $\frac{1}{k}(k+1-k) \geq \int_{k}^{k+1}\frac{dt}{t}$
+\newline $\forall t \in \left[k,k+1\right] : \frac{1}{t} \leq \frac{1}{k}$ donc $\int_{k}^{k+1} \frac{dt}{t} \leq \int_{k}{k+1}\frac{dt}{k} = \frac{k+1-k}{k} = \frac{1}{k}$.
+\newline On trouve $\frac{1}{k} \geq \ln(k+1)-\ln(k)$
+\newline D'où, pour $n \in \mathbb{N}^* : H_n = \sum_{k=1}^{n} \frac{1}{k} \geq \sum_{k=1}^{n} \left(\ln(k+1)-ln(k)\right) = \ln(n+1)$
+\newline $\forall n, H_n \geq \underbrace{\ln (n+1)}_{\xrightarrow[n \rightarrow +\infty]{}+\infty}$
+\end{enumerate}
+Pour $n\geq 1, S_n = \sum_{k=1}^{n}\frac{1}{k^2}$
+\newline Il est clair que $S$ est croissante. 
+\newline Pour $n \geq 2, S_n = 1 + \sum_{k=2}^{n} \frac{1}{k^2}$. Or, pour $2 \leq k \leq n, \dfrac{1}{k^2} \leq \dfrac{1}{k(k-1)} = \dfrac{1}{k-1}-\dfrac{1}{k}$.
+\newline Donc $S_n \leq 1+ \sum_{k=2}^{n}(\frac{1}{k-1}-\frac{1}{k})= 2-\frac{1}{n} \leq 2$.
+\newline Donc, $\forall n \geq 2, S_n \leq 2$ (et c'est aussi vrai si $n=1$).
+$S$ est croissante et majorée donc converge.
+\newline \newline Soient $0 \leq a \leq b$ et $u,v$ les suites réelles définies par $u_0 = a, v_0 = b$ et $\forall n \in \mathbb{N} :
+\begin{cases}
+u_{n+1} & =\sqrt{u_nv_n} \\
+v_{n+1} & =\dfrac{u_n + v_n}{2}
+\end{cases}$
+\newline $u$ et $v$ sont bien définies et positives.
+\newline $\forall x,y \in \mathbb{R}^*_+ : \sqrt{xy} \leq \dfrac{x+y}{2}$.
+\newline On en déduit que : $\forall n \in \mathbb{N}, u_{n+1} \leq v_{n+1}$ donc $\forall n \in \mathbb{N}^*, u_n \leq v_n$ (c'est vrai pour $n=0$).
+\newline On a, pour $n \in \mathbb{N} :
+\begin{cases}
+u_{n+1} &= \sqrt{u_nv_n} \geq \sqrt{u_nu_n}=u_n \\
+v_{n+1} &=\dfrac{u_n+v_n}{2} \leq \dfrac{v_n+v_n}{2}=v_n
+\end{cases}$
+\newline \newline On a $u_0 \leq u_n \leq u_{n+1} \leq v_{n+1} \leq v_n \leq v_0 \quad (\forall n)$
+\newline $u$ est croissante, majorée par $v_0$ donc converge vers un réel $\lambda$.
+\newline $v$ est décroissante, minorée par $u_0$ donc converge vers un réel $\mu$.
+\newline $\forall n, u_n \leq v_n$ donc $\lambda \leq \mu$.
+\newline $(v_{n+1})_{n \in \mathbb{N}}$ est une sous-suite de $v$ donc converge vers $\mu$.
+\newline Or : $\forall n : v_{n+1} = \dfrac{u_n + v_n}{2} \longrightarrow \dfrac{\lambda + \mu}{2}$ (théorèmes généraux).
+\newline Par unicité de la limite d'une suite convergente, $\mu = \dfrac{\lambda + \mu}{2}$ d'où $\lambda = \mu$.
+\end{exemple}
+
+\subsection{Suites adjacentes}
+\begin{definition}{Suites adjacentes}{}
+Soient $u,v \in \mathbb{R}^\mathbb{N}$. On dit que $u$ et $v$ sont adjacentes si l'une est croissante, l'autre est décroissante et $u-v$ converge vers $0$.
+\end{definition}
+
+\textbf{Petite Histoire :}
+\newline Soient $u,v$ deuix suites adjacentes avec, par exemple, $u$ croissante et $v$ décroissante.
+\newline $\star$ On a : $\forall k,\ell \in \mathbb{N} : u_k \leq v_\ell$. 
+\newline Supposons $\exists k,\ell \in \mathbb{N}$ tel que $u_k > v_\ell$.
+\newline Alors, pour $n \geq \rm{max}$$(k,\ell), u_n \geq u_k > v_\ell \geq v_n$ et $u_n - v_n \geq u_k - v_\ell > 0$ ; $n \rightarrow +\infty : 0 \geq u_k - v_\ell > 0$, c'est absurde.
+\newline $\star \star$ On a donc : $\forall n \in \mathbb{N}, u_0 \leq u_n \leq u_{n+1} \leq v_{n+1} \leq v_n \leq v_0$. 
+\newline $u$ est croissante, majorée donc converge vers $\lambda \in \mathbb{R}$.
+\newline $v$ est décroissante, minorée donc converge vers $\mu \in \mathbb{R}$.
+\newline $u-v$ converge vers $0$ par hypothèse mais aussi vers $\lambda - \mu$, d'où $\lambda -\mu = 0$.
+
+\begin{theoreme}{Limite de suites adjacentes}{}
+Si $u$ et $v$ sont deux suites adjacentes, alors $u$ et $v$ convergent vers un même réel.
+\end{theoreme}
+
+\newpage
+
+\section{Bolzano-Weierstrass}
+
+$\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$.
+
+\begin{definition}{Valeur d'adhérence d'une suite}
+Soit $u \in \mathbb{K}^\mathbb{N}, \ell \in \mathbb{K}$. $\ell$ est une valeur d'adhérence de $u$ s'il existe une sous-suite de $u$ qui converge vers $\ell$.
+\end{definition}
+
+\begin{exemple}[Exemples]
+\begin{enumerate}
+\item Si $u \in \mathbb{K}^\mathbb{N}$ converge vers $\lambda \in \mathbb{K}$ alors l'unique valeur d'adhérence de $u$ est $\lambda$.
+\item Pour $n \in \mathbb{N} : u_n = (-1)^n$, alors $1$ et $-1$ sont des valeurs d'adhérence de $u$ et ce sont les seules.
+\item Pour $n \in \mathbb{N} : u_n = n$. Alors $u$ n'a aucune valeur d'adhérence.
+\end{enumerate}
+\end{exemple}
+
+
+\begin{lemme}{}{lemme2}
+Soit $u \in \mathbb{K}^\mathbb{N}, \ell \in \mathbb{K}$. $\ell$ est valeur d'adhérence de $u$ si et seulement si pour tout $\varepsilon > 0$, pour tout $p \in \mathbb{N}$, il existe $n \geq p$ tel que $\lvert u_n - \ell \rvert \leq \varepsilon$.
+\end{lemme}
+
+\begin{principedemo}{lemme2}
+$\Longrightarrow$ Appliquer la définition de la valeur d'adhérence.
+\newline $\Longleftarrow$ Construire par récurrence une application strictement croissante de $\mathbb{N}$ dans $\mathbb{N}$, telle que la sous-suite de $u$ associée converge vers $\ell$
+\end{principedemo}
+
+
+
+\begin{theoreme}{Bolzano-Weierstrass}{B-W}
+Soit $u$ une suite réelle bornée. Alors $u$ admet au moins une valeur d'adhérence. (il existe une sous-suite de $u$ qui converge).
+\end{theoreme}
+
+\begin{principedemo}{B-W}
+
+\end{principedemo}
+
+\begin{remarque}{}
+Soit $k \in \mathbb{N}^*, u_1,...,u_k \; k$ suites réelles ou complexes bornées. Alors il existe $\varphi : \mathbb{N} \rightarrow \mathbb{N}$ strictement croissante telle que $\forall \ell \in \llbracket 1;k \rrbracket, (u_\ell(\varphi(n)))_{n \in \mathbb{N}}$ converge.
+\end{remarque}
+
+
+
+\newpage
+
+\section{Quelques suites particulières}
+
+\subsection{Suites arithmétiques}
+
+\begin{definition}{Suite arithmétique}{}
+$u \in \mathbb{K}^\mathbb{N}$ est une suite arithmétique s'il existe $r \in \mathbb{K}$ tel que : $\forall n, u_{n+1}-u_n=r$.
+\newline $r$ est la raison de la suite arithmétique $u$.
+\end{definition}
+On a alors : \begin{enumerate}
+\item $\forall n \in \mathbb{N} : u_n = u_0+nr$ ;
+\item $\forall n \in \mathbb{N} : \sum_{k=0}^n u_k = (n+1)\left(\frac{u_0+u_n}{2}\right) = (n+1)\left(u_0 + \frac{nr}{2}\right)$.
+\end{enumerate}
+
+\subsection{Suites géométriques}
+
+\begin{definition}{Suite géométrique}{}
+$u \in \mathbb{K}^\mathbb{N}$ est une suite géométrique de raison $q \in \mathbb{K}$ lorsque $\forall n : u_{n+1} = qu_n$.
+\end{definition}
+On a alors : \begin{enumerate}
+\item $\forall n \in \mathbb{N} : u_n = u_0q^n$
+\item Si $q \neq 1, \sum_{k=0}^nu_k = u_0\frac{q^{n+1}-1}{q-1}$.
+\end{enumerate}
+
+\begin{application}{}{}
+$q \in \mathbb{C}, q^n$ converge $\Longleftrightarrow q=1$ ou $\lvert q \rvert < 1$.
+\newline $\Longrightarrow$ Pour $n \in \mathbb{N}, u_n = q^n$. Supposons $u$ convergente de limite $\ell \in \mathbb{C}$. Alors $u_{n+1} \xrightarrow[n \rightarrow +\infty]{} \ell$ or $u_{n+1}=q^{n+1}=qu_n \rightarrow q\ell$.
+\newline Par unicité de la limite, $\ell = q\ell$, ce qui donne $\ell(q-1)=0 \Longleftrightarrow q=1$ ou $l=0$.
+\newline Si $\ell = 0$, on doit avoir $q^n \xrightarrow[n \rightarrow +\infty]{} 0 \Longleftrightarrow \lvert q^n \rvert \xrightarrow[n \rightarrow +\infty]{} 0 \Longleftrightarrow \lvert q \rvert < 1$.
+\end{application}
+
+
+\subsection{Suites arithmético-géométriques}
+\begin{definition}{Suite arithmético-géométrique}{}
+$u \in \mathbb{K}^\mathbb{N}$ est arithmético-géométrique s'il existe $a,b \in \mathbb{N}$ tels que $\forall n \in \mathbb{N} : u_{n+1} = au_n + b$.
+\end{definition}
+
+Si $a = 1$, on retrouve les suites arithmétiques.
+\newline Si $a \neq 1$, soit $\ell \in \mathbb{K}$ définie par $\ell = a\ell + b$ ($\ell = \frac{b}{1-a}$).
+\newline Pour $n \in \mathbb{N}, v_n = u_n - \ell$ alors $\forall n : v_{n+1} = u_{n+1} - \ell = au_n + b - a\ell - b = a(u_n - \ell) = av_n$.
+\newline $v$ est géométrique de raison $a\neq 1$ donc $\forall n : v_n = a^nv_0$ donc $u_n = v_n+\ell = a^n(u_0-\ell)+\ell$.
+
+\subsection{Suites à récurrence linéaire d'ordre 2}
+Il s'agit de suites $u \in \mathbb{K}^\mathbb{N}$ pour lesquelles il existe $a,b,c \in \mathbb{K}, a \neq 0, c\neq 0$ tels que $\forall n \in \mathbb{N} : au_{n+2}+bu_{n+1}+cu_n=0$ (on notera $E$ l'ensemble de ces suites).
+
+\begin{theoreme}{Expression directe du terme général d'une suite à réccurence linéaire d'ordre 2}{Rec2}
+Soit $P = aX^2+bX+c \in \mathbb{K}\left[X\right]$
+\begin{enumerate}
+\item Si $P$ a deux racines distinctes $r,s$ dans $\mathbb{K}$ alors les éléments de $E$ sont les suites $u$ pour lesquelles il existe $\alpha,\beta \in \mathbb{K}$ tels que : 
+\newline $\forall n \in \mathbb{N}, u_n = \alpha r^n + \beta s^n$ ;
+\item Si $P$ a une racine double $r_0$, les éléments de $E$ sont les suites $n \mapsto (\alpha n + \beta)r_0^n$ ;
+\item $\mathbb{K} = \mathbb{R}$ et $P$ n'a pas de racine réelle, $P$ admet deux racines complexes conjuguées $re^{\pm i\theta}$. Les éléments de $E$ sont les suites $n \mapsto r^n(\alpha \cos (n\theta) + \beta \sin (n\theta))$ avec $\alpha,\beta \in \mathbb{R}$
+\end{enumerate}
+\end{theoreme}
+
+\begin{principedemo}{Rec2}
+
+\end{principedemo}
+
+
+
+\par \textbf{Exemple :} Suite de Fibonacci.
+\newline $(F_n)_{n \in \mathbb{N}}$ définie par $F_0 = F_1 = 1$ et telle que $\forall n \in \mathbb{N} : F_{n+2} = F_{n+1}+F_n$.
+\newline $(F_n)$ vérifie une récurrence linéaire d'ordre 2 dont le polynôme caractéristique est $P = X^2 - X - 1$, on a $\Delta(P)=5$.
+\newline $P$ a deux racines distinctes $\phi = \dfrac{1+\sqrt{5}}{2}, -\dfrac{1}{\phi} = \dfrac{1-\sqrt{5}}{2}$.
+\newline Donc il existe $\alpha,\beta \in \mathbb{R}$ tels que : $\forall n \in \mathbb{N} : F_n = \alpha \left(\dfrac{1+\sqrt{5}}{2}\right)^n + \beta \left(\dfrac{1-\sqrt{5}}{2}\right)^n$
+\newline \newline $1=F_0 = \alpha + \beta
+\newline 1= F_1 = \alpha \dfrac{1+\sqrt{5}}{2} + \beta \dfrac{1-\sqrt{5}}{2}$
+\newline On a donc le système linéaire : 
+\newline $\begin{cases}
+\alpha + \beta &=1 \\
+\alpha(1+\sqrt{5}) + \beta(1-\sqrt{5}) &= 2
+\end{cases}$
+\newline On obtient $\alpha = \dfrac{\sqrt{5}+1}{2\sqrt{5}}$ et $\beta = \dfrac{\sqrt{5}-1}{2\sqrt{5}}$
+\newline \newline D'où, $\forall n \in \mathbb{N}, F_n = \dfrac{1}{\sqrt{5}} \left[\left(\dfrac{1+\sqrt{5}}{2}\right)^{n+1} - \left(\dfrac{1-\sqrt{5}}{2}\right)^{n+1} \right]$
+
+\newpage
+
+\section{Complément - D'Alembert-Gauss}
+Soit $P \in \mathbb{C}\left[X\right]$ non constant. $P : a_0+a_1X+...+a_nX^n$ avec $n \geq 1$ et $a_n \neq 0$.
+\newline \par \boxed{\textbf{Partie 1 :}}
+\begin{theoreme}{}{}
+Il existe $z_0 \in \mathbb{C}$ tel que : $\forall z \in \mathbb{C}$ : $\lvert P(z) \rvert \geq \lvert P(z_0) \rvert$.
+\end{theoreme}
+
+\noindent \textbf{Etape 1 :}
+
+\begin{lemme}{}{}
+Soit $M>0$, alors il existe $R>0$ tel que $\forall z \in \mathbb{C}, \lvert z \rvert > R \Longrightarrow \lvert P(z) \rvert \geq M$.
+\end{lemme}
+
+\begin{demo}
+Pour $z \in \mathbb{C}$, $\lvert P(z) \rvert = \lvert a_0 + a_1z + ... + + a_{n-1}z^{n-1} + a_n z^n \rvert \geq \left \lvert \lvert a_n z^n \rvert - \lvert a_0 + a_1z+...+a_{n-1}z^{n-1} \rvert \right \rvert$
+\newline Donc $\lvert P(z) \rvert \geq \lvert a_n z^n \rvert - \lvert a_0 + a_1z+...+a_{n-1}z^{n-1} \rvert$
+\newline et on a $\lvert a_0 + a_1z+...+a_{n-1}z^{n-1} \rvert  \leq \lvert a_0 \rvert + \lvert a_1 \rvert \lvert z \rvert + ... + \lvert a_{n-1} \rvert \lvert z\rvert ^{n-1}$.
+\newline D'où $\lvert P(z) \rvert  \geq \lvert a_n \rvert \lvert z \rvert ^n - \left(\lvert a_0 \rvert + \lvert a_1 \rvert  \lvert z \rvert + ...+ \lvert a_{n-1} \rvert \lvert z \rvert ^{n-1} \right)$
+\newline Donc, pour $z \in \mathbb{C}$ tel que $\lvert z \rvert \geq 1$, $\lvert P(z) \rvert \geq \lvert z \rvert n \left(\lvert a_n \rvert - \left( \dfrac{\lvert a_0 \rvert}{\lvert z \rvert ^n} + \dfrac{\lvert a_1 \rvert}{\lvert z \rvert ^{n-1}} + ... + \dfrac{\lvert a_{n-1} \rvert}{\lvert z \rvert}\right) \right)$.
+\newline \newline Pour $k \in \llbracket 0 ; n-1 \rrbracket, \dfrac{\lvert a_k \rvert }{\lvert z \rvert ^{n-k}} \leq \dfrac{\lvert a_k \rvert}{\lvert z \rvert}$ (car, pour $\ell \in \mathbb{N}^*, \lvert z \rvert \leq \lvert z \rvert ^\ell$).
+\newline D'où $\lvert P(z) \rvert \geq \lvert z \rvert ^n \left( \lvert a_n \rvert - \left(\dfrac{\lvert a_0 \rvert + \lvert a_1 \rvert + ... + \lvert a_{n-1} \rvert}{\lvert z \rvert} \right)\right)$
+\newline \newline On note $C = \lvert a_0 \rvert + \lvert a_1 \rvert + ... + \lvert a_{n-1} \rvert$. Imposons de plus $\dfrac{C}{\lvert z \rvert} \leq \dfrac{\lvert a_n \rvert}{2}$, ie $\lvert z \rvert \geq \dfrac{2C}{\lvert a_n \rvert}$.
+\newline \newline Alors, pour $z \in \mathbb{C}$ tel que $z \geq \rm{max}$$\left(1,\dfrac{2C}{\lvert a_n \rvert}\right)$, $\lvert P(z) \rvert \geq \lvert z \rvert ^n \dfrac{\lvert a_n \rvert}{2} \geq \lvert z \rvert \dfrac{\lvert a_n \rvert}{2}$.
+\newline \newline On impose alors $\lvert z \rvert \dfrac{\lvert a_n \rvert}{2} \geq M$ soit $\lvert z \rvert \geq \dfrac{2M}{\lvert a_n \rvert}$
+\newline \newline Donc, pour $\lvert z \rvert > R = \rm{max}$$\left(1,\dfrac{2C}{\lvert a_n \rvert},\dfrac{2M}{\lvert a_n \rvert}\right)$, on a bien $\lvert P(z) \rvert \geq M$.
+\end{demo}
+
+
+\textbf{Etape 2 :}
+\newline Soit $M = \lvert P(0) \rvert$. On peut trouver $R>0$ tel que : $\forall z \in \mathbb{C} : \lvert z \rvert > R \Longrightarrow \lvert P(z) \geq P(0)$
+\newline Soit $m = \rm{inf}\;$$\underbrace{\{ \lvert P(z) \rvert \; \mid \; z \in \underbrace{\overline{\mathcal{D}}(0,R)}_{\lvert z \rvert \leq R} \}}_{A}$ où $A$ est une partie non vide minorée de $\mathbb{R}$ (par $0$).
+\newline Montrons qu'il existe $z_0 \in \overline{\mathcal{D}}(0,R)$ tel que $m = \lvert P(z_0) \rvert$. Pour $k \in \mathbb{N}, m + \frac{1}{k} > m  = \rm{inf}$$A$, donc $m + \frac{1}{k}$ ne minore pas $A$.
+\newline Il existe donc $z_k \in \overline{\mathcal{D}}(0,R)$ tel que $\lvert P(z_k) \rvert < m + \frac{1}{k}$ (et on a $m \leq \lvert P(z_k) \rvert$).
+\newline $(z_k)_{k \in \mathbb{N}^*}$ est bornée ($\forall k, \lvert z_k \rvert \leq R$).
+\newline D'après Bolzano-Weierstrass, il existe $u \in \mathbb{C}$ et $\varphi : \mathbb{N} \rightarrow \mathbb{N}$ tels que $z_{\varphi(k)} \xrightarrow[k \rightarrow +\infty]{} u$.
+\newline $\star$ $\forall k \in \mathbb{N}^*, \lvert z_{\varphi(k)} \rvert \leq R$, donc ($k \rightarrow +\infty$): $\lvert u \rvert \leq R$.
+\newline $\star \star$ Pour $0 \leq \ell \leq n, a_\ell z_{\varphi(k)}^\ell \xrightarrow[k \rightarrow +\infty]{} a_\ell u^\ell$ (théorèmes généraux), donc $P\left(z_{\varphi(k)}\right) \xrightarrow[k \rightarrow +\infty]{} P(u)$.
+\newline De plus, $\forall k \in \mathbb{N}^*, m \leq \left \lvert P\left(z_{\varphi(k)}\right)\right \rvert < m + \frac{1}{\varphi(k)} \leq m + \frac{1}{k}$. Si $k \rightarrow +\infty$, $m \leq \lvert P(u) \rvert \leq m$.
+\newline \newline \textbf{Bilan :} Il existe $u \in \overline{\mathcal{D}}(0,R)$ tel que $\forall z \in \overline{\mathcal{D}}(0,R), \lvert P(z) \rvert \geq \lvert P(u) \rvert$ (en particulier, $\lvert P(0) \rvert \geq \lvert P(u) \rvert$).
+\newline Puis, pour $z \in \mathbb{C} \setminus \overline{\mathcal{D}}(0,R)$ ie tel que $\lvert z \rvert > R$, on a $\lvert P(z) \rvert \geq \lvert P(0) \rvert \geq \lvert P(u) \rvert$.
+\newline Donc, $\forall z \in \mathbb{C}, \lvert P(z) \rvert \geq \lvert P(u) \rvert$.
+\newline \newline \par \boxed{\textbf{Partie 2 :}}
+\newline Supposons $P(u) \neq 0$. $Q = \dfrac{P(X+u)}{P(u)}$
+\newline \newline On a $\rm{deg}$$Q = \rm{deg}$$P = n \geq 1$. $Q(0) = 1$ et, de plus, pour $z \in \mathbb{C}$, $\lvert Q(z) \rvert = \dfrac{\lvert P(z+u) \rvert}{\lvert P(u)\rvert} \geq 1$.
+\newline $Q = b_0 + b_1X + ... + b_n X^n$ avec $n \geq 1, b_n \neq 0$.
+\newline $b_0 = Q(0) = 1$ et soit $\ell = \rm{min}$$ \{ k \in \llbracket 1;n \rrbracket \mid b_k \neq 0 \}$. On a donc $Q = 1 + b_\ell X^\ell + ... + b_n X^n$, avec $b_\ell \neq 0$.
+\newline $b_\ell = \rho e^{i\theta}$ avec $\rho > 0$. Pour $k$ entier non nul, $z_k = \dfrac{1}{k} e^{i\frac{-\theta+\pi}{\ell}}$. On a : $z_k^\ell = \left(\dfrac{1}{k}\right)^\ell e^{i(-\theta+\pi)} = -\left(\dfrac{1}{k}\right)^\ell e^{-i\theta}$
+\newline \newline On va montrer que pour $k$ assez grand, $\lvert Q(z_k) \rvert < 1$.
+\newline $Q(z_k) = 1+ \rho e^{i\theta}z_k^\ell + \sum_{m=\ell+1}^{n}b_mz_k^m = 1 - \frac{\rho}{k^\ell} + \sum_{m=\ell+1}{n} b_m z_k^m$
+\newline On a : $\left \lvert \sum_{m=\ell+1}^{n}b_mz^k_m \right \rvert \leq \sum_{m=\ell+1}^{n} \lvert b_m \rvert \lvert z_k \rvert ^m = \frac{1}{k^\ell} \sum_{m=\ell+1}{n} \lvert b_m \rvert \frac{1}{k^{m-\ell}}$.
+\newline On a : $\underset{k \rightarrow +\infty}{\rm{lim}} \sum_{m=\ell+1}^n \frac{b_m}{k^{m-\ell}} = 0$ donc $\sum_{m=\ell+1}^n \frac{\lvert b_m \rvert}{k^{m-\ell}} \leq \frac{\rho}{2}$ APCR.
+\newline De plus, $\frac{\rho}{k^\ell} \xrightarrow[k \rightarrow +\infty]{} 0$ donc $\frac{\rho}{k^\ell} < 1$ APCR.
+\newline Donc, pour $k$ assez grand, on a $1 - \frac{\rho}{k^\ell} > 0$ et $\sum_{m=\ell+1}^n \frac{\lvert b_m \rvert}{k^{m-\ell}} \leq \frac{\rho}{2}$.
+\newline \newline  D'où $\lvert Q(z_k) \rvert = \left \lvert 1+ \displaystyle{\sum_{m=\ell+1}^n \dfrac{\lvert b_m \rvert}{k^{m-\ell}}}\;- \dfrac{\rho}{k^\ell} \right \rvert \leq \underbrace{\left \lvert 1- \frac{\rho}{k^\ell} \right \rvert}_{=1-\frac{\rho}{k^\ell}} + \underbrace{\left \lvert \sum_{m=\ell+1}^n b_mz_k^m \right \rvert}_{\leq \frac{\rho}{2k^\ell}} \leq 1-\frac{\rho}{2k^\ell} < 1$, contradiction !
+
+\newpage
+
+\section{Démonstrations}
+
+\begin{demonstration}{prop1}
+$\Longleftarrow$ Soit $M \in \mathbb{R}$ tel que $\forall n \in \mathbb{N}, \lvert u_n \rvert \leq M$, alors $\forall n \in \mathbb{N}, -M \leq u_n \leq M$, donc $u$ est majorée et minorée.
+\newline $\Longrightarrow$ Soient $m,M \in \mathbb{R}$ tel que $\forall n \in \mathbb{N}, m \leq u_n \leq M$.
+\newline Pour $n \in \mathbb{N}$, $u_n \leq M \leq \lvert M \rvert$, et $-u_n \leq -m \leq \lvert m \rvert$
+\newline D'où pour $n \in \mathbb{N}$, $\lvert u_n \rvert \leq \rm{max}$ $(\lvert m \rvert, \lvert M \rvert)$, donc $\lvert u \rvert$ est majorée.
+\end{demonstration}
+
+\begin{demonstration}{prop2}
+Supposons $u$ converge vers $\ell_1$ et $u$ converge vers $\ell_2$ avec $\ell_1,\ell_2 \in \mathbb{K}$.
+\newline Soit $\varepsilon > 0$. $u$ converge vers $\ell_1$ donc on dispose de $n_1 \in \mathbb{N}$ tel que $\forall n \geq n_1, \lvert u_n - \ell_1 \rvert \leq \varepsilon$.
+\newline $u$ converge vers $\ell_2$ donc on dispose de $n_2 \in \mathbb{N}$ tel que $\forall n \geq n_2, \lvert u_n - \ell_2 \rvert \leq \varepsilon$.
+\newline \newline Soit $n \geq \rm{max}$ $(n_1,n_2)$. On a $\lvert \ell_1-\ell_2 \rvert = \lvert \ell_1-u_n+u_n-\ell_2 \rvert \leq \lvert \ell_1-u_n \rvert + \lvert u_n - \ell_2 \rvert \leq 2\varepsilon$
+\newline Donc, $\forall \varepsilon > 0, \lvert \ell_1-\ell_2 \rvert \leq 2 \varepsilon$, ceci impose $\lvert \ell_1-\ell_2 \rvert \leq 0$
+\newline \newline Si $\lvert \ell_1 - \ell_2 \rvert > 0$, on a $\lvert \ell_1 - \ell_2 \rvert > \dfrac{2 \cdot\lvert \ell_1-\ell_2 \rvert}{4}$ et $\dfrac{\lvert \ell_1-\ell_2 \rvert}{4} > 0 : \exists \varepsilon > 0, \lvert \ell_1-\ell_2 \rvert > 2\cdot\varepsilon$
+\newline d'où $\lvert \ell_1-\ell_2 \rvert = 0$ et $\ell_1=\ell_2$.
+\end{demonstration}
+
+\begin{demonstration}{Pcomparaison}
+Soit $\varepsilon > 0$. Soit $n_0 \in \mathbb{N}$ tel que : $\forall n \geq n_0, \lvert v_n-0 \rvert \leq \varepsilon$, \newline et $n_1 \in \mathbb{N}$ tel que $\forall n \geq n_1, \lvert u_n -\ell \rvert \leq \varepsilon$.
+\newline Alors, pour $n \geq \rm{max}$ $(n_0,n_1)$, $\lvert u_n-\ell \rvert \leq v_n \leq \lvert v_n-0 \rvert \leq \varepsilon$.
+\end{demonstration}
+
+\begin{demonstration}{IngBer}
+C'est vrai pour $n=0$.
+\newline Supposons $(1+h)^n \geq 1+nh$ pour un certain $n \in \mathbb{N}$. 
+\newline Alors $(1+h)^{n+1} = (1+h)^n(1+h) \geq (1+nh)(1+h) = 1+(n+1)h+nh^2 \geq 1+(n+1)h$
+\end{demonstration}
+
+\begin{demonstration}{ex4}
+$\Longleftarrow$ Si $z=1$; la suite $(1^n)_{n \in \mathbb{N}}$ est constante égale à $1$.
+Si $\lvert z \rvert < 1$ alors $\forall n \in \mathbb{N}$, $\lvert z^n \rvert = \lvert z \rvert ^n \xrightarrow[n \rightarrow +\infty]{} 0$ car $0 \leq \lvert z \rvert < 1$ (cf 3.)
+\end{demonstration}
+
+\begin{demonstration}{thconv}
+Soit $\varepsilon > 0$ tel que $\ell + \varepsilon < 1$. On dispose de $n_0 \in \mathbb{N}$ tel que $n \geq n_0 \Longrightarrow \dfrac{u_{n+1}}{u_n} \in \left[\ell-\varepsilon,\ell+\varepsilon \right]$ 
+\newline d'où $\dfrac{u_{n+1}}{u_n} \leq \ell + \varepsilon$
+\newline \newline Donc, pour $n \geq n_0$, $\Pi_{k=n_0}^{n-1} \dfrac{u_{k+1}}{u_k} \leq \Pi_{k=n_0}^{n-1} (\ell+\varepsilon) \Longleftrightarrow \dfrac{u_n}{u_{n_0}} \leq (\ell + \varepsilon)^{n-n_0}$.
+\newline D'où $0 \leq u_n \leq \underbrace{\dfrac{u_{n_0}}{(\ell + \varepsilon)^{n_0}}(\ell + \varepsilon)^n}_{v_n}$
+\newline Pour $n \in \mathbb{N}$, $v_n = k(\ell + \varepsilon)^n$ avec $k=\dfrac{u_{n_0}}{(\ell + \varepsilon)^{n_0}}$
+\newline et on sait que $(\ell + \varepsilon)^n \xrightarrow[n \rightarrow +\infty]{} 0$ (donc, si $\varepsilon' > 0$ est donné, $\exists n' \in \mathbb{N}$ tel que $\forall n \geq n', v_n \leq k\varepsilon'$, donc $v_n \xrightarrow[n \rightarrow +\infty]{} 0)$
+\newline $0 \leq u_n \leq v_n$ APCR et $v_n \xrightarrow[n \rightarrow +\infty]{} 0$ donc $u_n \xrightarrow[n \rightarrow + \infty]{} 0$
+\end{demonstration}
+
+\begin{demonstration}{app}
+$\star$ \; Si $z=0$, c'est évident. \newline
+$\star \star$ Si $z \neq 0$, pour $n \in \mathbb{N}$, $u_n=\dfrac{z^n}{n!}$.
+\newline On a $u$ converge vers $0 \Longleftrightarrow \lvert u \rvert$ converge vers $0$.
+\newline Ici, pour $n \in \mathbb{N}$, $\lvert u_n \rvert = \dfrac{z^n}{n!} > 0$, et pour $n \in \mathbb{N}^* : \dfrac{\lvert u_{n+1} \rvert}{\lvert u_n \rvert} = \dfrac{\lvert z \rvert}{n+1} \xrightarrow[n \rightarrow +\infty]{} 0$.
+\newline (Soit $\varepsilon > 0$, on trouve $n_0$ tel que $n_0 > \dfrac{\lvert z \rvert}{\varepsilon}$ ($\mathbb{N}$ n'est pas majoré dans $\mathbb{R}$), alors pour $n \geq n_0$, $n+1 \geq n_0 > \dfrac{\lvert z \rvert}{\varepsilon} > 0$ d'où $0 < \dfrac{\lvert z \rvert}{n+1} < \varepsilon$.)
+\end{demonstration}
+
+\begin{demonstration}{convbor}
+Soit $u \in \mathbb{K}^\mathbb{N}$, convergente de limite $\ell \in \mathbb{K}$. 
+\newline Prenons $\varepsilon = 1$, on dispose de $n_0 \in \mathbb{N}$ tel que $\forall n \geq n_0, \lvert u_n - \ell \rvert \leq 1$, 
+\newline d'où $\lvert u_n \rvert = \lvert u_n -\ell + \ell \rvert \leq \lvert u_n - \ell \rvert + \lvert \ell \rvert \leq 1 + \lvert \ell \rvert$
+\newline On a alors : $\forall n \in \mathbb{N} : \lvert u_n \rvert \leq \rm{max}$ $ (1+ \lvert \ell \rvert ; \lvert u_0 \rvert ; ... ; \lvert u_{n_0-1} \rvert)$
+\end{demonstration}
+
+\begin{demonstration}{ssconvl}
+On a $\varphi(0) \geq 0$
+\newline Si $\varphi(n) \geq n$ pour un certain $n$ alors $\varphi(n+1) > \varphi(n)$ donc $\varphi(n+1) \geq n+1.$ \quad ($\varphi(n+1) \in \mathbb{N}$)
+\newline \newline Soit $v$ une sous-suite de $u$. Soit $\varphi : \mathbb{N} \rightarrow \mathbb{N}$ telle que $\forall n \in \mathbb{N}, v_n = u_{\varphi(n)}$.
+\newline Montrer que $v$ converge vers $\ell$.
+\newline Soit $\varepsilon > 0$. $u$ converge vers $\ell$ donc on dispose de $n_0 \in \mathbb{N}$ tel que $\forall n \geq n_0$, $\lvert u_n - \ell \rvert \leq \varepsilon$.
+\newline Soit $n \geq n_0$, on a $\varphi(n) \geq n \geq n_0$ donc $\lvert u_{\varphi(n)} - \ell \rvert \leq \varepsilon$ ie $\lvert v_n - \ell \rvert \leq \varepsilon$.
+\end{demonstration}
+
+\begin{demonstration}{sspar}
+Soit $u \in \mathbb{K}^\mathbb{N}$. Pour $n \in \mathbb{N}$, on pose $v_n = u_{2n}$ et $w_n = u_{2n+1}$. On suppose $v, w$ convergent vers $\ell \in \mathbb{K}$.
+\newline Soit $\varepsilon > 0$, on cherche $n_0 \in \mathbb{N}$ tel que $\forall n \geq n_0, \lvert u_n - \ell \rvert \leq \varepsilon$.
+\newline $v$ converge vers $\ell$ donc on dispose de $n_1 \in \mathbb{N}$ tel que $\forall n \geq n_1, \lvert v_n - \ell \rvert = \lvert u_{2n} -\ell \rvert \leq \varepsilon$
+\newline $w$ converge vers $\ell$ donc on dispose de $n_2 \in \mathbb{N}$ tel que $\forall n \geq n_2, \lvert w_n - \ell \rvert = \lvert u_{2n+1} - \ell \rvert \leq \varepsilon$.
+\newline \newline Prenons $n_0 = \rm{max}$ $(2n_1,2n_2+1)$. Soit $n \geq n_0$. \newline
+$\star$ \; Si $n$ est pair, on a $n=2p$, avec $p \in \mathbb{N}$ et $2p \geq n_0 \geq 2n_1$ donc $p \geq n_1$ et $\lvert u_{2p} - \ell \rvert = \lvert u_n - \ell \rvert \leq \varepsilon$. \newline
+$\star \star$ Si $n$ est impair, on a $n=2p+1$, avec $p \in \mathbb{N}$ et $2p+1 \geq n_0 \geq 2n_2+1$ donc $p \geq n_2$ et $\lvert u_{2p+1} - \ell \rvert = \lvert u_n - \ell \rvert \leq \varepsilon$.
+\newline \newline On a donc bien : $\forall n \geq n_0, \lvert u_n - \ell \rvert \leq \varepsilon$.
+\end{demonstration}
+
+\begin{demonstration}{gen}
+\textbf{(ii)} Majorer $v$ pour faire apparaître une constante dans le membre de droite de l'inégalité.
+\newline Soit $\varepsilon > 0$, on dispose de $n_1,n_2 \in \mathbb{N}$ tels que : $\forall n \geq n_1, \lvert u_n - \lambda \rvert \leq \varepsilon$, $\forall n \geq n_2, \lvert v_n - \mu \rvert \leq \varepsilon$.
+\newline Donc, pour $n \geq n_0 = \rm{max}$ $(n_1,n_2)$, on a $\lvert u_n - \lambda \rvert \leq \varepsilon$ et $\lvert v_n - \mu \rvert \leq \varepsilon$.
+\newline \newline \textbf{1.} Pour $n \geq n_0 : \lvert \alpha u_n + v_n - \alpha \lambda - \mu \rvert = \lvert \alpha (u_n - \lambda) + v_n - \mu \rvert \leq \lvert \alpha \rvert \cdot \lvert u_n-\lambda \rvert + \lvert v_n - \mu \rvert \leq (\lvert \alpha \rvert +1)\varepsilon$
+\newline Donc : $\forall \varepsilon > 0, \forall n \geq n_0, \lvert \alpha u_n + v_n - (\alpha \lambda + \mu) \rvert \leq (1+\lvert \alpha \rvert) \cdot \varepsilon$.
+\newline \newline \textbf{2.} Pour $n \geq n_0 : \lvert u_nv_n - \lambda \mu \rvert = \lvert (u_n-\lambda)\cdot v_n + \lambda \cdot (v_n - \mu) \rvert  \leq \lvert v_n \rvert \cdot \lvert u_n - \lambda \rvert \leq (\lvert v_n \rvert + \lvert \lambda \rvert) \cdot \varepsilon$
+\newline $v$ est convergente donc bornée, on dispose de $M \in \mathbb{R}$ tel que $ \forall n \in \mathbb{N}, \lvert v_n \rvert \leq M$.
+\newline D'où, pour $n \geq n_0$, $\lvert u_nv_n - \lambda \mu \rvert \leq (M + \lvert \lambda \rvert)\cdot \varepsilon$.
+\newline \newline \textbf{3.} Pour $n \geq n_0$ (côté obscur de l'inégalité triangulaire) : $\left \lvert \lvert u_n \rvert - \lvert \lambda \rvert \right \rvert \leq \lvert u_n - \lambda \rvert \leq \varepsilon$.
+\newline \newline \textbf{4.} Pour $n \geq n_0$, $\left \lvert \dfrac{1}{u_n} - \dfrac{1}{\lambda} \right \rvert  = \left \lvert \dfrac{\lambda - u_n}{\lambda u_n}\right \rvert = \dfrac{\varepsilon}{\lvert \lambda \rvert \lvert u_n \rvert}$.
+\newline Par \textbf{3.}, $\lvert u_n \rvert \xrightarrow[n \rightarrow +\infty]{} \lvert \lambda \rvert > 0$.
+\newline Soit $ \in ]0, \lvert \lambda \rvert[$ et $\varepsilon_1 = \lvert \lambda \rvert - m > 0$. On peut trouver $m_2 \in \mathbb{N}$ tel que : $\forall m \geq m_1$, $\lvert u_n \rvert \in \left[ \lvert \lambda \rvert - \varepsilon_1 ; \lvert \lambda \rvert + \varepsilon_1 \right]$.
+\newline \newline \textbf{5.} Pour tout $n$, $\rm{inf}$$(u_n,v_n) - \rm{min}$$(\lambda,\mu) = \dfrac{1}{2} \left( u_n + v_n - \lvert u_n - v_n \rvert \right) - \dfrac{1}{2} \left( \lambda + \mu - \lvert \lambda - \mu \rvert \right)$
+\newline Or : $u_n \xrightarrow[n \rightarrow + \infty]{} \lambda$, $v_n \xrightarrow[n \rightarrow + \infty]{} \mu$, $u_n-v_n \xrightarrow[n \rightarrow + \infty]{} \lambda-\mu$ (cf \textbf{1.})
+\newline puis $\lvert u_n - v_n \rvert \xrightarrow[n \rightarrow + \infty]{} \lvert \lambda - \mu \rvert$ (cf \textbf{3.}). D'où, d'après \textbf{1.}, on voit que $\rm{inf}$$(u_n,v_n) \xrightarrow[n \rightarrow + \infty]{} \dfrac{1}{2} \left( \lambda + \mu - \lvert \lambda - \mu \rvert \right) = \rm{min}$$(\lambda,\mu)$.
+\newline De même, $\rm{sup}$$(u,v)$ converge vers $\rm{max}$$(\lambda,\mu)$.
+\newline \newline Pour $n \in \mathbb{N} : \lvert \Re(u_n)-\Re(\lambda) \rvert = \lvert \Re(u_n - \lambda) \rvert \leq \lvert u_n - \lambda \rvert \xrightarrow[n \rightarrow + \infty]{} 0$.
+\newline $\lvert \Im(u_n)-\Im(\lambda) \rvert = \lvert \Im(u_n - \lambda) \rvert \leq \lvert u_n - \lambda \rvert \xrightarrow[n \rightarrow + \infty]{} 0$.
+\newline $\lvert \overline{u_n}-\overline{\lambda} \rvert = \lvert \overline{u_n - \lambda} \rvert = \lvert u_n - \lambda \rvert \xrightarrow[n \rightarrow + \infty]{} 0$.
+\end{demonstration}
+
+\begin{demonstration}{inglim}
+Soient $\alpha,\beta$ les limites respectives de $u$ et $v$. Supposons $\alpha > \beta$.
+\newline Soient $\gamma,\delta$ tels que $\beta < \gamma < \delta < \alpha$. 
+\newline On a $\gamma > \beta$ et $v$ converge vers $\beta$ donc $v_n \leq \gamma$ APCR : $\exists n_1 \in \mathbb{N}, \forall n \geq n_1, v_n \leq \gamma$.
+\newline De même, $\delta < \alpha$ et $u$ converge vers $\alpha$ donc $u_n \geq \delta$ APCR : $\exists n_2 \in \mathbb{N}, \forall n \geq n_2 : u_n \geq \delta$.
+\newline Mais alors, $\forall n \geq \rm{max}$ $(n_1,n_2), v_n \leq \gamma < \delta \leq u_n$ d'où $v_n < u_n$. Ceci contredit : $u_n \leq v_n$ APCR.
+\end{demonstration}
+
+\begin{demonstration}{thgen}
+Soit $\varepsilon > 0$. On dispose de $n_1,n_2,n_3 \in \mathbb{N}$ tels que : 
+\newline $\forall n \geq n_1 : u_n \leq v_n \leq w_n$ ;
+\newline $\forall n \geq n_2 : \lvert u_n - \ell \rvert \leq \varepsilon$ ;
+\newline $\forall n \geq n_3 : \lvert w_n - \ell \rvert \leq \varepsilon$.
+\newline Alors, pour $n \geq \rm{max}$ $(n_1,n_2,n_3) : \ell-\varepsilon \leq u_n \leq v_n \leq w_n \leq \ell + \varepsilon$, d'où $\lvert v_n - \ell \rvert \leq \varepsilon$.
+\end{demonstration}
+
+\begin{demonstration}{th3}
+Soit $u \in \mathbb{R}^\mathbb{N}$. Supposons $u$ majorée. Soit $\ell = \rm{sup}$ $\{u_n \mid n \in \mathbb{N}\}$.
+\newline Soit $\varepsilon > 0$. $\ell-\varepsilon$ ne majore pas $\{u_n \mid n \in \mathbb{N}\}$ par définition de $\ell$, donc il existe un entier $n_0$ tel que $u_{n_0} > \ell - \varepsilon$.
+\newline Comme $u$ est croissante, pour $n \geq n_0 : \ell - \varepsilon \leq u_{n_0} \leq u_n \leq \ell$ donc $u_n \in \left]\ell-\varepsilon, \ell\right] \subset \left[\ell - \varepsilon, \ell + \varepsilon\right]$.
+\newline \newline Supposons $u$ non majorée. Soit $M \in \mathbb{R}$. $u$ n'est pas majorée don il existe $n_0 \in \mathbb{N}$ tel que $u_{n_0} \geq M$.
+\newline Par croissance de $u$, pour $n \geq n_0 : u_n \geq u_{n_0} \geq M$. Donc $u$ tend vers $+\infty$.
+\end{demonstration}
+
+\begin{demonstration}{lemme2}
+$\Longrightarrow$ Supposons $\ell$ valeur d'adhérence de $u$. Soit $\varphi : \mathbb{N} \rightarrow \mathbb{N}$ strictement croissante telle que $u_{\varphi(n)} \xrightarrow[n \rightarrow +\infty]{} \ell$.
+\newline Soit $\varepsilon > 0$. Soit $p \in \mathbb{N}$, on dispose de $n_0 \in \mathbb{N}$ tel que $\forall n \geq n_0, \lvert u_{\varphi(n)}-\ell \rvert \leq \varepsilon$.
+\newline Soit $k \geq \rm{max}(p,n_0)$. Alors $\varphi(k) \geq k \geq p$ et $\lvert u_{\varphi(k)} - \ell \rvert \leq \varepsilon$ (car $k \geq n_0$).
+\newline $n = \varphi(k)$ est tel que $n \geq p$ et $\lvert u_n -\ell \rvert \leq \varepsilon$.
+\newline \newline $\Longleftarrow$ Soit $\varepsilon = \dfrac{1}{0+1}$ et $p=0$. Il existe $n \geq 0$ tel que $\lvert u_n - \ell \rvert \leq 1$. Posons $\varphi(0) = \rm{min}$ $\{ n \in \mathbb{N} \mid \lvert u_n - \ell \rvert \leq 1 \}$.
+\newline On a bien : $\lvert u_{\varphi(0)} - \ell \rvert \leq \dfrac{1}{0+1}$.
+\newline Puis, $\varepsilon = \dfrac{1}{1+1} = \dfrac{1}{2}, p = \varphi{0}+1$. Il existe $n \geq \varphi(0) +1$ tel que $\lvert u_n - \ell \rvert \leq \dfrac{1}{2}$.
+\newline On pose $\varphi(1) = \rm{min}$ $\{ n \geq \varphi(0) +1 \mid \lvert u_n - \ell \rvert \leq \dfrac{1}{2} \}$.
+\newline On a bien : $\varphi(0) < \varphi(1)$ et $\lvert u_{\varphi(1)} - \ell \rvert \leq \dfrac{1}{2}$.
+\newline \newline Supposons avoir construit $\varphi(0) < \varphi(1) < ... < \varphi(k)$ avec, pour $0 \leq m \leq k : \lvert u_{\varphi(m)} - \ell \rvert \leq \dfrac{1}{m+1}$.
+\newline Soit $\varepsilon = \dfrac{1}{k+2}$, $p=\varphi(k)+1$. Il existe $n \geq \varphi(k)+1$ tel que $\lvert u_n - \ell \rvert \leq \dfrac{1}{k+2}$.
+\newline On pose $\varphi(k+1) = \rm{min}$ $\left \{ n \in \llbracket \varphi(k)+1 ; +\infty \llbracket \; \mid  \; \lvert u_n - \ell \rvert \leq \dfrac{1}{k+2} \right \}$
+\newline Alors $\varphi(k+1) > \varphi(k)$ et $\lvert u_{\varphi(k+1)} - \ell \rvert \leq \dfrac{1}{k+2}$. On a bien : $u_{\varphi(n)} \xrightarrow[n \rightarrow +\infty]{} \ell$.
+\end{demonstration}
+
+\begin{demonstration}{B-W}
+\textbf{Cas réel} : $u$ est une suite réelle bornée.
+\newline \newline \boxed{\textbf{Preuve 1 :}}
+\newline Pour $n \in \mathbb{N}, \Omega_n = \{u_k \mid k \geq n \}$. $u$ est bornée donc il existe $M \in \mathbb{R}, \forall k \in \mathbb{N}, \lvert u_k \rvert \leq  M$
+\newline Donc $\forall n \in \mathbb{N}, \Omega_n$ est borné. Pour $n \in \mathbb{N}$, soit $\alpha_n = \rm{sup}$$\Omega_n, \beta_n = \rm{inf}$$\Omega_n$.
+\newline Pour tout $n \in \mathbb{N}, \Omega_{n+1} \subset \Omega_n$ donc $\alpha_{n+1} \leq \alpha_n$ et $\beta_{n+1} \geq \beta_{n}$ et de plus, $\beta_n \leq u_n \leq \alpha_n$.
+\newline Ainsi, $\forall n \in \mathbb{N}$, on a $\beta_0 \leq \beta_n \leq \beta_{n+1} \leq \alpha_{n+1} \leq \alpha_n \leq \alpha_0$.
+\newline La suite $(\alpha_n)_{n \in \mathbb{N}}$ est décroissante et minorée par $\beta_0$ donc converge vers $\lambda \in \mathbb{R}$. Prouvons que $\lambda$ est valeur d'adhérence de $u$.
+\newline Soit $\varepsilon > 0, p \in \mathbb{N}$, prouvons qu'il existe $k \geq p$ tel que $\lvert u_k - \lambda \rvert \leq \varepsilon$.
+\newline La suite $(\alpha_n)_{n \in \mathbb{N}}$ converge vers $\lambda$ en décroissant donc il existe $n_0 \in \mathbb{N}$ tel que : $\forall n \geq n_0 : \alpha_n \in \left[\lambda; \lambda + \varepsilon \right]$.
+\newline Soit $n \in \mathbb{N}$ tel que $n \geq \rm{max}$$(n_0,p)$.
+\newline $\alpha_n - \varepsilon < \alpha_n = \rm{sup}$$\Omega_n$ donc $\alpha_n-\varepsilon$ ne majore pas $\Omega_n$. Donc il existe $\omega \in \Omega_n$ tel que $\omega > \alpha_n - \varepsilon$ ie il existe $k \geq n $ tel que $u_k > \alpha_n - \varepsilon$.
+\newline On a $\alpha_n - \varepsilon \geq \lambda - \varepsilon$ et $u_k \leq \alpha_n \leq \lambda + \varepsilon$ donc $\lambda - \varepsilon \leq u_k \leq \lambda + \varepsilon$ ie $\lvert u_k \lambda \rvert \leq \varepsilon$ et $k \geq n \geq p$.
+\newline On montre de même que la suite $(\beta_n)_{n \in \mathbb{N}}$ converge vers un réel $\mu$ et que $\mu$ est valeur d'adhérence de $u$.
+\newline \newline \boxed{\textbf{Preuve 2 :}}
+\newline Par dichotomie. Soient $a,b \in \mathbb{R}$ tels que $\forall n \in \mathbb{N}, a \leq u_n \leq b$, et $a_0 = a, b_0 = b$.
+\newline $\{n \in \mathbb{N} \mid u_n \left[a_0, b_0 \right] \}$ est infini. Or cet ensemble est réunion de $A = \{ n \in \mathbb{N} \mid u_n \in \left[a_0,c\right] \}$ et de $B = \{ n \in \mathbb{N} \mid u_n \in \left[c,b_0\right] \}$.
+\newline Donc $A$ ou $B$ est infini. Si $A$ est infini, on pose $a_1 = a_0$ et $b_1 = c$, sinon, on pose $a_1 = c$ et $b_1 = b_0$. On a: $a_0 \leq a_1 \leq b_1 \leq b_0$, $b_1-a_1=\dfrac{b_0-a_0}{2}$ et $\{n \in \mathbb{N} \mid u_n \in \left[a_1,b_1\right]$ est infini.
+\newline On construit en répétant cet argument deux suites $(a_n)_{n \in \mathbb{N}}$, $(b_n)_{n \in \mathbb{N}}$ telles que : 
+\newline $\forall n \in \mathbb{N} : a_0 \leq a_n \leq a_{n+1} \leq b_{n+1} \leq b_n \leq b_0$ ;
+\newline $\forall n \in \mathbb{N} : \{n \in \mathbb{N} \mid u_n \in \left[a_n,b_n\right] \}$ est infini ;
+\newline $\forall n \in \mathbb{N} : b_n-a_n = \dfrac{b_0-a_0}{2^n}.$
+\newline il est clair que les suites $(a_n)$ et $(b_n)$ sont adjacentes donc convergent vers un même réel $\ell$.
+\newline On construit une extraction $\varphi : \mathbb{N} \rightarrow \mathbb{N}$ strictement croissante telle que : $\forall n, u_{\varphi(n)} \left[a_n,b_n\right]$
+\newline On pose $\varphi(0) = 0$. Si on a défini $\varphi(0) \leq \varphi(1) \leq  ... \leq \varphi(n)$ l'ensemble $\{ k \in \mathbb{N} \mid u_k \in \left[a_{n+1}, b_{n+1}\right] \}$ est infini donc poss!de des éléments strictement supérieurs à $\varphi(n)$, on pose $\varphi(n+1) = \rm{min}$ $\{k > \varphi(n) \mid u_k \in \left[a_{n+1}, b_{n+1} \right] \}$.
+\newline $\forall n, a_n \leq u_{\varphi(n)} \leq b_n$, donc d'après le théorème des gendarmes, $u$ tend vers $\ell$.
+\newline \par \textbf{Cas général :} Soit $(z_n)_{n \in \mathbb{N}}$ une suite complexe bornée : il existe $M \in \mathbb{N}$ tel que $\forall n, \lvert z_n \rvert \leq M$
+\newline $\forall n \in \mathbb{N}, u_n = \Re(z_n), v_n = \Im(z_n)$.
+\newline $\forall n \in \mathbb{N}, \lvert u_n \rvert = \lvert \Re(z_n) \rvert \leq \lvert z_n \rvert \leq M$ et $\lvert v_n \rvert = \lvert \Im(z_n) \rvert  \leq \lvert z_n \rvert \leq M$.
+\newline Donc $(u_n)_{n \in \mathbb{N}}$, $(v_n)_{n \in \mathbb{N}}$ sont deux suites réelles bornées.
+\newline On dispose de $\varphi : \mathbb{N} \rightarrow \mathbb{N}$ strictement croissante telle que $u_{\varphi(n)} \xrightarrow[n \rightarrow +\infty]{} \lambda$.
+\newline $\forall n \in \mathbb{N}, w_n = v_{\varphi(n)}$.
+\newline $w$ est réelle est bornée (car $v$ l'est), donc d'après Bolzano-Weierstrass, cas réel, il existe $\psi : \mathbb{N} \rightarrow \mathbb{N}$ strictement croissante et $\mu \in \mathbb{N}$ tel que $w_{\psi(n)} \xrightarrow[n \rightarrow +\infty]{} \mu$.
+\newline Pour $n \in \mathbb{N}, w_{\psi(n)} = v_{\varphi \circ \psi(n)}$ et $\varphi \circ \psi$ est strictement croissante de $\mathbb{N}$ dans $\mathbb{N}$. On a $v_{\varphi \circ \psi(n)} \xrightarrow[n \rightarrow +\infty]{} \mu$
+\newline De plus, si on pose $x_n = v_{\varphi \circ \psi(n)}$ et $y_n = u_{\varphi(n)}$ pour $n \in \mathbb{N}$. Alors, pour $n \in \mathbb{N}$, $x_n = y_{\psi(n)}$.
+\newline $(x_n)$ est donc une sous-suite de $(y_n)$. Comme $(y_n)$ converge vers $\lambda$, $(x_n)$ aussi.
+\newline Donc $u_{\varphi \circ \psi(n)} \xrightarrow[n \rightarrow +\infty]{} \lambda, \; v_{\varphi \circ \psi(n)} \xrightarrow[n \rightarrow +\infty]{} \mu$
+\newline donc $z_{\varphi \circ \psi(n)} \xrightarrow[n \rightarrow +\infty]{} \lambda + i\cdot \mu$.
+
+\begin{remarque}{}
+\begin{enumerate}
+\item Si $\nu$ est une valeur d'adhérence de $u$, soit $\varphi : \mathbb{N} \rightarrow \mathbb{N}$ telle que $u_{\varphi(n)} \xrightarrow[n \rightarrow +\infty]{} \nu$. On a, pour tout $n \in \mathbb{N} :\varphi(n) \geq n$ 
+\newline donc $\beta_n \leq u_{\varphi(n)} \leq \alpha_n : n \rightarrow +\infty = \mu \leq \nu \leq \lambda \Longrightarrow \mu$ est la plus petite valeur d'adhérence de $u$, $\lambda$ est la plus grande.
+\item Si $u$ n'a qu'une seule valeur d'adhérence alors $\lambda = \mu$. Or : $\forall n, u_n \in \Omega_n$ donc $\beta_n \leq u_n \leq \alpha_n$ Donc, d'après le théorème des gendarmes, $u$ converge vers $\lambda$.
+\end{enumerate}
+\end{remarque}
+
+
+\textbf{Bilan :} Si $u$ est une suite réelle bornée qui n'a qu'une seule valeur d'adhérence, alors $u$ converge vers celle-ci.
+\end{demonstration}
+
+\begin{demonstration}{Rec2}
+Soit $q \in \mathbb{K}^*$ et $\forall n \in \mathbb{N} : u_n = q^n$.
+\newline $u \in E \Longleftrightarrow \forall n, aq^{n+2}+bq^{n+1}+cq^n=0 \Longleftrightarrow \forall n, q^n(aq^2+bq+c)=0 \Longleftrightarrow aq^2 + bq +c =0 (q^0 \neq 0) \newline \Longleftrightarrow q$ est racine de $P$.
+\newline \newline \boxed{\textbf{Cas 1 :}} Supposons que $P$ admet une racine $q \in \mathbb{K}^*$. $\forall n, q^n \neq 0$ (et $n \mapsto q^n \in E$)
+\newline Toute suite $u \in \mathbb{K}^\mathbb{N}$ s'écrit : $\forall n \in \mathbb{N}, u_n = \lambda_n q^n (u_n = \frac{u_n}{q^n}q^n)$.
+\newline Soit $(\lambda_n)_{n \in \mathbb{N}} \in \mathbb{K}^\mathbb{N}$ et $u \in \mathbb{K}^\mathbb{N}$ définie par : $\forall u_n = \lambda_n q^n$.
+\newline $u \in E \Longleftrightarrow \forall n \in \mathbb{N}, a\lambda_{n+2}q^{n+2} + b\lambda_{n+1}q^{n+1}+c\lambda_nq^n = 0$
+\newline $\overset{\forall n, q^n \neq 0}{\Longleftrightarrow}a\lambda_{n+2}q^2+b\lambda_{n+1}q+c\lambda_n = 0$.
+\newline On sait que $aq^2 + bq + c = 0$, d'où $bq = -aq^2 - c$.
+\newline $u \in E \Longleftrightarrow \forall n, aq^2\lambda_{n+2} - (aq^2+c)\lambda_{n+1} + c\lambda_n \Longleftrightarrow \forall n, aq^2(\lambda_{n+2}-\lambda_{n+1}) = c(\lambda_{n+1}-\lambda_n)$
+\newline $\Longleftrightarrow \forall n, \lambda_{n+2}-\lambda_{n+1} = \frac{c}{aq^2}(\lambda_{n+1}-\lambda_n) \qquad (\star)$
+\newline Si $(\star)$ est vraie alors, $\forall n, (\lambda_{n+1}-\lambda_n) = \left(\frac{c}{aq^2}\right)^n(\lambda_1-\lambda_0)$ (car $(\lambda_{n+1}-\lambda_n)$ est géométrique de raison $\frac{c}{aq^2}$)
+\newline D'où, $\sum_{k=0}^{n-1} (\lambda_{k+1}-\lambda_k) = (\lambda_1-\lambda_0) \sum_{k=0}^{n-1} \left(\frac{c}{aq^2}\right)^k = \lambda_n - \lambda_0$.
+
+\begin{remarque}{}
+\begin{enumerate} 
+\item Si $q$ est racine double de $P$ : $P = a(X-q)^2 \Longrightarrow aq^2 = c, \frac{c}{aq^2}=1$.
+\item Si $q$ est racine simple de $P$ et si $q'$ est l'autre racine : $P = a(X-q)(X-q') \Longrightarrow qq' : \frac{c}{a}, \frac{c}{aq^2} = \frac{q'}{q} \neq 1$.
+\end{enumerate}
+\end{remarque}
+
+
+
+Supposons $v \in E$. $\forall n \in \mathbb{N}, \lambda_{n+1}-\lambda_n = \left(\frac{c}{aq^2}\right)^n(\lambda_1-\lambda_0)$
+\begin{enumerate}
+\item Si $q$ est racine double de $P$ ($\Delta(P)=0$), $\frac{c}{aq^2}=1 ; (\lambda_n)$ esy alors arithmétique donc du type $n \mapsto \alpha n + \beta$, et $\forall n \in \mathbb{N} : v_n = (\alpha n + \beta)q^n$.
+\newline Réciproquement, si $\alpha,\beta \in \mathbb{K}$ alors $n\overset{\lambda}{\mapsto} \alpha n +\beta$ est bien telle que $\lambda_{n+1}-\lambda_n = \alpha$ et $(\lambda_{n+1}-\lambda_n)$ est constante, donc géométrique de raison $q=1$.
+\newline Donc, si $q$ est racine double de $P$ alors $E$ est l'ensemble des suites du type $n \mapsto (\alpha n + \beta) q^n$.
+\item Si $q$ est racine simple de $P$, soit $q'$ l'autre racine de $P$ : $\frac{c}{aq^2}= \frac{q'}{q} \neq 1$.
+\newline On a, pour $n \in \mathbb{N}^* = \sum_{k=0}^{n-1} (\lambda_{k+1}-\lambda_k) = (\lambda_1-\lambda_0)\sum_{k=0}^{n-1}\left(\frac{q'}{q}\right)^k$
+\newline \newline ie $\lambda_n - \lambda_0 = (\lambda_1-\lambda_0) \dfrac{1-\left(\frac{q'}{q}\right)^n}{1-\frac{q'}{q}}$ (et c'est vrai pour $n=0$).
+\newline Il existe donc $\alpha,\beta \in \mathbb{K}$ tels que $\forall n, \lambda_n = \alpha + \beta\left(\frac{q'}{q}\right)$.
+\newline Puis, $\forall n, v_n = \lambda_n q^n = \alpha q^n + \beta q'^n$.
+\newline Réciproquement, soit $\alpha, \beta \in \mathbb{K}$ et $\lambda : n \mapsto \alpha + \beta\left(\frac{q'}{q}\right)^n$ alors $\forall n \in \mathbb{N}^* : \lambda_{n+1}-\lambda_n = \beta\left[\left(\frac{q'}{q}\right)^{n+1}-\left(\frac{q'}{q}\right)^n\right]
+\newline \Longrightarrow (\lambda_{n+1}-\lambda_n)$ est géométrique de raison $\frac{q'}{q} = \frac{c}{aq^2} \Longrightarrow n \mapsto \lambda_nq^n \in E$.
+\end{enumerate}
+\par \boxed{\textbf{Cas 2 :}} $P$ n'a pas de racines dans $\mathbb{K}. \mathbb{K} = \mathbb{C}, a,b,c \in \mathbb{R}$ et $b^2-4ac < 0$ 
+%\newline et $E = \{u \in \mathbb{R}^\mathbb{N} \mid \forall n \in \mathbb{N}, au_{n+2}+bu_{n+1}+cu_n = 0 \}$
+\newline Notons $E_\mathbb{C} = \{ u \in \mathbb{C}^\mathbb{N} \mid \forall n, au_{n+2}+bu_{n+1}+cu_n =0 \}$.
+\newline $P$ admet dans $\mathbb{C}$ deux racines complexes non réelles conjuguées $re^{\pm i\theta}$ avec $r>0$.
+\newline D'après \textbf{cas 1}, $E_\mathbb{C}$ est l'ensemble des suites du type $n \mapsto \alpha r^n e^{in\theta} + \beta r^n e^{-in\theta}$ avec $\alpha,\beta \in \mathbb{C}$.
+\newline Or $E=E_\mathbb{C} \cap \mathbb{R}^{\mathbb{N}}$. $E$ est constitué des éléments de $E_\mathbb{C}$ qui sont réels.
+\newline Soit $\alpha = s+it, \beta = \sigma +i\tau \in \mathbb{C}$ ($s,t,\sigma,\tau \in \mathbb{R}$),
+\newline et $u : n \mapsto \alpha r^n e^{in\theta} + \beta r^n e^{-in\theta}$. $u$ est réelle $\Longleftrightarrow \forall n \in \mathbb{N}, \Im(u_n)=0$.
+\newline $\forall n \in \mathbb{N}, \Im\left((s+it)r^n(\cos(n\theta) +i\sin(n\theta) + (\sigma + i \tau)r^n (\cos(n\theta) - i \sin(n\theta)\right) =0
+\newline \Longleftrightarrow (s-\sigma)\sin(n\theta) + (t+\tau)\cos(n\theta) = 0
+\newline \Longleftrightarrow \sigma = s$ et $\tau = -t$
+\newline ($\Longrightarrow$ Pour $n=0$, on obtient $t+\tau=0$ puis avec $n=1$, $(s-\sigma)\sin \theta = 0$ et $\sin \theta \neq 0$ car $re^{i\theta} \not \in \mathbb{R}$, donc $s=\sigma$.)
+\newline Les éléments de $E$ sont donc les suites $n \mapsto r^n \left((s+it)e^{in\theta}+(s-it)e^{-in\theta}\right) = r^n (2s \cos (n\theta)-2t \sin(n\theta)$
+\newline avec $s,t \in \mathbb{R}$.
+\end{demonstration}
+
+\end{document}
