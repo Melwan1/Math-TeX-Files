@@ -1,0 +1,285 @@
+\documentclass[12pt,a4paper]{report}
+\input{preambule}
+
+\begin{document}
+\chapter{Déterminants}
+
+\section{Déterminants dans une base}
+
+\subsection{Formes $n$-linéaires et alternées : définitions et exemples}
+
+\begin{definition}{Forme $n$-linéaire}{}
+Soit $E$ un $\K$-ev, $n \in \N^*, f : E^n \to \K$. \\
+$f$ est \strong{$n$-linéaire} lorsque :
+\begin{center}
+$\forall (a_1,\cdots,a_n) \in E^n, \forall i \in \llbracket 1,n \rrbracket, f : x \in E \mapsto f(a_1,\cdots,a_{i-1},x,a_{i+1},\cdots,a_n)$
+\end{center}
+est linéaire. \\
+
+Lorsque $n=2$, on parle de forme \strong{bilinéaire}.
+\end{definition}
+
+\begin{definition}{Application alternée}{}
+$f$ est \strong{alternée} lorsque :
+\begin{center}
+Pour tout $(a_1,\cdots,a_n) \in E^n$, s'il existe $i \ne j$ avec $a_i = a_j$ alors $f(a_1,\cdots,a_n) = 0$.
+\end{center}
+\end{definition}
+
+\begin{exemple}[Exemples]{}
+\begin{enumerate}
+	\item Soit $E$ un $\K$-ev, $\varphi_1,...,\varphi_n$ des formes linéaires sur $E$. \\
+	Alors
+	\begin{center}
+		$(x_1,\cdots,x_n) \in E^n \mapsto \varphi_1(x_1)\varphi_2(x_2)\cdots \varphi_n(x_n)$
+	\end{center}
+	est $n$-linéaire.
+	
+	\item Soit $E = \K^2$, soit $f : E^2 \to \K$ bilinéaire et alternée, $\bc_2 = (e_1,e_2)$. \\
+	
+	Pour $x = (\alpha, \beta) = \alpha e_1+\beta e_2, \quad, y = (\gamma, \delta) = \gamma e_1 + \delta e_2$ :
+	\begin{align*}
+	f(x,y) &= f(\alpha e_1 + \beta e_2, \gamma e_1 + \delta e_2) &= \alpha f(e_1, \gamma e_1 + \delta e_2) + \beta f(e_2, \gamma e_1 + \delta e_2) \\
+	&= \alpha (\gamma f(e_1,e_1) + \delta f(e_1,e_2)) + \beta (\gamma f(e_2,e_1) + \delta f(e_2,e_1))
+	\end{align*}
+	
+	Ceci est vrai puisque $f(\cdot, \alpha e_1 + \beta e_2)$ est linéaire et $f(e_1,\cdot)$ et $f(\cdot, e_2)$ sont linéaires. \\
+	
+	$f$ est alternée donc $f(e_1,e_1) = f(e_2,e_2) = 0$. \\
+	
+	$f(x,y) = \alpha \delta f(e_1,e_2) + \beta \gamma f(e_2,e_1)$. \\
+	
+	Or $0 = f(e_1+e_2,e_1+e_2) = \underbrace{f(e_1,e_1)}_{=0} + f(e_1,e_2) + f(e_2+e_1)+\underbrace{f(e_2,e_2)}{=0}$ \\
+	Donc :
+	\begin{center}
+		$f(e_2,e_1) = -f(e_1,e_2)$
+	\end{center}
+	
+	D'où :
+	\begin{center}
+		$f(x,y) = f(e_1,e_2)(\alpha \delta - \beta \gamma)$.
+	\end{center}
+	
+	Si on pose $\varphi(x,y) = \alpha \delta - \beta \gamma$, alors $f$ est proportionnelle à $\varphi$. \\
+	
+	On vérifie sans peine que $\varphi$ est bien bilinéaire et alternée (donc $k\varphi$ aussi pour tout $k \in \K$.)
+\end{enumerate}
+\end{exemple}
+
+\subsection{Propriétés des formes $n$-linéaires alternées}
+
+Soit $f : E^n \to \K$ $n$-linéaire et alternée.
+
+\begin{proposition}{}{}
+Soit $(x_1,\cdots,x_n) \in E^n$. \\
+Si l'un des $x_i$ est nul, alors $f(x_1,\cdots,x_n)=0$.
+\end{proposition}
+
+\begin{demo}{}
+Supposons par exemple $x_1 = 0_E$ (la même démonstration sera valable pour chacun des $x_i$, on simplifie seulement l'indexation ici). \\
+$u \overset{g}{\mapsto} f(u,x_2,...,x_n)$ est linéaire de $E$ dans $\K$ donc $g(0_E) = 0$.
+\end{demo}
+
+\begin{proposition}{}{}
+Soit $(x_1,\cdots,x_n) \in E^n$. Soit $i \in \llbracket 1,n \rrbracket$, $y \in \text{Vect}(x_k)_{k \in \llbracket 1,n \rrbracket \setminus \{i\}}$, alors
+\begin{center}
+$f(x_1,\cdots,x_i,\cdots,x_n)=f(x_1,\cdots,x_i+y,\cdots,x_n)$
+\end{center}
+\end{proposition}
+
+\begin{demo}{}
+Avec $i = 1$, supposons $y \in \text{Vect}(x_2,\cdots,x_n)$, on écrit $y = \displaystyle{\sum_{k=2}^n \alpha_kx_k}$. Alors :
+\begin{center}
+	$f(x_1+y,x_2,\cdots,x_n) = f(x_1,\cdots,x_n)+f(y,x_2,\cdots,x_n)$. \\
+	et $f(y,x_2,\cdots, x_n) = f\left(\displaystyle{\sum_{k=2}^n \alpha_kx_k, x_2,\cdots,x_n}\right) = \displaystyle{\sum_{k=2}^n \alpha_k\underbrace{f(x_k,x_2,\cdots,x_n)}_{=0 \text{ car }f \text{ est alternée}}}$.
+\end{center}
+\end{demo}
+
+\begin{remarque}[Variante]{}
+S'il existe $i \in \llbracket 1,n \rrbracket$ tel que $x_i \in \text{Vect}(x_k)_{k \in \llbracket 1,n \rrbracket \setminus \{i\}}$ alors $f(x_1,\cdots,x_n) = 0$.
+\end{remarque}
+
+\begin{corollaire}{}{}
+Si la famille $(x_1,\cdots,x_n)$ est liée, alors $f(x_1,\cdots,x_n) = 0$.
+\end{corollaire}
+
+\begin{remarque}{}
+Si $E$ est de dimension finie, et $\dim E < n$, alors la seule forme $n$-linéaire alternée sur $E$ est :
+\begin{align*}
+E^n &\to  \K \\
+(x_1,\cdots,x_n) & \mapsto 0_\K
+\end{align*}
+En effet, dans ce dernier cas, toute famille de vecteurs de $E$ de cardinal $n$ est liée.
+\end{remarque}
+
+\begin{proposition}{}{}
+$f$ est \strong{antisymétrique}:
+\begin{center}
+	$\forall (x_1,\cdots,x_n) \in E^n, \forall i \ne j, f(x_1,\cdots,x_i,\cdots,x_j,\cdots,x_n) = - f(x_1,\cdots, x_j, \cdots, x_i, \cdots, x_n)$.
+\end{center}
+L'échange de deux variables $x_i$ et $x_j$ fait apparaître un signe $-$ dans l'expression de $f$.
+\end{proposition}
+
+\begin{demo}{}
+Avec $i=1,j=2$,
+\begin{align*}
+0 &= f(x_1+x_2,x_1+x_2,x_3,\cdots,x_n) \\
+&= \underbrace{f(x_1,x_1,x_3,\cdots,x_n)}_{=0} + f(x_1,x_2,x_3,\cdots,x_n) + f(x_2,x_1,x_3,\cdots,x_n) + \underbrace{f(x_2,x_2,x_3,\cdots,x_n)}_{=0}
+\end{align*}
+\end{demo}
+
+De façon plus générale,
+\begin{center}
+$\forall \sigma \in S_n, \forall x_1,\cdots,x_n) \in E^n, f(x_{\sigma(1)},\cdots,x_{\sigma(n)}) = \varepsilon(\sigma) f(x_1,\cdots,x_n)$.
+\end{center}
+
+\begin{demo}{}
+On vient de voir le résultat lorsque $\sigma$ est une transposition. \\
+
+Soit $\sigma \in S_n, \sigma = \tau_1 \circ \cdots \circ \tau_r$, soit $(x_1, x_n) \in E^n$. \\
+Soit $s = \tau_1 \circ \cdots \circ \tau_{r-1}$,
+\begin{align*}
+f(x_{\sigma(1)},x_{\sigma(2)},\cdots,x_{\sigma(n)}) &= f(x_{s (\tau_r(1))},\cdots,x_{s(\tau_r(n))}) 
+&= f(y_{\tau_r(1)},\cdots,y_{\tau_r(n)})
+&= -f(y_1,\cdots,y_r) = -f(x_{s(1)},\cdots,,x_{s(n)}).
+\end{align*}
+où $y_i = x_{s(i)}$. \\
+En itérant, 
+\begin{center}
+$f(x_{\sigma(1)},\cdots,x_{\sigma(n)}) = (-1)^rf(x_1,\cdots,x_r)$.
+\end{center}
+
+\end{demo}
+
+\subsection{Déterminant dans une base}
+
+Ici, $n \in \N^*$, $E$ un $\K$-ev de dimension $n$, $\mathcal{B} = (e_1,\cdots,e_n)$ une base de $E$.
+
+\begin{theoreme}{Définition, existence et unicité du déterminant}{DefExistenceUnicitéDéterminant}
+Il existe une et une seule application $n$-linéaire alternée $f$ de $E^n$ dans $\K$ telle que 
+\begin{center}
+$f(e_1,\cdots,e_n) = 1$.
+\end{center}
+$f$ s'appelle le \strong{déterminant} dans $\mathcal{B}$ et se note $\det_{\mathcal{B}}$. \\
+Toute application $n$-linéaire de $E^n$ dans $\K$ est proportionnelle à $\det_{\mathcal{B}}$.
+\end{theoreme}
+
+\begin{demo}{}
+Soit $A = \mat_{\mathcal{B}}(x_1,\cdots,x_n)$. \\
+$x_j = \displaystyle{\sum_{i=1}^n a_{ij}e_i}$. \\
+Si $(e^*_1,\cdots,e^*_n)$ est la base duale de $\mathcal{B}$.  \\
+$a_{ij} = i^{\text{ème}}$ coordonnée de $x_j$ dans $\mathcal{B} = e^*_i(x_j)$. \\
+
+Soit $f$ convenant, 
+\begin{align*}
+f(x_1,\cdots,x_n) &= f\left(\sum_{i_1=1}^n a_{i_11}e_{i_1},x_2,\cdots,x_n\right) \\
+&= \sum_{i_1=1}^n a_{i_11}f(e_{i_1},x_2,\cdots,x_n)\\
+&= \sum_{i_1=1}^na_{i_11}f\left(e_{i_1},\sum_{i_2=1}^na_{i_22}e_{i_2},x_3,\cdots,x_n \right) \\
+&= \sum_{i_1=1}^n a_{i_11} \sum_{i_2=1}^n a_{i_22} f(e_{i_1},e_{i_2},x_3,\cdots,x_n) \\
+&= \sum_{1 \le i_1,i_2 \le n}a_{i_11}a_{i_22} f(e_{i_1},e_{i_2},x_3,\cdots,x_n) \\
+&= \cdots \\
+&= \sum_{1 \le i_1,i_2,\cdots,i_n  \le n} a_{i_11}a_{i_22}\cdots a_{i_nn}f(e_{i_1},\cdots,e_{i_n})
+\end{align*}
+La somme porte sur $\llbracket 1,n \rrbracket ^n$ qu'on peut identifier à $\mathcal{F}(\llbracket 1,n \rrbracket,\llbracket 1,n \rrbracket)$. \\
+
+$f(x_1,\cdots,x_n) = \displaystyle{\sum_{s \in \mathcal{F}(\llbracket 1,n \rrbracket,\llbracket 1,n \rrbracket)} a_{s(1)1}a_{s(2)2}\cdots a_({s(n)}n) f(e_{s(1)},e_{s(2)},\cdots,e_{s(n)})}$. \\
+
+Soit $s \in \mathcal{F}(\llbracket 1,n \rrbracket,\llbracket 1,n \rrbracket)$. \\
+Si $s$ n'est pas injective, il existe $i < j$ avec $s(i) = s(j) = \ell$ \\
+d'où $f(e_{s(1)},\cdots,e_{s(n)}) = f(e_{s(1)},\cdots,e_\ell,\cdots,e_\ell,\cdots,e_{s(n)}) = 0$, car $f$ est alternée. \\
+
+On peut donc faire porter la somme sur l'ensemble des applications injectives de $\llbracket 1,n \rrbracket$ dans $\llbracket 1,n \rrbracket$ \ie sur l'ensemble $S_n$ des permutations de $\llbracket 1,n \rrbracket$. \\
+
+$f(x_1,\cdots,x_n) = \displaystyle{\sum_{\sigma \in S_n} a_{\sigma(1)1}\cdots a_{\sigma(n)n} \underbrace{f(e_{\sigma(1)},\cdots,e_{\sigma(n)})}_{\varepsilon(\sigma) f(e_1,\cdots,e_n)}}$ \\
+Donc :
+\begin{center}
+$f(x_1,\cdots,x_n) = f(e_1,\cdots,e_n) \displaystyle{\sum_{\sigma \in S_n} \varepsilon(\sigma) a_{\sigma(1)1}\cdots a_{\sigma(n)n}}$.
+\end{center}
+
+Si $f(e_1,\cdots,e_n) = 1$ alors :
+\begin{center}
+$\forall (x_1,\cdots,x_n) \in E^n, f(x_1,\cdots,x_n) = \displaystyle{\sum_{\sigma \in S_n} \varepsilon(\sigma) e^*_{\sigma(1)}(x_1) \cdots e^*_{\sigma(n)}(x_n)}$.
+\end{center}
+
+Posons donc, pour $(x_1,\cdots,x_n) \in E^n,$
+\begin{center}
+$\varphi(x_1,\cdots,x_n) = \displaystyle{\sum_{\sigma \in S_n} \prod_{k=1}^n e^*_{\sigma(k)}(x_k)}$
+\end{center}
+
+\begin{itemize}
+	\item $\varphi(e_1,\cdots,e_n) = \displaystyle{\sum_{\sigma \in S_n} \varepsilon(\sigma) \prod_{k=1}^n e^*_{\sigma(k)}(e_k)} = \displaystyle{\sum_{\sigma \in S_n} \varepsilon(\sigma) \prod_{k=1}^n \delta_{\sigma(k)k}}$. \\
+	
+	Si $\sigma \ne \text{Id}$, il existe $\ell$ tel que $\sigma(\ell) \ne \ell$ donc $\delta_{\sigma(\ell)\ell} = 0$ puis
+	\begin{center}
+	$\displaystyle{\prod_{k=1}^n \delta_{\sigma(k)k} = 0}$
+	\end{center}
+	
+	D'où $\varphi(e_1,\cdots,e_n) = \varepsilon(\text{Id}) \displaystyle{\prod_{k=1}^n 1} = 1$.
+	
+	\item $\varphi$ est $n$-linéaire. \\
+	
+	Soit $\sigma \in S_n$. Pour $1 \le k \le n, e^*_{\sigma(k)}$ est une forme linéaire sur $E$ \\
+	donc $(x_1,\cdots,x_n) \mapsto \varepsilon(\sigma)e^*_{\sigma(1)}(x_1) \cdots e^*_{\sigma(n)}(x_n)$ est $n$-linéaire. \\
+	Par somme, $\varphi$ est aussi $n$-linéaire.
+	
+	\item $\varphi$ est alternée. \\
+	
+	Soit $(x_1,\cdots,x_n) \in E^n$, supposons qu'il existe $i<j$ tel que $x_i=x_j$, montrer que $\varphi(x_1,\cdots,x_n) = 0$. \\
+	
+	On rappelle que $A_n$ est le groupe alterné, c'est-à-dire l'ensembles des permutations $\sigma$ paires (\ie de signature $\varepsilon(\sigma) = 1$ ou encore de nombre d'inversions pair, une inversion se présentant en un couple $(i,j) \in \llbracket 1,n \rrbracket^2$ avec $i<j$ lorsque $\sigma(i)>\sigma(j)$). \\
+	Le groupe $S_n \setminus A_n$ est donc l'ensemble des permutations $\sigma$ impaires de $\llbracket 1,n \rrbracket$ (\ie de signature $\varepsilon(\sigma) = -1$). \\
+	
+	On a :
+	\begin{center}
+	$\varphi(x_1,\cdots,x_n) = \displaystyle{\sum_{\sigma \in A_n} \prod_{k=1}^n e^*_{\sigma(k)}(x_k) - \sum_{\sigma \in S_n \setminus A_n} \prod_{k=1}^n e^*_{\sigma(k)}(x_k)}$
+	\end{center}
+	
+	Soit $\tau$ la transposition qui échange $i$ et $j$ : $\varepsilon{\tau} = -1$. \\
+	Si $s$ décrit $A_n$, alors $s \circ \tau$ décrit $S_n \setminus A_n$. \\
+	Donc :
+	\begin{center}
+	$\displaystyle{\sum_{\sigma \in S_n \setminus A_n} \prod_{k=1}^n e^*_{\sigma(k)}(x_k) = \sum_{s \in A_n} \prod_{k=1}^n e^*_{s \circ \tau(k)}(x_k)}$
+	\end{center}
+	
+	Soit $s \in S_n$.
+	\begin{itemize}
+		\item Si $k \in \llbracket 1,n \rrbracket \setminus \{i,j\}$, alors $\tau(k) = k$ et $e^*_{s \circ \tau(k)}(x_k) = e^*_{s(k)}(x_k)$.
+		\item $e^*_{s \circ \tau(i)}(x_i) = e^*_{s(j)}(x_i) = e^*_{s(j)}(x_j)$ (car $x_i = x_j$). \\
+		$e^*_{s \circ \tau(j)}(x_j) = e^*_{s(i)}(x_j) = e^*_{s(i)}(x_i)$.
+	\end{itemize}
+	D'où :
+	\begin{center}
+	$\displaystyle{\prod_{k=1}^n e^*_{s \circ \tau(k)} (x_k)} = \displaystyle{\prod_{k=1}^n e^*_{s(k)}(x_k)}$
+	\end{center}
+	Donc : 
+	\begin{center}
+	$\displaystyle{\sum_{\sigma \in S_n \setminus A_n} \prod_{k=1}^n e^*_{\sigma(k)}(x_k) = \sum_{s \in A_n} \prod_{k=1}^n e^*_{s(k)}(x_k)}$
+	\end{center}
+	D'où $\varphi(x_1,\cdots,x_n) = 0$.
+\end{itemize}
+\end{demo}
+
+On a vu en cours de preuve que : si $f : E^n \to \K$ est $n$-linéaire alternée, alors :
+\begin{center}
+$\forall (x_1,\cdots,x_n) \in E^n, f(x_1,\cdots,x_n) = f(e_1,\cdots,e_n)\varphi(x_1,\cdots,x_n)$.
+\end{center}
+
+$f$ est proportionnelle à $\varphi = \det_{\mathcal{B}}$. \\
+
+\begin{exemple}{}
+\begin{itemize}
+	\item Pour $n=2$, $\mathcal{B} = (e_1,e_2)$ une base de $E$, $x,y \in E$, avec $\mat_{\mathcal{B}}(x,y) = A = \begin{pmatrix} a & c \\ b & d \end{pmatrix}$. \\
+	
+	Alors $\det_{\mathcal{B}}(x,y) = \displaystyle{\sum_{\sigma \in S_2} \varepsilon(\sigma) \prod_{k=1}^2 A_{\sigma(k)k}} = 1 A_{11}A_{22} + \; -1 A_{21}A_{12} = ad-bc$. 
+	
+	\item Pour $n = 3$, $S_3 = \{\text{Id},\tau_{12},\tau_{13},\tau_{23}, \begin{pmatrix} 1 & 2 & 3 \end{pmatrix}, \begin{pmatrix} 1 & 3 & 2 \end{pmatrix} \}$. \\
+	
+	Si $A = \mat_{\underbrace{(e_1,e_2,e_3)}_{\mathcal{B}}}(x_1,x_2,x_3)$, alors  
+	\begin{align*}
+	\det_{\mathcal{B}}(x_1,x_2,x_3) &= \sum{\sigma \in S_3} \varepsilon(\sigma) \prod_{k=1}^3 A_{\sigma(k)k} \\
+	&= A_{11}A_{22}A_{33} - A_{21}A_{12}A_{33} - A_{31}A_{22}A_{13} - A_{11}A_{32}A_{23} + A_{21}A_{32}A_{13}+A_{31}A_{12}A_{23}
+	\end{align*}
+\end{itemize}
+\end{exemple}
+
+\end{document}
