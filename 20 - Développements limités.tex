@@ -1,0 +1,347 @@
+\documentclass[12pt,a4paper]{report}
+\input{00 - preambule}
+
+\begin{document}
+
+\chapter{Développements limités}
+
+\section{Définitions et exemples}
+\begin{definition}{Développement limité}{}
+Soit $I$ un intervalle de $\R$, $f:I\to \K$, $a\in I$, $n \in \N$\\
+On dit que $f$ admet un développement limité à l'ordre $n$ au voisinage de $a$ (\textit{en abrégé}: $f$ admet un $DL_n(a)$) s'il existe $P\in \K[X]$ de degré $\leq n$ tel que : 
+\begin{center}
+    $f(x)-P(x-a) \underset{x \to a}{=} o((x-a)^n)$ 
+\end{center}
+\ie s'il existe $\lambda_0$, ..., $\lambda_n$ $\in K$ tel que :
+
+\begin{center}
+    $f(x)-(\lambda_0+\lambda_1(x-a)+...+\lambda_n(x-a)^n)\underset{x \to a}{=}o((x-a)^n)$    
+\end{center}
+On écrit alors : au $\mathcal{V}(a)$, $\mathbox{f(x)=\underbrace{\lambda_0+...+\lambda_n(x-a)^n}_{\text{Partie polynomiale}} + \underbrace{o((x-a)^n)}_{\text{\textit{chouia}}}}$
+\end{definition}
+
+\begin{remarque}
+\begin{itemize}
+	\item Si $f$ admet un $DL_n(a)$, il y a \strong{un seul} $P \in \K[X]$ de degré $\le n$ tel que, au voisinage de $a$ : $f(x) = P(x-a)+ o((x-a)^n)$.
+	$x \mapsto P(x-a)$ s'appelle la \strong{partie régulière} du $DL_n(a)$.
+
+	\begin{demo}
+	Supposons que, au voisinage de $a$, $f(x) = P(x-a) + o((x-a)^n) = Q(x-a) + o((x-a)^n)$. avec 	$P,Q$ polynômes de degré $\le n$. Alors $P(x-a) - Q(X-a) \underset{x \to a}{=} o((x-a)^n)$. \\
+	Ecrivons $P-Q = \lambda_0 + ... + \lambda n X^n$. Supposons : \\
+	$\exists k \in \llbracket 0,n \rrbracket, \lambda_k \neq 0$. Soit $\strong{m = \min \{ k \in \llbracket 0,n \rrbracket \mid \lambda_k \neq 0 \}}$. \\ \\
+	D'où $(P-Q)(x-a) = \lambda_m (x-a)^m + \underbrace{\lambda_{m+1}(x-a)^{m+1} + ... + \lambda_n (x-a)^n}_{\underset{x \to a}{=} o((x-a)^m)}$. \\
+	D'où $(P-Q)(x-a) \underset{x \to a}{\sim} (x-a)^m$ et on aurait $\lambda_m (x-a)^m \underset{x \to a}{=} o((x-a)^m)$, c'est faux.
+	\end{demo}
+	
+	\item On peut toujours supposer $a=0$. \\
+	$f : I \to \K, n \in \N, a \in I$. $J = I-a = \{x-a \mid x \in I \}$. \\
+	Soit $g : t \in J \mapsto f(a+t) \in \K$, on a $0 \in J$. \\
+	Soit $P \in \K[X]$ de degré $\le n$. $f$ admet un $DL_n(a)$ de partie régulière $x \mapsto P(x-a) \\
+	\Longleftrightarrow g$ admet un $DL_n(0)$ de partie régulière $t \mapsto P(t)$.
+	En effet, supposons que, au voisinage de $a$, $f(x) = P(x-a) + (x-a)^m \varepsilon(x)$ avec $\underset{x \to a}{\lim} \varepsilon(x) = 0$. \\
+	Alors, pour $t \in J$, $g(t) = f(a+t) = \underbrace{P(t)}_{\text{polynomiale de degré } \le n} + t^n \underbrace{\varepsilon{a+t}}_{\xrightarrow[t \to 0]{} 0}$.
+	
+	\item $f : I \to \K, a \in I$. $f$ a un $DL_0(a)$ signifie $f$ est continue en $a$. \\
+	$\Longrightarrow$ Au voisinage de $a$, $f(x) = \lambda + \varepsilon(x)$ avec $\underset{a}{\lim} \varepsilon = 0$. \\
+	D'où $f(x) \xrightarrow[x \to a]{} \lambda$ (d'où $\lambda = f(a)$) \\
+	$\Longleftarrow$ On écrit $f(x) = \underbrace{f(a)}_{\substack{\text{polynomiale} \\ \text{de degré } 0}} + \underbrace{f(x)-f(a)}_{\varepsilon(x) \xrightarrow[x \to a]{} 0}$. \\ \\
+	$f$ a un $DL_1(a) \Longleftrightarrow f$ est dérivable en $a$. Si $f$ est dérivable en $a$, on a au voisinage de $a$, $f(x) = f(a) + (x-a)f'(a) + o(x-a)$. \\ \\
+	\textbf{Attention !} On n'a pas pour $n \ge 2$, $f$ admet un $DL_n(a) \Longleftrightarrow f$ a une dérivée $n^{\text{ième}}$ en $a$.
+\end{itemize}
+\end{remarque}
+
+\begin{exemple}
+$f(x) = \begin{cases}
+0 &\text{si } x=0 \\
+x^3\sin\left(\dfrac{1}{x}\right) &\text{si } x \neq 0
+\end{cases}$ \\ \\
+$f$ est de classe $\mathcal{C}^{\infty}$ sur $\R^*$. \\ \\
+Pour $x \neq 0$, $\dfrac{f(x)-f(0)}{x} = x^2\sin\left(\dfrac{1}{x}\right) \xrightarrow[x \to 0]{} 0$ donc $f$ est dérivable en $0$ et $f'(0) = 0$. \\ \\
+Pour $x \neq 0$, $\dfrac{f'(x)-f'(0)}{x} = \dfrac{f'(x)}{x} = \dfrac{3x^2\sin \frac{1}{x} - x \cos \frac{1}{x}}{x} = \underbrace{3x \sin \dfrac{1}{x}}_{\xrightarrow[x \to 0]{} 0} - \underbrace{\cos \dfrac{1}{x}}_{\text{pas de limite en } 0}$, donc $f'$ n'est pas dérivable en $0$.
+\end{exemple}
+
+\begin{exemple}
+$f : x \in ]-\infty,1[ \mapsto \dfrac{1}{1-x}$. \\ \\
+Alors, $\forall n \in \N, f$ admet un $DL_n(0)$ de partie régulière $x \mapsto 1+x+...+x^n$. \\ \\
+En effet, pour $x \in ]-\infty,1[, 1+x+...+x^n = \dfrac{1-x^{n+1}}{1-x}$ \ie $f(x) = \underbrace{1+x+...+x^n}_{\text{polynôme de degré } \le n} + \underbrace{\dfrac{x}{1-x} x^n}_{\underset{x \to 0}{=} o(x^n)}$. \\ \\
+Donc, au voisinage de $0$, $\dfrac{1}{1-x} = 1+x+...x^n + o(x^n)$.
+\end{exemple}
+
+\begin{theoreme}{Formule de \textsc{Taylor-Young}\footnotemark{}}{FormuleTaylorYoung}
+    Soit $n \in \N$, $I$ un \strong{intervalle} de $\R$, $f : I \to \K$ de classe \strong{$\mathcal{C}^n$} et \strong{$a \in I$}. Alors $f$ admet un $\mathrm{DL}_n(a)$ dont la partie régulière est :
+    $$ x \mapsto T_{n,f,a} (x) = \sum_{k = 0}^n f^{(k)}(a) \dfrac{(x - a)^k}{k!} = f(a) + f'(a)(x-a) + ... + f^{(n)}(a)\dfrac{(x-a)^n}{n!} $$
+    Ainsi, au voisinage de $a$, $f$ s'écrit :
+    $$ \mathbox{f(x) \underset{x \to a}{=} \sum_{k = 0}^n f^{(k)}(a) \dfrac{(x - a)^k}{k!} + o\left( (x - a)^n \right)} $$
+\end{theoreme}
+
+\footnotetext{\textit{Aka} Taylor Le Jeune}
+
+\begin{principedemo}{FormuleTaylorYoung}
+    Raisonner par récurrence pour montrer que pour $n \in \N$ :
+    $$ \strong{\dfrac{f(x) - T_{n,f,a}(x)}{(x-a)^n} \xrightarrow[x \to a]{} 0} $$
+    Utiliser alors la \strong{définition epsilonesque} de la limite et les \strong{IAF} entre $a$ et $x$ sur les fonctions :
+    $$ \strong{\varphi : t \mapsto f(t) - T_{n+1,f,a}(t)} \quad\text{et}\quad \strong{g : t \mapsto \varepsilon \dfrac{|t-a|^{n+1}}{n+1} } $$
+    Distinguer les cas \strong{$x < a$} et \strong{$x > a$} pour gérer plus facilement les valeurs absolues.
+\end{principedemo}
+
+\begin{remarque}
+    Si $f$ admet un $\mathrm{DL}_n(a)$ de partie régulière $T_{n,f,a}$, alors au voisinage de $0$, $f$ s'écrit :
+    $$ f(x) \underset{x \to 0}{=} T_{n,f,a}(x + a) + o\left(x^n\right) $$
+    De même, si $f$ admet un $\mathrm{DL}_n(0)$ de partie régulière $T_{n,f,0}$, alors au voisinage de $a$, $f$ s'écrit :
+    $$ f(x) \underset{x \to a}{=} T_{n,f,0}(x - a) + o\left((x-a)^n\right) $$
+\end{remarque}
+
+Au $\mathcal{V}(0)$ : $f(a+h)=f(a)+hf'(a)+...+\dfrac{h^n}{n!} f^{(n)}(a)+o(h^n)$
+
+\begin{proposition}{$DL$ classiques}{}
+Au $\mathcal{V}(0)$:
+\begin{itemize}
+    \item $\sin x = x - \dfrac{x^3}{6}+\dfrac{x^5}{120}+...+(-1)^n \dfrac{x^{2n+1}}{(2n+1)!}+o(x^{2n+1})$
+    \item $\cos x = 1 - \dfrac{x^2}{2}+\dfrac{x^4}{24}-...+(-1)^n \dfrac{x^{2n}}{(2n)!}+o(x^{2n})$
+    \item $e^x = 1+x +\dfrac{x^2}{2}+...+ \dfrac{x^{n}}{n!}+o(x^{n})$
+    \item $\ln(1+x) = x - \dfrac{x^2}{2}+\dfrac{x^3}{3}+...+ (-1)^{n-1}\dfrac{x^{n}}{n}+o(x^{n})$
+    \item $(1+x)^{\alpha} = 1+ \alpha x + \dfrac{\alpha (\alpha-1)}{2} x^2+...+ \dfrac{\alpha (\alpha-1)...(\alpha-n+1)}{n!} x^n+o(x^{n})$
+\end{itemize}
+\end{proposition}
+
+\section{Opérations sur les $DL$}
+On se place désormais au $\mathcal{V} (0)$
+
+\subsection{Produit élémentaire}
+\begin{proposition}{Produit élémentaire}{}
+$f:I\to \K$ ($0\in I$)
+On suppose : $f$ admet un $DL_n (0)$ de partie régulière $P\in \K[X]$, alors :
+\begin{center}
+    \strong{$x\mapsto x^m f(x)$ admet un $DL_{n+m}(0)$ de partie régulière $X^m P$}
+\end{center}
+\end{proposition}
+
+\begin{demo}
+En effet, au $\mathcal{V}(0)$, $f(x)=P(x)+o(x^n)$\\
+D'où : $x^m f(x) = \underbrace{x^m P(x)}_{\text{Polynomiale de degré } \leq n+m} + \underbrace{x^m o(x^n)}_{o(x^{n+m})}$
+\end{demo}
+
+\subsection{Composition élémentaire}
+\begin{proposition}{Composition élémentaire}{}
+$f:I\to \K$ ($0\in I$)
+On suppose : $f$ admet un $DL_n (0)$ de partie régulière $P\in \K[X]$ ($\deg P \leq n$), alors :
+\begin{center}
+    \strong{$x\mapsto f(\alpha x^m)$ admet un $DL_{nm}(0)$ de partie régulière $Q = P \circ (\alpha X^m)$}
+\end{center}
+\end{proposition}
+
+\begin{demo}
+Au $\mathcal{V}(0)$, $f(t)=P(t)+t^n\varepsilon(t)$ avec $\displaystyle\lim_{0} \varepsilon = 0$\\
+D'où : $f(\alpha x^m ) = \underbrace{P(\alpha x^m)}_{\text{Polynomiale de degré } \leq nm} + \alpha^n x^{nm} \underbrace{ \varepsilon(\alpha x^m)}_{\xrightarrow[x \to 0]{} 0}$
+\end{demo}
+
+\subsection{Troncature}
+\begin{proposition}{Troncature}{}
+$f:I\to \K$ ($0\in I$) admet un $DL_n (0)$ de partie régulière $P\in \K[X]$, alors pour $0\leq k \leq n$,
+\begin{center}
+    $f$ admet un $DL_k (0)$ de partie régulière \textbox{$a_0 + a_1 X + ... + a_k X^k$} ($P$ tronqué au degré $k$)
+\end{center}
+\end{proposition}
+
+\begin{demo}
+Soit $k \in \llbracket 0, n \rrbracket$ au $\mathcal{V}(0)$\\
+$f(x) = a_0 + ... + a_k x^k + \underbrace{a_{k+1} x^{k+1}}_{o(x^k)} + ... + \underbrace{a_{n} x^{n}}_{o(x^k)} + \underbrace{o(x^n)}_{o(x^k)}$\\
+$f(x)=\underbrace{a_0 + ... + a_{k} x^{k}}_{\text{Polynomiale de degré } \leq k} + o(x^k)$
+\end{demo}
+
+\subsection{Parité}
+\begin{proposition}{Parité}{}
+$f:I\to \K$ ($I$ symétrique par rapport à 0) admet un $DL_n (0)$ de partie régulière $P\in \K[X]$ :
+\begin{center}
+    Si $f$ est paire alors $P$ est pair \\
+    \ie $P=P(-x)$, si on écrit $P=\displaystyle\sum_k a_k X^k$, on a $a_k=0$ si $k$ est impair)\\
+\end{center}
+\begin{center}
+    Si $f$ est impaire, $P$ est impair\\
+    \ie $P(-x)=-P$ ou encore $a_k = 0$ si $k$ est pair
+\end{center}
+\end{proposition}
+
+\begin{demo}
+Supposons, par exemple, $f$ paire au voisinage de 0, $f(x)=P(x)+x^n \varepsilon(x)$ où $\displaystyle\lim_0 \varepsilon = 0$ 
+\begin{center}
+    $f(x)=f(-x)=P(-x)+(-x)^n \varepsilon (-x)$\\
+    $f(x)=f(-x)=P(-x)+(-1)^n x^n \varepsilon (-x)$\\
+    $f(x)= P(-x) + o(x^n)$
+\end{center}
+Par unicité de la partie régulière d'un $DL$ :
+\begin{center}
+    $P=P(-X)$ d'où $\displaystyle\sum_k a_k (-X)^k = \displaystyle\sum_k (-1)^k a_k X^k = \displaystyle\sum_k a_k X^k$
+\end{center}
+D'où, pour tout entier naturel $k$, $(-1)^k$ $a_k$ = $a_k$\\
+Autrement dit : $a_k=0$ si $k$ impair
+\end{demo}
+
+\subsection{Combinaison linéaire}
+\begin{proposition}{Combinaison linéaire}{}
+$\alpha \in \K$, $f,g:I\to \K$ admettent des $DL_n (0)$ de parties régulières $P,Q \in \K[X]$, alors :
+\begin{center}
+    $\alpha f + g$ admet un $DL_n (0)$ de partie régulière $\alpha P + Q$
+\end{center}
+\end{proposition}
+
+\begin{demo}
+Au voisinage de 0 :
+\begin{center}
+    $f(x) = P(x) + o(x^n)$
+    $g(x) = Q(x) + o(x^n)$
+\end{center}
+D'où $\alpha f(x) +g(x)= \underbrace{\alpha P(x) + Q(x)}_{\text{Polynomiale de degré } \leq n} + \underbrace{\alpha o(x^n) + o(x^n)}_{o(x^n)}$
+\end{demo}
+
+\begin{exemple}
+\strong{$DL_2 (0)$ de $\sqrt{1+x} - e^x$}\\
+\\
+Au voisinage de 0 : 
+\begin{center}
+    $e^x = 1 +x+ \dfrac{x^2}{2} + o(x^2)$ \: \: \: \: \: $\sqrt{1+x} = 1 + \dfrac{x}{2} - \dfrac{x^2}{8} + o(x^2)$
+\end{center}
+D'où \textbox{$\sqrt{1+x} - e^x = - \dfrac{x}{2} - \dfrac{5}{8}x^2 +o(x^2) $}\\
+\\
+On trouve également un équivalent : 
+\begin{center}
+    $\sqrt{1+x} - e^x = - \dfrac{x}{2} +o(x)$\\
+    \textbox{$\sqrt{1+x} - e^x \underset{x \to 0}{\sim}$ $- \dfrac{x}{2}$}
+\end{center}
+\end{exemple}
+
+\pagebreak
+
+\subsection{Produit}
+\begin{proposition}{Produit}{}
+$f,g : I \to \K$ ont des $DL_n (0)$ de parties régulières $P$,$Q \in \K[X]$, alors :
+\begin{center}
+    $fg$ a un $DL_n(0)$ dont la partie régulière est $[PQ]_n$ (polynôme $PQ$ tronqué au degré $n$)
+\end{center}
+\end{proposition}
+
+\begin{demo}
+\textit{A venir ...}
+\end{demo}
+
+\begin{exemple}
+\strong{$DL_2 (0)$ de $\sqrt{1+x}$ $e^x$}\\
+\\
+Au voisinage de 0 : 
+\begin{center}
+    $e^x = 1 +x+ \dfrac{x^2}{2} + o(x^2)$ \: \: \: \: \: $\sqrt{1+x} = 1 + \dfrac{x}{2} - \dfrac{x^2}{8} + o(x^2)$\\
+\end{center}
+D'où : 
+\begin{center}
+    $\sqrt{1+x}$ $e^x = 1 + x(\dfrac{1}{2} + 1) + x^2 (- \dfrac{1}{8}+ \dfrac{1}{2} + \dfrac{1}{2}) + o(x^2)$\\
+    \textbox{$\sqrt{1+x}$ $e^x = 1 + \dfrac{3}{2}x + \dfrac{7}{8} x^2 + o(x^2)$}
+\end{center}
+\end{exemple}
+
+\begin{application}{Exercice}{}
+\begin{align*}
+  f \colon ]0,1] &\to \R\\
+  x &\mapsto \dfrac{1}{\sin x} - \dfrac{1}{x}
+\end{align*}
+Montrer que $f$ se prolonge en 0, en une fonction de classe $C^1$
+\end{application}
+
+\subsection{Intégration}
+\begin{proposition}{Intégration}{}
+$f:I \to K$ dérivable\\
+On suppose $f'$ admet un $DL_n (0)$ de partie régulière $P=a_0 +a_1 X + ... + a_n X^n$, alors :
+\begin{center}
+    $f$ a un $DL_{n+1} (0)$ de partie régulière \strong{$Q=f(0)+a_0 X + \dfrac{a_1}{2} X^2 + ... + \dfrac{a_n}{n+1} X^{n+1}$}
+\end{center}
+\end{proposition}
+
+\begin{demo}
+\textit{A venir ...}
+\end{demo}
+
+\begin{application}{}{}
+\begin{align*}
+  f \colon ]-1,+\infty] &\to \R\\
+  x &\mapsto \ln (1+x)
+\end{align*}
+\end{application}
+
+\subsection{Dérivation}
+\begin{proposition}{Dérivation}{}
+$f:I \to \K$ de classe $C^{n+1} (0 \in I)$\\
+Soit $Q$ la partie régulière du $DL_{n+1} (0)$ de $f$ (on sait qu'un tel $DL_{n+1} (0)$ existe)\\
+Soit $P$ la partie régulière du $DL_{n} (0)$ de $f'$ (existe car $f'$ est $C^n$)
+\begin{center}
+    $P=Q'$
+\end{center}
+\end{proposition}
+
+\begin{demo}
+On sait que $Q=T_{n+1,f,0}$ et $P=T_{n,f',0}$\\
+Il s'agit de voir que : $T_{n,f',0}= (T_{n+1,f,0})'$ ce qui est vrai
+\end{demo}
+
+\begin{exemple}
+\textit{A venir ...}
+\end{exemple}
+
+\subsection{Composition}
+\begin{proposition}{Composition}{}
+$g:I \to K$\\
+$f:I \to J$ tel que \Strong{$f(0)=0$}\\
+On suppose $g$ a un $DL_n (0)$ de partie régulière $Q \in \K[X]$ et que $f$ a un $DL_n (0)$ de partie régulière $P \in K[X]$\\
+(On a $P(0)=f(0)=0$, donc $P$ s'écrit : $P=XS$ où $\deg S \leq n-1$), alors :
+\begin{center}
+    $g\circ f$ admet un $DL_n(0)$ dont la partie régulière est $[Q \circ P]_n$ ($Q\circ P$ tronqué au degré $n$)
+\end{center}
+\end{proposition}
+
+\begin{demo}
+\textit{A venir ...}
+\end{demo}
+
+\pagebreak
+
+\subsection{Inverse}
+\begin{proposition}{Inverse}{}
+$f:I\to \K$ ($0 \in I$)\\
+On suppose $f(0) \neq 0$ et $f$ admet un $DL_n (0)$ ($f$ est continue en 0, $f(0) \neq 0$ donc $f$ reste $\neq 0$ au $\mathcal{V}(0)$ donc $\dfrac{1}{f}$ est définie au $\mathcal{V}(0)$), alors : 
+\begin{center}
+    $\dfrac{1}{f}$ admet un $DL_n (0)$
+\end{center}
+\end{proposition}
+
+\pagebreak
+
+\section*{Démonstrations}
+\addcontentsline{toc}{section}{Démonstrations}
+
+\begin{demonstration}{FormuleTaylorYoung}
+    \begin{itemize}[leftmargin=0.5cm]
+        \item Soit $\mathcal{H}_n$ : si $f : I \to \K$ de classe $\mathcal{C}^n$ et $a \in I$, alors : $ \strong{\dfrac{f(x) - T_{n,f,a}(x)}{(x-a)^n} \xrightarrow[x \to a]{} 0} $
+        \item $\mathcal{H}_0$ est vraie : pour $f : I \to \K$ de classe $\mathcal{C}^0$ et $a \in I$, on a bien (car $f$ est continue) : 
+        $$ \dfrac{f(x) - T_{0,f,a}(x)}{(x-a)^0} = f(x) - f(a) \xrightarrow[x \to a]{} 0 $$
+        \item Soient $n \in \N$ tel que $\mathcal{H}_n$ soit vraie, $f : I \to \K$ de classe $\mathcal{C}^{n+1}$ et $a \in I$.\\
+        Posons \strong{$\varphi : x \in I \mapsto f(x) - T_{n+1,f,a}(x)$}. D'après les théorèmes généraux, $\varphi$ est dérivable sur $I$ comme somme de fonctions dérivable et $\forall x \in I$ :
+        \begin{align*}
+            \varphi'(x) &= f'(x) - T'_{n+1,f,a}(x) \\
+            &= f'(x) - \sum_{k=1}^{n+1} f^{(k)}(a) \dfrac{(x-a)^{(k-1)}}{(k-1)!} \\
+            &= f'(x) - \sum_{k=0}^{n} f^{(k+1)}(a) \dfrac{(x-a)^k}{k!} \\
+            &= \mathbox{f'(x) - T_{n,f',a}(x)}
+        \end{align*}
+        Soit \strong{$\varepsilon > 0$} :\\
+        $f'$ est de classe $\mathcal{C}^n$ (car $f$ est de classe $\mathcal{C}^{n+1}$) donc par HR, $\exists \alpha_\varepsilon > 0, \; \forall x \in I\setminus\{a\}, \; |x-a| \leqslant \alpha_\varepsilon $ :
+        $$ \left| \dfrac{f'(x) - T_{n,f',a}(x)}{(x-a)^n} \right| \leqslant \varepsilon \; \Longleftrightarrow \; \mathbox{|\varphi'(x)| \leqslant \varepsilon |x-a|^n} $$
+        \begin{itemize}
+            \item Si \strong{$x > a$} : alors $\forall t > a, |t-a| \leqslant \alpha_\varepsilon$ : $|\varphi'(t)| \leqslant \varepsilon(t-a)^n$\\
+            D'après les \strong{IAF} appliquées à \strong{$\varphi$} et \strong{$g : t > a \mapsto \varepsilon \dfrac{(t-a)^{n+1}}{n+1}$} entre $a$ et $x$ tel que $|x-a| \leqslant \alpha_\varepsilon$ :
+            $$ |\varphi(x) - \varphi(a)| \leqslant g(x) - g(a) \; \Longleftrightarrow \; |\varphi(x)| \leqslant \varepsilon \dfrac{(x-a)^{n+1}}{n+1} \; \Longleftrightarrow \; \mathbox{\left| \dfrac{f(x) - T_{n+1,f,a}(x)}{(x-a)^{n+1}} \right| \leqslant \dfrac{\varepsilon}{n+1} \leqslant \varepsilon} $$
+            \item Si \strong{$x < a$} : alors $\forall t < a, |t-a| \leqslant \alpha_\varepsilon$ : $|\varphi'(t)| \leqslant \varepsilon(a-t)^n$\\
+            D'après les \strong{IAF} appliquées à \strong{$\varphi$} et \strong{$g : t < a \mapsto -\varepsilon \dfrac{(a-t)^{n+1}}{n+1}$} entre $x$, tel que $|x-a| \leqslant \alpha_\varepsilon$, et $a$ :
+            $$ |\varphi(a) - \varphi(x)| \leqslant g(a) - g(x) \; \Longleftrightarrow \; |\varphi(x)| \leqslant \varepsilon \dfrac{(a-x)^{n+1}}{n+1} \; \Longleftrightarrow \; \mathbox{\left| \dfrac{f(x) - T_{n+1,f,a}(x)}{(x-a)^{n+1}} \right| \leqslant \dfrac{\varepsilon}{n+1} \leqslant \varepsilon} $$
+        \end{itemize}
+        \item Donc $\mathcal{H}_n$ est vraie par récurrence $\forall n \in \N$.
+    \end{itemize}
+\end{demonstration}
+
+\end{document}
