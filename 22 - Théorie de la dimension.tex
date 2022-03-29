@@ -1,0 +1,626 @@
+\documentclass[12pt, a4paper]{report}
+\input{00 - preambule}
+
+\begin{document}
+\chapter{Théorie de la dimension}
+\sommaire
+
+\section{Définition et faits de base}
+
+\begin{definition}{}{}
+Un $\K$-ev $E$ est de \Strong{type fini} s'il existe $n \in \N^*$ et $x_1,...,x_n \in E$ tels que $E = \text{Vect}(x_1,...,x_n)$, \ie $E$ est engendré par une famille finie $(x_1,...,x_n)$ ou une partie finie.
+\end{definition}
+
+\begin{exemple}[Exemples]{}
+\begin{itemize}
+	\item $\K^n$ est de type fini ($bc_3$ est une famille génératrice finie).
+	\item $\K_n[X] = \{ P \in \K[X] \mid \deg P \le n \} = \text{Vect}(1,X,...,X^n)$.
+	\item $\{0\} = \text{Vect}(0)$.
+\end{itemize}
+\end{exemple}
+
+\begin{theoreme}{}{}
+Soit $E$ un $\K$-ev de type fini.
+\begin{enumerate}
+	\item $E$ admet des bases finies.
+	\item \strong{Théorème de la base incomplète} : \\
+	Si $L = (x_1,...,x_r)$ est une famille libre de vecteurs de $E$ et $G = (y_1,...,y_m)$ est une famille génératrice de $E$, alors il existe $1 \le i_1 < i_2 < ... < i_p \le m$ tels que $(x_1,...,x_r,y_{i_1},...,y_{i_p})$ est une base de $E$.
+\end{enumerate}
+\end{theoreme}
+
+\begin{demo}{}
+\begin{itemize}
+	\item On a déjà $2) \Longrightarrow 1)$. Considérer $L = $famille vide (qui est libre), ou bien si $E \ne \{0\}$, prendre $x \in E \setminus \{0\}$, puis $L = (x)$ et une famille génératrice de $E$. \\
+	\item Soit $\mathcal{I}$ l'ensemble des parties $I = \{i_1,...,i_p \}$ de $\llbracket 1,m \rrbracket$ (y compris $\varnothing$) telles que $(x_1,...,x_r,y_{i_1},...,y_{i_p})$ est libre. \\
+	
+	Toute partie $I \in \mathcal{I}$ est finie de cardinal inférieur ou égal à $m$. \\
+	On peut donc considérer $q = \underset{I \in \mathcal{I}}{\max} \abs{I}$ et $I = \{i_1,...,i_q\} \in \mathcal(I)$. \\
+	Quitte à renuméroter, on peut supposer $I = \{1,...,q\}$ (si $q \ge 1$). \\
+	
+	Alors $(x_1,...,x_r,y_1,...,y_q)$ est une base de $E$. \\
+	$\longrightarrow$ on sait déjà que cette famille est libre. \\
+	$\longrightarrow$ la famille est génératrice. En effet, pour $k \in \llbracket q+1,m \rrbracket, \\
+	y_k \in \text{Vect}(x_1,...,x_r,y_1,...,y_q)$ : \\
+	si $y_k \not \in \text{Vect}(x_1,...,x_r,y_1,...,y_q)$, alors $(x_1,...,x_r,y_1,...,y_q)$ est libre : \\
+	Soient $\lambda_1,...,\lambda_r,\mu_1,...,\mu_q,\mu_k \in \K$ tels que \\
+	 $\lambda_1x_1+...\lambda_rx_r+\mu_1y_1+...+\mu_qy_q+\mu_ky_k = 0$ \\
+	 donc $\mu_ky_k = -\lambda_1x_1-...-\lambda_rx_r-\mu_1y_1-...-\mu_qy_q$. \\
+	 Or $-\lambda_1x_1-...-\lambda_rx_r-\mu_1y_1-...-\mu_qy_q \in \text{Vect}(x_1,...,x_r,y_1,...,y_q)$ \\
+	 et $y_k \not \in \text{Vect}(x_1,...,x_r,y_1,...,y_q)$ donc $\mu_ky_k = 0$ \\
+	 On a alors $\lambda_1x_1+...\lambda_rx_r+\mu_1y_1+...+\mu_qy_q= 0$, et tous les $\lambda_i$ et $\mu_j$ sont nuls par liberté de la famille $(x_1,...,x_r,y_1,...,y_q)$. \\
+	 
+	La liberté de $(x_1,...,x_r,y_1,...,y_q)$ est en contradiction avec la définition de $q$ \\
+	(on a $I' = (x_1,...,x_r,y_1,...,y_q,y_k) \in \mathcal{I}$ car $I'$ est libre et $I'$ est une famille de cardinal $q+1 > q$) \\
+	
+	D'où $E = \text{Vect}(y_1,...,y_m) \subset \text{Vect}(x_1,...,x_r,y_1,...,y_q) \subset E$. \\
+	
+	Si $q = 0$, on montre de la même façon que $\forall k \in \llbracket 1,m \rrbracket, y_k \in \text{Vect}(x_1,...,x_r)$. \\
+\end{itemize}
+\end{demo}
+
+\begin{remarque}
+\begin{itemize}
+	\item \textbf{Formulation usuelle} (avec les parties) : \\
+	Si $L$ est une partie libre de $E$ et $G$ une partie génératrice finie de $E$, \\
+	alors il existe une partie basique $\mathcal{B}$ telle que $L \subset \mathcal{B} \subset L \cup G$. \\
+	Avec $L=\varnothing$ (libre) : toute partie génératrice finie de $E$ contient une partie basique. \\
+	Donc : toute famille $(y_1,...,y_m)$ génératrice de $E$ possède une sous-famille $(y_{i_1},...,y_{i_p})$ qui est une base ($1 \le i_1 < ... < i_p \le m$). \\
+	
+	\item \textbf{Utilisation courante du théorème de la base incomplète} : \\
+	Si $(x_1,...,x_r)$ est une famille libre de vecteurs de $E$, on peut trouver $y_1,...,y_q \in E$ tel que $(x_1,...,x_r,y_1,...,y_q)$ est une base de $E$.
+\end{itemize}
+\end{remarque}
+
+\begin{theoreme}{}{}
+Soit $E$ un $\K$-ev de type fini, et $G$ une famille génératrice finie. Alors toute famille libre $L$ de vecteurs de $E$ est finie et Card $L \le$ Card $G$.
+\end{theoreme}
+
+\begin{remarque}[NB]{}
+Le cardinal de la famille $(x_i)_{i \in I}$ ($I$ fini) est le cardinal de $I$.
+\end{remarque}
+
+\begin{demo}{}
+On rappelle que si $(x_1,...,x_n)$ est une famille libre de vecteurs de $E$, et si $y_1,...,y_{n+1} \in \text{Vect}(x_1,...,x_n)$ alors $(y_1,...,y_{n+1})$ est liée. \\
+Ici, on note $G = (x_1,...,x_n)$. Alors si $y_1,...,y_{n+1} \in \text{Vect}(G) = E$, alors $(y_1,...,y_{n+1})$ est liée. \\
+Donc toute famille de vecteurs de $E$ ayant au moins $n+1$ vecteurs est liée. \\ Donc une famille libre de vecteurs de $E$ est de cardinal inférieur ou égal à $n$.
+\end{demo}
+
+\begin{corollaire}{}{}
+Si $E$ est un $\K$-ev de type fini, toutes les bases de $E$ sont finies de même cardinal. \\
+La \Strong{dimension} de $E$ est le cardinal d'une base (et donc de toutes les bases) de $E$. On note cet entier $\strong{\dim \: E}$.
+\end{corollaire}
+
+\begin{demo}{}
+On sait que $E$ admet une base $\mathcal{B}$ finie. Soit $\mathcal{C}$ une autre base. $\mathcal{C}$ est libre et $\mathcal{B}$ est génératrice finie, donc $\mathcal{C}$ est finie, et Card $\mathcal{C} \le$ Card $\mathcal{B}$ (d'après le théorème 2). \\
+Puis $\mathcal{B}$ est libre et $\mathcal{C}$ est génératrice donc Card $\mathcal{B} \le$ Card $\mathcal{C}$.
+\end{demo}
+
+\begin{remarque}{}
+Si $E$ est un $\K$-ev qui admet une base finie de cardinal $n$ alors $E$ est de type fini. \\
+On dira aussi $E$ est de dimension finie et $\dim E = n$. \\
+Ainsi, $\dim \K^n = n$ car $bc_n$ est une base finie de cardinal $n$ de $\K^n$. \\
+De même, $\K_n[X]$ est de dimension finie et $\dim \K_n[X] = n+1$ car $(1,X,...,X^n)$ en est une base.
+\end{remarque}
+
+\begin{theoreme}{}{}
+Soit $E$ un $\K$-ev de dimension finie, $n = \dim E \in \N^*$ (on suppose $E \ne \{0\}$ car $\{0\}$ est le seul $\K$-ev de dimension $0$). \\
+\begin{enumerate}
+	\item Toute famille libre $L$ de vecteurs de $E$ est finie de cardinal $\le n$. Si Card $L = n$, alors $L$ est une base.
+	\item Toute famille génératrice $G$ de vecteurs de $E$ finie Card $G \ge n$ (aussi pour une famille infinie). Si $G$ est finie de cardinal $n$, alors $G$ est une base.
+\end{enumerate}
+\end{theoreme}
+
+\begin{demo}{}
+Soit $\mathcal{B}$ une base de $E$. 
+\begin{enumerate}
+	\item Si $L$ est libre, comme $\mathcal{B}$ est génératrice de cardinal $n$, on sait que $L$ est finie de cardinal $\le n$. \\
+	
+	Supposons que Card $L = n$. D'après le théorème de la base incomplète, il existe une base $\mathcal{C}$ de $E$ dont $L$ est une sous-famille. \\
+	Mais Card $L = n = \dim E = $ Card $\mathcal{C}$, d'où $L = \mathcal{C}$ donc $L$ est une base.
+	
+	\item Soit $G$ une famille génératrice. Si $G$ est finie et Card $G < n$, vu que $\mathcal{B}$ est libre, on doit avoir $n \le \text{Card} \mathcal{B} \le \text{Card} G < n$, c'est absurde. \\
+	Si $G$ est finie de cardinal $n$, d'après le théorème de la base incomplète, il existe une base $\mathcal{C}$ de $E$ qui est une sous-famille de $G$, or \\
+	Card $\mathcal{C} = \dim E = n = \text{Card} G$ donc $\mathcal{C} = G$, d'où $G$ est une base.
+\end{enumerate}
+\end{demo}
+
+\begin{exemple}{}
+\begin{itemize}
+	\item $(P_0,...,P_n)$ une famille d'éléments de $\K[X]$ telle que $\deg P_k = k$ ($0 \le k \le n$). \\
+	Par exemple, $P_0 = 1, P_1 = X, P_k = \dfrac{X(X-1)...(X-k+1)}{k!} \quad (k \ge 1)$. (polynômes de Hilbert). \\
+	On sait que $(P_0,...,P_n)$ est libre car $0 = \deg P_0 < \deg P_1 < ... < \deg P_n$. \\
+	De plus, $(P_0,...,P_n)$ est une famille d'éléments de $\K_n[X]$, libre de cardinal $n+1 = \dim \K_n[X]$ donc c'est une base de $\K_n[X]$. \\
+	Donc tout polynôme $P$ s'écrit de façon unique $P=\lambda_0P_0+...+\lambda_nP_n$ avec $(\lambda_0,...,\lambda_n) \in \K^{n+1}$.
+	
+	\item $x_0,...,x_n$ des éléments distincts de $\K$. \\
+	$L_k = \displaystyle{\prod_{i \ne k} \dfrac{X-x_i}{x_k-x_i}}$. \\
+	$L_0,...,L_n$ sont les polynômes interpolateurs de Lagrange associés à $x_0,...,x_n$. \\
+	On a vu $\forall P \in \K_n[X], P(X) = \displaystyle{\sum_{k=0}^n \overset{\sim}{P}(x_k)L_k(X)}$, ce qui permet de voir que $(L_0,...,L_n)$ est une famille génératrice de $\K_n[X]$ ($\deg L_k = n$) de cardinal $n+1 = \dim \K_n[X]$. \\
+	Donc $(L_0,...,L_n)$ est une base de $\K_n[X]$.
+\end{itemize}
+\end{exemple}
+
+\begin{remarque}[Question au courageux lecteur \footnotemark]
+Soit $F$ un sous-espace vectoriel de $\K[X]$ tel que $F$ est de dimension finie. \\
+\begin{enumerate}
+	\item Existe-t-il une base de $F$ constituée de polynômes de même degré ?
+	\item Existe-t-il une base de $F$ constituée de polynômes de degrés distincts ?
+\end{enumerate}
+\end{remarque}
+
+\footnotetext{"Enfin au lecteur déjà..." O.S.}
+
+\begin{remarque}
+Si $E$ est de dimension finie, alors toute famille libre est finie et $\dim E$ est le cardinal maximum d'une famille libre. Inversement, si $E$ n'est pas de type fini, $E$ contient une famille libre infinie : \\
+Si $E \ne \{0\}$, on peut considérer $x_1 \ne 0 \in E$. Si on dispose de $x_1,...,x_n$ tels que la famille $(x_1,...,x_n)$ est libre, on a $E \ne \text{Vect}(x_1,...,x_n)$ donc on peut trouver $x_{n+1} \in E \setminus \text{Vect}(x_1,...,x_n)$, et alors $(x_1,...,x_{n+1})$ est libre.
+\end{remarque}
+
+\newpage
+
+\section{Dimensions classiques}
+\subsection{Somme de sous-espaces vectoriels}
+
+\begin{theoreme}{}{}
+Soit $E$ un $\K$-ev de dimension finie, $F$ un sous-espace vectoriel de $E$, alors $F$ est de dimension finie, et $\dim F \le \dim E$. Si $\dim F = \dim E$, alors $F = E$.
+\end{theoreme}
+
+\begin{demo}{}
+\begin{itemize}
+	\item Si $F$ n'est pas de dimension finie, $F$ contient une suite $(x_n)_{n \in \N^*}$ libre, et cette famille infinie est aussi libre dans $E$ : absurde.
+	\item
+	Soit $\mathcal{C} = (e_1,...,e_p)$ une base de $F$, $p = \dim F$, alors $\mathcal{C}$ est une famille libre de vecteurs de $E$, donc $p \le \dim E$. \\
+	Si $p = \dim E$, alors $\mathcal{C}$ est une base de $E$ et on a $F = \text{Vect}(\mathcal{C}) = E$. 	
+\end{itemize}
+\end{demo}
+
+\begin{theoreme}{Somme directe de sous-espaces vectoriels de dimension finie}{}
+Soit $E$ un $\K$-ev, $F_1,...,F_n$ des sous-espaces vectoriels de $E$, qui sont de dimension finie, et tels que $\displaystyle{\sum_{k=1}^n F_k}$ est directe, alors $F = \displaystyle{\sum_{k=1}^n F_k}$ est de dimension finie et $\dim \displaystyle{\sum_{k=1}^n F_k} = \displaystyle{\sum_{k=1}^n \dim F_k}$.
+\end{theoreme}
+
+\begin{demo}{}
+Pour $1 \le k \le n$, soit $\mathcal{B}_k$ une base de $F_k$ $(\mathcal{B}_k$ est finie de cardinal $\dim F_k)$. \\
+Alors, par recollement, $\mathcal{B} = \mathcal{B}_1 \text{v} ... \text{v} \mathcal{B}_n$ est libre. \\
+De plus, $\displaystyle{\sum_{k=1}^n F_k = \sum_{k=1}^n \text{Vect}\mathcal{B}_k} = \text{Vect}(\mathcal{B}_1 \text{v} ... \text{v} \mathcal{B}_n) = \text{Vect}(\mathcal{B})$, donc $\mathcal{B}$ engendre $F$. \\
+Ainsi, $\mathcal{B}$ est une base de $F$, finie de cardinal Card $\mathcal{B}_1 + ... + $ Card $\mathcal{B}_n = \dim F_1 + ... + \dim F_n$.
+\end{demo}
+
+\begin{corollaire}{}{}
+Soit $E$ un $\K$-ev de dimension finie, 
+\begin{enumerate}
+	\item $F_1,...,F_n$ des sous-espaces vectoriels de $E$ tels que $E = \displaystyle{\bigoplus_{k=1}^n F_k}$, alors 
+	\begin{center}
+	$\dim E = \displaystyle{\sum_{k=1}^n \dim F_k}$ ;
+	\end{center}
+	\item Si $F$ et $G$ sons des sous-espaces vectoriels de $E$, tels que $F \cap G = \{0\}$, alors 
+	\begin{center}
+	$\dim (F+G) = \dim F + \dim G$
+	\end{center}
+\end{enumerate}
+\end{corollaire}
+
+\begin{remarque}
+\begin{theoreme}{Existence d'un supplémentaire}{ExistenceSupplémentaire}
+Soit $E$ un $\K$-ev de dimension finie, $F$ un sous-espace vectoriel de $E$, alors $F$ admet un supplémentaire (au moins) : \\
+Il existe un sous-espace vectoriel $G$ de $E$ tel que $E = F \oplus G$.
+\end{theoreme}
+
+\begin{demo}{}
+Soit $(e_1,...,e_p)$ une base de $F$. Alors $(e_1,...,e_p)$ est libre dans $E$ donc d'après le théorème de la base incomplète, on peut trouver $e_{p+1},...,e_n \in E$ tels que $(e_1,...,e_p,e_{p+1},...,e_n)$ est une base de $E$. Il suffit de prendre (exercice) $G = \text{Vect}(e_{p+1},...,e_n)$.
+\end{demo}
+\end{remarque}
+
+\begin{theoreme}{Formule de Grassmann}{FormuleGrassmann}
+Soit $E$ un $\K$-ev de dimension finie, $F,G$ deux sous-espaces vectoriels de $E$. \\
+Alors 
+\begin{center}
+$\dim (F+G) = \dim F + \dim G - \dim (F \cap G)$.
+\end{center}
+\end{theoreme}
+
+\begin{demo}
+\begin{itemize}
+	\item $F \cap G$ est un sous-espace vectoriel de $E$ inclus dans $F$, c'est donc aussi un sous-espace vectoriel de $F$. 
+	\item $F$ est de dimension finie, (sous-espace vectoriel de $E$) donc, d'après le théorème \ref{theoreme:ExistenceSupplémentaire}, on peut considérer $H$ un sous-espace vectoriel de $F$ tel que : \\
+	$F = (F \cap G) \oplus H$. \\
+	
+	On veut montrer que $F+G = H \oplus G$. \\
+	$H$ est un sous-espace vectoriel de $F$, donc de $F+G$ et $G$ est aussi un sous-espace vectoriel de $F+G$. \\
+	$\longrightarrow H \cap G = \{0\}$ : soit $x \in H \cap G$, on a $x \in F \cap G$ (car $H \subset F$) et $x \in (F \cap G) \cap H = \{0\}$. \\
+	$\longrightarrow F+G = H+G$ : soit $x \in F+G, x = a+b$ avec $a \in F, b \in G$. \\
+	$a\in F = H+F\cap G$ donc $a$ s'écrit $a = c+d$ avec $c\in H, d \in F \cap G$. \\
+	d'où $x = c+d+b$, on a $c \in H$ et $d+b \in G$ car $d \in G$ et $b \in G$. \\
+	donc $x \in H+G$. \\
+	
+	D'où $\dim (F+G) = \dim (H \oplus G) = \dim H + \dim G$. \\
+	De plus, $\dim F = \dim H + \dim (F \cap G)$, car $F = (F\cap G) \oplus H$, d'où le résultat.
+
+\end{itemize}
+\end{demo}
+
+\begin{remarque}
+\begin{enumerate}
+	\item $E$ un $\K$-ev de dimension finie $n \in \N^*$. $\forall k \in \llbracket 0,n \rrbracket, E$ admet des sous-espaces vectoriels de dimension $k$. \\
+	Si $\mathcal{B} = (e_1,...,e_n)$ est une base de $E$, alors $\text{Vect}(e_1,...,e_k)$ est un sous-espace vectoriel de dimension $k$ pour $1 \le k \le n$ et $\{0\}$ est (le seul) sous-espace vectoriel de $E$ de dimension $0$.
+	
+	\item Les hyperplans de $E$ sont les sous-espaces vectoriel de $E$ de dimension $n-1$ :
+	\begin{itemize}
+		\item Toute droite vectorielle $\text{Vect}(a) (a \ne 0)$ est de dimension $1$, donc si $E = H \oplus \text{Vect}(a)$, alors $n = \dim E = \dim H + \dim \text{Vect}(a) = \dim H + 1$.
+		\item Si $F$ est un sous-espace vectoriel de dimension $n-1$, on peut considérer un supplémentaire $D$ de $F$, et on a $\dim D = 1$ donc $D$ est une droite vectorielle.
+	\end{itemize}
+\end{enumerate}
+\end{remarque}
+
+\subsection{Produit cartésien}
+
+\begin{theoreme}{Produit cartésien}{}
+Soient $E,F$ deux $\K$-ev de dimension finie. Alors $E \times F$ est de dimension finie et 
+\begin{center}
+$\dim (E \times F) = \dim E + \dim F$.
+\end{center}
+\end{theoreme}
+
+\begin{demo}{}
+$(x,y) = (x,0_F)+(0_E,y)$. \\
+$\forall x \in E, \forall y \in F$, soit $E' = \{(x,0_F) \mid x \in E\}, F' = \{(0_E,y) \mid y \in F\}$.
+\begin{itemize}
+	\item $E'$ et $F'$ sont des sous-espaces vectoriels de $E \times F$ (exercice laissé au lecteur). \\
+	\item $E'$ est de dimension finie, et $\dim E' = \dim E$. (si $\mathcal{B} = (e_1,...,e_n)$ est une base de $E$, alors $\mathcal{B}' = ((e_1,0_F),...,(e_n,0_F))$ est une base de $E'$). (exercice laissé au lecteur) \\
+	De même, $F'$ est de dimension finie et $\dim F' = \dim F$.
+	\item $E \times F = E' \oplus F'$ (exercice laissé au lecteur), d'où le résultat.
+\end{itemize}
+\end{demo}
+
+\begin{remarque}
+On peut facilement généraliser ce résultat au cas de $n \; \K$-ev : si $E_1,...,E_n$ sont des $\K$-ev de dimension finie, alors $E_1 \times ... \times E_n$ est de dimension finie et 
+\begin{center}
+$\dim (E_1 \times ... \times E_n) = \dim E_1 + ... + \dim E_n$
+\end{center}
+\end{remarque}
+
+\begin{theoreme}{}{}
+Soient $E,F$ deux $\K$-ev de dimension finie, alors $\mathcal{L}(E,F)$ est de dimension finie et 
+\begin{center}
+$\dim \mathcal{L}(E,F) = \dim E \cdot \dim F$
+\end{center}
+\end{theoreme}
+
+\begin{demo}{}
+Voir plus tard, dans le chapitre des matrices.
+\end{demo}
+
+\begin{remarque}
+En particulier, si $E$ est un $\K$-ev de dimension finie, alors $\mathcal{L}(E,\K)$ est de dimension finie et 
+\begin{center}
+$\dim \mathcal{L}(E,\K) = \dim E$
+\end{center}
+$\mathcal{L}(E,\K)$ s'appelle l'\Strong{espace dual} de $E$, et se note aussi $E^*$
+\end{remarque}
+
+\newpage
+
+\section{Applications linéaires en dimension finie}
+
+Soit $E$ un $\K$-ev, de dimension finie.
+
+\subsection{Formes linéaires coordonnées dans une base}
+
+Soit $\mathcal{B} = (e_1,...,e_n)$ une base de $E$. \\
+\textbf{Rappel :} si $x \in E$, il existe un unique $(\alpha_1,...,\alpha_n) \in \K^n$ tel que $x$ s'écrit \\
+\begin{center}
+$x = \alpha_1e_1+...+\alpha_ne_n$
+\end{center}
+(c'est le $n$-uplet des coordonnées de $x$ dans $\mathcal{B}$). \\
+Pour $x \in E$, on note alors $\alpha_i(x)$ la $i^\text{ème}$ coordonnée de $x$ dans $\mathcal{B}$. \\
+$\alpha_i : E \to \K$ est linéaire. ($1 \le i \le n$). \\
+Soient en effet $x, y \in E, \lambda \in \K$. \\
+$x = \displaystyle{\sum_{i=1}^n \alpha_i(x) e_i}, y = \displaystyle{\sum_{i=1}^n \alpha_i(y)e_i}$, d'où
+$\lambda x + y = \displaystyle{\sum_{i=1}^n \lambda \alpha_i(x) + \alpha_i(y)}$ \\
+
+Par unicité des coordonnées de $\lambda x + y$ dans $\mathcal{B}$, $\forall 1 \le i \le n, \alpha_i(\lambda x + y) = \lambda \alpha_i(x) + \alpha_i(y)$. \\
+
+$\alpha_1,...,\alpha_n$ sont les \Strong{formes linéaires coordonnées} relatives à $\mathcal{B}$. \\
+Pour $1 \le i,j \le n, \alpha_i(e_j) = \delta_{ij}$. $(e_j = 0e_1+...+0e_{j-1}+1e_j + 0e_{j+1}+...+0e_n)$ \\
+Montrer que $(\alpha_1,...,\alpha_n)$ est une base de $E^*$. On l'appelle la \Strong{base duale} de la base $\mathcal{B}$. \\
+
+$\longrightarrow (\alpha_1,...,\alpha_n)$ est libre : soient $\lambda_1,...,\lambda_n \in \K$ tels que $\lambda_1\alpha_1+....+\lambda_n\alpha_n = 0_{E^*}$. \\
+Alors $\forall x \in E, \lambda_1\alpha_1(x) + ... + \lambda_n\alpha_n(x) = 0_{\K}$.
+Pour $1 \le j \le n, 0_\K = \displaystyle{\sum_{i=1}^n \lambda_i \alpha_i(e_j)} = \lambda_j$ \\
+
+$\longrightarrow$ Montrer que $E^* = \text{Vect}(\alpha_1,...,\alpha_n)$. \\
+Soit $\varphi \in E^* = \mathcal{L}(E,\K)$. \\
+Alors, pour $x \in E, \varphi(x) = \varphi \left(\displaystyle{\sum_{i=1}^n \alpha_i(x)e_i}\right) \underset{\varphi \text{ linéaire}}{=} \displaystyle{\sum_{i=1}^n \alpha_i(x) \varphi(e_i) = \sum_{i=1}^n \alpha_i(x) \lambda_i}$ où $\lambda_i = \varphi(e_i)$. \\
+
+D'où $\varphi = \displaystyle{\sum_{i=1}^n \alpha_i \lambda_i} \in \text{Vect}(\alpha_1,...,\alpha_n)$. \\
+
+On sait aussi que $E^*$ est de dimension finie, et que $\dim E^* = n$.
+
+\begin{remarque}
+Soit $x \in E$.
+\begin{center}
+\textbox{$x = 0_E \Longleftrightarrow \forall \varphi \in E^*, \varphi(x) = 0$}
+\end{center}
+$\Longrightarrow$ évident par linéarité de $\varphi$. \\
+$\Longleftarrow$ on a en particulier $\alpha_i(x) = 0 (1 \le i \le n)$ d'où $x = \displaystyle{\sum_{i=1}^n \underbrace{\alpha_i(x)}_{=0} e_i}= 0_E$. \\
+
+Par contraposée, $x \ne 0_E \Longleftrightarrow \exists \varphi \in E^*, \varphi(x) \ne 0_\K$.
+
+\end{remarque}
+
+\subsection{Propriétés des applications linéaires en dimension finie}
+
+Soit $F$ un $\K$-ev (quelconque), $\mathcal{B} = (e_1,...,e_n)$ une base de $E$, $(\alpha_1,...,\alpha_n)$ la base duale de $\mathcal{B}$.
+
+\subsubsection{Condition de nullité d'une application linéaire}
+
+Soient $f,g \in \mathcal{L}(E,F)$.
+
+\begin{theoreme}{Egalité de deux applications linéaires}{}
+Deux applications linéaires sont égales si et seulement si elles coïncident sur une base.
+\begin{center}
+$f = g \Longleftrightarrow \forall i \in \llbracket 1,n \rrbracket f(e_i) = g(e_i)$
+\end{center}
+\end{theoreme}
+
+\begin{demo}{}
+$\Longrightarrow$ évident \\
+$\Longleftarrow$ Pour $x \in E$, 
+$f(x) = f\left(\displaystyle{\sum_{i=1}^n \alpha_i(x) e_i}\right) = \displaystyle{\sum_{i=1}^n \alpha_i(x) f(e_i) = \sum_{i=1}^n \alpha_i(x) g(e_i)} = g \left(\displaystyle{\sum_{i=1}^n \alpha_i(x) e_i} \right) = g(x)$
+\end{demo}
+
+En particulier,
+\begin{center}
+$f = 0_{\mathcal{L}(E,F)} \Longleftrightarrow \forall i \in \llbracket 1,n \rrbracket, f(e_i) = 0_F$
+\end{center}
+
+\subsubsection{Analogue des polynômes interpolateurs de Lagrange pour les applications linéaires en dimension finie}
+
+Soient $y_1,...,y_n \in F$ et $f : x \in E \mapsto \displaystyle{\sum_{i=1}^n \alpha_i(x) y_i} \in F$. \\
+$f$ est linéaire de $E$ dans $F$. \\
+Soient $x,x' \in E, \lambda \in \K$. 
+\begin{align*}
+f(\lambda x+x') &= \sum_{i=1}^n \alpha_i(\lambda x + x')y_i \\
+&= \sum_{i=1}^n \lambda \alpha_i(x)y_i+\alpha_i(x')y_i \quad (\alpha_i \text{ est linéaire }, 1 \le i \le n)\\
+&= \lambda \sum_{i=1}^n \alpha_i(x)y_i + \sum_{i=1}^n \alpha_i(x')y_i \\
+&= \lambda f(x) + f(x')
+\end{align*}
+
+De plus, $\forall i \le j \le n, f(e_j) = \displaystyle{\sum_{i=1}^n\alpha_i(e_j)y_i} = \displaystyle{\sum_{i=1}^n \delta_{ij}y_i} = y_j$. \\
+
+\textbf{Bilan :} $f$ est l'unique application linéaire (cf 3.2.1) de $E$ dans $F$ telle que $\forall 1 \le j \le n, f(e_j) = y_j$.
+
+\begin{theoreme}{}{}
+Pour $y_1,...,y_n \in F$, il existe une unique application linéaire $f$ de $E$ dans $F$ telle que 
+\begin{center}
+$\forall 1 \le j \le n, f(e_j) = y_j$
+\end{center}
+\end{theoreme}
+
+\begin{exemple}{}
+$E = \R^3, F = \R[X], P = X+X^2, Q = 1+X^3,R=X^4, bc_3 = (e_1,e_2,e_3)$. \\
+Il existe une unique application linéaire $f : \R^3 -> \R[X]$ telle que : \\
+$f(e_1) = P, f(e_2) = Q, f(e_3) = R$. \\
+
+Pour $e = (x,y,z) = xe_1+ye_2+ze_3 \in \R^3$
+Ici $\alpha_1(e) = x, \alpha_2(e) = y, \alpha_3(e) = z$. \\
+$f(e) = xP+yQ+zR = y+xX+xX^2+yX^3+zX^4$.
+\end{exemple}
+
+\subsubsection{Isomorphismes linéaires en dimension finie}
+
+Soit $F$ un $\K$-ev quelconque, $B = (e_1,...,e_n)$ une base de $E$. \\
+Soit $f \in \mathcal{L}(E,F)$.
+
+\begin{theoreme}{Caractérisation d'un isomorphisme linéaire}{}
+\begin{enumerate}
+	\item $f$ est injective $\Longleftrightarrow (f(e_1),...,f(e_n))$ est libre ;
+	\item $f$ est surjective $\Longleftrightarrow (f(e_1),...,f(e_n))$ engendre $F$ ;
+	\item $f$ est un isomorphisme $\Longleftrightarrow (f(e_1),..,f(e_n))$ est une base de $F$.
+\end{enumerate}
+\end{theoreme}
+
+\begin{demo}{}
+\begin{enumerate}
+	\item $\Longrightarrow$ $\mathcal{B}$ est libre et $f$ est injective donc $f(\mathcal{B})$ est libre. \\
+	$\Longleftarrow$ Soit $x \in \text{Ker }f$, on écrit $x = \displaystyle{\sum_{i=1}^n \alpha_ie_i}$. \\
+	$0_F = f(x) = f \left(\displaystyle{\sum_{i=1}^n \alpha_ie_i}\right) = \displaystyle{\sum_{i=1}^n\alpha_if(e_i)}$. \\
+	Or $(f(e_1),...,f(e_n))$ est libre donc $\alpha_i = 0$ ($1 \le i \le n)$ puis $x = 0_E$, donc $\text{Ker }f = \{0_E\}$. \\
+	\item est connu : on sait que $\mathcal{B}$ est une famille génératrice de $E$.
+\end{enumerate}
+\end{demo}
+
+\begin{remarque}{}
+\begin{itemize}
+	\item Si $F$ est isomorphe à $E$, alors $F$ est de dimension finie et $\dim F = \dim E$.
+	\item Réciproquement, si $F$ est de dimension finie, avec $\dim F = \dim E =n$, alors $E$ et $F$ sont isomorphes : \\
+	Soit $\mathcal{C} = (c_1,...,c_n)$ une base de $F$. On considère l'unique application linéaire $h$ de $E$ dans $F$ telle que $h(e_i) = c_i$ ($1 \le i \le n$). \\
+	$h$ transforme la base $\mathcal{B}$ en une base de $F$, donc $h$ est un isomorphisme.
+\end{itemize}
+\end{remarque}
+
+\begin{corollaire}{Isomorphismes particuliers}{}
+Tout $\K$-ev de dimension finie $n \in \N^*$ est isomorphe à $\K^n$.
+\end{corollaire}
+
+\subsubsection{Rang d'une application linéaire en dimension finie}
+
+Soit $F$ un $\K$-ev quelconque, $f \in \mathcal{L}(E,F)$.
+
+\begin{enumerate}
+	\item Soit $\mathcal{B} = (e_1,...,e_n)$ une base de $E$, \\
+	$\text{Im } f = f(\text{Vect}(e_1,...,e_n)) = \text{Vect}(f(e_1),...,f(e_n))$. \\
+	Donc $\text{Im } f$ est de dimension finie et $\dim \text{Im }f \le n$. \\
+	
+	\begin{definition}{Rang d'une application linéaire}{}
+	Le \Strong{rang} de $f$ est, par définition, \mathbox{\text{rg }f = \dim \text{Im } f}.
+	\end{definition}
+	
+	\begin{itemize}
+		\item Si $f$ est injective alors $(f(e_1),...,f(e_n))$ est libre, donc c'est une base de $\text{Vect}(f(e_1),...,f(e_n)) = \text{Im }f$. \\
+		Donc $\text{rg} f = n (= \dim E)$.
+		
+		\item Réciproquement, si $\text{rg} f = n$, $(f(e_1),...,f(e_n))$ est une famille génératrice de cardinal $n = \dim \text{Im } f$.
+		
+		\item Finalement, \textbox{$f$ injective $\Longleftrightarrow$ rg $f = \dim E$}
+	\end{itemize}
+
+	\item On suppose de plus : $F$ est de dimension finie. \\
+	$\text{Im }f$ est un sous-espace vectoriel donc $\dim \text{Im }f \le \dim F$ (et $\dim \text{Im f} = \dim F \Longleftrightarrow \text{Im } f = F \Longleftrightarrow f$ surjective). \\
+	Donc \textbox{rg $f \le \dim F$} et \textbox{rg $f = \dim F \Longleftrightarrow f$ surjective}. \\
+	
+	On a donc toujours rg $f \le \min(\dim E, \dim F)$. 
+	\begin{itemize}
+		\item si $\dim F < \dim E$, alors rg $f \le \dim F < \dim E$, donc $f$ ne peut pas être injective (par analogie avec le principe des tiroirs, voir chapitre sur les applications).
+		
+		\item si $\dim E < \dim F$, alors rg $f \le \dim E < \dim F$, donc $f$ ne peut pas être surjective. 
+		
+		\item De façon équivalente, si $f$ est injective alors $\dim E \le \dim F$ ; si $f$ est surjective alors $\dim F \le \dim E$. Et, si $f$ est un isomorphisme, alors $\dim E = \dim F$.
+	\end{itemize}
+	
+	\item On suppose de plus que $\dim F = \dim E$. C'est le cas en particulier si $F = E$ (et $f \in \mathcal{L}(E)$).
+	
+	\begin{itemize}
+		\item si $f$ est injective, alors rg $f = \dim E = \dim F$ donc $f$ est surjective ;
+		\item si $f$ est surjective, alors rg $f = \dim F = \dim E$ donc $f$ est injective.
+	\end{itemize}
+	\textbf{Bilan :} \textbox{$f$ injective $\Longleftrightarrow f$ surjective $\Longleftrightarrow f$ est un isomorphisme}
+	
+	\begin{theoreme}{Récapitulatif pour deux espaces vectoriels de même dimension finie}{}
+	Soient $E,F$ deux $\K$-ev de dimension finie avec $\dim E = \dim F, f \in \mathcal{L}(E,F), \mathcal{B} = (e_1,...,e_n)$ base de $E$. \\
+	Les assertions suivantes sont équivalentes :
+	\begin{enumerate}
+		\item $f$ est injective ($\text{Ker }f = \{0_E\}$) ;
+		\item $f$ est surjective ($\text{Im }f = F$) ;
+		\item $f$ est un isomorphisme ;
+		\item rg $f = n$ ;
+		\item $(f(e_1),...,f(e_n))$ est libre ;
+		\item $(f(e_1),...,f(e_n))$ est génératrice ;
+		\item $(f(e_1),...,f(e_n))$ est une base.
+	\end{enumerate}
+	\end{theoreme}
+
+	Ceci est vrai en particulier si $F = E$. \\
+
+	\begin{exemple}{}
+	\begin{itemize}
+		\item Si $f \in \mathcal{L}(\R^3)$, avec $bc_3 = (e_1,e_2,e_3)$, pour montrer que $f$ est un automorphisme, il suffit de voir que $(f(e_1),f(e_2),f(e_3))$ est libre.
+		\item \textbf{Interpolation de Lagrange :} \\
+		$x_0,...,x_n$ distincts dans $\K$, $y_0,...,y_n \in \K$, montrer que :
+		\begin{center}
+		$\exists ! P \in \K_n[X], \forall 0 \le i \le n, \overset{\sim}{P}(x_i) = y_i$
+		\end{center}
+		
+		Soit $f : P \in \K_n[X] \mapsto (\overset{\sim}{P}(x_0),...,\overset{\sim}{P}(x_n)) \in \K^{n+1}$. \\
+		$\longrightarrow$ $f$ est linéaire (laissé au lecteur) \\
+		$\longrightarrow$ Quid $\text{Ker } f$ ? \\
+		Soit $P \in \text{Ker f} : f(P) = 0_{\K^{n+1}}$ \ie $\forall 0 \le i \le n, \overset{\sim}{P}(x_i) = 0$. \\
+		$P$ admet $n+1$ racines distinctes et $\deg P \le n$ donc $P = 0$. \\
+		D'où $\text{Ker }f = \{0\}$ : $f$ est injective. \\
+		
+		Or $\dim \K_n[X] = n+1 = \dim \K^{n+1}$ donc $f$ est un isomorphisme. En particulier, $f$ est bijective. \\
+		Donc $\exists ! P \in \K_n[X]$ tel que $f(P) = (y_0,...,y_n)$ \ie tel que $\forall 0 \le i \le n, \overset{\sim}{P}(x_i) = y_i$.
+		
+		\item $E = \K$-ev de dimension finie $n \in \N^*$. \\
+		Soit $(\varphi_1,...,\varphi_n)$ une base de $E^*$. \\
+		$\longrightarrow$ Existe-t-il une base $\mathcal{B}$ de $E$ dont $(\varphi_1,...,\varphi_n)$ est la base duale ?
+		
+		\begin{remarque}{}
+		Si $(e_1,...,e_n)$ est une base de $E$ dont on note $(\alpha_1,...,\alpha_n)$ la base duale, on a :
+		\begin{center}
+		$\forall 1 \le i \le n, \alpha_i(e_j) = \delta_{ij}$
+		\end{center}
+		$\alpha_i$ est l'unique application linéaire de $E$ dans $\K$ définie par $\forall 1 \le i,j \le n, \alpha_i(e_j) = \delta_{ij}$. \\
+		\textbf{Suggestion :} $f : x \in E \mapsto (\varphi_1(x),...,\varphi_n(x)) \in \K^n$.
+		\end{remarque}
+		
+	\end{itemize}
+	\end{exemple}
+
+\end{enumerate}
+
+\subsubsection{Théorème du rang}
+
+\begin{theoreme}{Théorème du rang}{}
+	Soit $E$ un $\K$-ev, de dimension finie. Soit $F$ un sous-espace vectoriel de $E$, et $f$ une application linéaire de $E$ dans $F$.  Alors
+	\begin{center}
+	\textbox{rg $f + \dim \text{Ker } f = \dim E$}
+	\end{center}
+\end{theoreme}
+
+\begin{demo}{}
+Soit $H$ un supplémentaire de $\text{Ker } f$ dans $E$. $E = H \oplus \text{Ker } f$. \\
+Soit $g : x \in H \mapsto f(x) \in \text{Im } f$. 
+
+\begin{itemize}
+	\item $g$ est bien définie et linéaire, car $f$ l'est.
+	\item Soit $x \in \text{Ker }g : x \in H$ et $f(x) = 0$ donc $x \in H \cap \text{Ker }f = \{0_E\}$, donc $\text{Ker }g = \{0_E\}$. $g$ est donc injective. \\
+	\item $g$ est surjective. Soit $y \in \text{Im }f$, $y$ s'écrit $y = f(a)$ où $a \in E$. \\
+	$a$ s'écrit $a=b+c$ avec $b \in H$, $c \in \text{Ker }f$. \\
+	Donc $y = f(a) = f(b+c) = f(b)+f(c) =f(b) = g(b)$ car $b \in H$. \\
+	On en déduit que $g$ est un isomorphisme ce qui implique que rg $f = \dim \text{Im }f = \dim H = \dim E - \dim \text{Ker }f$. \\
+\end{itemize}
+\end{demo}
+
+\begin{exemple}{}
+\begin{itemize}
+	\item $f : (x,y,z) \in \R^3 \mapsto (x-2y+z,x-z,y-z) \in \R^3$. \\
+	\begin{itemize}
+		\item $f$ est linéaire (vérification facile)
+		\item $bc_3 = (e_1,e_2,e_3), \text{Im }f = f(\R^3) = f(\text{Vect}(e_1,e_2,e_3)) = \text{Vect}(\underbrace{f(e_1)}_{u_1},\underbrace{f(e_2)}_{u_2},\underbrace{f(e_3)}_{u_3})$. \\
+		$u_1 = (1,1,0), u_2 = (-2,0,1), u_3 = (1,-1,-1)$. \\
+		La famille $(u_1,u_2)$ est libre, $u_3 = -u_1-u_2$. \\
+		d'où $\text{Im }f = \text{Vect}(u_1,u_2)$ et $(u_1,u_2)$ est une base de $\text{Im }f$ donc \textbox{rg $f = 2$} \\
+		
+		D'après le théorème du rang, $\dim \text{Ker} f = 3-$rg $f = 1$, de plus, \\
+		$0 = u_1+u_2+u_3 = f(e_1)+f(e_2)+f(e_3) = f(\underbrace{e_1+e_2+e_3}_{a})$ \\
+		$a = (1,1,1)$, $a \in \text{Ker }f$ et $a \ne 0_{\R^3}$ donc $\text{Vect}(a) \subset \text{Ker }f$ puis $\dim \text{Vect}(a) = \dim \text{Ker }f = 1$. \\
+		Donc $\text{Vect}(a) = \text{Ker }f$. \\
+		
+		$a \not \in \text{Vect}(u_1,u_2)$ : sinon il existe $\alpha,\beta \in \R$ tels que $\alpha u_1+\beta u_2 = a$, \\
+		\ie tels que $\begin{cases} \alpha-2\beta &= 1 \\ \alpha &= 1 \\ \beta &= 1 \end{cases}$ : impossible. \\
+		
+		D'où $\text{Vect}(a) \cap \text{Vect}(u_1,u_2) = \{0\}$ \ie $\text{Ker }f \cap \text{Im }f = \{0_E\}$. \\
+		D'où $\dim (\text{Ker }f+\text{Im }f) = \dim \text{Ker } f + \dim \text{Im }f = 1+2 = 3 = \dim \R^3$. \\
+		D'où $\text{Ker }f + \text{Im }f = \R^3$, et finalement \textbox{$\R^3 =$ Ker $f \oplus$ Im $f$}.
+		
+	\end{itemize}
+	
+	\item $E$ de dimension finie, $f \in \mathcal{L}(E)$, \textbox{$\text{Ker }f \cap \text{Im }f \{0\} \Longrightarrow E = \text{Ker }f \oplus \text{Im }f$}. 
+\end{itemize}
+\end{exemple}
+
+\begin{remarque}{}
+Soit $\varphi$ une forme linéaire de $E$ \strong{non nulle}. \\
+$\text{Im }\varphi$ est un sous-espace vectoriel de $\K$, distinct de $\{0\}$ donc rg $\varphi = \dim \text{Im }\varphi \ge 1$, mais aussi rg $\varphi = \dim \K \le 1$, donc \textbox{rg $\varphi = 1$}. \\
+
+D'après le théorème du rang, $(\varphi : E \to \K)$ : $\dim \text{Ker } \varphi = \dim E -$ rg $\varphi = \dim E - 1$. \\
+\textbox{Tout hyperplan de $E$ est de dimension $n-1$.} \\
+
+Soit $\mathcal{B} = (e_1,...,e_n)$ une base de $E$, $\mathcal{B}^* = (\alpha_1,...,\alpha_n)$ la base duale, $\varphi$ s'écrit donc \\
+$\varphi = a_1\alpha_1 + a_n \alpha_n$ avec $a_1,...,a_n \in \K$ non tous nuls (sinon $\varphi = 0$). \\
+
+Donc, pour $x = \displaystyle{\sum_{i=1}^nx_ie_i} \in E, x \in \text{Ker }\varphi \Longleftrightarrow \displaystyle{\sum_{i=1}^na_i\alpha_i(x)} = 0 \Longleftrightarrow \displaystyle{\sum_{i=1}^n a_i x_i} = 0$. \\
+Ainsi, $\text{Ker } \varphi$ est l'ensemble d'équation cartésienne $a_1x_1+...+a_nx_n = 0$, relativement à $\mathcal{B}$. \\
+
+Supposons que $\text{Ker } \varphi$ admette une autre équation cartésienne $b_1x_1+...+b_nx_n = 0$, avec $b_1,...,b_n \in \K$ non tous nuls. \\
+Alors $\text{Ker } \varphi = \text{Ker }(\underbrace{b_1\alpha_1+...+b_n\alpha_n}_\psi)$, il existe alors $\lambda \in \K$ tel que : 
+\begin{center}
+$\psi = \lambda \varphi$.
+\end{center}
+\ie tel que $\displaystyle{\sum_{i=1}^nb_i\alpha_i = \sum_{i=1}^n\lambda a_i\alpha_i}$, \\
+d'où $\forall 1 \le i \le n, b_i = \lambda \alpha_i$ (unicité des coordonnées dans une base).
+
+\end{remarque}
+
+\begin{exemple}[Exercice]{Intersection de deux hyperplans}
+Soient $H_1,H_2$ deux hyperplans du $\K$-ev $E$ de dimension finie. Quid $\dim (H_1 \cap H_2)$ ?
+
+Si $H_1 = H_2$, alors $H_1 \cap H_2 = H_1$ et $\dim (H_1\cap H_2) = \dim H_1 = n-1$. \\
+Si $H_1 \ne H_2$, alors $H_2 \not \subset H_1$ (si $H_2 \subset H_1$ alors $H_2 = H_1$ pour cause de dimension) \\
+Il existe donc $a \in H_2$ tel que $a \not \in H_1$. \\
+On a alors $E = H_1+\text{Vect}(a) \subset H_1+H_2 \subset E$ donc $H_1+H_2 = E$. \\
+$\dim (H_1 \cap H_2) = -\dim(H_1+H_2) + \dim H_1 + \dim H_2 = -n + (n-1)+(n-1) = n-2$. \\
+
+Par exemple, l'intersection de deux plans dans un espace à trois dimensions est soit l'un des deux plans (dimension $= 2$) soit une droite vectorielle (dimension $=1$).
+\end{exemple}
+
+\end{document}
