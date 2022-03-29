@@ -118,9 +118,16 @@
     $\mathcal{L}(E,F)$ est de dimension finie et \textbox{$\dim \mathcal{L}(E,F) = \dim E \times \dim F$}
 \end{corollaire}
 
-\begin{definition}{Application linéaire canonique associée à une matrice}
-    Soient $n, p \in \N^*$ et $M \in \mathcal{M}_{n,p}(\K)$. On appelle \Strong{application linéaire canoniquement associée à $M$} l'unique application linéaire \strong{de $\K^p$ dans $\K^n$} telle que \strong{$\mat_{\bc_p, \bc_n}(f) = M$}. \\
-    En particulier, pour $M \in \mathcal{M}_n(\K)$, on appelle \strong{endomorphisme de $\K^n$ canoniquement associé à $M$} l'unique $f \in \mathcal{L}(\K^n)$ telle que \strong{$\mat_{\bc_n}(f) = M$}.
+\begin{definition}{Application linéaire canonique associée à une matrice}{}
+    Soient $n, p \in \N^*$ et $M \in \mathcal{M}_{n,p}(\K)$. \\
+    On appelle \Strong{application linéaire canoniquement associée à $M$} l'unique application linéaire \strong{de $\K^p$ dans $\K^n$} telle que : 
+    \begin{center}
+        \strong{$\mat_{\bc_p, \bc_n}(f) = M$}
+    \end{center} 
+    En particulier, pour $M \in \mathcal{M}_n(\K)$, on appelle \strong{endomorphisme de $\K^n$ canoniquement associé à $M$} l'unique $f \in \mathcal{L}(\K^n)$ telle que 
+    \begin{center}
+        \strong{$\mat_{\bc_n}(f) = M$}
+    \end{center}
 \end{definition}
 
 \begin{remarque}
@@ -305,10 +312,23 @@
 \end{proposition}
 
 \begin{demo}
-    Soient $a \in \mathcal{L}(\K^q,\K^p)$, $b \in \mathcal{L}(\K^r, \K^q)$, $c \in \mathcal{L}(\K^s, \K^r)$ respectivement et canoniquement associées à $A$, $B$ et $C$. Alors $\underbrace{(a \circ b)}_{\mathcal{L}(\K^r, \K^p)} \circ \; c = a \; \circ \underbrace{(b \circ c)}_{\mathcal{L}(\K^s, \K^q)}$. D'où $\mat_{\bc_s, \bc_p}((a \circ b) \circ c) = \mat_{\bc_s, \bc_p}(a \circ (b \circ c))$. \\
-    Or, $\mat_{\bc_s, \bc_p}((a \circ b) \circ c) = \mat_{\bc_q, \bc_p}(a \circ b) \mat_{\bc_s, \bc_r}(c)$. \\
-    De plus, $\mat_{\bc_s, \bc_p}(a \circ b) = \mat_{\bc_q, \bc_p}(a) \mat_{\bc_r, \bc_q}(b) = AB$. \\
-    Donc $\mat_{\bc_s, \bc_p}((a \circ b) \circ c) = (AB)C$. De même $\mat_{\bc_s, \bc_p}(a \circ (b \circ c)) = A(BC)$.
+    Soient $a \in \mathcal{L}(\K^q,\K^p)$, $b \in \mathcal{L}(\K^r, \K^q)$, $c \in \mathcal{L}(\K^s, \K^r)$ respectivement et canoniquement associées à $A$, $B$ et $C$, alors :
+    \begin{center}
+        $\underbrace{(a \circ b)}_{\mathcal{L}(\K^r, \K^p)} \circ \; c = a \; \circ \underbrace{(b \circ c)}_{\mathcal{L}(\K^s, \K^q)}$
+    \end{center} 
+    D'où : 
+    \begin{center}
+        $\mat_{\bc_s, \bc_p}((a \circ b) \circ c) = \mat_{\bc_s, \bc_p}(a \circ (b \circ c))$
+    \end{center}
+    Or 
+    \begin{center}
+        $\mat_{\bc_s, \bc_p}((a \circ b) \circ c) = \mat_{\bc_q, \bc_p}(a \circ b) \mat_{\bc_s, \bc_r}(c)$
+    \end{center}
+    De plus 
+    \begin{center}
+        $\mat_{\bc_s, \bc_p}(a \circ b) = \mat_{\bc_q, \bc_p}(a) \mat_{\bc_r, \bc_q}(b) = AB$
+    \end{center}
+    Donc \textbox{$\mat_{\bc_s, \bc_p}((a \circ b) \circ c) = (AB)C$}. De même $\mat_{\bc_s, \bc_p}(a \circ (b \circ c)) = A(BC)$.
 \end{demo}
 
 \pagebreak
@@ -347,7 +367,6 @@
 
 \section{La $\K$-algèbre $\mathcal{M}_n(\K)$}
 
-\subsection{Propriété de $\K$-algèbre et isomorphismes de $\K$-algèbres}
 \begin{remarque}{}
 	Soit $n \in \N^*$, si $A,B \in \mathcal{M}_n(\K)$, alors $AB$ est bien défini et appartient à $\mathcal{M}_n(\K)$ donc le produit matriciel devient une LCI sur $\mathcal{M}_n(\K)$.
 \end{remarque}
@@ -364,18 +383,32 @@
 \end{demo}
 
 \begin{remarque}
-	Pour $A \in \mathcal{M}_n(\K)$ et $1 \le i \le n$, ($(E_{ij})_{1 \le i,j \le n}$ la base canonique de $\mathcal{M}_n(\K)$) : \\
-	$E_{ii}A = \begin{pmatrix} 0 \\ \vdots \\ 0 \\ L_i(A) \\ 0 \\ \vdots \\ 0 \end{pmatrix}$ (en $i$ème position). \\
-	Donc $E_{11}A + E_{22}A + \cdots + E_{nn}A = A$. \\
-	De même, $AE_{ii} = \begin{pmatrix} 0 & \cdots & C_i(A) & 0 & \cdots & 0 \end{pmatrix}$ \\
-	donc $A(E_{11}+\cdots+E_{nn})=A$. \\
-	On pose $I_n = E_{11}+\cdots+E_{nn} = \begin{pmatrix} 1 & 0 & \cdots & 0 \\ 0 & \ddots & \ddots & \vdots \\ \vdots & \ddots  & \ddots & 0 \\ 0 & \cdots & 0 & 1 \end{pmatrix}$ \\
-	Alors $\forall A \in \mathcal{M}_n(\K), AI_n = I_nA = A$. \\
+	Pour $A \in \mathcal{M}_n(\K)$ et $1 \le i \le n$, ($(E_{ij})_{1 \le i,j \le n}$ la base canonique de $\mathcal{M}_n(\K)$) :
+	\begin{center}
+	    $E_{ii}A = \begin{pmatrix} 0 \\ \vdots \\ 0 \\ L_i(A) \\ 0 \\ \vdots \\ 0 \end{pmatrix}$ (en $i$ème position).
+	\end{center}
+	Donc 
+	\begin{center}
+	    $E_{11}A + E_{22}A + \cdots + E_{nn}A = A$
+	\end{center}
+	De même, $AE_{ii} = \begin{pmatrix} 0 & \cdots & C_i(A) & 0 & \cdots & 0 \end{pmatrix}$, donc \textbox{$A(E_{11}+\cdots+E_{nn})=A$} \\
+	On pose 
+	\begin{center}
+	    $I_n = E_{11}+\cdots+E_{nn} = \begin{pmatrix} 1 & 0 & \cdots & 0 \\ 0 & \ddots & \ddots & \vdots \\ \vdots & \ddots  & \ddots & 0 \\ 0 & \cdots & 0 & 1 \end{pmatrix}$
+	\end{center}
+	Alors \strong{$\forall A \in \mathcal{M}_n(\K), AI_n = I_nA = A$}. \\
 	
-	Autre façon : \\
-	Soit $A \in \mathcal{M}_n(\K), a \in \mathcal{L}(\K^n)$ canoniquement associé à $A$. On a : $a \circ \text{Id}_{\K^n} = \text{Id}_{\K^n} \circ a = a$. \\
-	Donc $\mat_{\bc_n}(a \circ \text{Id}_{\K^n}) = \mat_{\bc_n}(\text{Id}_{\K^n} \circ a) = \mat_{\bc_n}(a)$ \\
-	ie $\mat_{\bc_n}(a) \mat_{\bc_n}(\text{Id}_{\K^n}) = \mat_{\bc_n}(\text{Id}_{\K^n})\mat_{\bc_n}(a) = A$. \\
+	\textbf{Autre façon :} \\
+	Soit $A \in \mathcal{M}_n(\K), a \in \mathcal{L}(\K^n)$ canoniquement associé à $A$.\\
+	On a : 
+	\begin{center}
+	    $a \circ \text{Id}_{\K^n} = \text{Id}_{\K^n} \circ a = a$
+	\end{center}
+	Donc 
+	\begin{center}
+	    $\mat_{\bc_n}(a \circ \text{Id}_{\K^n}) = \mat_{\bc_n}(\text{Id}_{\K^n} \circ a) = \mat_{\bc_n}(a)$ \\
+	\ie $\mat_{\bc_n}(a) \mat_{\bc_n}(\text{Id}_{\K^n}) = \mat_{\bc_n}(\text{Id}_{\K^n})\mat_{\bc_n}(a) = A$. \\
+	\end{center}
 	
 	Avec $\bc_n = (e_1,...,e_n)$.
 	Pour $1 \le k \le n, \text{Id}_{\K^n}(e_k) = e_k = (0,\cdots,0,1,0,\cdots,0)$ \\
@@ -409,7 +442,7 @@ Alors : $\psi_\mathcal{B} : f \in \mathcal{L}(E) \mapsto \mat_{\mathcal{B}}(f) \
 	\begin{itemize}
 		\item On sait que $\psi_{\mathcal{B}}$ est un isomorphisme de $\K$-espaces vectoriels. \\
 		Soient $f,g \in \mathcal{L}(E)$, on a \\
-		$\mat_{\mathcal{B},\mathcal{B}}(f \circ g) = \mat_{\mathcal{B},\mathcal{B}}(f)  \mat_{\mathcal{B},\mathcal{B}}(g)$ \\
+		$\mat_{\mathcal{B},\mathcal{B}}(f \circ g) = \mat{\mathcal{B},\mathcal{B}}(f)  \mat{\mathcal{B},\mathcal{B}}(g)$ \\
 		\ie $\mat_{\mathcal{B}}(f \circ g) = \mat_{\mathcal{B}}(f)  \mat_{\mathcal{B}}(g)$  \\
 		\ie $\psi_\mathcal{B}(f \circ g) = \psi_{\mathcal{B}}(f) \psi_{\mathcal{B}}(g)$. \\
 		\item Enfin, $\mat_{\mathcal{B}}(\text{Id}_E) = I_n$.
@@ -421,30 +454,51 @@ Alors : $\psi_\mathcal{B} : f \in \mathcal{L}(E) \mapsto \mat_{\mathcal{B}}(f) \
 \subsection{Matrices carrées inversibles}
 
 \begin{remarque}[Notation]{}
-	On note $\text{GL}_n(\K)$ le groupe des inversibles de l'anneau $(\mathcal{M}_n(\K),+,\times)$
-	On a : $A \in \text{GL}_n(\K) \Longleftrightarrow \exists B \in \mathcal{M}_n(\K), AB = BA = I_n$. \\
-	Les éléments de $\text{GL}_n(\K)$ s'appellent les \strong{matrices inversibles de $\mathcal{M}_n(\K)$}. \\
-	Si $A$ est inversible, il y a une seule $B \in \mathcal{M}_n(\K)$ telle que $AB=BA=I_n$. $B$ s'appelle \strong{l'inverse} de $A$, et se note $A^{-1}$. \\
-	On a alors $A^{-1} \in \text{GL}_n(\K)$ et $(A^{-1})^{-1} = A$. \\
-	
-	Si $A,B \in \text{GL}_n(\K)$ alors $AB \in \text{GL}_n(\K)$ et $(AB)^{-1} = B^{-1}A^{-1}$. \\
-	Si $A \in \text{GL}_n(\K)$, alors ${}^tA \in \text{GL}_n(\K)$ et $({}^tA)^{-1} = {}^t(A^{-1})$. \\
-	En effet, si $M \in \mathcal{M}_n(\K)$, alors ${}^tM \in \mathcal{M}_n(\K)$ et : \\
-	$AA^{-1} = A^{-1}A = I_n \Longrightarrow {}^t(AA^{-1}) = {}^t(A^{-1}A) = {}^tI_n = I_n$ \ie ${}^tA^{-1} {}^tA = {}^tA {}^tA^{-1} = I_n$.
-	
+	On note $\text{GL}_n(\K)$ le groupe des inversibles de l'anneau $(\mathcal{M}_n(\K),+,\times)$. On a : 
+	\begin{center}
+	    $A\in \text{GL}_n(\K) \Longleftrightarrow \exists B \in \mathcal{M}_n(\K)$, $AB = BA = I_n$
+	\end{center}
+	Les éléments de $\text{GL}_n(\K)$ s'appellent les \strong{matrices inversibles}. Si $A$ est inversible, il y a une seule matrice $B \in \mathcal{M}_n(\K)$ tel que : $AB=BA= I_n$. $B$ s'appelle l'\strong{inverse} de $A$ et se note \strong{$A^{-1}$}. On a alors :
+	\begin{center}
+	    $A^{-1} \in \text{GL}_n(\K)$ et $(A^{-1})^{-1} = A$
+	\end{center}
 \end{remarque}
 
+\begin{proposition}{Propriétés sur les inverses}{}
+    \begin{enumerate}
+        \item Si $A,B \in \text{GL}_n(\K)$ alors $AB \in \text{GL}_n(\K)$ et \strong{$(AB)^{-1} = B^{-1} A^{-1}$}
+        \item Si $A \in \text{GL}_n(\K)$ alors \strong{$({}^tA)^{-1} = {}^tA^{-1}$}
+    \end{enumerate}
+\end{proposition}
+
+\begin{demo}
+    En effet, si $M \in \mathcal{M}_n(\K)$, alors ${}^tM \in \mathcal{M}_n(\K)$ et : 
+    \begin{center}
+        $AA^{-1} = A^{-1}A = I_n \Longrightarrow {}^t(AA^{-1}) = {}^t(A^{-1}A) = {}^tI_n = I_n$ \\
+	\ie ${}^tA^{-1} {}^tA = {}^tA {}^tA^{-1} = I_n$.
+    \end{center}
+\end{demo}
+
 \begin{proposition}{Matrice d'un isomorphisme linéaire d'un espace vectoriel}{MatriceIsomorphisme}
-	Soit $E$ un $\K$-ev de dimension $n \in \N$, $\mathcal{B}$ une base de $E$, $f \in \mathcal{L}(E)$, alors $f \in \text{GL}_n(E) \Longleftrightarrow \mat_{\mathcal{B}}(f) \in \text{GL}_n(\K)$ (on a alors $\mat_{\mathcal{B}}(f)^{-1} = \mat_{\mathcal{B}}(f^{-1})$).
+	Soit $E$ un $\K$-ev de dimension $n \in \N$, $\mathcal{B}$ une base de $E$, $f \in \mathcal{L}(E)$, alors 
+	\begin{center}
+	    $f \in \text{GL}_n(E) \Longleftrightarrow \mat_{\mathcal{B}}(f) \in \text{GL}_n(\K)$
+	\end{center}
+	On a alors : \strong{$\mat_{\mathcal{B}}(f)^{-1} = \mat_{\mathcal{B}}(f^{-1})$}
 \end{proposition}
 
 \begin{demo}{}
 Soient $U,V$ deux $\K$-algèbres isomorphes, $\varphi : U \to V$ un isomorphisme de $\K$-algèbres. \\
-Soit $u \in U$, alors $u$ est inversible dans $U \Longleftrightarrow \varphi(u)$ est inversible dans $V$. \\
-$\Longrightarrow uu^{-1} = 1_U = u^{-1}u$ d'où $\varphi(uu^{-1}) = \varphi(1_U) = \varphi(u^{-1}u)$ soit $\varphi(u)\varphi(u^{-1}) = 1_V = \varphi(u^{-1})\varphi(u)$. \\
-Donc $\varphi(u)$ est inversible d'inverse $\varphi(u^{-1})$. \\
-$\Longleftarrow$ Appliquer le sens direct avec l'isomorphisme $\varphi^{-1}$. Si $v \in V$ est inversible dans $V$ alors $\varphi^{-1}(v)$ est inversible dans $U$. \\
-Donc si $\varphi(u)$ est inversible dans $V$ alors $\varphi^{-1}(\varphi(u)) = u \in U$ est inversible. \\
+Soit $u \in U$, alors $u$ est inversible dans $U \Longleftrightarrow \varphi(u)$ est inversible dans $V$.
+\begin{itemize}
+    \item $\Longrightarrow uu^{-1} = 1_U = u^{-1}u$ d'où $\varphi(uu^{-1}) = \varphi(1_U) = \varphi(u^{-1}u)$ \\
+    Soit $\varphi(u)\varphi(u^{-1}) = 1_V = \varphi(u^{-1})\varphi(u)$. \\
+    Donc $\varphi(u)$ est inversible d'inverse $\varphi(u^{-1})$. 
+    \item $\Longleftarrow$ Appliquer le sens direct avec l'isomorphisme $\varphi^{-1}$. \\
+    Si $v \in V$ est inversible dans $V$ alors $\varphi^{-1}(v)$ est inversible dans $U$. \\
+    Donc si $\varphi(u)$ est inversible dans $V$ alors $\varphi^{-1}(\varphi(u)) = u \in U$ est inversible. \\
+\end{itemize}
+
 \end{demo}
 
 Ici, $\psi_{\mathcal{B}} : f \in \mathcal{L}(E) \mapsto \mat_{\mathcal{B}}(f) \in \mathcal{M}_n(\K)$ est un isomorphisme de $\K$-algèbres.
@@ -453,8 +507,12 @@ Ici, $\psi_{\mathcal{B}} : f \in \mathcal{L}(E) \mapsto \mat_{\mathcal{B}}(f) \i
 	\begin{enumerate}
 		\item Soit $M = \begin{pmatrix} a & c \\ b & d \end{pmatrix} \in \mathcal{M}_2(\K)$, alors $M$ est inversible $\Longleftrightarrow ad-bc \ne 0$.
 		\begin{demo}{}
-			Soit $f \in \mathcal{L}(\K^2)$ canoniquement associée à $M$, $\bc_2 = (e_1,e_2)$ alors $f(e_1) = (a,b)$ et $f(e_2) = (c,d)$. \\
-			$M \in \text{GL}_2(\K) \Longleftrightarrow f$ est un isomorphisme $\Longleftrightarrow (f(e_1),f(e_2))$ est libre $\Longleftrightarrow ((a,b),(c,d))$ est libre $\Longleftrightarrow ad-bc \ne 0$.
+			Soit $f \in \mathcal{L}(\K^2)$ canoniquement associée à $M$, $\bc_2 = (e_1,e_2)$ alors : 
+			\begin{center}
+			    $f(e_1) = (a,b)$ et $f(e_2) = (c,d)$
+			\end{center}
+			$M \in \text{GL}_2(\K) \Longleftrightarrow f$ est un isomorphisme $\Longleftrightarrow (f(e_1),f(e_2))$ est libre \\
+			$\Longleftrightarrow ((a,b),(c,d))$ est libre $\Longleftrightarrow ad-bc \ne 0$.
 		\end{demo}
 	\item Soient $A,B \in \mathcal{M}_n(\K)$ telles que $AB = I_n$. Alors $A$ et $B$ sont inversibles, et $B = A^{-1}$.
 	\begin{demo}{}
@@ -525,7 +583,7 @@ Donc $A$ est inversible et $A^{-1}=B$.
 
 \footnotetext{Olivier S. qui ne donne pas la définition de sous-algèbre en cours, puis plus tard : "Je ne vous ai pas donné la définition d'une sous-algèbre ?" Un blanc. Au DS la semaine d'après : "On définit ici une sous-algèbre : ... ". Une pédagogie toujours sans faille de la part du Grand Sensei !}
 
-\subsubsection{Ensemble $\mathcal{D}_n(\K)$ des matrices diagonales}
+\subsubsection{Matrices diagonales : Ensemble $\mathcal{D}_n(\K)$ }
 
 \begin{definition}{Matrice diagonale}{MatriceDiagDef}
 $A \in \mathcal{M}_n(\K)$ est \Strong{diagonale} si $\forall i \ne j, A_{ij} = 0$ \ie si $A$ est du type
@@ -539,6 +597,225 @@ $\begin{pmatrix}
 \end{center}
 avec $\alpha_1,...,\alpha_n \in \K$, cette matrice se note : Diag$(\alpha_1,\cdots,\alpha_n)$.
 \end{definition}
+
+\pagebreak
+
+\begin{remarque}[Remarques]{}
+\begin{itemize}
+    \item $\mathcal{D}_n(\K)$ est bien un \sev de $\mathcal{M}_n(\K)$ : 
+    En notant $(E_{i,j})_{1 \leq i,j \leq n}$ la base standard de $\mathcal{M}_n(\K)$, on voit que : 
+    \begin{center}
+        $\mathcal{D}_n(\K) = \vect (E_{1,1}, E_{2,2}, ..., E_{n,n})$\\
+        D'où \strong{$\mathcal{D}_n(\K)$ est un \sev de $\mathcal{M}_n(\K)$ de $\dim n$}
+    \end{center}
+    \item On a bien \strong{$I_n \in \mathcal{D}_n(\K)$}
+    \item Si $A,B \in \mathcal{D}_n(\K)$, soient $i,j \in \llbracket 1,n\rrbracket$ : 
+    \begin{center}
+        ($AB$)$[i,j] = \displaystyle\sum^n_{k=1} A[i,k]B[k,j] = A[i,i]B[i,j] $ \\
+    \end{center}
+    Si $i\neq j$ alors A[i,i]B[i,j] = 0, donc $AB \in \mathcal{D}_n(\K)$
+    \item $\forall \alpha_1, ..., \alpha_n, \beta_1, ..., \beta_n \in \K$ 
+    \begin{center}
+        Diag $(\alpha_1, ..., \alpha_n)$Diag $(\beta_1, ..., \beta_n)$ = Diag$(\alpha_1 \beta_1, ..., \alpha_n \beta_n)$
+    \end{center}
+    Donc $\mathcal{D}_n(\K)$ est une \strong{sous-algèbre commutative} de $\mathcal{M}_n(\K)$\\
+    Par ailleurs, $\forall k \in \N$, $(\text{Diag}(\alpha_1, ..., \alpha_n))^k = Diag (\alpha_1^k, ..., \alpha_n^k)$
+    \item Soient $\alpha_1, ..., \alpha_n \in K$\\
+    Si $\forall i \in \llbracket 1, n \rrbracket, \alpha_i \neq 0$, Diag($\alpha_1, ..., \alpha_n$)Diag$\left(\dfrac{1}{\alpha_1}, ... , \dfrac{1}{\alpha_n}\right)$=$I_n$\\
+    Donc Diag($\alpha_1, ..., \alpha_n$) est inversible d'inverse \strong{Diag$\left(\dfrac{1}{\alpha_1}, ... , \dfrac{1}{\alpha_n}\right)$}
+    \item S'il existe $i \in \llbracket 1, n \rrbracket$ tel que $\alpha_i = 0$ alors la famille ($c_1, ..., c_n$) des vecteurs colonne de Diag($\alpha_1, ..., \alpha_n$) n'est pas libre car $c_i = 0_{\K^n}$, donc : 
+    \begin{center}
+        Diag($\alpha_1,..., \alpha_n$) $\notin GL_n(\K)$
+    \end{center}
+    \item \Strong{Bilan :} Pour $\alpha_1, ..., \alpha_n \in \K$
+    \begin{center}
+        Diag($\alpha_1, ..., \alpha_n$) $\in GL_n(\K)$ $\Longleftrightarrow$ $\forall i \in \llbracket 1, n \rrbracket$, $\alpha_i \neq 0$ $\Longleftrightarrow \alpha_1 \alpha_2 ... \alpha_n \neq 0$
+    \end{center}
+\end{itemize}
+\end{remarque}
+
+\begin{remarque}[Remarque : Multiplication à droite et à gauche par une matrice diagonale]{}
+Soit $A \in \mathcal{M}_n,p(\K)$
+\begin{itemize}
+    \item Soient $\alpha_1, ..., \alpha_n \in \K$ et $D = \text{Diag} (\alpha_1, ..., \alpha_n) \in \mathcal{D}_n(\K)$, $\forall j \in \llbracket 1,p \rrbracket$, $\forall i \in \llbracket 1, n \rrbracket$
+    \begin{center}
+        (DA)$[i,j]$ = $\displaystyle\sum^n_{k=1} D[i,k]A[k,j]=\alpha_i A[i,j]$
+    \end{center}
+    D'où $\forall i \in \llbracket 1, n \rrbracket$, 
+    \begin{center}
+        $l_i (DA)= (\alpha_i A[i,1],\alpha_i A[i,2], ... , \alpha_i A[i,n] ) = \alpha_i l_i (A)$
+    \end{center}
+    \item Soient $\beta_1,..., \beta_p \in \K$ et D=Diag($\beta_1,..., \beta_p$) $\in \mathcal{D}_p(\K)$,$\forall j \in \llbracket 1, p \rrbracket$, $\forall i \in \llbracket 1,n \rrbracket$: 
+    \begin{center}
+        ($AD$)$[i,j] = \displaystyle\sum^n_k= A[i,k]D[k,j] = \beta_j A[i,j]$
+    \end{center}
+    D'où $\forall j \in \llbracket 1, p \rrbracket$, 
+    \begin{center}
+        $c_j (AD)=  \beta_j c_j (A)$
+    \end{center}
+\end{itemize}
+\end{remarque}
+
+\subsubsection{Matrices triangulaires}
+
+\begin{definition}{Matrice triangulaire}{}
+Soit $A\in \mathcal{M}_n(\K)$
+\begin{enumerate}
+    \item On dit que $A$ est \strong{triangulaire supérieure} si $A[i,j]=0$, $\forall 1 \leq j < i \leq n$. On note \strong{$\text{TS}_n (\K)$} l'ensemble des matrices triangulaires supérieures. Une telle matrice est du type : 
+    \begin{center}
+    $\begin{pmatrix}
+    \alpha_{1,1} & \alpha_{1,2} & \cdots & \alpha_{1,n} \\
+    0 & \alpha_{2,2} & \ddots & \vdots \\
+    \vdots & \ddots & \ddots & \alpha_{n-1,n} \\
+    0 & \cdots & 0 & \alpha_{n,n}
+    \end{pmatrix}$
+    \end{center}
+    \item $A$ est \strong{triangulaire inférieure} si $A[i,j]=0$, $\forall 1 \leq i < j \leq n$, \ie $A$ est du type : 
+    \begin{center}
+    $\begin{pmatrix}
+    \alpha_{1,1} & 0 & \cdots & 0 \\
+    \alpha_{2,1} & \alpha_{2,2} & \ddots & \vdots \\
+    \vdots & \ddots & \ddots & 0 \\
+    \alpha_{n,1} & \cdots & \alpha_{n,n-1} & \alpha_{n,n}
+    \end{pmatrix}$.
+    \end{center}
+\end{enumerate}
+\end{definition}
+
+\begin{remarque}[Remarques]
+\begin{itemize}
+    \item On a $\text{TS}_n = \vect(E_{i,j})_1 \leq i \leq j \leq n$\\
+    Donc $\text{TS}_n(\K)$ est un \sev \: de $\mathcal{M}_n(\K)$ de dimension $\dfrac{n(n+1)}{2}$
+    \item $\mathcal{D}_n(\K) \subset \text{TS}_n (\K)$ et I$_n \in \text{TS}_n (\K)$
+    \item Soient $A,B \in$ TS$_n (\K)$, $\forall i,j \in \llbracket 1,n\rrbracket$ :
+    \begin{center}
+        ($AB$) $= \displaystyle\sum^n_{k=1} A[i,k]B[k,j] = $
+    \end{center}
+    Si $j < i$, alors $\forall k \in \llbracket 1, n \rrbracket$, $k > j$, donc $B[k,j]=0$, puis $(AB)[i,j]=0$\\
+    Donc $AB \in $ TS$_n (\K)$. \\
+    De plus : $(AB)[i,i]= \displaystyle\sum^n_{k=i} A[i,k]B[k,i] = A[i,i]B[i,i] + \sum^n_{k=i+1} A[i,k]B[k,i] = A[i,i]B[i,i]$ \\
+    Ainsi \strong{TS$_n(\K)$ est une sous-algèbre de $\mathcal{M}_n(\K)$} 
+    \item Si $n \geq 2$, TS$_n(\K)$ \strong{n'est pas commutative} 
+\end{itemize}
+\end{remarque}
+
+\begin{proposition}{Inverse d'une matrice triangulaire}{}
+    Soit $A \in$ TS$_n (\K)$, si $A$ est inversible $A^{-1}\in$ TS$_n(\K)$
+\end{proposition}
+
+\begin{demo}
+    $f \: : \: M \in$ TS$_n(\K)$ $\to$ $AM \in$ TS$_n(\K)$, $f$ est bien définie et linéaire. 
+    \begin{itemize}
+        \item Si $M \in \ker f$ alors $AM = 0$\\
+        D'où $A^{-1}AM = A^{-1}0=0$ \ie $M=0 \Longrightarrow f$ est \strong{injective}
+        \item TS$_n(\K)$ est de dimension finie donc $f$ est un isomorphisme, en particulier une bijection. Donc I$_n$ a un antécédent par $f$ : $\exists B \in$ TS$_n (\K)$, $AB=$ I$_n$\\
+        D'où $A^{-1}AB= A^{-1}$I$_n$ \ie $B=A^{-1}$ et \strong{$A^{-1} \in$ TS$_n(\K)$}
+    \end{itemize}
+\end{demo}
+
+\begin{application}{Exercice}{}
+Soit $A$ une $\K$-algèbre, $B$ une sous-algèbre de $A$ de dimension finie, alors : 
+\begin{center}
+    si $b \in B$ est inversible dans $A$, alors $b^{-1}\in B$
+\end{center} 
+\end{application}
+
+\begin{remarque}[Remarques]
+\begin{enumerate}
+    \item Si $A\in$ TS$_n(\K)$ est inversible, en notant $B=A^{-1} \in$ TS$_n(\K)$, $AB =$ I$_n$ donc : 
+    \begin{center}
+        $\forall i \in \llbracket 1,n \rrbracket$ : ($AB$)$[i,j] = 1$ d'où $A[i,i]B[i,i]=1$ donc $A[i,i]\neq 0$
+    \end{center}
+    
+    \item Réciproquement, supposons $A\in$ TS$_n(\K)$ telle que $\forall i \in \llbracket 1,n \rrbracket$, $A[i,i] \neq 0$, $\bc_n = (e_1, ..., e_n)$
+    \begin{center}
+        $c_1 (A) = \underbrace{(A_{11}, 0,..., 0)}_{\in \: \vect(e_1)}$, $c_2 (A) = \underbrace{(A_{11},A_{22} 0,..., 0)}_{\in \: \vect(e_1, e_2)}$, ..., $c_k (A) = \underbrace{(A_{11},..., A_{kk},0,..., 0)}_{\in \: \vect(e_1, ..., e_k)}$
+    \end{center}
+    Donc $c_1 \neq 0_{\K^n}$ et pour $2\leq k \leq n$, $c_k \neq \vect(c_1, ..., c_{k-1})$ \\ 
+    En effet, $\vect (c_1, ..., c_{k-1}) \subset \vect(e_1, ..., e_{k-1})$ et $A_{kk} \neq 0$) \\
+    \\
+    Donc $(c_1, ... , c_n)$ est libre et $A$ est inversible. \\
+    \\
+    \Strong{Bilan : }\\
+    Soit $A \in$ TS$_n(\K)$ : \strong{$A$ est inversible $\Longleftrightarrow$ $\forall i \in \llbracket 1, n \rrbracket, A_{ii} \neq 0$}\\
+    De plus, 
+    \begin{center}
+        Si $A$ est inversible alors $A^{-1}\in$ TS$_n(\K)$ et $(A^{-1})_{ii} = \dfrac{1}{A_{ii}}$
+    \end{center}
+\end{enumerate}
+\end{remarque}
+
+\subsubsection{Matrices symétriques et antisymétriques}
+Dans cette partie, $\K= \R$ ou $\C$ 
+
+\begin{remarque}
+Si $M \in \mathcal{M}_n(\K)$, alors \strong{$^tM \in \mathcal{M}_n(\K)$}
+\end{remarque}
+
+\begin{definition}{Matrice symétrique et antisymétrique}{}
+Soit $M \in \mathcal{M}_n(\K)$. \\
+On dit que $M$ est \strong{symétrique} si 
+\begin{center}
+    $^t M= M$\\
+    \ie pour $1\leq i,j \leq n$, $M[i,j] = M[j,i]$
+\end{center}
+
+$M$ est \strong{antisymétrique} si 
+\begin{center}
+    $^t M = -M$\\
+    \ie $\forall i,j \in \llbracket 1, n \rrbracket$, $M[i,j] = - M[j,i] \Longrightarrow \forall i \in \llbracket 1,n \rrbracket, M[i,i]=0$
+\end{center}
+On note \strong{$\mathcal{S}_n (\K)$} l'ensemble des matrices symétriques et \strong{$\mathcal{A}_n(\K)$} l'ensemble des matrices antisymétriques.
+\end{definition}
+
+\begin{demo}
+    Soit $s : M \in \mathcal{M}_n(\K) \to {}^t M \in \mathcal{M}_n(\K)$ est linéaire et $s\circ s =$ Id $_{\mathcal{M}_n(\K)}$\\
+    Donc $s$ est une symétrie du $\K$ev $\mathcal{M}_n(\K)$\\
+    \\
+    On sait que $\mathcal{M}_n(\K) = \underbrace{\ker (s- \text{Id} _{\mathcal{M}_n(\K)})}_{=\mathcal{S}_n (\K)}$ $\oplus$ $\underbrace{\ker (s+ \text{Id} _{\mathcal{M}_n(\K)})}_{=\mathcal{A}_n (\K)}$\\
+    \\
+    Donc $\mathcal{A}_n (\K)$ et $\mathcal{S}_n (\K)$ sont des $\sev$ \: supplémentaire de $\mathcal{M}_n (\K)$, pour $M\in \mathcal{M}_n (\K)$ :
+    \begin{center}
+        $M = \underbrace{\dfrac{M + {}^t M}{2}}_{\in \mathcal{S}_n (\K)}$ + $\underbrace{\dfrac{M - {}^t M}{2}}_{\in \mathcal{A}_n (\K)}$
+    \end{center}
+\end{demo}
+
+\begin{remarque}[Bilan]
+\strong{$\mathcal{M}_n (\K) = \mathcal{A}_n (\K) + \mathcal{S}_n (\K)$} et $\dim \mathcal{S}_n (\K) = \dfrac{n(n+1)}{2}$ (une base est : $(E_{1,1}, ..., E_{n,n}, (E_{i,j} + E_{j,i})_{1 \leq i,j \leq n})$) et $\dim \mathcal{A}_n (\K) = \dfrac{n(n-1)}{2}$ (une base est : $(E_{i,j} - E_{j,i})_{1 \leq i,j \leq n}$) \\
+
+\begin{center}
+    $\begin{pmatrix} a & d & e \\ d & b & f \\ e & f & c \end{pmatrix} = aE_{11}+bE_{22}+cE_{33}+d(E_{12}+E_{21})+e(E_{13}+E_{31})+f(E_{23}+E_{32})$
+\end{center}
+\end{remarque}
+
+\pagebreak
+
+\subsubsection{Trace d'une matrice carrée}
+\begin{definition}{Trace d'une matrice}{}
+Pour $M\in \mathcal{M}_n (\K)$, la \strong{trace} de $M$ est Tr$(M)=\displaystyle\sum^n_{i=1} M[i,i]$
+\end{definition}
+
+\begin{proposition}{Linéarité d'une trace}{}
+    Tr est une \strong{forme linéaire sur $\mathcal{M}_n (\K)$}
+\end{proposition}
+
+\begin{demo}
+    $\forall \alpha \in \K$, $\forall M,N \in \mathcal{M}_n (\K)$, Tr$(\alpha M+N) = \alpha \text{Tr}M + \text{Tr}N$
+\end{demo}
+
+\begin{remarque}
+Tr$E_{11} = 1 \neq 0$. Donc Tr est une forme linéaire non nulle. \\
+Donc $\ker$ Tr $=\lbrace M \in \mathcal{M}_n (\K) \mid$ Tr$M=0\rbrace$ est un hyperplan de $\mathcal{M}_n (\K)$, donc un sous-espace vectoriel de dimension $n^2-1$
+\end{remarque}
+
+\begin{proposition}{Propriétés de la trace}{}
+\begin{multicols}{2}
+\begin{enumerate}
+        \item $\forall M \in \mathcal{M}_n (\K)$, Tr$({}^tM) = $ Tr$M$
+        \item $\forall M,N \in \mathcal{M}_n (\K)$, Tr$(MN)$ = Tr$(NM)$
+    \end{enumerate}
+\end{multicols}
+\end{proposition}
 
 \pagebreak
 
