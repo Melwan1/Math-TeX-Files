@@ -1,0 +1,249 @@
+\documentclass[12pt,a4paper]{report}
+\input{00 - preambule}
+
+\section{Voisinage}
+
+\begin{definition}{Voisinage}{}
+\begin{enumerate}
+\item Soit $x \in \mathbb{R}, A \subset \mathbb{R}$. On dit que $A$ est un voisinage de $x$ dans $\mathbb{R}$ s'il existe $r>0$ tel que $\left[x-r,x+r\right] \subset A$.
+\item Soit $z \in \mathbb{C}, A \subset \mathbb{C}$. On dit que $A$ est un voisinage de $z$ dans $\mathbb{C}$ s'il existe $r>0$ tel que $\overline{\mathcal{D}}(z,r) \subset A$.
+\end{enumerate}
+\end{definition}
+
+\begin{exemple}[Exemples]
+\begin{enumerate}
+\item $\mathbb{K}=\mathbb{R},\; A = \left[0;1\right[$. $A$ est voisinage de $\frac{3}{4}$ car $\left[\frac{3}{4} - \frac{1}{8}, \frac{3}{4} + \frac{1}{8} \right] \subset A$.
+\newline $A$ n'est pas voisinage de $0$.
+\item $\mathbb{Q}$ n'est voisinage d'aucun de ses points.
+\newline ($\mathbb{Q}$ ne peut contenir aucun intervalle non trivial $I$, $\mathbb{R} \setminus \mathbb{Q} \cap I \neq \varnothing$ car $\mathbb{R} \setminus \mathbb{Q}$ est dense dans $\mathbb{R}$.)
+\newline De même, $\mathbb{R} \setminus \mathbb{Q}$ n'est voisinage d'aucun de ses points.
+\newline Soient $a,b \in \mathbb{R}$ avec $a<b$. Alors $\left]a,b\right[$ est voisinage de chacun de ses points :
+\newline Soit $x \in \left]a,b\right[$. Prenons $r = \dfrac{1}{2}\rm{min}$$(x-a,b-x)$ alors $\left[x-r,x+r\right] \subset \left]a,b\right[$.
+\item $\mathbb{K}=\mathbb{C}.$ Si $x \in \mathbb{R}$ et $A$ est un voisinage de $x$ dans $\mathbb{R}$, alors $A$ n'est jamais un voisinage de $x$ dans $\mathbb{C}$.
+\newline Si $r>0$, on a $x+ir \in \overline{\mathcal{D}}(x,r)$ et $x+ir \not \in \mathbb{R}$, donc $\overline{\mathcal{D}}(x,r) \not \subset A$.
+\newline Soit $\rho > 0, z \in \mathbb{C}$ et $A = \mathcal{D}(z,\rho) = \{ z' \in \mathbb{C} \mid \lvert z-z' \rvert < \rho \}$.
+\newline $A$ est voisinage dans $C$ de chacun de ses points. Soit $z' \in A$ : $\lvert  z-z' \rvert < \rho$.
+\newline Soit $r = \rho - \lvert z-z' \rvert > 0$, montrer que $\overline{\mathcal{D}}(z',\frac{r}{2}) \subset \mathcal{D}(z,\rho)$.
+\newline Soit $\omega \in \overline{\mathcal{D}}(z',r) : \lvert z'-\omega \rvert \leq \frac{r}{2}$. Alors $\lvert z-\omega \rvert = \lvert z-z'+z'-\omega \rvert \leq \lvert z-z' \rvert + \underbrace{\lvert z'-\omega \rvert}_{<\; r} < \lvert z-z' \rvert + r = \rho$
+\end{enumerate}
+\end{exemple}
+
+\pagebreak
+
+\begin{propositions}{}{prop1}
+$\mathbb{K}=\mathbb{R}$ ou $\mathbb{C}$.
+\newline Pour $z \in \mathbb{K}, \mathcal{V}_{\mathbb{K}}(z)$ est l'ensemble des voisinages de $z$ dans $\mathbb{K}$.
+\begin{enumerate}
+\item Soit $z \in \mathbb{K}$, si $A \in \mathcal{V}_{\mathbb{K}}(z)$ et si $A \subset B$ alors $B \in \mathcal{V}_{\mathbb{K}}(z)$.
+\item Si $z \in \mathbb{K}$ alors une réunion quelconque de voisinages de $z$ est un voisinage de $z$.
+\item Une intersection finie de voisinages de $z$ dans $\mathbb{K}$ est un voisinage de $z$.
+\end{enumerate}
+\end{propositions}
+
+\begin{principedemo}{prop1}
+Appliquer la définition des voisinages et construire un disque fermé inclus dans tous les autres disques fermés.
+\end{principedemo}
+
+
+\begin{remarque}
+Une intersection infinie de voisinages n'est pas forcément un voisinage : $\mathbb{K} = \mathbb{R}$. Pour $n \in \mathbb{N}, V_n = \left[-\dfrac{1}{n}, \dfrac{1}{n}\right]$. 
+\newline $\forall n, V_n \in \mathcal{V}_\mathbb{R}$.
+On a : $\displaystyle{\bigcap_{n \geq 1}} V_n  = \{0\} \not \in \mathcal{V}_{\mathbb{R}}(0)$
+\end{remarque}
+
+
+\begin{proposition}{Formulation topologique de la convergence}{topoConv}
+Soit $u \in \mathbb{K}^\mathbb{N}, \ell \in \mathbb{K}. \; u$ converge vers $\ell \Longleftrightarrow \forall V \in \mathcal{V}_{\mathbb{K}}, \exists n_0 \in \mathbb{N}, u_n \in V$.
+\end{proposition}
+
+\begin{principedemo}{topoConv}
+$\Longrightarrow$ Appliquer la définition d'un voisinage puis de la convergence, et vérifier que les éléments de la suite appartiennent au voisinage à partir d'un certain rang.
+\end{principedemo} 
+
+\section{Ouverts, fermés}
+
+\begin{definition}{Ouvert et fermé}{}
+\begin{enumerate}
+\item $A \subset \mathbb{K}$ est ouvert lorsque $A$ est voisinage dans $\mathbb{K}$ de chacun de ses points (ie si et seulement si $\forall a,\; a \in A \Longrightarrow A \in \mathcal{V}_{\mathbb{K}} (a)$)
+\item $A \subset \mathbb{K}$ est fermé lorsque $\mathbb{K} \setminus A$ est ouvert.
+\end{enumerate}
+\end{definition}
+
+\begin{exemple}[Exemples]
+\begin{enumerate}
+\item $\mathbb{K}=\mathbb{R}$.
+\begin{enumerate}
+\item On a vu que $\left]a,b\right[ (a<b)$ est ouvert.
+\item $\varnothing$ et $\mathbb{R}$ sont ouverts, donc aussi fermés.
+\item Tout intervalle ouvert de $\mathbb{R}$ est ouvert.
+\item $\left[0;1\right[$ n'est ni ouvert, ni fermé.
+\item $\mathbb{Q}$ et $\mathbb{R} \setminus \mathbb{Q}$ ne sont ni ouverts, ni fermés.
+\item $\mathbb{Z}$ est fermé dans $\mathbb{R}$, montrer que $\mathbb{R} \setminus \mathbb{Z}$ est un ouvert. Pour $x$ dans $\mathbb{R} \setminus \mathbb{Z}$, on a $n < x < n+1$ avec $n = \rm{E}$$(x)$.
+\newline $x \in \left]n,n+1\right[ \subset \mathbb{R} \setminus \mathbb{Z}$ et $\left]n,n+1\right[$ est voisinage de $x$ donc $\mathbb{R} \setminus \mathbb{Q}$ l'est aussi.
+\end{enumerate}
+\item $\mathbb{K}=\mathbb{C}$
+\begin{enumerate}
+\item $\mathbb{C}$ et $\varnothing$ sont ouverts.
+\item Pour $z \in \mathbb{C}$ et $r > 0$, $\overline{\mathcal{D}}(z,r)$ est fermé, $\mathcal{D}(z,r)$ est ouvert.
+\item $\mathbb{R}$ est fermé dans $\mathbb{C}$.
+\end{enumerate}
+\end{enumerate}
+\end{exemple}
+
+\begin{proposition}{}{prop3}
+\begin{enumerate}
+\item Une réunion quelconque d'ouverts de $\mathbb{K}$ est un ouvert de $\mathbb{K}$.
+\newline Une intersection finie d'ouverts est un ouvert.
+\item Une intersection quelconque de fermés est un fermé.
+\item Une réunion finie de fermés est un fermé.
+\end{enumerate}
+\end{proposition}
+
+\begin{principedemo}{prop3}
+....
+\end{principedemo}
+
+\section{Adhérence, intérieur}
+
+\begin{definition}{Adhérence et intérieur}{}
+Soit $A \subset \mathbb{K}$.
+\begin{enumerate}
+\item $x \in \mathbb{K}$ est adhérent à $A$ lorsque m $\forall V \in \mathcal{V}_\mathbb{K}(x), A \cap V \neq \varnothing$.
+\newline On note $\rm{Adh}$$(A)$ l'ensemble des $x \in \mathbb{K}$ qui sont adhérents à $A$.
+\item $x \in \mathbb{K}$ est un point intérieur à $A$ lorsque $A$ est voisinage de $x \in \mathbb{K}$.
+\newline On note $\rm{Int}$$(A)$ l'ensemble des $x \in \mathbb{K}$ qui sont des points intérieurs à A
+\end{enumerate}
+\end{definition}
+
+\begin{remarque}
+\begin{enumerate}
+\item On a toujours : $\rm{Int}$$(A) \subset A  \subset \rm{Adh}$$(A)$.
+\item $\mathbb{K}=\mathbb{R}$.
+\begin{enumerate}
+\item $\rm{Int}$$(\left[0;1\right[) = \left]0;1\right[, \rm{Adh}$$(\left[0;1\right[) = \left[0;1\right]$
+\item $\rm{Int}$$(\mathbb{Q}) = \varnothing$, $\rm{Adh}$$(\mathbb{Q}) = \mathbb{R}$ (si $x \in \mathbb{R}$, et $V \in \mathcal{V}_\mathbb{R}(x)$, $V$ contient un intervalle non trivial, qui contient des rationnels car $\mathbb{Q}$ est dense dans $\mathbb{R}$.)
+\newline De même, $\rm{Int}$$(\mathbb{R} \setminus \mathbb{Q}) = \varnothing, \rm{Adh}$$(\mathbb{R} \setminus \mathbb{Q}) = \mathbb{R}$
+\end{enumerate}
+\item $\mathbb{K} = \mathbb{C}$, $\rm{Adh}$$(\mathcal{D}(z,r)) = \overline{\mathcal{D}}(z,r)$, $\rm{Int}$$(\overline{\mathcal{D}}(z,r)) = \mathcal{D}(z,r)$.
+\item Caractérisation séquentielle de l'adhérence :
+\newline Soit $A \subset \mathbb{K}, z \in \mathbb{K}$ On a $z$ adhérent à $A$ (dans $\mathbb{K}$) $\Longleftrightarrow$ il existe une suite de points de $A$ qui converge vers $z$.
+
+\begin{principedemo}{}
+$\Longrightarrow$ Considérer un voisinage de $z$ dont où $r$ dépend de $n$ et tend vers $0$ lorsque $n$ tend vers $+\infty$. Utiliser l'hypothèse que $z$ est adhérent à $A$ et considérer une suite d'éléments de $A \cap V_n$.
+\newline $\Longleftarrow$ Utiliser l'hypothèse, considérer un voisinage $V$ de $z$ dans $\mathbb{K}$ et montrer que $A \cap V \neq \varnothing$.
+\end{principedemo}
+
+
+\item $\mathbb{K}=\mathbb{R}$. Soit $A \subset \mathbb{R}$, $A \neq \varnothing$ et $A$ majorée. Alors $\rm{sup}$$(A) \in \rm{Adh}$$(A)$.
+\begin{principedemo}{}
+...
+\end{principedemo}
+\end{enumerate}
+\end{remarque}
+
+
+\begin{proposition}{}{prop4}
+Soit $A \subset \mathbb{K}$
+\begin{enumerate}
+\item $\rm{Int}$$(A)$ est ouvert. Si $O$ est ouvert de $\mathbb{K}$ tel que $O \subset A$ alors $O \subset \rm{Int}$$(A)$. 
+\newline ($\rm{Int}$$(A)$ est le plus grand ouvert de $\mathbb{K}$ contenu dans $A$). $A$ est ouvert $\Longleftrightarrow A=\rm{Int}$$(A)$.
+\item $\rm{Adh}$$(A)$ est fermé. Si $F$ est fermé de $\mathbb{K}$ tel que $A \subset F$ alors $\rm{Adh}$$(A) \subset F$.
+\newline ($\rm{Adh}$$(A)$ est le plus petit fermé de $\mathbb{K}$ qui contient $A$). $A$ fermé $\Longleftrightarrow A = \rm{Adh}$$(A)$.
+\end{enumerate}
+\end{proposition}
+
+\begin{principedemo}{prop4}
+.... 
+\end{principedemo}
+
+
+\begin{remarque}[Rappel]
+Soit $A \subset \mathbb{K}$.\\
+On dit que $A$ est dense dans $\mathbb{K}$, si : pour tout $\varepsilon > 0$, pour tout $z \in \mathbb{K}$, il existe $a \in A$ tel que $\lvert z-a \rvert \leq \varepsilon$.
+\newline On a : $A$ dense dans $\mathbb{K} \Longleftrightarrow \rm{Adh}$$(A) = \mathbb{K}$.
+\end{remarque}
+
+\begin{demo}{}
+$\Longrightarrow$ Soit $x \in \mathbb{K}, V \in \mathcal{V}_\mathbb{K}(x)$. Il existe $\varepsilon > 0$ tel que $\{ y \in \mathbb{K} \mid \lvert y-x \rvert \leq \varepsilon \} \subset V$.
+\newline On peut trouver $a \in A$ tel que $\lvert a-x \rvert \leq \varepsilon$ d'où $a \in V$ et $A \cap V \neq \varnothing : x \in \rm{Adh}$ $(A)$.
+\newline $\Longleftarrow$ Soit $\varepsilon > 0, z \in \mathbb{K}, V = \{y \in \mathbb{K} \mid \lvert y-z \rvert \leq \varepsilon \}$ est un voisinage de $z$ donc $V \cap A \neq \varnothing$,
+\newline On peut trouver $a \in A$ tel que $a \in V$, ie tel que $\lvert a-z \rvert \leq \varepsilon$.
+\end{demo}
+
+
+\begin{application}{Exercice}{}
+$A$ dense dans $\mathbb{K} \Longleftrightarrow$ pour tout ouvert non vide $O$ de $\mathbb{K}, A \cap O \neq \varnothing$.
+\end{application}
+
+\begin{remarque}
+On a aussi (cf caractérisation séquentielle de l'adhérence) : $A$ dense dans $\mathbb{K} \Longleftrightarrow$ pour $z \in \mathbb{K}$, il existe une suite $(a_n)_{n \in \mathbb{N}}$ de points de $A$ qui converge vers $z$.
+\end{remarque}
+
+\begin{proposition}{Caractérisation séquentielle de la fermitude}{fermitude}
+Soit $A \subset \mathbb{K}$. $A$ est fermé $\Longleftrightarrow$ pour toute suite $(a_n)_{n \in \mathbb{N}}$ de points de $A$ qui converge, on a $\underset{n \rightarrow +\infty}{\rm{lim}} a_n \in A$.
+\end{proposition}
+
+\begin{demo}{}
+$\Longrightarrow$ Soit $(a_n)_{n \in \mathbb{N}}$ une suite de points de $A$ qui converge vers $\ell \in \mathbb{K}$. Alors $\ell \in \rm{Adh}$$(A)$ ($\ell$ est limite d'une suite de points de $A$). $A$ est fermé donc $\rm{Adh}$$(A) = A$.
+\newline $\Longleftarrow$ Montrer que : $\rm{Adh}$$(A) = A$. Soit $z \in \rm{Adh}$$(A)$. On sait qu'il existe une suite $(a_n)_{n \in \mathbb{N}}$ de points de $A$ qui converge vers $z$. On a alors $z = \underset{n \rightarrow +\infty}{\rm{lim}} a_n \in A$.
+\end{demo}
+
+
+
+\pagebreak
+\section*{Démonstration}
+
+\begin{demonstration}{prop1}
+$\mathbb{K}=\mathbb{C}$, $V_1, ..., V_n$ des voisinages de $z$ dans $\mathbb{C}$. Il existe $r_1,...r_n \in \mathbb{R}^*_+$ tels que
+\newline $\forall k : \overline{\mathcal{D}}(z,r_k) \subset V_k$. D'où, avec $r = \rm{min}$$(r_1,...r_n) : \forall k, \overline{\mathcal{D}}(r,z) \subset \overline{\mathcal{D}}(z,r_k) \subset V_k$
+\newline D'où $\overline{\mathcal{D}}(z,r) \subset \displaystyle{\bigcap_{k=1}^{n}}V_k$.
+\end{demonstration}
+
+\begin{demonstration}{topoConv}
+$\Longrightarrow$ Soit $V \in \mathcal{V}_\mathbb{K}(\ell)$. Il existe $\varepsilon > 0$ tel que $\{z \in \mathbb{K} \mid \lvert z-\ell \rvert \leq \varepsilon \} \subset V$.
+\newline $u$ converge vers $\ell$ donc il existe $n_0 \in \mathbb{N}$ tel que $\forall n \geq n_0, \lvert u_n - \ell \rvert \leq \varepsilon$. Donc $u_n \in V$ pour $n \geq n_0$ \\
+Soit $\varepsilon > 0$. $V = \{z \in \mathbb{K} \mid \lvert z-\ell \rvert \leq \varepsilon \}$ est un voisinage de $\ell \in \mathbb{K}$ donc il existe $n_0 \in \mathbb{N}$ tel que \\
+$\forall n\geq n_0, u_n \in V$ ie $\lvert u_n - \ell \rvert \leq \varepsilon$.
+\end{demonstration}
+
+\begin{demonstration}{prop3}
+Soit $(O_i)_{i \in I}$ une famille d'ouverts de $K$ et $O = \displaystyle{\bigcup_{i \in I}} O_i$
+\newline Soit $x \in O : \exists j, x \in O_j$. $O_j$ est ouvert donc $O_j$ est voisinage de $x$. $O_j \subset O$ donc $O$ est voisinage de $x$.
+\end{demonstration}
+
+\begin{demonstration}{}
+\textbf{4)}\\
+$\Longrightarrow$ Pour $n \in \mathbb{N}^* : V_n = \{ \omega \in \mathbb{K} \mid \lvert \omega-z \rvert \leq \frac{1}{n} \}$. Pour $n \in \mathbb{N}^*$, $V_n$ est voisinage de $z$ donc $A \cap V_n \neq \varnothing$.
+\newline On peut considérer $a_n \in A \cap V_n$. On a, $\forall n, \lvert a_n - z \rvert \leq \frac{1}{n}$ donc $(a_n)$ converge vers $z$.
+\newline $\Longleftarrow$ Soit $(a_n)$ une suite de points de $A$ qui converge vers $z$. Soit $V \in \mathcal{V}_{\mathbb{K}}(z)$. On peut trouver $n_0 \in \mathbb{N}$ tel que : $\forall n \geq n_0, a_n \in V$ donc, pour $n \geq n_0$, $a_n \in A \cap V$ (et $A \cap V \neq \varnothing$).\\
+
+\textbf{5)}\\
+\newline Soit $V$ un voisinage de $\rm{sup}$ $(A)$ dans $\mathbb{R}$ : il existe $r>0$ tel que $\left[\rm{sup}(\emph{A}) - r, \rm{sup}(\emph{A})+r\right] \subset V$.
+\newline $\rm{sup}$$(A) -r < \rm{sup}$$(A)$ donc $\rm{sup}$ $(A)-r$ ne majore pas $A$ : il existe $a \in A$ tel que $a > \rm{sup}$ $(A)-r$.
+\newline D'où $a \in \left]\rm{sup}(\emph{A})-r, \rm{sup}(\emph{A}) \right] \subset V$, donc $V \cap A \neq \varnothing$.
+\newline De même, si $A$ est minorée alors $\rm{inf}$ $(A) \in \rm{Adh}$ $(A)$
+\end{demonstration}
+
+\begin{demonstration}{prop4}
+\begin{enumerate}
+\item Soit $x \in \rm{Int}$ $(A)$. $A$ est voisinage de $x$ donc il existe $r>0$ tel que $V_r = \{z \in \mathbb{K} \mid \lvert x-z \rvert \leq r \} \subset A$.
+\newline On a aussi $V'_r = \{z \in \mathbb{K} \mid \lvert x-z \rvert < r \} \subset V_r \subset A$.
+\newline $V'_r$ est ouvert donc voisinage de chacun de ses points, donc si $z \in V'_r, V'_r \in \mathcal{V}_\mathbb{K}(z)$ et $V'_r \subset A$, donc $A \in \mathcal{V}_\mathbb{K}(z)$ ie $z \in \rm{Int}$$(A)$.
+\newline D'où $V'_r \subset \rm{Int}$$(A)$. $V'_r$ est voisinage de $x$ donc $\rm{Int}$$(A)$ aussi $\Longrightarrow \rm{Int}$$(A)$ est voisinage de chacun de ses points.
+\newline \newline Soit $O$ un ouvert tel que $O \subset A$. Si $x \in O, O$ est voisinage de $x$ donc $A$ aussi donc $x \in \rm{Int}$$(A) : O \subset \rm{Int}$$(A)$.
+\newline \newline Si $A$ est ouvert, $A$ est un ouvert contenu dans $A$ donc $A \subset \rm{Int}$$(A)$, et on a toujours $\rm{Int}$$(A) \subset A$, donc $A=\rm{Int}$$(A)$.
+%
+\item Montrer que  : $\mathbb{K} \setminus \rm{Adh}$$(A)$ est ouvert. Soit $x \in \mathbb{K} \setminus \rm{Adh}$ $(A)$, donc $x$ n'est pas adhérent à $A$.
+\newline Il existe un voisinage de $x \; V \in \mathcal{V}_\mathbb{K}(x)$ tel que $V \cap A = \varnothing$.
+\newline On dispose de $r > 0$ tel que $\{y \in \mathbb{K} \mid \lvert y-x \rvert \leq r \} \subset V$.
+\newline \emph{a fortiori}, $O = \{ y \in \mathbb{K} \mid \lvert y-x \rvert < r \} \subset V$. Si $y \in O$ alors $O$ est voisinage de $y$ et $O \cap A \subset V \cap A = \varnothing$.
+\newline Donc $y$ n'est pas adhérent à $A$. Ainsi, $O \subset \mathbb{K} \setminus \rm{Adh}$$(A)$ et $O$ est voisinage de $x$ ($x \in O$ et $O$ est ouvert), donc $\mathbb{K} \setminus \rm{Adh}$$(A)$ est voisinage de $x$.
+\newline Ainsi, $\mathbb{K} \setminus \rm{Adh}$$(A)$ est voisinage de chacun de ses points, donc $\mathbb{K} \setminus \rm{Adh}$$(A)$ est ouvert.
+\newline \newline Soit $F$ un fermé tel que $A \subset F$. On a $O = \mathbb{K} \setminus F$ est un ouvert de $\mathbb{K}$. Si $x \in O$, alors $O$ est voisinage de $x$ donc $x$ n'est pas adhérent à $A$.
+\newline D'où $O \subset \mathbb{K} \setminus \rm{Adh}$$(A)$, d'où $K \setminus O = F \supset \rm{Adh}$$(A) = \mathbb{K} \setminus (\mathbb{K} \setminus \rm{Adh}$$(A))$.
+\newline \newline Si $A$ est un fermé, alors $A$ est un fermé qui contient $A$ donc $\rm{Adh}$$(A) \subset A$, l'inclusion inverse est toujours vraie.
+\newline Si $A = \rm{Adh}$ $(A)$ alors $A$ est fermé ($\rm{Adh}$ $(machin)$ est toujours fermé).
+\end{enumerate}
+\end{demonstration}
+
+\end{document}
