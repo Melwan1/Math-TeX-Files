@@ -1,0 +1,563 @@
+\documentclass[12pt,a4paper]{report}
+\input{00 - preambule}
+
+\begin{document}
+
+\chapter{Matrices}
+
+\section{Introduction}
+
+    \subsection{Définitions}
+
+\begin{remarque}[Rappel]
+    Soit $\Omega$ un ensemble non vide et $\K$ un corps. Alors, $\K^\Omega$ est un \ev\ car :\\
+    $\forall f, g \in \K^\Omega$ et $\forall \alpha \in \K$ : \quad $ f + g : \begin{array}[t]{rcl} \Omega & \to & \K \\ \omega & \mapsto & f(\omega) + g(\omega) \end{array}$ \quad et \quad $\alpha f : \begin{array}[t]{rcl} \Omega & \to & \K \\ \omega & \mapsto & \alpha f(\omega) \end{array} $
+\end{remarque}
+
+\begin{definition}{Matrice}{}
+    Soient $n, p \in \N^*$.\\
+    Une \Strong{matrice} à $n$ lignes et $p$ colonnes à coefficients dans $\K$ est une \strong{application} de \strong{$\llbracket 1 ; n \rrbracket \times \llbracket 1 ; p \rrbracket$} dans \strong{$\K$}. On note \strong{$\mathcal{M}_{n,p}(\K) = \K^{\llbracket 1 ; n \rrbracket \times \llbracket 1 ; p \rrbracket}$} l'ensemble de ces matrices.\\
+    Pour $M \in \mathcal{M}_{n,p}(\K)$ et $(i, j) \in \llbracket 1 ; n \rrbracket \times \llbracket 1 ; p \rrbracket$, on note \strong{$M_{i,j}$} ou \strong{$M[i,j]$} l'image de $(i,j)$ par la matrice $M$ (donc $M_{i,j} \in \K$).
+\end{definition}
+
+\begin{remarque}
+    Pour $M \in \mathcal{M}_{n,p}(\K)$, on représente la matrice $M$ avec un \strong{tableau} à $n$ lignes et $p$ colonnes tel que $M_{i,j}$ soit l'intersection de la $i^\text{ème}$ ligne et $j^\text{ème}$ colonne :
+    $$ \strong{M =
+    \begin{pmatrix}
+    M_{1,1} & M_{1,2} & \cdots & M_{1,p} \\
+    M_{2,1} & M_{2,2} & \cdots & M_{2,p} \\
+    \vdots  & \vdots  & \ddots & \vdots  \\
+    M_{n,1} & M_{n,2} & \cdots & M_{n,p}
+    \end{pmatrix}}
+    $$
+\end{remarque}
+
+\pagebreak
+
+\begin{definition}{Vecteurs colonne et ligne}{}
+    Soit $M \in \mathcal{M}_{n,p}(\K)$, alors :
+    \begin{itemize}
+        \item Pour $1 \leqslant j \leqslant p$ : $\strong{c_j(M) = (M_{1,j}, M_{2,j}, ..., M_{n,j})} \in \K^n$ est le \strong{$j^\text{ème}$} \Strong{vecteur colonne} de $M$ ;
+        \item Pour $1 \leqslant i \leqslant n$ : $\strong{\ell_i(M) = (M_{i,1}, M_{i,2}, ..., M_{i,p})} \in \K^p$ est le \strong{$i^\text{ème}$} \Strong{vecteur ligne} de $M$ ;
+    \end{itemize}
+\end{definition}
+
+\begin{definition}{Matrices particulières}{}
+    Soit $M \in \mathcal{M}_{n,p}(\K)$, alors :
+    \begin{itemize}
+        \item Pour \strong{$n = 1$}, on dit que $M$ est une \Strong{matrice ligne} de taille $p$, ainsi $M = \begin{pmatrix} \alpha_1 & \cdots & \alpha_p \end{pmatrix}$ ;
+        \item Pour \strong{$p = 1$}, on dit que $M$ est une \Strong{matrice colonne} de taille $n$, ainsi $M = \begin{pmatrix} \alpha_1 \\ \vdots \\ \alpha_n \end{pmatrix}$ ;
+        \item Pour \strong{$n = p$}, on dit que $M$ est une \Strong{matrice carrée} de taille $n$, on note alors $\strong{\mathcal{M}_{n}(\K) = \mathcal{M}_{n,p}(\K)}$ ;
+        \item Pour \strong{$n = p = 1$}, on dit que $M$ est une \Strong{matrice scalaire}, ainsi $M = \begin{pmatrix} \alpha \end{pmatrix}$.
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}{Espace vectoriel des matrices $\mathcal{M}_{n,p}(\K)$}{}
+    \strong{$\mathcal{M}_{n,p}(\K)$} est un \strong{\ev} de dimension fini muni des lois suivantes : \\
+    $\forall M, N \in \mathcal{M}_{n,p}(\K)$, $\forall \alpha \in \K$ : \quad $\begin{array}[t]{|l} \strong{(M+N)(i,j) = M_{i,j} + N_{i,j}} \\ \substack{1 \leqslant i \leqslant n \\ 1 \leqslant j \leqslant p} \end{array}$ \quad et \quad $\begin{array}[t]{|l} \strong{(\alpha M)(i,j) = \alpha M_{i,j}} \\ \substack{1 \leqslant i \leqslant n \\ 1 \leqslant j \leqslant p} \end{array} $ \\\\
+    Ainsi \strong{$\dim \mathcal{M}_{n,p}(\K) = np$} donc $\mathcal{M}_{n,p}(\K)$ est isomorphe à $\K^{np}$ et admet pour \strong{base canonique} l'ensemble des \Strong{matrices élémentaires} \strong{$\left(E_{i,j}\right)_{\substack{1 \leqslant i \leqslant n \\ 1 \leqslant j \leqslant p}}$} avec \strong{$E_{i,j}[k,\ell] = \delta_{(i,j),(k,\ell)} = \left\lbrace \begin{array}{cl} 1 & \text{si } k = i \text{ et } \ell = k \\ 0 & \text{sinon} \\ \end{array} \right.$}
+\end{proposition}
+
+\begin{exemple}
+    Pour $\mathcal{M}_2(\K)$ de dimension 4, la base canonique est : $\left(\begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 0 \\ 1 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 1 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}\right)$
+\end{exemple}
+
+\begin{remarque}
+    \begin{itemize}
+        \item Si $M \in \mathcal{M}_{n,p}(\K)$, alors \strong{$\displaystyle M = \sum_{\substack{1 \leqslant i \leqslant n \\ 1 \leqslant j \leqslant p}} M[i,j] E_{i,j}$} ;
+        \item \danger\ Ici $E_{i,j}$ est une matrice, ce n'est pas l'image de la matrice $E$.
+    \end{itemize}
+\end{remarque}
+
+\begin{exemple}
+    Avec $n=p=2$, on a : $\begin{pmatrix} a & c \\ b & d\end{pmatrix} = aE_{1,1} + bE_{2,1} + cE_{1,2} + dE_{2,2}$.
+\end{exemple}
+
+\pagebreak
+
+    \subsection{Matrice d'une application linéaire relativement à un couple de bases}
+    
+\begin{definition}{Matrice d'une famille de vecteurs dans une base}{}
+    Soit $E$ un \ev\ de dimension finie $\dim E = n \in \N^*$, $\mathcal{B} = (e_1, ..., e_n)$ une base de $E$ et $x_1, ..., x_p \in E$. On notera \strong{$\mat_{\mathcal{B}}(x_1, ..., x_p)$} la matrice $M \in \strong{\mathcal{M}_{n,p}(\K)}$ telle que $\forall i \in \llbracket 1 ; n \rrbracket$ et $\forall j \in \llbracket 1 ; p \rrbracket$ : \strong{$M[i,j]$} soit la \strong{$i^\text{ème}$ coordonnée de $x_j$ dans $\mathcal{B}$}. Ainsi :
+    \begin{itemize}
+        \item $\forall j \in \llbracket 1 ; p \rrbracket$ : \strong{$\displaystyle x_j = \sum_{i=1}^n M[i,j]e_i$} ;
+        \item \strong{$\left(M[1,j], ..., M[n,j]\right)$} est le \strong{$n$-uplet des coordonnées de $x_j$ dans $\mathcal{B}$}.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}{Matrice d'une application linéaire relativement à un couple de bases}{}
+    Soient $p, n \in N^*$, $E$ et $F$ deux \evs\ de dimensions finies $\dim E = p$ et $\dim F = n$ de bases respectives $\mathcal{B} = (e_1, ..., e_p)$ et $\mathcal{C} = (e_1', ..., e_n')$ et $f \in \mathcal{L}(E,F)$. On appelle \Strong{matrice de $f$ relativement au couple $(\mathcal{B}, \mathcal{C})$} notée \strong{$\mat_{\mathcal{B}, \mathcal{C}}(f)$} la matrice $M = \strong{\mat_\mathcal{C} (f(e_1), ..., f(e_p))}$. Ainsi :
+    \begin{itemize}
+        \item $\forall i \in \llbracket 1 ; n \rrbracket$ et $\forall j \in \llbracket 1 ; p \rrbracket$ : \strong{$M[i,j]$} soit la \strong{$i^\text{ème}$ coordonnée de $f(e_j)$ dans $\mathcal{C}$} ;
+        \item $\forall j \in \llbracket 1 ; p \rrbracket$ : \strong{$\displaystyle f(e_j) = \sum_{i=1}^n M[i,j]e'_i$}.
+    \end{itemize}
+    En particulier, pour $E = F$ et $\mathcal{B} = \mathcal{C}$, la matrice de $f$ relativement à $\mathcal{B}$ se note \strong{$\mat_\mathcal{B}(f)$}.
+\end{definition}
+
+\begin{exemple}[Exemples]
+    \begin{itemize}
+        \item Soit l'application linéaire $\begin{array}[t]{rcl} f : \; \R_2[X] & \to & \R^2 \\ P & \mapsto & (P(0), P(1)) \end{array}$ \\
+        Alors pour $\mathcal{B} = \left(1, X, X^2\right)$ et $\mathcal{C} = \bc_2 = (e_1, e_2)$, bases de $\R_2[X]$ et $\R^2$ : $ \mat_{\mathcal{B}, \mathcal{C}}(f) = \begin{pmatrix} 1 & 0 & 0 \\ 1 & 1 & 1 \end{pmatrix} $
+        En effet : $ f(1) = (1,1) = e_1 + e_2$ ; $f(X) = (0,1) = e_2$ et $f\left(X^2\right) = (0,1) = e_2 $
+        \item Soit l'application linéaire $\begin{array}[t]{rcl} f : \; \R^3 & \to & \R^3 \\ (x,y,z) & \mapsto & (x-2y+z, x-z, y-z) \end{array}$ \\
+        Alors pour $\mathcal{B} = \mathcal{C} = \bc_3 = (e_1, e_2, e_3)$, base de $\R^3$, on a : $\mat_{\mathcal{B}}(f) = \begin{pmatrix} 1 & -2 & 1 \\ 1 & 0 & -1 \\ 1 & 1 & -1 \end{pmatrix}$ ; en effet :
+        $ f(e_1) = (1,1,1) = e_1 + e_2 + e_3$ ; $f(e_2) = (-2,0,1) = -2e_1 + e_3$ et $f(e_3) = (1,-1,-1) = e_1 - e_2 - e_3 $
+    \end{itemize}
+\end{exemple}
+
+\begin{theoreme}{Isomorphise de $\mathcal{L}(E,F)$ dans $\mathcal{M}_{n,p}(\K)$}{IsomorpheLM}
+    Soient $p,n \in \N^*$, $E$ et $F$ deux \evs\ de dimension finie $\dim E = p$ et $\dim F = n$.\\
+    Alors l'application \strong{$\begin{array}[t]{rcl} \psi_{\mathcal{B}, \mathcal{C}} : \; \mathcal{L}(E,F) & \to & \mathcal{M}_{n,p}(\K) \\ f & \mapsto & \mat_{\mathcal{B, \mathcal{C}}} (f)\end{array}$} est un \strong{isomorphisme}.
+\end{theoreme}
+
+\begin{principedemo}{IsomorpheLM}
+    Il suffit de montrer que $\psi_{\mathcal{B}, \mathcal{C}}$ est \strong{linéaire} (par unicité des coordonnées dans une base), que \strong{$\ker \psi_{\mathcal{B}, \mathcal{C}} = \left\lbrace 0_{\mathcal{L}(E,F)} \right\rbrace$} puis enfin que $\psi_{\mathcal{B}, \mathcal{C}}$ est \strong{surjective}.
+\end{principedemo}
+
+\begin{corollaire}{Dimension de l'ensemble des applications linéaires}{}
+    $\mathcal{L}(E,F)$ est de dimension finie et \textbox{$\dim \mathcal{L}(E,F) = \dim E \times \dim F$}
+\end{corollaire}
+
+\begin{definition}{Application linéaire canonique associée à une matrice}
+    Soient $n, p \in \N^*$ et $M \in \mathcal{M}_{n,p}(\K)$. On appelle \Strong{application linéaire canoniquement associée à $M$} l'unique application linéaire \strong{de $\K^p$ dans $\K^n$} telle que \strong{$\mat_{\bc_p, \bc_n}(f) = M$}. \\
+    En particulier, pour $M \in \mathcal{M}_n(\K)$, on appelle \strong{endomorphisme de $\K^n$ canoniquement associé à $M$} l'unique $f \in \mathcal{L}(\K^n)$ telle que \strong{$\mat_{\bc_n}(f) = M$}.
+\end{definition}
+
+\begin{remarque}
+    Soient $M \in \mathcal{M}_{n,p}(\K)$, $\bc_p = (e_1, ..., e_p)$, $bc_n = (e_1', ..., e_n')$ et $f \in \strong{\mathcal{L}(\K^p, \K^n)}$ canoniquement associée à $M$. Par définition de $f$, on a $M = \mat_{\bc_p,\bc_n}(f)$ donc $\forall i \in \llbracket 1 ; p \rrbracket$ :
+    $$ \strong{f(e_j)} = \sum_{i = 1}^n M_{i,j} e_j' = (M_{1,j}, ..., M_{n,j}) = \strong{c_j} \quad \text{(le $j^\text{ème}$ vecteur colonne de $M$)} $$
+\end{remarque}
+
+\begin{exemple}
+    Soit $f \in \mathcal{L}(\R^3)$ canoniquement associée à $M = \begin{pmatrix} 1 & 0 & 1 \\ 2 & -1 & 1 \\ 1 & 1 & 1 \end{pmatrix}$.\\
+    Alors si $\bc_3 = (e_1,e_2,e_3)$ on a $f(e_1) = (1,2,1)$ ; $f(e_2) = (0,-1,1)$ et $f(e_3) = (1,1,1)$.
+\end{exemple}
+
+
+    \subsection{Produit matriciel}
+    
+\begin{remarque}[Remarque : Vers la définition du produit matriciel]
+    Soient $E$, $F$ et $G$ trois \evs\ de dimensions finies $\dim E = p$, $\dim F = q$ et $\dim G = r$ de bases respectives $\mathcal{B} = (b_1, ..., b_p)$, $\mathcal{C} = (c_1, ..., c_q)$ et $\mathcal{D} = (d_1, ..., d_r)$ et $g \in \mathcal{L}(E,F)$ et $f \in \mathcal{L}(F,G)$. On pose $N = \mat_{\mathcal{B}, \mathcal{C}}(g) \in \mathcal{M}_{q,p}(\K)$, $M = \mat_{\mathcal{C}, \mathcal{D}}(f)$ et $A = \mat_{\mathcal{B}, \mathcal{D}}(f \circ g)$. On alors $\forall j \in \llbracket 1 ; p \rrbracket$ : 
+    $$ \strong{(f \circ g)(b_j) = \sum_{i=1}^r A_{i,j} d_i} $$    
+    D'autre part, $\forall j \in \llbracket 1 ; p \rrbracket$ :
+    $$ \strong{(f \circ g)(b_j)} = f(g(b_j)) = f\left(\sum_{k=1}^q N_{k,j} c_k \right) = \sum_{k=1}^q N_{k,j} f(c_k) = \sum_{k=1}^q N_{k,j} = \sum_{i=1}^r M_{i,k} d_i = \strong{\sum_{i=1}^r \left( \sum_{k=1}^q M_{i,k} N_{k,j}\right) d_i} $$
+    On en déduit par unicité des coordonnées dans une base que $\forall i \in \llbracket 1 ; r \rrbracket$ et $\forall j \in \llbracket 1 ; p \rrbracket$ :
+    $$ \strong{A_{i,j} = \sum_{k=1}^q M_{i,k} N_{k,j}} $$
+\end{remarque}
+
+\begin{definition}{Produit matriciel}{}
+    Soient, $p, q, r \in \N^*$, $A \in \mathcal{M}_{p,q}(\K)$ et $B \in \mathcal{M}_{q,r}(\K)$. \\
+    On définit le \Strong{<< produit >> matriciel} \strong{$AB \in \mathcal{M}_{p,r}(\K)$} $\forall i \in \llbracket 1 ; p \rrbracket$ et $\forall j \in \llbracket 1 ; r \rrbracket$ par :
+    $$ \mathbox{(AB)[i,j] = \sum_{k=1}^q A[i,k]B[k,j]} $$
+\end{definition}
+
+\begin{remarque}
+    $AB$ n'est défini que si le nombre de colonnes de $A$ est égale au nombre de lignes de $B$.
+\end{remarque}
+
+\begin{proposition}{Matrice d'une composée d'une application linéaire}{}
+    Soient $E$, $F$ et $G$ trois \evs\ de dimensions finies et de bases respectives $\mathcal{B}$, $\mathcal{C}$ et $\mathcal{D}$, $g \in \mathcal{L}(E,F)$ et $f \in \mathcal{L}(F,G)$. Alors \strong{$\mat_{\mathcal{B}, \mathcal{D}}(f \circ g) = \mat_{\mathcal{C}, \mathcal{D}}(f) \mat_{\mathcal{B}, \mathcal{C}}(g)$}.
+\end{proposition}
+
+\begin{remarque}[Remarque : Cas pratique du calcul d'un produit matriciel]
+    Soit $n \in \N^*$, \strong{$X = \begin{pmatrix} \alpha_1 \\ \vdots \\ \alpha_n \end{pmatrix} \in \mathcal{M}_{n,1}(\K)$} et \strong{$Y = \begin{pmatrix} \beta_1 & \cdots & \beta_n \end{pmatrix} \in \mathcal{M}_{1,n}(\K)$}. \\
+    Alors les produits $YX$ et $XY$ sont bien définis et on a :
+    \[
+        \displaystyle \strong{YX = \left(\sum_{k=1}^n \beta_k \alpha_k\right)} \in \mathcal{M}_{1,1}(\K) \simeq \K\footnotemark{} \qquad \text{et} \qquad{}
+        \strong{XY =
+        \begin{pmatrix}
+        \alpha_1 \beta_1 & \alpha_1 \beta_2 & \cdots & \alpha_1 \beta_n \\
+        \alpha_2 \beta_1 & \alpha_2 \beta_2 & \cdots & \alpha_2 \beta_n \\
+        \vdots           & \vdots           & \ddots & \vdots \\
+        \alpha_n \beta_1 & \alpha_n \beta_2 & \cdots & \alpha_n \beta_n
+        \end{pmatrix}} \in \mathcal{M}_n(\K)
+    \]
+    Plus généralement, pour $A \in \mathcal{M}_{p,q}(\K)$, $B \in \mathcal{M}_{q,r}(\K)$, $\forall i \in \llbracket 1 ; p \rrbracket$ et $\forall j \in \llbracket 1 ; q \rrbracket$ :
+    $$ \mathbox{(AB)[i,j] = \sum_{k=1}^q A[i,k] B[k,j] = \underbrace{\begin{pmatrix} A[i,1] & \cdots & A[i,q] \end{pmatrix}}_{L_i(A) \in \mathcal{M}_{1,q}(\K)} \underbrace{\begin{pmatrix} B[1,j] \\ \vdots \\ B[q,j] \end{pmatrix}}_{C_j(B) \in \mathcal{M}_{q,1}(\K)}} $$
+    Donc si on a $L_i(A) = 0$ (resp. $C_j(B)$) pour un certain $i$ (resp. $j$), alors $L_i(AB) = 0$ (resp. $C_j(AB) = 0$). Pour calculer le produit de deux matrices, on pourra donc les disposer de la manière suivante :
+    \[
+    \begin{array}{rc}
+    & \begin{pmatrix}
+        \hspace*{0.45cm} B[1,1] \hspace*{0.45cm} & \cdots & \hspace*{0.45cm} B[1,j] \hspace*{0.45cm} \quad & \cdots & \hspace*{0.45cm} B[1,r] \hspace*{0.45cm} \\
+        \vdots & \ddots & \vdots & \ddots & \vdots \\
+        B[q,1] & \cdots & B[q,j] & \cdots & B[q,r]
+    \end{pmatrix} \\\\
+    \begin{pmatrix}
+        A[1,1] & \cdots & A[1,q] \\
+        \vdots & \ddots & \vdots \\
+        A[i,1] & \cdots & A[i,q] \\
+        \vdots & \ddots & \vdots \\
+        A[p,1] & \cdots & A[p,q]
+    \end{pmatrix}
+    & \begin{pmatrix}
+        L_1(A)C_1(B) & \cdots & L_1(A)C_j(B) & \cdots & L_1(A)C_r(B) \\
+        \vdots       & \ddots & \vdots       & \ddots & \vdots \\
+        L_i(A)C_1(B) & \cdots & L_i(A)C_j(B) & \cdots & L_i(A)C_r(B) \\
+        \vdots       & \ddots & \vdots       & \ddots & \vdots \\
+        L_p(A)C_1(B) & \cdots & L_p(A)C_j(B) & \cdots & L_p(A)C_r(B)
+    \end{pmatrix}
+    \end{array}
+    \]
+\end{remarque}
+\footnotetext{Le symbole $\simeq$ signifie ici << être isomorphe à >>, c'est-à-dire qu'il existe un isomorphisme entre les deux ensembles.}
+
+\begin{exemple}
+    Calculer le produit des matrices $\begin{pmatrix} 1 & 2 \\ -1 & 1 \end{pmatrix} \begin{pmatrix} 1 & 3 & 2 \\ 2 & 1 & 4 \end{pmatrix}$ :
+    $
+    \begin{array}[b]{rc}
+        & \begin{pmatrix}
+            1 & 3 & 2 \\
+            2 & 1 & 4 
+        \end{pmatrix} \\
+        \begin{pmatrix}
+            1  & 2 \\
+            -1 & 1
+        \end{pmatrix} &
+        \begin{pmatrix}
+            5 & 5  & 10 \\
+            1 & -2 & 2
+        \end{pmatrix}
+    \end{array}
+    $
+\end{exemple}
+
+\begin{remarque}
+    Soient $A \in \mathcal{M}_{n,p}(\K)$ et $X = \begin{pmatrix} x_1 \\ \vdots \\ x_p \end{pmatrix} \in \mathcal{M}_{p,1}(\K)$. Le produit matriciel $AX$ est bien défini : \\
+    On a $AX \in \mathcal{M}_{n,1}(\K)$ et $AX = \begin{pmatrix} L_1X \\ \vdots \\ L_nX \end{pmatrix} = \begin{pmatrix} A[1,1]x_1 + ... + A[1,p]x_p \\ \vdots \\ A[n,1]x_1 + ... + A[n,p]x_p \end{pmatrix}$ où $L_1, ..., L_n$ sont les liges de $A$.\\
+    Donc si on écrit $AX = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}$, on a $\forall i \in \llbracket 1 ; n \rrbracket$ : $\displaystyle y_i = \sum_{j=1}^n A[i,j]x_j$. \\
+    Soit $(E_1, ..., E_p)$ la base canonique de $\mathcal{M}_{p,1}(\K) (\simeq \K^p)$, alors $E_j = \begin{pmatrix} 0 \\ \vdots \\ 0 \\ 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix} \leftarrow j$ et $AE_j = \begin{pmatrix} A[1,j] \\ \vdots \\ A[n,j] \end{pmatrix} = C_j(A)$.\\
+    On en déduit donc que \textbox{$A = 0 \; \Longleftrightarrow \; \forall X \in \mathcal{M}_{p,1}(\K), AX = 0_{\mathcal{M}_{n,1}(\K)}$}
+\end{remarque}
+
+\pagebreak
+
+\begin{theoreme}{Relation entre vecteurs et matrices d'une application linéaire}{}
+    Soient $E$ et $F$ deux \evs\ de dimensions finies $\dim E = p$ et $\dim F = n$ avec pour bases respectives $\mathcal{B} = (b_1, ..., b_n)$ et $\mathcal{C} = (c_1, ..., c_n)$ et $f \in \mathcal{L}(E,F)$. \\
+    On définit \strong{$M = \mat_{\mathcal{B}, \mathcal{C}}(f)$}, $\displaystyle \strong{x = \sum_{i=1}^p x_ib_i} \in E$, \strong{$X = \begin{pmatrix} x_1 \\ \vdots \\ x_p \end{pmatrix}$}, $\strong{\displaystyle y = \sum_{i=1}^n y_ic_i} \in F$ et \strong{$Y = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}$}. \\
+    Alors \textbox{$y = f(x) \; \Longleftrightarrow \; Y = MX$} (donc la colonne des composantes de $f(x)$ dans $\mathcal{C}$ est $MX$).
+\end{theoreme}
+
+\begin{demo}
+    On a $\displaystyle f(x) = f\left(\sum_{j=1}^p x_jb_j\right) = \sum_{j=1}^p x_kf(b_j) = \sum_{j=1}^p x_j \sum_{i=1}^n M[i,j]c_i = \sum_{i=1}^n \left(\sum_{j=1}^p M[i,j]x_j\right)c_i$. Donc : \\
+    $$ y = f(x) \; \Longleftrightarrow \; \forall i \in \llbracket 1 ; n \rrbracket, y_i = \sum_{j=1}^p M[i,j]x_j \; \Longleftrightarrow \; \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix} = \begin{pmatrix} M[1,1]x_1 + ... + M[1,p]x_p \\ \vdots \\ M[n,1]x_1 + ... + M[n,p]x_p \end{pmatrix} \; \Longleftrightarrow \; Y = MX $$
+\end{demo}
+
+\begin{exemple}
+    Soit $f \in \mathcal{L}(\R^3)$ canoniquement associée à $\begin{pmatrix} 1 & -1 & 2 \\ 3 & 2 & 1 \\ 2 & 1 & -1 \end{pmatrix}$ pour $\mathcal{C} = (x,y,z)$ la colonne des composantes de $f(e)$ dans $\bc_3$ et $M \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} x-y+2z \\ 3x+2y+z \\ 2x+y-z \end{pmatrix}$. D'où $f(x,y,z) = (x-y+2z, 3x+2y+z, 2x+y-z)$.
+\end{exemple}
+
+\begin{remarque}[Remarque : Multiplication par les matrices de la base canonique]
+    Soit $(E_{i,j})_{\substack{1 \leqslant i,j \leqslant n}}$ la base canonique de $\mathcal{M}_n(\K)$.
+    \begin{itemize}
+        \item Soit $A \in \mathcal{M}_{n,p}(\K)$. Quid $E_{i,j}A$ ? \\
+        $E_{i,j} A \in \mathcal{M}_{n,p}(\K)$ pour $k \in \llbracket 1 ; n \rrbracket \setminus \{i\}$, $L_k(E_{i,j}) = 0$ donc $L_k(E_{i,j}A) = 0$. \\
+        Pour $1 \leqslant \ell \leqslant p$ : $(E_{i,j}A)[i,\ell] = L_i(E_{i,j})C_\ell(A) = \underset{\substack{\uparrow \\ j}}{\begin{pmatrix} 0 & \cdots & 0 & 1 & 0 & \cdots & 0 \end{pmatrix}} \begin{pmatrix} A[1,\ell] \\ \vdots \\ A[n,\ell] \end{pmatrix} A[j,\ell]$. \\
+        Donc $L[i,j](E_{i,j}A) = \begin{pmatrix} A[j,1] & \cdots & A[j,p] \end{pmatrix} = L_j(A)$, d'où :
+        \[
+        \mathbox{E_{i,j}A =
+        \begin{pmatrix}
+        0      & \cdots & 0 \\
+        \vdots & \ddots & \vdots \\
+        0      & \cdots & 0 \\
+        A[i,1] & \cdots & A[j,p] \\
+        0      & \cdots & 0 \\
+        \vdots & \ddots & \vdots \\
+        0      & \cdots & 0
+        \end{pmatrix}}
+        \]
+        De même, soit $B \in \mathcal{M}_{q,n}(\K)$, alors $BE_{i,j}$ est bien définie et $BE_{i,j} \in \mathcal{M}_{q,n}(\K)$. \\
+        Pour $k \in \llbracket 1 ; n \rrbracket \setminus \{j\}$, $c_k(E_{i,j}) = 0$ donc $c_k(BE_{i,j}) = 0$ et on a $c_j(BE_{i,j}) = c_i(B)$ d'où :
+        \[
+        \mathbox{BE_{i,j} =
+        \begin{pmatrix}
+        0      & \cdots & 0      & B[i,j] & 0      & \cdots & 0 \\
+        \vdots & \ddots & \vdots & \vdots & \vdots & \ddots & \vdots \\
+        0      & \cdots & 0      & B[q,i] & 0      & \cdots & 0
+        \end{pmatrix}}
+        \]
+        \item Soient $(i,j), (k,\ell) \in \llbracket 1 ; n \rrbracket^2$. Quid $E_{i,j}E_{k,\ell}$ ? \\
+        Pour $m \in \llbracket 1 ; n \rrbracket \setminus\{i\} : L_n(E_{i,j}E_{k,\ell}) = 0$ et $L_i(E_{i,j}E_{k,\ell}) = L_j(E_{k,\ell}) = \left\lbrace\begin{array}{cl} 0 & \text{si } k \neq j \\ L_j(E_{j,\ell}) & \text{si } k = j \end{array}\right.$ \\
+        Donc $\mathbox{E_{i,j}E_{k,\ell} = \delta_{j,k}E_{i,\ell}}$
+    \end{itemize}
+\end{remarque}
+
+\begin{propositions}{Pseudo distributivité}{}
+    Soient $p,q,r \in \N^*$, $A, A' \in \mathcal{M}_{p,q}(\K)$ et $B, B' \in \mathcal{M}_{q,r}(\K)$, alors :
+    \begin{multicols}{3}
+    \begin{enumerate}
+        \item \textbox{$(A + A')B = AB + A'B$}
+        \item \textbox{$A(B + B') = AB + AB'$}
+        \item \textbox{$\alpha(AB) = (\alpha A)B = A(\alpha B)$}
+    \end{enumerate}
+    \end{multicols}
+    \smallskip
+\end{propositions}
+
+\begin{demo}[\'Eléménets de démonstration]
+    \begin{itemize}
+        \item $\displaystyle \sum_{k=1}^q (A[i,k] + A'[i,k])B[k,j] = \sum_{k=1}^q A[i,k]B[k,j] + \sum_{k=1}^q A'[i,k]B[k,j]$
+        \item $\displaystyle \sum_{k}(\alpha A[i,k])B[k,j] = \sum_k A[i,k](\alpha B[k,j]) = \alpha \sum_k A[i,k]B[k,j]$
+    \end{itemize}
+\end{demo}
+
+\begin{proposition}{Pseudo associativité}{}
+    Soient $p,q,r,s \in \N^*$, $A \in \mathcal{M}_{p,q}(\K)$, $B \in \mathcal{M}_{q,r}(\K)$ et $C \in \mathcal{M}_{r,s}(\K)$, alors \textbox{$(AB)C = A(BC)$}
+\end{proposition}
+
+\begin{demo}
+    Soient $a \in \mathcal{L}(\K^q,\K^p)$, $b \in \mathcal{L}(\K^r, \K^q)$, $c \in \mathcal{L}(\K^s, \K^r)$ respectivement et canoniquement associées à $A$, $B$ et $C$. Alors $\underbrace{(a \circ b)}_{\mathcal{L}(\K^r, \K^p)} \circ \; c = a \; \circ \underbrace{(b \circ c)}_{\mathcal{L}(\K^s, \K^q)}$. D'où $\mat_{\bc_s, \bc_p}((a \circ b) \circ c) = \mat_{\bc_s, \bc_p}(a \circ (b \circ c))$. \\
+    Or, $\mat_{\bc_s, \bc_p}((a \circ b) \circ c) = \mat_{\bc_q, \bc_p}(a \circ b) \mat_{\bc_s, \bc_r}(c)$. \\
+    De plus, $\mat_{\bc_s, \bc_p}(a \circ b) = \mat_{\bc_q, \bc_p}(a) \mat_{\bc_r, \bc_q}(b) = AB$. \\
+    Donc $\mat_{\bc_s, \bc_p}((a \circ b) \circ c) = (AB)C$. De même $\mat_{\bc_s, \bc_p}(a \circ (b \circ c)) = A(BC)$.
+\end{demo}
+
+\pagebreak
+
+    \subsection{Transposition}
+    
+\begin{definition}{Transposition}{}
+    Soit $A \in \mathcal{M}_{n,p}(\K)$ pour $n,p \in \N^*$. On appelle \Strong{transposée} de $A$ notée \strong{${}^t A$} (ou $A^\top$) la matrice de $\mathcal{M}_{p,n}(\K)$ définie $\forall i \in \llbracket 1 ; p \rrbracket$ et $\forall j \in \llbracket 1 ; n \rrbracket$ : \strong{$({}^tA[i,j]) = A[j,i]$}.
+\end{definition}
+
+\begin{remarque}
+    $\forall i \in \llbracket 1 ; p \rrbracket$ : $\ell_i({}^tA) = (A[1,i], ..., A[n,i]) = c_i(A)$ et de même $\forall j \in \llbracket 1 ; n \rrbracket$ : $c_j({}^tA) = \ell_j(A)$.
+\end{remarque}
+
+\begin{exemple}
+    $$ \begin{pmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{pmatrix}^\top = \begin{pmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{pmatrix} $$
+\end{exemple}
+
+\begin{propositions}{Propriétés de la transposition}{}
+    $\forall A, B \in \mathcal{M}_{n,p}$ et $\forall \alpha \in \K$ :
+    \begin{multicols}{3}
+    \begin{enumerate}
+        \item \strong{${}^t(\alpha A + B) = \alpha {}^tA + {}^tB$} ;
+        \item \strong{${}^t({}^tA) = A$} ;
+        \item \strong{${}^t(AB) = {}^tB {}^tA$}.
+    \end{enumerate}
+    \end{multicols}
+\end{propositions}
+
+\begin{demo}
+    $A, B \in \mathcal{M}_{n,p}(\K)$. Soient $i \in \llbracket 1 ; p \rrbracket$ et $j \in \llbracket 1 ; n \rrbracket$, alors :
+    $$ {}^t(AB)[i,j] = (AB)[j,i] = \sum_{k=1}^p A[j,k]B[k,i] = \sum_{k=1}^p B[k,i]A[j,k] = \sum_{k=1}^p ({}^tB)[k,j] ({}^tA)[i,j] = ({}^tB{}^tA)[i,j]$$
+\end{demo}
+
+\newpage
+
+\section{La $\K$-algèbre $\mathcal{M}_n(\K)$}
+
+\subsection{Propriété de $\K$-algèbre et isomorphismes de $\K$-algèbres}
+\begin{remarque}{}
+	Soit $n \in \N^*$, si $A,B \in \mathcal{M}_n(\K)$, alors $AB$ est bien défini et appartient à $\mathcal{M}_n(\K)$ donc le produit matriciel devient une LCI sur $\mathcal{M}_n(\K)$.
+\end{remarque}
+
+\begin{theoreme}{$\K$-algèbre $\mathcal{M}_n(\K)$}{Kalgèbre}
+	$(\mathcal{M}_n(\K),+,\times,\cdot)$ est une $\K$-algèbre.
+\end{theoreme}
+
+\begin{demo}{}
+	\begin{itemize}
+		\item On sait que $(\mathcal{M}_n(\K),+,\cdot)$ est un $\K$-ev de dimension finie égale à $n^2$.
+		\item D'après les propriétés du produit matriciel, $\times$ est associative et distributive par rapport à $+$.
+	\end{itemize}
+\end{demo}
+
+\begin{remarque}
+	Pour $A \in \mathcal{M}_n(\K)$ et $1 \le i \le n$, ($(E_{ij})_{1 \le i,j \le n}$ la base canonique de $\mathcal{M}_n(\K)$) : \\
+	$E_{ii}A = \begin{pmatrix} 0 \\ \vdots \\ 0 \\ L_i(A) \\ 0 \\ \vdots \\ 0 \end{pmatrix}$ (en $i$ème position). \\
+	Donc $E_{11}A + E_{22}A + \cdots + E_{nn}A = A$. \\
+	De même, $AE_{ii} = \begin{pmatrix} 0 & \cdots & C_i(A) & 0 & \cdots & 0 \end{pmatrix}$ \\
+	donc $A(E_{11}+\cdots+E_{nn})=A$. \\
+	On pose $I_n = E_{11}+\cdots+E_{nn} = \begin{pmatrix} 1 & 0 & \cdots & 0 \\ 0 & \ddots & \ddots & \vdots \\ \vdots & \ddots  & \ddots & 0 \\ 0 & \cdots & 0 & 1 \end{pmatrix}$ \\
+	Alors $\forall A \in \mathcal{M}_n(\K), AI_n = I_nA = A$. \\
+	
+	Autre façon : \\
+	Soit $A \in \mathcal{M}_n(\K), a \in \mathcal{L}(\K^n)$ canoniquement associé à $A$. On a : $a \circ \text{Id}_{\K^n} = \text{Id}_{\K^n} \circ a = a$. \\
+	Donc $\mat_{\bc_n}(a \circ \text{Id}_{\K^n}) = \mat_{\bc_n}(\text{Id}_{\K^n} \circ a) = \mat_{\bc_n}(a)$ \\
+	ie $\mat_{\bc_n}(a) \mat_{\bc_n}(\text{Id}_{\K^n}) = \mat_{\bc_n}(\text{Id}_{\K^n})\mat_{\bc_n}(a) = A$. \\
+	
+	Avec $\bc_n = (e_1,...,e_n)$.
+	Pour $1 \le k \le n, \text{Id}_{\K^n}(e_k) = e_k = (0,\cdots,0,1,0,\cdots,0)$ \\
+	Donc $C_k(\mat_{\bc_n}(\text{Id}_{\K^n})) = \begin{pmatrix} 0 \\ \vdots \\ 0 \\ 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix} \leftarrow k$ donc $\mat_{\bc_n}(\text{Id}_{\K^n}) = \begin{pmatrix} 1 & 0 & \cdots & 0 \\ 0 & \ddots & \ddots & \vdots \\ \vdots & \ddots  & \ddots & 0 \\ 0 & \cdots & 0 & 1 \end{pmatrix} := I_n$ \\
+	
+	Enfin, pour $\alpha \in \K, A,B \in \mathcal{M}_n(\K), \alpha \cdot (A \times B) = (\alpha \cdot A) \times B = A \times (\alpha \cdot B)$.
+\end{remarque}
+
+\begin{remarque}{}
+$(E_{ij})_{1 \le i,j \le n}$ la base standard de $\mathcal{M}_n(\K)$. \\
+On a vu : $\forall i,j,k,\ell \in \llbracket 1,n \rrbracket, E_{ij}E_{k\ell} = \delta_{jk}E_{i\ell}$, donc si $n \ge 2, E_{12} \times E_{12} = 0$ alors que $E_{12} \ne 0_{\mathcal{M}_2(\K)}$, donc l'anneau $(\mathcal{M}_n(\K),+,\times)$ n'est pas intègre, et certains éléments sont nilpotents. \\
+$E_{12}E_{21} = E_{11}$ et $E_{21}E_{12} = E_{22} \ne E_{11}$ donc la multiplication n'est pas commutative. \\
+
+Pour $A,B \in \mathcal{M}_n(\K)$, on a \strong{si $AB = BA$}, 
+\begin{center}
+$(A+B)^n  = \displaystyle{\sum_{k=0}^n \binom{n}{k}A^k B^{n-k}}$ \\
+et $A^n - B^n = (A-B) \displaystyle{\sum_{k=0}^{n-1}A^kB^{n-k}} = \displaystyle{\sum_{k=0}^{n-1}A^kB^{n-k}}(A-B)$.
+\end{center}
+
+Comme $I_n$ commute avec toutes les matrices, \\
+$A_{m}-I_n = (A-I_n)(I_n+A+A^2+\cdots+A^{m-1}) = (I_n+A+A^2+\cdots+A^{m-1})(A-I_n)$.
+
+\end{remarque}
+
+\begin{theoreme}{Isomorphisme de $\K$-algèbres}{IsomorphismeAlgèbres}
+Soit $E$ un $\K$-ev de dimension $n$, $\mathcal{B}$ une base de $E$. \\
+Alors : $\psi_\mathcal{B} : f \in \mathcal{L}(E) \mapsto \mat_{\mathcal{B}}(f) \in \mathcal{M}_n(\K)$ est un isomorphisme de $\K$-algèbres.
+\end{theoreme}
+
+\begin{demo}{}
+	\begin{itemize}
+		\item On sait que $\psi_{\mathcal{B}}$ est un isomorphisme de $\K$-espaces vectoriels. \\
+		Soient $f,g \in \mathcal{L}(E)$, on a \\
+		$\mat_{\mathcal{B},\mathcal{B}}(f \circ g) = \mat_{\mathcal{B},\mathcal{B}}(f)  \mat_{\mathcal{B},\mathcal{B}}(g)$ \\
+		\ie $\mat_{\mathcal{B}}(f \circ g) = \mat_{\mathcal{B}}(f)  \mat_{\mathcal{B}}(g)$  \\
+		\ie $\psi_\mathcal{B}(f \circ g) = \psi_{\mathcal{B}}(f) \psi_{\mathcal{B}}(g)$. \\
+		\item Enfin, $\mat_{\mathcal{B}}(\text{Id}_E) = I_n$.
+	\end{itemize}
+\end{demo}
+
+\pagebreak
+
+\subsection{Matrices carrées inversibles}
+
+\begin{remarque}[Notation]{}
+	On note $\text{GL}_n(\K)$ le groupe des inversibles de l'anneau $(\mathcal{M}_n(\K),+,\times)$
+	On a : $A \in \text{GL}_n(\K) \Longleftrightarrow \exists B \in \mathcal{M}_n(\K), AB = BA = I_n$. \\
+	Les éléments de $\text{GL}_n(\K)$ s'appellent les \strong{matrices inversibles de $\mathcal{M}_n(\K)$}. \\
+	Si $A$ est inversible, il y a une seule $B \in \mathcal{M}_n(\K)$ telle que $AB=BA=I_n$. $B$ s'appelle \strong{l'inverse} de $A$, et se note $A^{-1}$. \\
+	On a alors $A^{-1} \in \text{GL}_n(\K)$ et $(A^{-1})^{-1} = A$. \\
+	
+	Si $A,B \in \text{GL}_n(\K)$ alors $AB \in \text{GL}_n(\K)$ et $(AB)^{-1} = B^{-1}A^{-1}$. \\
+	Si $A \in \text{GL}_n(\K)$, alors ${}^tA \in \text{GL}_n(\K)$ et $({}^tA)^{-1} = {}^t(A^{-1})$. \\
+	En effet, si $M \in \mathcal{M}_n(\K)$, alors ${}^tM \in \mathcal{M}_n(\K)$ et : \\
+	$AA^{-1} = A^{-1}A = I_n \Longrightarrow {}^t(AA^{-1}) = {}^t(A^{-1}A) = {}^tI_n = I_n$ \ie ${}^tA^{-1} {}^tA = {}^tA {}^tA^{-1} = I_n$.
+	
+\end{remarque}
+
+\begin{proposition}{Matrice d'un isomorphisme linéaire d'un espace vectoriel}{MatriceIsomorphisme}
+	Soit $E$ un $\K$-ev de dimension $n \in \N$, $\mathcal{B}$ une base de $E$, $f \in \mathcal{L}(E)$, alors $f \in \text{GL}_n(E) \Longleftrightarrow \mat_{\mathcal{B}}(f) \in \text{GL}_n(\K)$ (on a alors $\mat_{\mathcal{B}}(f)^{-1} = \mat_{\mathcal{B}}(f^{-1})$).
+\end{proposition}
+
+\begin{demo}{}
+Soient $U,V$ deux $\K$-algèbres isomorphes, $\varphi : U \to V$ un isomorphisme de $\K$-algèbres. \\
+Soit $u \in U$, alors $u$ est inversible dans $U \Longleftrightarrow \varphi(u)$ est inversible dans $V$. \\
+$\Longrightarrow uu^{-1} = 1_U = u^{-1}u$ d'où $\varphi(uu^{-1}) = \varphi(1_U) = \varphi(u^{-1}u)$ soit $\varphi(u)\varphi(u^{-1}) = 1_V = \varphi(u^{-1})\varphi(u)$. \\
+Donc $\varphi(u)$ est inversible d'inverse $\varphi(u^{-1})$. \\
+$\Longleftarrow$ Appliquer le sens direct avec l'isomorphisme $\varphi^{-1}$. Si $v \in V$ est inversible dans $V$ alors $\varphi^{-1}(v)$ est inversible dans $U$. \\
+Donc si $\varphi(u)$ est inversible dans $V$ alors $\varphi^{-1}(\varphi(u)) = u \in U$ est inversible. \\
+\end{demo}
+
+Ici, $\psi_{\mathcal{B}} : f \in \mathcal{L}(E) \mapsto \mat_{\mathcal{B}}(f) \in \mathcal{M}_n(\K)$ est un isomorphisme de $\K$-algèbres.
+
+\begin{exemple}[Applications]{}
+	\begin{enumerate}
+		\item Soit $M = \begin{pmatrix} a & c \\ b & d \end{pmatrix} \in \mathcal{M}_2(\K)$, alors $M$ est inversible $\Longleftrightarrow ad-bc \ne 0$.
+		\begin{demo}{}
+			Soit $f \in \mathcal{L}(\K^2)$ canoniquement associée à $M$, $\bc_2 = (e_1,e_2)$ alors $f(e_1) = (a,b)$ et $f(e_2) = (c,d)$. \\
+			$M \in \text{GL}_2(\K) \Longleftrightarrow f$ est un isomorphisme $\Longleftrightarrow (f(e_1),f(e_2))$ est libre $\Longleftrightarrow ((a,b),(c,d))$ est libre $\Longleftrightarrow ad-bc \ne 0$.
+		\end{demo}
+	\item Soient $A,B \in \mathcal{M}_n(\K)$ telles que $AB = I_n$. Alors $A$ et $B$ sont inversibles, et $B = A^{-1}$.
+	\begin{demo}{}
+		Soient $a,b \in \mathcal{L}(\K^n)$ canoniquement associées à $A$ et $B$. \\
+		Alors $\mat_{\bc_n}(a \circ b) = \mat_{\bc_n}(a) \mat_{\bc_n}(b) = AB = I_n=\mat_{\bc_n}(\text{Id}_{\K^n})$, donc $a \circ b = \text{Id}_{\K^n}$. \\
+		On sait alors que $a$ et $b$ sont des isomorphismes réciproques l'un de l'autre donc $A$ et $B$ sont inversibles et $A^{-1} = \mat_{\bc_n}(a^{-1}) = \mat_{\bc_n}(b) = B$.
+	\end{demo}
+	
+	\item Soit $M \in \mathcal{M}_n(\K)$, soit $f \in \mathcal{L}(\K^n)$ canoniquement associée à $M$, $\bc_n = (e_1,...,e_n)$. On a : \\
+	$M \in \text{GL}_n(\K) \Longleftrightarrow f \in \text{GL}(\K^n) \Longleftrightarrow (f(e_1),\cdots, f(e_n))$ est libre $\Longleftrightarrow (c_1(M),\cdots,c_n(M))$ est libre, où $c_j(M)$ est le $j^{\text{ème}}$ vecteur colonne de $M$. \\
+	De plus, $M \in \text{GL}_n(\K) \Longleftrightarrow {}^t(M) \in \text{GL}_n(\K) \Longleftrightarrow (c_1({}^tM),\cdots,c_n({}^tM))$ est libre $\Longleftrightarrow (\ell_1(M),\cdots,\ell_n(M))$ est libre dans $\K^n$.
+	\end{enumerate}
+\end{exemple}
+
+\begin{theoreme}{Caractérisation d'une matrice inversible}{InversibilitéMatrice}
+Soit $M \in \mathcal{M}_n(\K)$, $(c_1,\cdots,c_n)$ la famille des vecteurs colonnes de $M$, $(\ell_1,\cdots,\ell_n)$ la famille des vecteurs lignes de $M$. \\
+Alors $M \in \text{GL}_n(\K) \Longleftrightarrow (c_1,\cdots,c_n)$ libre $\Longleftrightarrow (c_1,\cdots,c_n)$ est une base de $\K^n \Longleftrightarrow (\ell_1,\cdots,\ell_n)$ libre $\Longleftrightarrow (\ell_1,\cdots,\ell_n)$ est une base de $\K^n$.
+\end{theoreme}
+
+\subsection{Calcul pratique de l'inverse}
+
+Soit $A \in \mathcal{M}_n(\K)$. Supposons avoir trouvé $B \in \mathcal{M}_n(\K)$ telle que $\forall Y \in \mathcal{M}_{n,1}(\K), \forall X \in \mathcal{M}_{n,1}(\K)$, 
+\begin{center}
+$AX = Y \Longleftrightarrow X = BY$.
+\end{center}
+Alors $A$ est inversible et $B = A^{-1}$. \\
+En effet, $\forall Y \in \mathcal{M}_{n,1}(\K), A(BY) = Y \ie \forall Y \in \mathcal{M}_{n,1}(\K), (AB-I_n)Y=0$ donc $AB-I_n = 0$ d'où $A \in \text{GL}_n(\K)$ et $B = A^{-1}$. \\
+
+On se donne $Y = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix} \in \mathcal{M}_{n,1}(\K)$ et on cherche à résoudre l'équation $AX = Y$ d'inconnue $X = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} \in \mathcal{M}_{n,1}(\K)$, ce qui équivaut à la résolution d'un système linéaire.
+
+\begin{remarque}{}
+Si $A$ est inversible, l'équation admet une unique solution $X = A^{-1}Y$. \\
+Si le système linéaire n'admet pas de solution pour certains $Y$, c'est que $A$ n'est pas inversible. Sinon, la résolution du système linéaire permet d'identifier $B \in \mathcal{M}_n(\K)$ telle que l'unique solution de l'équation est $BY$. Dès lors, $A$ est inversible d'inverse $B$.
+\end{remarque}
+
+\begin{exemple}{}
+Soit $A = \begin{pmatrix} 1 & 1 & 3 \\ -1 & -2 & 0 \\ 1 & 2 & 1 \end{pmatrix} \in \mathcal{M}_3(\R)$. \\
+Soit $Y = \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix} \in \mathcal{M}_{3,1}(\R)$ et $X = \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}$, \\
+$AX = Y \Longleftrightarrow
+\begin{cases}
+x_1 + x_2 + 3x_3 &= y_1 \\
+-x_1 - 2x_2 &= y_2 \\
+x_1 + 2x_2 + x_3 &= y_3
+\end{cases}
+\underset{\text{P-G}}{\Longleftrightarrow}
+\begin{cases}
+x_1+x_2+3x_3 &= y_1 \\
+-x_2 + 3x_3 &= y_2 + y_1 \\
+x_2 - 2x_3 &= y_3-y_1
+\end{cases}$ \\
+$\Longleftrightarrow
+\begin{cases}
+x_1 + x_2 + 3x_3 &= y_1 \\
+-x_2 + 3x_3 &= y_2 + y_1 \\
+x_3 = y_3 + y_2
+\end{cases}
+\Longleftrightarrow
+\begin{cases}
+x_1 &= 2y_1-5y_2-6y_3 \\
+x_2 &= -y_1 + 2y_2 + 3y_3 \\
+x_3 &= y_2 + y_3
+\end{cases}
+\Longleftrightarrow X = BY \text{ où } B = \begin{pmatrix} 2 & -5 & -6 \\ -1 & 2 & 3 \\ 0 & 1 & 1 \end{pmatrix}$. \\
+Donc $A$ est inversible et $A^{-1}=B$.
+\end{exemple}
+
+\subsection{Quelques sous-algèbres remarquables de $\mathcal{M}_n(\K)$}
+
+\footnotetext{Olivier S. qui ne donne pas la définition de sous-algèbre en cours, puis plus tard : "Je ne vous ai pas donné la définition d'une sous-algèbre ?" Un blanc. Au DS la semaine d'après : "On définit ici une sous-algèbre : ... ". Une pédagogie toujours sans faille de la part du Grand Sensei !}
+
+\subsubsection{Ensemble $\mathcal{D}_n(\K)$ des matrices diagonales}
+
+\begin{definition}{Matrice diagonale}{MatriceDiagDef}
+$A \in \mathcal{M}_n(\K)$ est \Strong{diagonale} si $\forall i \ne j, A_{ij} = 0$ \ie si $A$ est du type
+\begin{center}
+$\begin{pmatrix}
+\alpha_1 & 0 & \cdots & 0 \\
+0 & \alpha_2 & \ddots & \vdots \\
+\vdots & \ddots & \ddots & 0 \\
+0 & \cdots & 0 & \alpha_n
+\end{pmatrix}$.
+\end{center}
+avec $\alpha_1,...,\alpha_n \in \K$, cette matrice se note : Diag$(\alpha_1,\cdots,\alpha_n)$.
+\end{definition}
+
+\pagebreak
+
+\section*{Démonstrations}
+\addcontentsline{toc}{section}{Démonstrations}
+
+\begin{demonstration}{IsomorpheLM}
+    \begin{itemize}
+        \item $\psi_{\mathcal{B}, \mathcal{C}}$ est \strong{linéaire} : soient $\lambda \in \K$ et $f,g \in \mathcal{L}(E,F)$ alors on pose $M = \mat_{\mathcal{B}, \mathcal{C}}(f)$, $N = \mat_{\mathcal{B}, \mathcal{C}}(g)$ et $A = {\mathcal{B}, \mathcal{C}}(\lambda f + g)$. Il s'agit de montrer que $A = \lambda M + N$ : \\
+        Par définition de $A$ $\forall j \in \llbracket 1 ; p \rrbracket$ : $\displaystyle (\lambda f + g)(e_j) = \sum_{i=1}^n A[i,j] b_i$. D'autre part $\forall j \in \llbracket 1 ; p \rrbracket$ :
+        $$ (\lambda f + g)(e_j) = \lambda f(e_j) + g(e_j) = \lambda \sum_{i=1}^n M[i,j]b_i + \sum_{i=1}^n N[i,j]b_i = \sum_{i=1}^n \left(\lambda M[i,j] + N[i,j]\right)b_i $$
+        Donc, par \strong{unicité des coordonnées dans une base}, $\forall i \in \llbracket 1 ; n \rrbracket$ :
+        $$A[i,j] = \lambda M [i,j] + N[i,j] = (\lambda M + N)[i,j]$$
+        \item $\psi_{\mathcal{B}, \mathcal{C}}$ est \strong{injective} : soit \strong{$f \in \ker \psi_{\mathcal{B}, \mathcal{C}}$}, alors $M = \mat_{\mathcal{B}, \mathcal{C}}(f) = 0$ (matrice nulle).\\
+        D'où $\forall j \in \llbracket 1 ; p \rrbracket$ : $\displaystyle f(e_j) = \sum_{i=1}^n \underbrace{M[i,j]}_{0} b_i = 0_F$. Ainsi \strong{$f$ s'annule sur la base $\mathcal{B}$} donc \strong{$f = 0_{\mathcal{L}(E,F)}$}.
+        \item $\psi_{\mathcal{B}, \mathcal{C}}$ est \strong{surjective} : soient \strong{$M \in \mathcal{M}_{n,p}(\K)$} et $f \in \mathcal{L}(E,F)$ définie sur $\mathcal{B}$ $\forall j \in \llbracket 1 ; p \rrbracket$ par : \\
+        \strong{$\displaystyle f(e_j) = \sum_{i=1}^n M[i,j]b_i$}. Alors \strong{$\mat_{\mathcal{B}, \mathcal{C}}(f) = M$}.
+    \end{itemize}
+    $\psi_{\mathcal{B}, \mathcal{C}}$ est donc bien un isomorphisme de $\mathcal{L}(E,F)$ dans $\mathcal{M}_{n,p}(\K)$.
+\end{demonstration}
+
+\end{document}
