@@ -1,0 +1,382 @@
+\documentclass[12pt,a4paper]{report}
+\input{00 - preambule}
+\begin{document}
+\chapter{Equivalents}
+
+Dans ce chapitre, $D$ est une partie de $\R$, $a \in \overline{\R} \cap \Adh(D)$.
+
+\section{Fonctions négligeables, fonctions dominées}
+
+\begin{definition}{Fonction négligeable}{}
+    Soient $f, g \in \K^D$ et $a \in \overline{\R}$. On dit que $f$ est \Strong{négligeable} devant $g$ au voisinage de $a$ lorsque :
+    $$
+    \exists U \in \mathcal{V}_{\overline{\R}}(a), \;
+    \exists \varepsilon \in \K^{U \cap D}, \;
+    \strong{\varepsilon(x) \xrightarrow[x \to a]{} 0}, \;
+    \forall x \in U \cap D : \;
+    \mathbox{f(x) = \varepsilon(x)g(x)}
+    $$
+    On note alors \strong{$f \underset{a}{=} o(g)$} ou $f(x) \underset{x \to a}{=} o(g(x))$ (voire $f(x) \underset{x \to a}{\ll} g(x)$\footnotemark).
+\end{definition}
+
+\footnotetext{Pour les physiciens.}
+
+\begin{definition}{Fonction dominée\footnotemark}{}
+    Soient $f, g \in \K^{D}$ et $a \in \overline{\R}$. On dit que $f$ est \Strong{dominée} par $g$ au voisinage de $a$ lorsque :
+    $$
+    \exists U \in \mathcal{V}_{\overline{R}}(a), \;
+    \exists \omega \in \K^{U \cap D}, \;
+    \strong{\omega \text{ bornée}}, \;
+    \forall x \in U \cap D : \;
+    \mathbox{f(x) = \omega(x) g(x)}
+    $$
+    On note alors \strong{$f \underset{a}{=} O(g)$} ou $f(x) \underset{x \to a}{=} O(g(x))$.
+\end{definition}
+
+\footnotetext{En dehors de tout sous-entendu...}
+
+\begin{exemple}[Exemples\footnotemark]
+Pour $\alpha > 0$ :
+$
+\quad
+x^\alpha \underset{x \to +\infty}{=} o\left(e^x\right)
+\quad
+\ln x \underset{x \to +\infty}{=} o\left(x^\alpha\right)
+$
+\hfill
+Pour $\alpha < \beta$ :
+$
+\quad
+x^\alpha \underset{x \to +\infty}{=} o\left(x^\beta\right)
+\quad
+x^\beta \underset{x \to 0}{=} o\left(x^\alpha\right)
+$
+\end{exemple}
+
+\footnotetext{Autre exemple : $\textsc{Nadal} = o(\textsc{Fédérer})$.}
+
+\begin{remarque}[Remarques]
+    \begin{itemize}
+        \item $o(g)$ et $O(g)$ se prononcent respectivement << petit o de $g$ >> et << grand O de $g$ >> ;
+        \item[\danger] $f \underset{a}{=} o(g)$ et $f \underset{a}{=} O(g)$ signifient $f(x) = 0$ au voisinage de $a$, ce qui n'arrive presque jamais.
+        \item Une suite est une fonction avec $D = \N$, on peut donc définir la notion de suite négligeable et dominée pour $a = +\infty$ :
+    \end{itemize}
+\end{remarque}
+
+\begin{definition}{Suite négligeable}{}
+    Soient $u, v \in \K^\N$. On dit que $u$ est \Strong{négligeable} devant $v$ lorsque :
+    $$
+    \exists \varepsilon \in \K^\N, \;
+    \strong{\varepsilon \xrightarrow{} 0}, \;
+    \APCR : \;
+    \mathbox{u_n = \varepsilon_n v_n}
+    $$
+    On note alors \strong{$u \underset{+\infty}{=} o(v)$} ou $u_n \underset{n \to +\infty}{=} o(v_n)$.
+\end{definition}
+
+\begin{definition}{Suite dominée}{}
+    Soient $u, v \in \K^\N$. On dit que $u$ est \Strong{dominée} par $v$ lorsque :
+    $$
+    \exists \omega \in \K^\N, \;
+    \strong{\omega \text{ bornée}}, \;
+    \APCR : \;
+    \mathbox{u_n = \omega_n v_n}
+    $$
+    On note alors \strong{$u \underset{+\infty}{=} O(v)$} ou $u_n \underset{n \to +\infty}{=} O(v_n)$.
+\end{definition}
+
+\begin{proposition}{Relation fonction négligeable et limite}{RelationNegliLimite}
+    Soient $f, g \in \K^D$ et $a \in \overline{\R}$ tels que \strong{$g$ ne s'annule pas au voisinage de $a$} (sauf peut-être en $a$).\\
+    Si $a \not\in D$ ou que $f$ et $g$ sont continues en $a$ avec $f(a) = 0$, alors :
+    $$
+    \mathbox{f \underset{a}{=} o(g) \; \Longleftrightarrow \; \dfrac{f}{g} \xrightarrow[a]{} 0}
+    $$
+\end{proposition}
+
+\begin{demo}[Principe de démonstration]
+    \begin{multicols}{2}
+    \begin{itemize}
+        \item[\circled{$\Rightarrow$}] $\dfrac{f}{g} = \varepsilon \xrightarrow[a]{} 0$
+        \item[\circled{$\Leftarrow$}] Poser $\varepsilon = \left\{ \begin{array}{ccc} \frac{f}{g} & \text{si} & x \neq a \\ 0 & \text{si} & x = a \end{array} \right.$
+    \end{itemize}
+    \end{multicols}
+\end{demo}
+
+\begin{proposition}{Compatibilité fonction négligeable, fonction dominée}{}
+    Soient $f, g \in \K^D$ et $a \in \overline{\R}$, alors :
+    \hfill
+    $ \mathbox{f \underset{a}{=} o(g) \; \Longrightarrow \; f \underset{a}{=} O(g)} $
+    \hspace*{\fill}
+\end{proposition}
+
+\begin{demo}[Principe de démonstration]
+    Si $\varepsilon \xrightarrow[a]{} 0$, alors $\varepsilon$ est bornée.
+\end{demo}
+
+\begin{propositions}{Transitivité des fonctions négligeables et dominées}{}
+    Soient $f, g \in \K^D$ et $a \in \overline{\R}$, alors :
+    $$
+    \mathbox{
+    \begin{array}{ccl}
+    f \underset{a}{=} O(g) \quad \text{et} \quad g \underset{a}{=} O(h) \;\; & \Longrightarrow & f \underset{a}{=} O(h) \\
+    \left.
+    \begin{array}{lcr}
+        f \underset{a}{=} O(g) & \text{ et } & g \underset{a}{=} o(h) \\
+        f \underset{a}{=} o(g) & \text{ et } & g \underset{a}{=} O(h) \\
+        f \underset{a}{=} o(g) & \text{ et } & g \underset{a}{=} o(h)
+    \end{array}
+    \right\}
+    & \Longrightarrow & f \underset{a}{=} o(h)
+    \end{array}
+    }
+    $$
+\end{propositions}
+
+\begin{demo}[Principe de démonstration]
+    $\varepsilon \xrightarrow[a]{} 0$ et $\omega$ est bornée donc $\varepsilon \omega \xrightarrow[a]{} 0$.
+\end{demo}
+
+\begin{propositions}{Opération sur les fonctions négligeables et dominées}{}
+    Soient $f, g, h, \varphi, \psi \in \K^D$ et $a \in \overline{\R}$, alors :
+    \begin{itemize}
+        \item \textbf{Somme :} (uniquement par rapport à une même fonction et pour une même relation)
+        $$
+        \mathbox{
+        \begin{array}{lcrcl}
+        f \underset{a}{=} O(h) & \text{et} & g \underset{a}{=} O(h) & \Longrightarrow & f + g \underset{a}{=} O(h) \\
+        f \underset{a}{=} o(h) & \text{et} & g \underset{a}{=} o(h) & \Longrightarrow & f + g \underset{a}{=} o(h)
+        \end{array}
+        }
+        $$
+        \item \textbf{Produit} :
+        $$
+	    \mathbox{
+	    \begin{array}{ccl}
+	    \; f \underset{a}{=} O(\varphi) \quad \text{et} \quad g \underset{a}{=} O(\psi) \quad & \Longrightarrow & fg \underset{a}{=} O(\varphi\psi) \\
+	    \left.
+	    \begin{array}{lcr}
+	        f \underset{a}{=} o(\varphi) & \text{ et } & g \underset{a}{=} O(\psi) \\
+	        f \underset{a}{=} o(\varphi) & \text{ et } & g \underset{a}{=} o(\psi)
+	    \end{array}
+	    \right\}
+	    & \Longrightarrow & fg \underset{a}{=} o(\varphi\psi)
+	    \end{array}
+	    }
+        $$
+    \end{itemize}
+\end{propositions}
+
+
+\section{Fonctions équivalentes}
+
+\begin{definition}{Fonction équivalente}{}
+    Soient $f, g \in \K^D$ et $a \in \overline{\R}$. On dit que $f$ est \Strong{équivalente} à $g$ au voisinage de $a$ lorsque :
+    $$
+    \exists U \in \mathcal{V}_{\overline{\R}}(a), \;
+    \exists \varphi \in \K^{U \cap D}, \;
+    \strong{\varphi(x) \xrightarrow[x \to a]{} 1}, \;
+    \forall x \in U \cap D : \;
+    \mathbox{f(x) = \varphi(x) g(x)}
+    $$
+    On note alors \strong{$f \underset{a}{\sim} g$} ou $f(x) \underset{x \to a}{\sim} g(x)$.
+\end{definition}
+
+\begin{propositions}{Relation d'équivalence}{}
+    Soient $f, g, h \in \K^D$ et $a \in \overline{\R}$.
+    \begin{enumerate}
+        \item\label{RelEq1} \textbf{Réflexivité :} $\mathbox{f \underset{x \to a}{\sim} f}$
+        \item\label{RelEq2} \textbf{Symétrie :} $\mathbox{f \underset{a}{\sim} g \; \Longleftrightarrow \; g \underset{a}{\sim} f}$
+        \item\label{RelEq3} \textbf{Transitivité :} $\mathbox{f \underset{x \to a}{\sim} g \; \text{ et } \; g \underset{a}{\sim} h \; \Longrightarrow \; f \underset{x \to a}{\sim} h}$
+    \end{enumerate}
+\end{propositions}
+
+\begin{demo}[Principe de démonstration]
+    \begin{center}
+	    \ref{RelEq1} Prendre $\varphi(x) = 1$ ;
+	    \hfill
+	    \ref{RelEq2} $\varphi \xrightarrow[a]{} 1 \; \Longrightarrow \; \dfrac{1}{\varphi} \xrightarrow[a]{} 1$ ;
+	    \hfill
+	    \ref{RelEq3} $\displaystyle \lim_a \varphi = \lim_a \psi = 1 \; \Longrightarrow \; \lim_a \varphi\psi = 1$.
+    \end{center}
+\end{demo}
+
+\begin{proposition}{\'Equivalent d'une fonction admettant une limite}{EquivalentLimite}
+    Soient $f \in \K^D$ et \strong{$\ell \in \R^*$} : \hfill \textbox{$f(x) \xrightarrow[x \to a]{} \ell \; \Longrightarrow \; f(x) \underset{x \to a}{\sim} \ell$} \hspace*{\fill}
+\end{proposition}
+
+\begin{demo}[Principe de démonstration]
+Prendre $\varphi(x) = \frac{f(x)}{\ell}$.
+\end{demo}
+
+\begin{remarque}
+    \begin{itemize}
+        \item[\danger] $f(x) \underset{x \to a}{\sim} 0$ signifie que $f$ est nulle\footnotemark\ au voisinage de $a$, ce qui n'arrive presque jamais ; d'où le fait que la \cref{prop\string:EquivalentLimite} n'est pas valide pour une limite $\ell = 0$.
+    \end{itemize}
+\end{remarque}
+
+\footnotetext{<< Nul, ça veut dire \href{https://www.youtube.com/watch?v=m5qXr9lLdwA}{\textsc{Maé}}. >>}
+
+\begin{corollaire}{\'Equivalent d'une fonction continue en un point de $D$}{EquivalentLimiteCor}
+    Soient $f \in \K^D$ et $a \in D$ tels que \strong{$f$ est continue en $a$} et \strong{$f(a) \neq 0$}, alors : \hfill \textbox{$f(x) \underset{x \to a}{\sim} f(a)$} \hspace*{\fill}
+\end{corollaire}
+
+\begin{demo}
+    $a \in D$ et $f$ continue en $a \; \Longrightarrow \; f(x) \xrightarrow[x \to a]{} f(a)$ ; d'où (cf. \cref{prop\string:EquivalentLimite}) : $f(x) \underset{a}{\sim} f(a)$.
+\end{demo}
+
+\begin{exemple}[Exemples]
+    En appliquant directement la \cref{prop\string:EquivalentLimite} ou le \cref{prop\string:EquivalentLimiteCor}, on trouve (pour $\alpha \in \R$) que :
+    $$ \cos x \underset{x \to 0}{\sim} 1 \qquad \cosh x \underset{x \to 0}{\sim} 1 \qquad e^x \underset{x \to 0}{\sim} 1 \qquad (1+x)^\alpha \underset{x \to 0}{\sim} 1 $$
+\end{exemple}
+
+\begin{proposition}{Relation fonction équivalente et limite}{RelationEquiLimite}
+    Soient $f, g \in \K^D$ et $a \in \overline{\R}$ tels que \strong{$g$ ne s'annule pas au voisinage de $a$} (sauf peut-être en $a$).\\
+    Si $a \not\in D$ ou que $f$ et $g$ sont continues en $a$ avec $f(a) = g(a)$, alors :
+    $$
+    \mathbox{f \underset{a}{\sim} g \; \Longleftrightarrow \; \dfrac{f}{g} \xrightarrow[a]{} 1}
+    $$
+\end{proposition}
+
+%\footnotetext{<< Les anglais ils ne se font pas chier, ils écrivent directement que $\frac{f}{g} \xrightarrow[a]{} 1$. >>}
+
+\begin{demo}[Principe de démonstration]
+    Même principe que pour la \cref{prop\string:RelationNegliLimite}.
+\end{demo}
+
+\begin{proposition}{Lien entre dérivation et équivalent}{LienDerivEquivalent}
+    $I$ est un intervalle de $\R$. Soient $f \in \R^I$ et $a \in I$ tels que \strong{$f$ est dérivable en $a$} et \strong{$f'(a) \neq 0$}, alors :
+    $$ \mathbox{f(x) - f(a) \underset{x \to a}{\sim} f'(a) (x-a)} $$
+\end{proposition}
+
+\begin{demo}[Principe de démonstration]
+    Remarquer que $\displaystyle\lim_{x \to a} \tfrac{f(x) - f(a)}{f'(a) (x - a)} = 1$.
+\end{demo}
+    
+\begin{proposition}{\'Equivalents de référence}{}
+    $$
+    \begin{array}{cccc}
+        \sin x \underset{x \to 0}{\sim} x & \tan x \underset{x \to 0}{\sim} x & \ln(1+x) \underset{x \to 0}{\sim} x & e^x - 1 \underset{x \to 0}{\sim} x \\
+        \text{Pour } \alpha \in \R^* : & (1 + x)^\alpha -1 \underset{x \to 0}{\sim} \alpha x & \sinh x \underset{x \to 0}{\sim} x & \tanh x \underset{x \to 0}{\sim} x
+    \end{array}
+    $$
+\end{proposition}
+
+\begin{demo}[Principe de démonstration]
+    Résulte directement la \cref{prop\string:LienDerivEquivalent}.
+\end{demo}
+
+\begin{proposition}{Réciproque limite et fonction équivalente}{}
+    Soient $f, g \in \K^D$ et $a \in \overline{\R}$ tels que \strong{$f \underset{a}{\sim} g$} :
+    \begin{enumerate}
+        \item \textbox{$g(x) \xrightarrow[x \to a]{} \ell \; \Longrightarrow \; f(x) \xrightarrow[x \to a]{} \ell$}
+        \item $f$ et $g$ s'annulent simultanément au voisinage de $a$, ce qui signifie que pour $\K = \R$, \strong{$f$ et $g$ sont de même signe au voisinage de $a$}.
+    \end{enumerate}
+\end{proposition}
+
+\begin{demo}[Principe de démonstration]
+    Exploiter que $f(x) = \varphi(x)g(x)$ au voisinage de $a$ avec $\varphi(x) \xrightarrow[x \to a]{} 1$.
+\end{demo}
+
+\begin{proposition}{Opérations sur les fonctions équivalentes}{}
+    Soient $f, g, u, v \in \K^D$ et $a \in \overline{\R}$ tels que \strong{$f \underset{a}{\sim} u$} et \strong{$g \underset{a}{\sim} v$}, alors : \hfill $\mathbox{fg \underset{a}{\sim} \alpha \beta}$ \hspace*{\fill}\smallskip\\
+    Si de plus $g(x) \neq 0$ et $v(x) \neq 0$ au voisinage de $a$, alors : \hfill $ \qquad \mathbox{\dfrac{f}{g} \underset{a}{\sim} \dfrac{\alpha}{\beta}} $ \hspace*{\fill}
+\end{proposition}
+
+\begin{demo}[Principe de démonstration]
+    Poser $f = \varphi u$ et $g = \psi v$ avec $\displaystyle \lim_a \varphi = \lim_a \psi = 1$.
+\end{demo}
+
+\begin{exemple}
+    $$ \dfrac{\sin x}{\ln(1+x)} \underset{x \to 0}{\sim} \dfrac{x}{x} = 1 \qquad \text{d'où :} \qquad \dfrac{\sin x}{\ln(1+x)} \xrightarrow[x \to 0]{} 1 $$
+\end{exemple}
+
+\begin{remarque}
+    \begin{itemize}
+        \item[\danger] Pas de propriété analogue pour la somme :
+        $$ x^2 + x \underset{x \to +\infty}{\sim} x^2 \qquad \text{et} \qquad -x^2 + 2x \underset{x \to +\infty}{\sim} -x^2 \qquad \text{mais} \qquad x^2 + x -x^2 + 2x \underset{x \to +\infty}{\sim} 3x $$
+        Néanmoins, on peut établir quelques propriétés avec les fonctions négligeables :
+    \end{itemize}
+\end{remarque}
+
+\begin{proposition}{Somme sur les fonctions équivalentes}{}
+    Soient $f, g \in \K^D$ et $a \in \overline{\R}$, alors :
+    \begin{multicols}{2}
+    \begin{enumerate}
+        \item $ \mathbox{f \underset{a}{\sim} h \; \text{ et } \; g \underset{a}{=} o(h) \; \Longrightarrow \; f + g \underset{a}{=} h} $
+        \item $ \mathbox{f \underset{a}{\sim} g \; \Longleftrightarrow \; f - g \underset{a}{=} o(g)} $
+    \end{enumerate}
+    \end{multicols}
+    \vspace*{-5pt}
+\end{proposition}
+
+\begin{demo}[Principe de démonstration]
+    Raisonner sur les voisinages et les définitions.
+\end{demo}
+
+\begin{proposition}{Substitution dans un équivalent}{}
+    Soient $h \in \Delta^D, \; f, g \in \K^\Delta, \; a \in \overline{\R} \cap \Adh(D)$ et $b \in \overline{\R} \cap \Adh(\Delta)$ tels que \strong{$h(x) \xrightarrow[x \to a]{} b$} et \strong{$f \underset{b}{\sim} g$}, alors :
+    $$ \mathbox{f \circ h \underset{a}{\sim} g \circ h} $$
+\end{proposition}
+
+\begin{demo}[Principe de démonstration]
+    Poser $f = \varphi g$ avec $\varphi(x) \xrightarrow[x \to b]{} 1$. Puis avec la composition des limites : $(\varphi \circ h)(x) \xrightarrow[x \to a]{} 1$.
+\end{demo}
+
+\begin{exemple}
+    $$ \frac{1}{t} \xrightarrow[t \to +\infty]{0} \qquad \text{et} \qquad \sin x \underset{x \to 0}{\sim} x \qquad \text{donc} \qquad \sin \frac{1}{t} \underset{t \to +\infty}{\sim} \dfrac{1}{t} $$
+\end{exemple}
+
+\begin{remarque}
+\begin{itemize}
+    \item[\danger] On vient de voir que l'on peut composer une même fonction par une relation d'équivalence pour en obtenir une autre, mais on ne peut pas composer une relation d'équivalence par une même fonction :
+    $$ x^2 + x \underset{x \to +\infty}{\sim} x^2 \qquad \text{mais} \qquad \dfrac{e^{x^2 + x}}{e^{x^2}} = e^x \xrightarrow[x \to +\infty]{} +\infty $$
+    (On a ici utilisé la \cref{prop\string:RelationEquiLimite} \cpageref{prop\string:RelationEquiLimite})\\
+    Néanmoins, on peut composer par les fonctions $x \mapsto x^\alpha$ (avec $\alpha \in \R$) et $\ln$ : 
+\end{itemize}
+\end{remarque}
+
+\begin{propositions}{Composition d'équivalents par les fonctions puissance et logarithme}{}
+    Soient $f, g \in \K^D$, $a \in \overline{\R}$ et $\alpha \in \R$ tels que \strong{$f \underset{a}{\sim} g$}, alors :
+    \begin{enumerate}
+        \item\label{CompEqui1} $\mathbox{f^\alpha \underset{a}{\sim} g^\alpha}$
+        \item\label{CompEqui2} Si de plus \strong{$g(x) \xrightarrow[x \to a]{} 0$ ou $+\infty$} (c'est-à-dire que $f$ et $g$ sont de même signe), alors : $\mathbox{\ln \circ f \underset{a}{\sim} \ln \circ g}$
+    \end{enumerate}
+\end{propositions}
+
+\begin{demo}[Principe de démonstration]
+    \ref{CompEqui1} $\varphi(x) \xrightarrow[x \to a]{} 1 \; \Longrightarrow \; \varphi^\alpha(x) \xrightarrow[x \to a]{} 1$ ; \hfill \ref{CompEqui2} $\varphi(x) \xrightarrow[x \to a]{} 1 \; \Longrightarrow \; (\ln \circ \varphi)(x) \xrightarrow[x \to a]{} 0 \; \Longrightarrow \; \frac{\ln \circ f}{\ln \circ g}(x) \xrightarrow[x \to a]{} 1$.
+\end{demo}
+
+\begin{exemple}
+    $$ \sin x \underset{\substack{x \to 0 \\ x > 0}}{\sim} x \qquad \text{donc} \qquad \ln \circ \sin \underset{0}{\sim} \ln $$
+\end{exemple}
+
+% Rajouter applications sur les équivalent de ln o sin et ln o cos
+
+\begin{proposition}{\'Equivalent de polynômes}{}
+    Soit $P \in \K[X]^*$ tel que \strong{$a_n$} soit son \strong{coefficient dominant} et \strong{$a_\ell$} le coefficient de son \strong{monôme de plus petit degré}, alors :
+    $$ \mathbox{\widetilde{P}(t) \underset{t \to +\infty}{\sim} a_n t^n} \qquad \text{et} \qquad \mathbox{\widetilde{P}(t) \underset{t \to 0}{\sim} a_\ell t^\ell} $$
+\end{proposition}
+
+\begin{demo}[Principe de démonstration]
+    Pour $\alpha < \beta$ : $x^\alpha \underset{x \to +\infty}{=} o\left(x^\beta\right)$ et $x^\beta \underset{x \to 0}{=} o\left(x^\alpha\right)$.
+\end{demo}
+
+\begin{definition}{Suite équivalente}{}
+    Soient $u, v \in \K^\N$. On dit que $u$ est \Strong{équivalente} à $v$ lorsque :
+    $$
+    \exists \varphi \in \K^{\N}, \;
+    \varphi_n \xrightarrow[n \to +\infty]{} 1, \;
+    \APCR : \;
+    \mathbox{u_n = \varphi_n v_n}
+    $$
+    On note alors \strong{$u \underset{+\infty}{\sim} v$} ou $u_n \underset{n \to +\infty}{\sim} v_n$.
+\end{definition}
+
+\begin{remarque}
+    On retrouve les mêmes propositions des fonctions équivalentes appliquées aux suites.
+\end{remarque}
+
+% Faire application de fin du cours
+
+\end{document}
