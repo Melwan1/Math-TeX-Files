@@ -1,0 +1,240 @@
+\documentclass[12pt, a4paper]{report}
+\input{00 - preambule}
+
+\title{Notion de logique}
+
+\begin{document}
+\chapter{Notion de logique}
+
+
+\begin{remarque}[Introduction]
+On raisonne sur des \strong{assertions} ( énoncés qui ont un sens, pouvant être vrais ou faux )\\
+\\
+A la base de toute théorie, il y a les \strong{axiomes} ( assertions considérées comme vraies à priori )\\
+\\
+On admet que la théorie n'est pas contradictoire, \ie ne contient pas d'énoncé à la fois vrai et faux (on peut alors montrer que tout énoncé est à la fois vrai et faux)\\
+\\
+Les énoncés vrais (autres que les axiomes) s'appellent \strong{théorèmes, propositions, lemmes, corollaires}. Ils doivent être \strong{prouvés} au moyen d'un raisonnement logique
+\end{remarque}
+
+\section{Connecteurs logiques}
+Si $P$ et $Q$ sont deux assertions, il existe des assertions notés :
+\begin{itemize}
+\begin{multicols}{2}
+    \item $P$ OU $Q$ (disjonction de $P$, $Q$)
+    \item $P$ ET $Q$ (conjonction de $P$, $Q$)
+    \item NON $P$ (négation de $P$)
+\end{multicols}
+\end{itemize}
+\par Dont les valeurs de vérités sont :
+\begin{itemize}
+\begin{multicols}{2}
+\item \begin{tabular}{|l|c|r|}
+      \hline
+      $P$ & NON $P$   \\
+      \hline
+      V & F \\
+      \hline
+      F & V \\
+      \hline
+     \end{tabular}
+\item \begin{tabular}{|l|c|c|r|}
+      \hline
+      $P$ & $Q$ & $P$ OU $Q$ & $P$ ET $Q$ \\
+      \hline
+      V & V & V & V \\
+      \hline
+      V & F & V & F\\
+      \hline
+      F & V & V & F\\
+      \hline
+      F & F & F & F \\
+      \hline
+      \end{tabular}
+\end{multicols}
+\end{itemize}
+
+On note aussi : 
+\begin{center}
+    $P$ $\Longrightarrow$ $Q$ (lire "$P$ implique $Q$) l'assertion \strong{(NON $P$) OU $Q$}\\
+    $P$ $\Longleftrightarrow$ $Q$ (équivalence de $P$ et $Q$) l'assertion \strong{($P \Longrightarrow Q$) ET ($Q \Longrightarrow P$)}
+\end{center}
+\begin{center}
+    \begin{tabular}{|l|c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\Longrightarrow Q$ & $P\Longleftrightarrow Q$ \\
+      \hline
+      V & V & V & V \\
+      \hline
+      V & F & F & F\\
+      \hline
+      F & V & V & F\\
+      \hline
+      F & F & V & V \\
+      \hline
+      \end{tabular}
+\end{center}
+
+\begin{remarque}
+\begin{itemize}
+    \item Si $P$ est fausse alors pout toute assertion $Q$, $P\Longrightarrow Q$ est vraie \\
+    Si $Q$ est vraie alors pout toute assertion $P$, $P\Longrightarrow Q$ est vraie 
+    \item \Strong{Principe de raisonnement :}
+    Si $P$ est vraie et si $P\Longrightarrow Q$ est vraie alors $Q$ est vraie
+    \item Pour prouver l'implication $P\Longrightarrow Q$ (\ie pour montrer que l'implication est vraie)\\
+    On suppose que $P$ est vraie et on essaie de montrer que $Q$ est vraie
+    \item L'équivalence $P\Longleftrightarrow Q$ est vraie si et seulement si $P$ et $Q$ ont les mêmes valeurs de vérité
+    \item \Strong{Négation :}
+    \begin{itemize}
+        \begin{multicols}{2}
+        \item NON($\exists x, P(x)) \equiv \forall x,$ NON($P(x)$)\\
+        \item NON($\forall x, P(x)) \equiv \exists x,$ NON($P(x)$)
+    \end{multicols}
+    \end{itemize}
+\end{itemize}
+\end{remarque}
+
+On peut, en combinant les divers connecteurs, écrire des formules logiques dans lesquelles figurent des variables propositionnelles (représentant des assertions) et des connecteurs. \\Ex : (NON($P$ OU $Q$)) $\Longrightarrow R$\\
+\\
+2 formules logiques $F$, $G$ sont logiquement équivalentes lorsque quelles que soient les valeurs de vérité des variable propositionnelles qui les composent $P$, $Q$, $R$ ...\\
+Ex : $F(P,Q,R,...)$ et $G(P,Q,R,...)$ ont la même valeur de vérité\\
+On écrira $F=Q$\\
+
+\begin{exemple}{}{}
+\begin{itemize}
+    \item NON(NON $P$) $\equiv$ $P$ \\ (Pour montrer que $P$ est vrai, il suffit de montrer que NON(NON$P$) est vrai)
+\begin{multicols}{2}
+    \item $P$ ET ($Q$ OU $R$) $\equiv$ ($P$ ET $Q$) OU ($P$ ET $R$)
+    \item $P$ OU ($Q$ ET $R$) $\equiv$ ($P$ OU $Q$) ET ($P$ OU $R$)
+    \item NON($P$ OU $Q$) $\equiv$ (NON $P$) ET (NON $Q$)
+    \item NON($P$ ET $Q$) $\equiv$ (NON $P$) OU (NON $Q$)
+\end{multicols}
+\end{itemize}
+\end{exemple}
+
+\section{Raisonnement par contraposée}
+\begin{definition}{Principe du raisonnement par contraposée}{}
+\begin{center}
+    \textbox{$P \Longrightarrow Q \equiv$ (NON$Q$)$\Longrightarrow$(NON$P$)}\\
+\end{center}
+\begin{center}
+    \begin{tabular}{|c|c|c|c|}
+      \hline
+      $P$ & $Q$ & $P\Longrightarrow Q$ & (NON$Q$)$\Longrightarrow$(NON$P$) \\
+      \hline
+      V & V & V & V \\
+      \hline
+      V & F & F & F\\
+      \hline
+      F & V & V & V\\
+      \hline
+      F & F & V & V \\
+      \hline
+     \end{tabular}
+     \\
+\end{center}
+\begin{itemize}
+    \item NON($P\Longrightarrow Q$) $\equiv$ $P$ ET (NON $Q$)
+    \begin{multicols}{2}
+    \item (NON $P$) OU $P$ $\equiv$ V
+    \item (NON $P$) ET $P$ $\equiv$ F
+    \end{multicols}
+\end{itemize}
+\end{definition}
+
+\begin{exemple}{}{}
+$Q$ : Il existe des irrationnels positifs, $a,b$ tels que $a^b$ est rationnel\\
+On sait que $\sqrt{2} \notin \Q$
+\begin{center}
+    $x=\sqrt{2}^{\sqrt{2}}$ \: \: \: \: \: $P$ : $x$ est rationnel
+\end{center}
+Si $P$ est vraie alors $Q$ est vraie (prendre $a=b=\sqrt{2}$, $P \Longrightarrow Q$ est vraie)\\
+Si $P$ est fausse alors $x$ est irrationnel mais $x^{\sqrt{2}} = (\sqrt{2}^{\sqrt{2}})^{\sqrt{2}} = \sqrt{2}^{\sqrt{2}\sqrt{2}} = \sqrt{2}^2=2$ $\in \Q$\\
+Donc $Q$ est vraie (avec $a=x$, $b=\sqrt{2}$)\\
+D'où (NON $P$) $\Longrightarrow Q$ est vraie, on en déduit ($P$ OU (NON $P$)) $\Longrightarrow Q$ est vraie, $Q$ est vraie
+\end{exemple}
+
+\section{Raisonnement par l'absurde}
+
+\begin{definition}{Principe du raisonnement par l'absurde}{}
+On veut prouver qu'une assertion $P$ est vraie. On suppose NON $P$ est vraie (on ajoute NON $P$ aux axiomes) et on essaie d'obtenir une contradiction (\ie une assertion à la fois vraie et fausse), ce qui ne peut être. On a prouvé alors que NON $P$ est faux, \ie $P$ est vrai.
+\end{definition}
+
+\begin{exemple}{}{}
+\begin{itemize}
+    \item $\sqrt{2} \notin Q$ : On raisonne par l'absurde.\\ 
+    Supposons $\sqrt{2}\in \Q$, on écrit $\sqrt{2}=\dfrac{a}{b}$, avec $a,b\in \N^*$ premiers entre eux. \\
+    D'où $a^2=2b^2$, $a^2$ est pair donc $a$ aussi\\
+    On écrit $a=2a'$, alors $4a'^2=2b^2$ $\Longleftrightarrow$ $b^2=2a'^2$\\
+    $2$ divise $a$ et $b$. Contradiction, $b^2$ est pair donc $b$ aussi
+    \item L'ensemble des nombres premiers est infini
+    \item $e$ est irrationnel
+\end{itemize}
+\end{exemple}
+
+\section{Prédicats}
+
+\begin{definition}{Prédicat}{}
+Un \strong{prédicat} (sur un ensemble $E$) est une phrase comportant des variables éventuelles (représentant des éléments de $E$) qui \strong{devient une assertion} lorsqu'on donne des valeurs à ces variables.
+\end{definition}
+
+\begin{exemple}{}{}
+\begin{itemize}
+\begin{multicols}{2}
+    \item $E=\R$\\
+    $\mathcal{P}(x)$ : $x>2$\\
+    $\mathcal{P}(3)$ est une assertion (Vraie)\\ 
+    $\mathcal{P}(2)$ est une assertion (Fausse)
+    \item $E=\R^2$\\
+    $\mathcal{P}(x,y)$ : $x\geq y$\\
+    $\mathcal{P}(3,2)$ est une assertion (Vraie)\\ 
+    Pour $x\in\R$, $\mathcal{P}(x,1)$ est un prédicat (sur $\R$)
+\end{multicols}
+\end{itemize}
+\end{exemple}
+
+\begin{remarque}
+Soit $P$ et $Q$, 2 prédicats sur l'ensemble $E$
+\begin{itemize}
+\begin{multicols}{2}
+    \item $P(x)$ OU $Q(x)$ est aussi prédicats
+    \item $P(x)$ ET $Q(x)$ idem
+\end{multicols}
+    \item $\exists x$, ($P(x)$ ET $Q(x)$) $\nequiv$ ($\exists x, P(x)$) ET ($\exists x, Q(x)$)
+    \item Par contre, $\exists x$, ($P(x)$ OU $Q(x)$) $\equiv$ ($\exists x, P(x)$) OU ($\exists x, Q(x)$)
+\end{itemize}
+\end{remarque}
+
+\section{Quantificateurs}
+\begin{definition}{Quantificateur}{}
+Soit $P$ un prédicat sur un ensemble $E$\\
+La phrase : \strong{$\forall x (\in E)$, $P(x)$} est l'assertion signifiant :
+\begin{center}
+    Pour tout élément $x$ de $E$, l'assertion $P(x)$ est vraie\\
+    ($\forall$ est le quantificateur \strong{universel})
+\end{center}
+La phrase : \strong{$\exists x (\in E)$, $P(x)$} est l'assertion signifiant :
+\begin{center}
+    Il existe un élément $x$ de $E$, pour lequel l'assertion $P(x)$ est vraie
+\end{center}
+On utilise parfois aussi : \strong{$\exists !x (\in E)$, $P(x)$}
+\begin{center}
+    Il existe un et un seul élément $x$ de $E$, pour lequel l'assertion $P(x)$ est vraie
+\end{center}
+\end{definition}
+
+\begin{exemple}
+Soit $f:\R \to \R$\\
+La phrase : $\mathbox{\exists M \in \R$, $\forall x \in \R$, $f(x) \leq M}$, exprime que \strong{$f$ est majorée}. \\
+Si $u$ est une suite réelle et $\ell \in \R$, l'assertion : $\mathbox{\forall \varepsilon >0, \exists n_0 \in \N, \forall n\geq n_0$, $\abs{U_n - \ell}\leq \varepsilon}$, exprime la \strong{convergence de la suite $u$ vers le réel $\ell$}.
+
+\end{exemple}
+
+\begin{remarque}[Remarques]
+\begin{itemize}
+    \item Certaines définitions sont données avec des prédicats et quantificateurs
+    \item \Strong{Attention} à l'ordre des éventuels quantificateurs 
+\end{itemize}
+\end{remarque}
+
+\end{document}
