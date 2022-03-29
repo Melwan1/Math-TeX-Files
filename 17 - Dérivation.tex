@@ -1,0 +1,1083 @@
+\documentclass[12pt,a4paper]{report}
+\input{00 - preambule}
+
+\begin{document}
+
+\chapter{Dérivation}
+
+\section*{Introduction}
+\addcontentsline{toc}{section}{Introduction}
+
+$I$ intervalle de $\R$, $f:I \mapsto \R$, continue, $x_0 \in I$\\
+Quelle est la "meilleure" fonction affine : $\varphi : x \mapsto \alpha(x-x_0)+\beta$, qui approche $f$ au $\mathcal{V}(x_0)$ ?\\
+
+On impose déjà $\varphi(x_0) = f(x_0)$ ( de telle sorte $f(x)-\varphi (x) \xrightarrow[x \mapsto +\infty]{} 0$)
+\begin{center}
+    \ie \Strong{$\beta = f(x_0)$}
+\end{center} 
+$\Delta (x) = f(x) - \varphi (x_0) = f(x) - (\alpha (x-x_0)+f(x_0))$\\
+Pour $x\neq x_0$, 
+\begin{center}
+    \strong{$\Delta (x) = (x-x_0)(\frac{f(x)-f(x_0)}{x-x_0}-\alpha)$}
+\end{center}
+L'approximation est la meilleure si on a : \strong{$\frac{f(x)-f(x_0)}{x-x_0}-\alpha \xrightarrow[x \to x_0]{} 0$}\\
+
+On choisit donc $\alpha = \displaystyle\lim_{x \mapsto x_0} \frac{f(x)-f(x_0)}{x-x_0}$ ( Pourvu que cette limite existe).
+
+\section{Définition - Exemples}
+Dans la suite, $I$ est un intervalle non trivial de $\R$
+
+\begin{definition}{Fonction dérivable}{}
+Soit $f:I \rightarrow \K$ ($\K = \R$ ou $\C$)
+\begin{itemize}
+    \item Soit $x_0 \in I$\\
+    On dit que $f$ est dérivable sur $x_0$ ($f$ est $\Delta$ en $x_0$) si l'application taux de variation 
+    \begin{center}
+        $\Phi_{x_0, f} : x \in I\setminus \lbrace x_0 \rbrace \mapsto \frac{f(x)-f(x_0)}{x-x_0} \in \K$ 
+    \end{center}
+    admet en $x_0$ une limite \strong{finie} $\ell \in \K$\\
+    Si c'est le cas, cette limite s'appelle \Strong{la dérivée} de $f$ en $x_0$, et se note : $f'(x_0)$
+    
+    \item On dit que $f$ est dérivable sur $I$ si $f$ est dérivable en tout $x_0 \in I$. \\
+    Si c'est le cas, l'application : \strong{$x\in I \mapsto f'(x)$} s'appelle la dérivée de $f$, notée $f'$\\
+    On note $\mathcal{D} (I, \K)$ l'ensemble des fonctions dérivables sur $I$, à valeur dans $\K$
+\end{itemize}
+\end{definition}
+
+\begin{remarque}[Interprétation géométrique]
+
+
+\end{remarque}
+
+\begin{exemple}
+\begin{enumerate}
+	\item Soit $f : t \in \R_+ \mapsto \sqrt{t} \in \R$. Soit $x_0 \in \R_+$, pour $x \neq x_0, \dfrac{f(x)-f(x_0)}{x-x_0} = \dfrac{\sqrt{x}-\sqrt{x_0}}{x-x_0} = \dfrac{1}{\sqrt{x}+\sqrt{x_0}}$. \\
+	On a $\sqrt{x}+\sqrt{x_0} \xrightarrow[x \to x_0]{} 2 \sqrt{x_0}$ ($t \mapsto \sqrt{t}$ est continue). \\
+	Donc, si : \\
+		$x_0 > 0$ alors $2\sqrt{x_0} > 0$ et $\dfrac{1}{\sqrt{x}+\sqrt{x_0}} \xrightarrow[x \to x_0]{} \dfrac{1}{2\sqrt{x_0}}$ : $f$ est dérivable en $x_0$ et $f'(x_0) = \dfrac{1}{2\sqrt{x_0}}$; \\ \\
+		$x_0 = 0$ alors $2\sqrt{0} = 0$ et $\dfrac{1}{\sqrt{x}+\sqrt{0}} \xrightarrow[x \to 0]{} +\infty$ : $f$ n'est pas dérivable en $0$. \\ \\
+	\textbf{Bilan :} $f$ est dérivable sur $\R_+^*$ et $\forall x \in \R_+^*, f'(x) = \dfrac{1}{2\sqrt{x}}$ \\
+	
+	\item Soit $n \in \N^*$ et $f : x \in \R \mapsto x^n$. \\ \\
+	Soit $x_0 \in \R$, pour $x \neq x_0$, $\dfrac{f(x)-f(x_0)}{x-x_0} = \dfrac{x^n-x_0^n}{x-x_0} = x_0^{n-1}+xx_0^{n-2}+...+x^{n-2}x_0+x^{n-1} \xrightarrow[x \to x_0]{} nx_0^{n-1}$ \\ \\
+	Donc $f$ est dérivable en $x_0$ et $f'(x_0) = nx_0^{n-1}$. \\
+	Ainsi, $f$ est dérivable sur $\R$ et $f'$ est l'application $t \mapsto nt^{n-1}$ \\
+	
+	\item Soit $f : t \mapsto \abs{t}$. \\
+	Pour $t>0, \dfrac{f(t)-f(0)}{t} = \dfrac{\abs{t}}{t} = 1 \xrightarrow[t \to 0]{} 1$. \\
+	Pour $t<0 : \dfrac{f(t)-f(0)}{t} = \dfrac{\abs{t}}{t} = -1 \xrightarrow[t \to 0]{} -1$. \\
+	$\Phi_{0,f}$ admet en $0$ des limites à droite et à gauche différentes en $0$, donc pas de limite en $0$ : $f$ n'est pas dérivable en $0$.
+\end{enumerate}
+\end{exemple}
+
+\begin{definition}{Dérivable à gauche et à droite}{}
+$x_0 \in \Int (I)$, $f:I \mapsto \K$\\
+Si $\Phi_{x_0,f}$ admet en $x_0$ une limite à droite (\textit{resp. gauche}) finie : \\
+On dira que $f$ est $\Delta$ à droite (\textit{resp. gauche}) en $x_0$\\
+Si c'est le cas, on notera $f_d'(x_0)$ (\textit{resp. $f_g'(x_0)$}) cette limite\\
+On a alors (\textit{Voir merveilleux cours sur les limites}) :
+\begin{center}
+    $f$ $\Delta$ en $x_0 \Longleftrightarrow $ $f$ est dérivable à droite et à gauche en $x_0$ et $f_d'(x_0)=f_g'(x_0)$
+\end{center}
+\end{definition}
+
+\begin{remarque}
+$f : I \mapsto \K$, $x_0 \in I$\\
+$J=I-x_0 = \lbrace x-x_0 \mid x \in I \rbrace$\\
+$J$ est un intervalle de $\R$, $0\in J$\\
+\\
+Pour $t\in J$, on pose : $\varphi (t) = f(x_0 +t)$\\
+On a $f$ dérivable en $x_0 \Longleftrightarrow \varphi$ dérivable en $0$\\
+(Si c'est le cas, $f'(x_0) = \varphi'(0)$)
+\\
+
+\begin{demo}{}
+$\Longleftarrow$ Pour $x\in I\setminus \lbrace x \rbrace$
+\begin{center}
+    $\dfrac{f(x)-f(x_0)}{x-x_0} = \dfrac{\varphi(x-x_0)-\varphi(0)}{x-x_0}$ \: \: \: or $\dfrac{\varphi(x)-\varphi(0)}{t} \xrightarrow[t \to 0]{} \varphi'(0) \in \K$
+\end{center}
+Donc (\textit{comp. des lim.}) $\dfrac{\varphi(x-x_0)-\varphi(0)}{x-x_0}\xrightarrow[x \to x_0]{} \varphi'(0)$ \\
+\\
+$f$ est dérivable en $x_0$, et $f'(x_0) = \varphi'(0)$\\
+\\
+$\Longrightarrow$ Analogue
+\end{demo}
+
+\begin{proposition}{Bilan}{}
+\begin{center}
+    $f$ est dérivable en $x_0$ \\ si et seulement si $\mathbox{h \mapsto \dfrac{f(x_0 + h) - f(x_0)}{h}}$ admet une limite finie pour \strong{$h \xrightarrow[h \neq 0]{} 0$}
+\end{center}
+\end{proposition}
+\end{remarque}
+
+\begin{proposition}{}{}
+$f:I\to \K$, $x_0 \in I$\\
+$f$ est dérivable en $x_0$ $\Longrightarrow$ $f$ est continue en $x_0$
+\end{proposition}
+
+\begin{demo}{}
+Pour $x \neq x_0, f(x) - f(x_0) = \underbrace{(x-x_0)}_{\xrightarrow[x \to x_0]{} 0} \underbrace{\dfrac{f(x)-f(x_0)}{x-x_0}}_{\xrightarrow[x \to x_0]{} f'(x_0) \in \K} \quad \xrightarrow[\substack{x \to x_0 \\ x \neq x_0} ]{} 0$. \\ \\
+Donc $f(x) \xrightarrow[\substack{x \to x_0 \\ x \neq x_0}]{} f(x_0)$, on en déduit bien $f$ continue en $x_0$.
+\end{demo}
+
+\begin{proposition}{}{}
+$f : I \to \K$, $x_0 \in I$\\
+$f$ est dérivable en $x_0$ $\Longleftrightarrow$ $f$ admet un $DL_1 (x_0)$ : $\exists \alpha, \beta \in \K$, $\varepsilon : I \to \K$ tel que $\displaystyle\lim_{x_0} \varepsilon = 0$
+\begin{center}
+    $\forall x \in I$, $f(x) = \alpha + \beta (x-x_0) + \underbrace{(x-x_0) \varepsilon (x)}_{\underset{x \to x_0}{=} o(x-x_0)}$
+\end{center}
+\end{proposition}
+
+\begin{demo}{}
+$\Longleftarrow$ On voit que $\alpha+(x-x_0)\beta + (x-x_0)\varepsilon(x) \xrightarrow[x \to x_0]{} \alpha$. \\
+$f$ a donc une limite en $x_0$ donc est continue, et $\alpha = f(x_0)$, puis, pour $x \neq x_0$ : \\ \\
+$\dfrac{f(x)-f(x_0)}{x-x_0} = \dfrac{f(x)-\alpha}{x-x_0} = \beta + \varepsilon(x) \xrightarrow[x \to x_0]{} \beta$ \\ \\
+donc $f$ est dérivable en $x_0$ et $f'(x_0) = \beta$. \\ \\
+$\Longrightarrow$ Posons $\varepsilon(x_0) = 0$, et pour $x \neq x_0$, $\varepsilon(x) = \dfrac{f(x)-f(x_0)}{x-x_0}-f'(x_0)$. \\ \\
+On a $\varepsilon(x) \xrightarrow[\substack{x \to x_0 \\ x \neq x_0}]{} 0 = \varepsilon(x_0)$, donc $\underset{x_0}{\lim} \: \varepsilon = 0$. \\
+Pour $x \neq x_0$, on a bien $f(x) = f(x_0) + (x-x_0)f'(x_0)+(x-x_0)\varepsilon(x)$ et c'est aussi vrai pour $x=x_0$.
+\end{demo}
+
+
+\section{Théorèmes généraux}
+\begin{theoreme}{Opérations générales (Version locale)}{}
+$f,g : I \to \K$ dérivables en $x_0 \in I$, $\lambda \in \K$, alors : 
+\begin{enumerate}
+    \item $\lambda f+g$ est dérivable en $x_0$ :
+    $\mathbox{(\lambda f + g) ( x_0) =\lambda f'(x_0)+g'(x_0)}$
+    \item $fg$ est dérivable en $x_0$ : 
+    $\mathbox{(fg)'(x_0)=f'(x_0)g(x_0)+f(x_0)g'(x_0)}$
+    \item On suppose que $f$ ne s'annule pas, alors $\dfrac{1}{f}$ est dérivable en $x_0$ : 
+    $\mathbox{\left(\frac{1}{f}\right)'(x_0)= - \frac{f'(x_0)}{f(x_0)^2}}$
+\end{enumerate}
+\end{theoreme}
+
+\begin{principedemo}{}
+Faire apparaître un taux de variation pour chaque proposition.
+\end{principedemo}
+
+\begin{demo}{}
+\begin{enumerate}
+	\item Pour $x \in I \setminus \{x_0 \}$ : \\ \\
+	$\dfrac{(\lambda f+g)(x) - (\lambda f+g)(x_0)}{x-x_0} = \lambda \dfrac{f(x)-f(x_0)}{x-x_0} + \dfrac{g(x)-g(x_0)}{x-x_0} \xrightarrow[x \to x_0]{} \lambda f'(x_0) + g'(x_0)$. \\
+	
+	\item Pour $x \in I \setminus \{x_0\}$ :
+	\begin{align*}
+	\dfrac{f(x)g(x)-f(x_0)g(x_0)}{x-x_0} &= \dfrac{(f(x)-f(x_0)+f(x_0))g(x) - f(x_0)g(x_0)}{x-x_0} \\
+	&= \underbrace{g(x)}_{\xrightarrow[x \to x_0]{} g(x_0)} \underbrace{\dfrac{f(x)-f(x_0)}{x-x_0}}_{\xrightarrow[x \to x_0]{} f'(x_0)} - f(x) \underbrace{\dfrac{g(x)-g(x_0)}{x-x_0}}_{\xrightarrow[x \to x_0]{} g'(x_0)} \\
+	\dfrac{f(x)g(x)-f(x_0)g(x_0)}{x-x_0} & \xrightarrow[x \to x_0]{} g(x_0)f'(x_0)+f(x_0)g'(x_0)
+	\end{align*}
+	
+	\item Pour $x \in I \setminus \{ x_0\}$ :
+	\begin{align*}
+	\dfrac{\frac{1}{f(x)} - \frac{1}{f(x_0)}}{x-x_0} &= \dfrac{\frac{f(x_0)-f(x)}{f(x)f(x_0)}}{x-x_0} \\
+	&= - \dfrac{\frac{f(x)-f(x_0)}{x-x_0}}{\underbrace{f(x)f(x_0)}_{f(x) \xrightarrow[x \to x_0]{} f(x_0) \neq 0}} \\
+	\dfrac{\frac{1}{f(x)} - \frac{1}{f(x_0)}}{x-x_0} & \xrightarrow[x \to x_0]{} - \dfrac{f'(x_0)}{f(x_0)^2}
+	\end{align*}
+	
+\end{enumerate}
+\end{demo}
+
+\begin{corollaire}{}{}
+\begin{center}
+    $\dfrac{g}{f}$ est dérivable en $x_0$ et $\left(\dfrac{g}{f}\right)'(x_0)=  \dfrac{g'(x_0)f(x_0) - g(x_0)f'(x_0)}{f(x_0)^2}$
+\end{center}
+\end{corollaire}
+
+\begin{principedemo}{}
+Appliquer le théorème en utilisant l'inverse puis le produit.
+\end{principedemo}
+
+\begin{theoreme}{Opérations générales (Version globale)}{}
+$f,g \in \mathcal{D} (I, \K)$, $\lambda \in \K$ alors : 
+\begin{enumerate}
+    \item $\lambda f+g \in \mathcal{D} (I, \K)$ :$\mathbox{(\lambda f + g)=\lambda f'+g'}$
+    \item $fg \in \mathcal{D} (I, \K)$ : $\mathbox{(fg)'=f'g+fg'}$
+    \item On suppose que $f$ ne s'annule pas, alors $\dfrac{1}{f}\in \mathcal{D} (I, \K)$ : $\mathbox{\left(\frac{1}{f}\right)'= - \frac{f'}{f^2}}$
+    \item $\dfrac{g}{f}\in \mathcal{D} (I, \K)$ : $\mathbox{\left(\frac{g}{f}\right)'=  \frac{g'f - gf'}{f^2}}$
+\end{enumerate}
+\end{theoreme}
+
+\begin{theoreme}{Opération sur les fonctions dans $\C$}{}
+$f:I \to \C$\\
+$u = \Re (f)$ et $v = \Im (f)$\\
+$f$ est dérivable sur $I \Longleftrightarrow u$ et $v$ sont dérivables sur $I$\\
+On a alors $\mathbox{f'=u'+iv'}$
+\end{theoreme}
+
+\begin{demo}{}
+$\Longrightarrow$ Soit $x_0 \in I$, pour $x \in I \setminus \{x_0\}, \\
+\underbrace{\dfrac{f(x)-f(x_0)}{x-x_0}}_{\xrightarrow[x \to x_0]{} \ell = \alpha+i\beta} = \underbrace{\dfrac{u(x)-u(x_0)}{x-x_0}}_{\in \R} + i \underbrace{\dfrac{v(x)-v(x_0)}{x-x_0}}_{\in \R}$. \\
+On en déduit $\dfrac{u(x) - u(x_0)}{x-x_0} \xrightarrow[x \to x_0]{} \alpha$ et $\dfrac{v(x)-v(x_0)}{x-x_0} \xrightarrow[x \to x_0]{} \beta$ (théorèmes généraux sur les limites).
+$\Longleftarrow$ Evident (théorèmes généraux sur les dérivées).
+\end{demo}
+
+\begin{theoreme}{Composition}{}
+$I,J$ 2 intervalles de $\R$\\
+$f:I\to J$ \: \: \: \: dérivables\\
+$g:J \to \K$\\
+Alors $g \circ f$ est dérivable : $\mathbox{(g\circ f)'=f'\times g'\circ f}$
+\end{theoreme}
+
+\begin{demo}{}
+Soit $x_0 \in I$. Pour $x \in I \setminus \{x_0\}$ : \\
+$\dfrac{g(f(x))-g(f(x_0))}{x-x_0} = \dfrac{g(f(x))-g(f(x_0))}{f(x)-f(x_0)} \cdot \dfrac{f(x)-f(x_0)}{x-x_0} \xrightarrow[x \to x_0] g'(f(x_0)) \cdot f'(x_0)$. \\ \\
+En effet, $f(x) \xrightarrow[x \to x_0]{} f(x_0)$ car $f$ est continue en $x_0$ et $\dfrac{g(y)-g(f(x_0))}{y-f(x_0)} \xrightarrow[y \to f(x_0)]{} g'(f(x_0))$ \\ \\
+donc par composition des limites : $\dfrac{g(f(x))-g(f(x_0))}{f(x)-f(x_0)} \xrightarrow[x \to x_0]{} g'(f(x_0))$. \\ \\
+
+\textbf{Problème :} on peut avoir $f(x)=f(x_0)$ même pour $x \neq x_0$ voisin de $x_0$. Cette preuve fonctionne à condition que $f(x) \neq f(x_0)$ pour $x \neq x_0$ au voisinage de $x_0$. En particulier si $f$ est strictement monotone. \\ \\
+
+\textbf{Retour à la preuve :} \footnotemark Pour $y \in J$, on pose $H(y) =
+\begin{cases}
+\frac{g(y)-g(f(x_0))}{y-f(x_0)} & \text{ si } y \neq f(x_0) \\
+g'(f(x_0)) & \text{ si } y = f(x_0)
+\end{cases}$
+Il est clair que $H$ est continue en $f(x_0)$ (car $g$ est dérivable en $f(x_0)$). \\
+Or, pour $x \in I \setminus \{x_0\}$ on a toujours \\ \\
+$\dfrac{g(f(x))-g(f(x_0))}{x-x_0} = H(f(x)) \cdot \dfrac{f(x)-f(x_0)}{x-x_0}$. \\ \\
+En effet, c'est bon si $f(x) \neq f(x_0)$ et si $f(x) =f(x_0)$, on a bien $0=0$. \\ \\
+Or, par composition des limites : \\
+$H(f(x)) \xrightarrow[x \to x_0]{} H(f(x_0))$ (car $f$ continue en $x_0$), et on a $\dfrac{f(x)-f(x_0)}{x-x_0} \xrightarrow[x \to x_0]{} f'(x_0)$. \\
+On a donc bien : $\dfrac{g(f(x))-g(f(x_0))}{x-x_0} \xrightarrow[x \to x_0]{} g'(f(x_0))f'(x_0)$.
+\end{demo}
+\footnotetext{"Come-back", d'après Olivier S.}
+
+\begin{theoreme}{Composition avec l'exponentielle complexe}{}
+$f:I \to \C$ dérivable \\
+Alors $\exp \circ f$ est dérivable : $\mathbox{(\exp \circ f)'=f' \times \exp \circ f}$
+\end{theoreme}
+
+\begin{demo}{}
+$u = \Re(f), v = \Im(f) : u,v$ sont bien dérivables sur $I$ et à valeurs dans $\R$. \\
+$\Re(\exp(f)) = e^{u}\cos v, \Im(\exp(f)) = e^{u}\sin v$. On voit donc (théorèmes généraux sur les fonctions réelles) que $e^{u} \cos v$ et $e^{u}\sin v$ sont dérivables, donc $\exp(f)$ est dérivable. \\ \\
+De plus, 
+\begin{align*}
+(\exp(f))' &= (e^{u}\cos v)' + i (e^{u}\sin v)' \\
+&=(u'e^{u}\cos v - v'e^{u}\sin v) + i (u'e^{u}\sin v + v'e^{u} \cos v) \\
+&=e^{u}\left[(u'\cos v - v' \sin v) + i (u' \sin v + v' \cos v)\right] \\
+&= e^{u} (u'+iv')(\cos v + i \sin v) \\
+&= f'\exp(f)
+\end{align*}
+\end{demo}
+
+\begin{theoreme}{Dérivée d'une réciproque}{}
+Soit $I$ un intervalle de $\R$, non trivial \\
+$f: I \to \R$ continue strictement monotone \\
+\\
+On sait que $f$ induit une bijection de $I$ sur $J=f(I)$, dont on note $g$ la réciproque ($g$ est aussi continue, strictement monotone)
+\begin{enumerate}
+    \item Soit $x_0 \in I$, on suppose que $f$ est dérivable en $x_0$ et que $f'(x_0) \neq 0$\\
+    Alors $g$ est dérivable en $y_0 = f(x_0)$ et $g'(y_0)=\dfrac{1}{f'(x_0)}$
+    \item Si $f$ est dérivable sur $I$, et si $f'$ ne s'annule pas, alors $g$ est dérivable sur $J$ :\\ $\forall y \in J, \mathbox{g'(y)=\dfrac{1}{f'(g(y))}}$
+\end{enumerate}
+\end{theoreme}
+
+\begin{demo}{}
+Pour $y \in J \setminus \{y_0 \} : \dfrac{g(y)-g(y_0)}{y-y_0} = \dfrac{1}{\frac{f(g(y))-f(x_0))}{g(y)-x_0}}$. \\ \\
+Or, $\dfrac{f(x)-f(x_0)}{x-x_0} \xrightarrow[\substack{x \to x_0 \\ x \in I \setminus \{x_0\}}]{} f'(x_0) \neq 0$. \\ \\
+De plus, $g(y) \xrightarrow[y \to y_0]{} g(y_0) = x_0$ ($g$ est continue). \\
+Donc, par composition des limites, \\
+$\dfrac{f(g(y))-f(x_0)}{g(y)-x_0} \xrightarrow[y \to y_0]{} f'(x_0) \neq 0$, \\ \\
+Puis $\dfrac{1}{\frac{f(g(y))-f(g(y_0))}{g(y)-g(y_0)}} \xrightarrow[y \to y_0]{} \dfrac{1}{f'(x_0)}=\dfrac{1}{f'(g(y_0))}$, CQFD.
+\end{demo}
+
+\begin{remarque}
+Que se passe-t-il lorsque $f'(x_0)=0$ ? Supposons $f$ strictement croissante. On a toujours : \\ \\
+$\dfrac{f(g(y))-f(g(y_0))}{g(y)-g(y_0)} \xrightarrow[y \to y_0]{} f'(x_0) = 0$. \\ \\
+Or, pour $x \in I \setminus \{x_0\}$ : $\dfrac{f(x)-f(x_0)}{x-x_0}>0$. \\ \\
+En effet, si $x>x_0$ on a $f(x)>f(x_0)$ et si $x<x_0$ on a $f(x)<f(x_0)$ \\ \\
+D'où : $\forall y \in J \setminus \{y_0\} : \dfrac{f(g(y))-f(x_0)}{g(y)-x_0} > 0$. On en déduit : \\ \\
+$\dfrac{1}{\frac{f(g(y))-f(x_0)}{g(y)-x_0}} \xrightarrow[y \to y_0]{} +\infty$ : \\ \\
+$g$ n'est pas dérivable en $y_0$ mais $\dfrac{g(y)-g(y_0)}{y-y_0} \xrightarrow[y \to y_0]{} +\infty$.
+\end{remarque}
+
+\begin{exemple}[Exemples]{}
+\begin{enumerate}
+	\item $f : t \in \R_+ \mapsto t^n$ ($n \in \N$) est continue, strictement croissante et induit une bijection de $R_+$ sur $f(\R_+) = \R_+$. La réciproque est $g : t \in \R_+ \mapsto \sqrt[n]{t} = t^{\frac{1}{n}}$ \\
+	Pour $t \in \R_+, f'(t) = nt^{n-1}>0$ donc $g$ est dérivable sur $f(\R_+) = \R_+$ et pour $x>0 : \\ \\
+	g'(x) = \dfrac{1}{f'(g(x))} = \dfrac{1}{n} \dfrac{1}{(t^{\frac{1}{n})^{n-1}}} = \dfrac{1}{n} \dfrac{1}{t^{1-\frac{1}{n}}} = \dfrac{1}{n} t^{\frac{1}{n}-1}$.
+	
+	\item $\varphi : t \in ]-\frac{\pi}{2},\frac{\pi}{2}[ \mapsto \tan t \in \R$. $\tan$ est continue strictement croissante sur $]-\frac{\pi}{2},\frac{\pi}{2}[$ donc est bijective de $]-\dfrac{\pi}{2},\dfrac{\pi}{2}[$ sur $]\underset{-\frac{\pi}{2}^+}{\lim} \; \tan, \underset{\frac{\pi}{2}^-}{\lim} \; \tan[ \; = \; ]-\infty,+\infty[$. \\
+	
+	\begin{definition}{Fonction $\arctan$}{DefArctan}
+		$\arctan = \varphi^{-1}$. $\arctan$ est continue de $\R$ dans $]-\dfrac{\pi}{2},\dfrac{\pi}{2}[$. De plus, $\varphi$ est dérivable sur $]-\dfrac{\pi}{2},\dfrac{\pi}{2}[$ et $\varphi'(t) = 1+\tan^2 t>0$. $\arctan$ est dérivable sur $\R$ et \\
+		\begin{center}
+			$\forall x\in \R : \arctan'(x) = \dfrac{1}{1+\varphi'(\arctan x)} = \dfrac{1}{1+\tan^2 \arctan x} = \dfrac{1}{1+x^2}$.
+		\end{center}
+	\end{definition}
+	
+	\begin{remarque}
+		$\arctan$ est impaire. Soit $x \in \R, \theta = \arctan x \in ]-\dfrac{\pi}{2},\dfrac{\pi}{2}[$. On a $x = \tan \theta$. \\
+		D'où $-x = -\tan \theta = \tan(-\theta)$ et $-\theta \in ]-\dfrac{\pi}{2},\dfrac{\pi}{2}[$, donc $-\theta = \arctan(-x)$. \\
+		\\
+		\Strong{Valeurs remarquables de la fonction $\arctan$ :}
+		\begin{center}
+		    \begin{tabular}{|Sc|Sc|Sc|Sc|Sc|}
+            \hline
+            $x$ & $0$ & $-\dfrac{1}{\sqrt{3}}$ & $1$ & $\sqrt{3}$ \\
+            \hline
+            $\arctan x$ & $0$ & $\dfrac{\pi}{6}$ & $\dfrac{\pi}{4}$ & $\dfrac{\pi}{3}$ \\
+            \hline
+            \end{tabular}
+		\end{center}
+		Quid $\arctan(\tan \frac{2\pi}{3})$ ? \\
+		$\arctan(\tan \frac{2\pi}{3}) = \arctan(-\sqrt{3}) = -\frac{\pi}{3}$ \\
+		Pour $x,y \in \R, y = \arctan x \Longleftrightarrow y \in ]-\dfrac{\pi}{2},\dfrac{\pi}{2}[$ et $x = \tan y$.
+	\end{remarque}
+	
+\end{enumerate}
+\end{exemple}
+
+\pagebreak
+
+\section{Théorème des accroissements finis - TAF}
+Ce paragraphe est spécifique aux fonctions réelles. 
+
+\subsection{Extrêmes locaux}
+\begin{definition}{Minimum\footnotemark et maximum local}{}
+
+Soit $I$ un intervalle de $\R$, $f:I \to \R$, $x_0 \in I$. On dit que $f$ présente en $x_0$ un minimum local (\textit{resp.} maximum local) s'il existe $r>0$ tel que :
+\begin{center}
+    \strong{$[x_0 - r, x_0 +r] \subset I$ et $\forall t \in [x_0 - r, x_0 +r]$, $f(t) \geq f(x_0)$} (\textit{resp.} $f(t)\leq f(x_0)$)
+\end{center}
+\end{definition}
+
+\footnotetext{Attention à la transformée d'Olivier ...}
+
+\begin{remarque}
+Si $f$ présente en $x_0$ un extremum local (\ie un minimum local ou un maximum local) alors $x_0 \in \Int(I)$
+\end{remarque}
+
+\begin{theoreme}{}{}
+$f : I \to \R$, $x_0 \in I$\\
+On suppose que $f$ présente en $x_0$ un extremum local et que $f$ est dérivable en $x_0$, alors : $\mathbox{f'(x_0)=0}$
+\end{theoreme}
+
+\begin{demo}{}
+Soit $r>0$ tel que $[x_0-r,x_0+r] \subset I$ et tel que $\forall t \in [x_0-r,x_0+r], f(t) \geq f(x_0)$ (on a supposé que $f$ présente en $x_0$ un minimum local).
+$\forall n \in \N^* : h_n = x_0-\frac{r}{n}$. On a $\forall n \in  \N^*, h_n \in [x_0-r,x_0[$ et $h_n \xrightarrow[n \to +\infty]{}x_0$. \\
+De plus, $f(h_n) - f(x_0) \geq 0$, donc $\dfrac{f(h_n)-f(x_0)}{h_n - x_0} \leq 0$. \\ \\
+On sait que $\dfrac{f(x)-f(x_0)}{x-x_0} \xrightarrow[\substack{x \to x_0 \\ x \in I \setminus \{x_0\}}]{} f'(x_0)$. \\
+$(h_n)$ est une suite de points de $I \setminus \{x_0\}$ qui converge vers $x_0$ donc, par définition séquentielle de la limite : \\ \\
+$\dfrac{f(h_n)-f(x_0)}{h_n-x_0} \xrightarrow[n \to +\infty]{} f'(x_0)$. \\ \\
+Donc, par conservation des inégalités larges par passage à la limite : $f(x_0) \leq 0$. \\ \\
+En considérant de même $(k_n)_{n \in \N^*}$ définie par $\forall n \in \N^*, k_n = x_0-\frac{r}{n}$ \\
+$(k_n)$ est une suite de points de $I \setminus \{x_0\}$ qui converge vers $x_0$ et : \\ \\
+$\forall n \in \N^*, \dfrac{f(k_n)-f(x_0)}{k_n-x_0} \geq 0$ car $k_n \in ]x_0,x_0+r]$. \\ \\
+On obtient, si $n \to +\infty : f'(x_0) \geq 0$. \\
+D'où : \mathbox{f'(x_0) = 0}
+\end{demo}
+
+\subsection{Théorème de Rolle}
+
+\begin{theoreme}{Théorème de Rolle}{}
+Soient $a,b\in \R$ avec $a<b$\\
+$f:[a,b]\to \R$, continue sur $[a,b]$ et dérivable sur $]a,b[$, tel que $f(a)=f(b)$, alors :
+\begin{center}
+    $\exists c \in ]a,b[$, $\mathbox{f'(c)=0}$
+\end{center}
+\end{theoreme}
+
+\begin{remarque}[Interprétation]
+\begin{center}
+    \begin{tikzpicture}
+    \begin{scope}
+    \clip (-3,-2) rectangle (3,2);
+    \draw[thick,smooth,domain=-3:3] plot (\x,{\x^3/3 - \x});
+    \end{scope}
+    \node[point,fill=black] (a) at (-1.75,1/20) {};
+    \node[point,fill=black] (b) at (1.75,1/20) {};
+    \coordinate (origin) at (-4,-3);
+    \coordinate (topright) at (4,2);
+    \draw[<->] (topright -| origin) -- (origin) -- (origin -| topright);
+    \draw[dotted,very thick] (a) -- (a|-origin) node[below] {$a$};
+    \draw[dotted,very thick] (b) -- (b|-origin) node[below] {$b$};
+
+    \node[point,fill=black] (x0) at ({-2/sqrt(4)},{(1/3)*(-2/sqrt(3))^3+2/sqrt(3)}) {};
+    \draw (x0) +(-1,1/20) -- +(1,1/20);
+    \node[point,fill=black] (x1) at ({2/sqrt(4)},{(1/3)*(2/sqrt(3))^3-2/sqrt(3)}) {};
+    \draw (x1) +(-1,1/80) -- +(1,1/80);
+    \draw[dashed] (x0) -- (x0 |- origin) node[below]{$c_1$};
+    \draw[dashed] (x1) -- (x1 |- origin) node[below]{$c_2$};
+\end{tikzpicture}
+\end{center}
+
+Il existe $c \in ]a,b[$ tel que le graphe de $f$ admet une tangente horizontale au point d'abscisse $c$.
+\end{remarque}
+
+\begin{demo}{}
+Si $f$ est constante, on a $\forall c \in ]a,b[, f'(c) = 0$. \\
+Supposons $f$ non constante. $f$ est continue sur le segment $[a,b]$ donc est bornée et atteint ses bornes : il existe $c,d \in [a,b]$ tels que $\forall x \in [a,b] = f(c) \leq f(x) \leq f(d)$. \\
+On a $f(c) < f(d)$ sinon $f$ est constante, donc $f(c)$ ou $f(d)$ est distinct de $f(a) (=f(b))$. \\
+Supposons par exemple $f(c) \neq f(a)$, alors $c \neq a$ et $c \neq b$, ie $c \in ]a,b[$. \\
+Soit $r>0$ tel que $[c-r,c+r] \subset [a,b]$ (il y en a car $c \in ]a,b[$). \\
+On a $\forall t \in [c-r,c+r], f(t) \geq f(c)$ \\
+donc $f$ présente un minimum local. $f$ est dérivable en $c$ donc $f'(c) = 0$.
+\end{demo}
+
+\begin{remarque}
+\begin{itemize}
+    \item Ce théorème s'applique en particulier si $f$ est dérivable sur $[a,b]$ (et $f(a)=f(b)$)
+    \item $P\in \R[X]$ non constant et scindé ($\deg P \geq 2$) alors : $P'$ est scindé (sur $\R$)
+\end{itemize}
+\end{remarque}
+
+\begin{demo}{}
+$P = c(X-x_1)^{\alpha_1} ... (X-x_r)^{\alpha_r}$, $c \in \R^*, r \in \N^*, \alpha_i \in \N^* (1 \leq i \leq r), x_1 < ... < x_r$. \\
+$n = \deg P = \alpha_1 + ... + \alpha_r$. On sait que $\deg P' = n-1$. \\
+$\forall i \in \llbracket 1,r \rrbracket, (X-x_i)^{\alpha_i-1}$ divise $P'$ \\
+($P = (X-x)^{\alpha}T \Longrightarrow P' = \alpha (X-x)^{\alpha-1}T + (X-x)^{\alpha}T' = (X-x)^{\alpha-1}(\alpha T+(X-x)T')$). \\
+Pour $1 \leq i \leq r-1$ : $P$ est dérivable sur $[x_i,x_{i+1}]$ et $P(x_i) = P(x_{i+1}) (=0)$. \\
+Donc il existe $y_i \in ]x_i,x_{i+1}[$ tel que $P'(y_i) = 0$. (théorème de Rolle) \\
+On a $x_1 < y_1 < x_2 < ... < x_{r-1} < y_{r-1} < x_r$. \\
+$\Longrightarrow$ Les polynômes $(X-x_i)^{\alpha_i-1} (1 \leq i \leq r)$ et $(X-y_i) (1 \leq i \leq r-1)$ sont deux à deux premiers entre eux, et divisent $P'$. \\
+Donc $T = (X-y_1)...(X-y_{r-1})(X-x_1)^{\alpha_1-1} ... (X-x_r){\alpha_r-1}$. \\
+Or $\deg T = r-1 + (\alpha_1-1) + ... + (\alpha_r-1) = \alpha_1 + ... + \alpha_r - 1 = n-1 = \deg P'$ \\
+$\Longrightarrow P' = \lambda T$ avec $\lambda \in \R$.
+
+\end{demo}
+
+\subsection{Théorème des accroissements finis et conséquences }
+
+\begin{theoreme}{Théorème des accroissements finis \footnotemark}{}
+Soient $a,b \in \R$, avec $a<b$\\
+$f:[a,b]\to \R$, continue sur $[a,b]$ et dérivable sur $]a,b[$, alors : 
+\begin{center}
+    $\exists c \in ]a,b[$, $\mathbox{f(b)-f(a)=(b-a)f'(c)}$
+\end{center}
+\end{theoreme}
+
+\footnotetext{\textit{Olivier S. : Mon copain le TAF }}
+
+\begin{remarque}[Interprétation]
+\begin{center}
+    \begin{tikzpicture}
+    \begin{scope}
+    \clip (-3,-2) rectangle (3,2);
+    \draw[thick,smooth,domain=-3:3] plot (\x,{\x^3/3 - \x});
+    \end{scope}
+    \node[point,fill=black] (a) at (-2,-2/3) {};
+    \node[point,fill=black] (b) at (2,2/3) {};
+    \draw[thick] (a) -- (b);
+    \coordinate (origin) at (-4,-3);
+    \coordinate (topright) at (4,2);
+    \draw[<->] (topright -| origin) -- (origin) -- (origin -| topright);
+    \draw[dotted,very thick] (a) -- (a|-origin) node[below] {$a$};
+    \draw[dotted,very thick] (b) -- (b|-origin) node[below] {$b$};
+
+    \node[point,fill=black] (x0) at ({-2/sqrt(3)},{(1/3)*(-2/sqrt(3))^3+2/sqrt(3)}) {};
+    \draw (x0) +(-1,-1/3) -- +(1,1/3);
+    \node[point,fill=black] (x1) at ({2/sqrt(3)},{(1/3)*(2/sqrt(3))^3-2/sqrt(3)}) {};
+    \draw (x1) +(-1,-1/3) -- +(1,1/3);
+    \draw[dashed] (x0) -- (x0 |- origin) node[below]{$c_1$};
+    \draw[dashed] (x1) -- (x1 |- origin) node[below]{$c_2$};
+\end{tikzpicture}
+\end{center}
+Il existe $c\in ]a,b[$ tel que la tangente au graphe de $f$ en $C(c,f(c))$ est parallèle à $(AB)$ \\où $A(a,f(a))$ et $B(b,f(b))$
+\end{remarque}
+
+\begin{remarque}
+Il est clair que le théorème des accroissements finis $\Longrightarrow$ théorème de Rolle
+\end{remarque}
+
+\begin{demo}{}
+Soit $g : t \in [a,b] \to f(t) - \left(\dfrac{f(b)-f(a)}{b-a}(t-a)+f(a)\right) \in \R$. \\ \\
+$g$ est, comme $f$, continue sur $[a,b]$, dérivable sur $]a,b[$, de plus $g(a) = g(b) = 0$. \\
+D'après le théorème de Rolle, appliqué à $g$, il existe $c \in ]a,b[$ tel que $g'(c) = 0$, \ie tel que $f'(c)-\dfrac{f(b)-f(a)}{b-a} = 0$.
+\end{demo}
+
+
+\subsubsection{Variation des fonctions}
+
+\begin{theoreme}{Variation pour les fonctions réelles constantes}{}
+Soit $I$ un intervalle de $\R$, $f:I\to \R$, dérivable, alors :
+\begin{center}
+    \textbox{$f$ est constante $\Longleftrightarrow$ $f'$ est nulle}
+\end{center}
+\end{theoreme}
+
+\begin{demo}
+$\Longrightarrow$ \textit{Obvious !}\\
+$\Longleftarrow$ Soit $a\in I$, pour $b \in I\setminus \lbrace a \rbrace$, $f$ est dérivable sur $[\alpha,\beta]$\\
+$\alpha = \min(a,b)$ \: \: \: \: \: $\beta = \max(a,b)$ \: \: \: \: \: ( on a bien $[\alpha,\beta] \subset I$ )\\
+Donc (\textit{TAF}) il existe $c \in ]\alpha,\beta[$ tel que :
+\begin{center}
+    $f(\beta)-f(\alpha)=(\beta-\alpha)\underbrace{f'(c)}_{=0}=0$
+\end{center}
+D'où $f(\alpha)=f(\beta)$ \ie $f(a)=f(b)$ ($\lbrace a,b \rbrace =\lbrace \alpha, \beta \rbrace$)\\
+\textbf{Donc :} $\forall b \in I\setminus \lbrace a \rbrace$, $f(b)=f(a)$ : $f$ est constante
+\end{demo}
+
+\begin{corollaire}{Variation pour les fonctions complexes constantes}{}
+$f:I \to \C$ dérivable, alors : 
+\begin{center}
+    \textbox{$f$ constante $\Longleftrightarrow$ $f'$ nulle}
+\end{center}
+\end{corollaire}
+
+\begin{demo}
+$\Longrightarrow$ \textit{Obvious !}\\
+$\Longleftarrow$ $u=\Re(f)$ et $v=\Im(f)$ \\
+On sait que $u$ et $v$ sont dérivables et que $0=f'=u'+iv'$, d'où $u'=v'=0$\\
+D'après le théorème précédent ($u$ et $v$ sont réelles), $u$ et $v$ sont constantes et $f=u+iv$ aussi
+\end{demo}
+
+\begin{definition}{Aparté - Primitive}{}
+$f:I \to \C$\\
+Une primitive de $f$ est une application \strong{$F:I\to \C$}, dérivable tel que : \textbox{$F'=f$}
+\end{definition}
+
+\begin{remarque}
+L'existence d'une primitive n'est pas toujours assurée\\
+Supposons : $f$ admet une primitive $F$, alors les primitives de $f$ sont les applications : 
+\begin{center}
+    $t\in I \mapsto F(t) + \lambda$, où $\lambda \in \C$
+\end{center}
+\end{remarque}
+
+\begin{demo}{}
+Si $\lambda \in \C, t \overset{G}{\mapsto} F(t)+\lambda$ est dérivable et $\forall t \in I, G'(t) = F'(t) = f(t)$, donc $G$ est une primitive de $f$. \\
+Si $G$ est une primitive de $f$ alors $G-F$ est dérivable sur $I$ et $(G-F)' = G'-F' = f-f = 0$ donc $G-F$ est constante : $\exists \lambda \in \C, \forall t \in I, G(t)-F(t) = \lambda$.
+\end{demo}
+
+\begin{theoreme}{Variation pour les fonctions réelles}{}
+Soit $I$ un intervalle de $\R$\\
+$f:I \to \R$, dérivable 
+\begin{itemize}
+    \item $f$ est croissante $\Longleftrightarrow$ $f'\geq 0$
+    \item si $f'>0$ alors $f$ est strictement croissante 
+\end{itemize}
+(\textit{resp.} décroissante)
+\end{theoreme}
+
+\begin{demo}{}
+$\Longrightarrow$ Soit $x_0 \in I$, et $x \in I \setminus \{x_0\}$. \\ \\
+Si $x<x_0$ alors $f(x) - f(x_0) \leq 0$ d'où $\dfrac{f(x)-f(x_0)}{x-x_0} \geq 0$. \\ \\
+Donc, $\forall x \in I \setminus \{x_0 \}, \dfrac{f(x)-f(x_0)}{x-x_0} \geq 0$. Par passage à la limite pour $x \to x_0$ : $f'(x_0) \geq 0$. \\ \\
+$\Longleftarrow$ Soient $a,b \in I$ tels que $a<b$. On a $[a,b] \subset I$, $f$ est dérivable sur $[a,b]$ donc (d'après le théorème des accroissements finis), \\ 
+il existe $c \in ]a,b[$ tel que $f(b)-f(a) = (b-a)f'(c) \geq 0$. D'où $f(a) \leq f(b)$.
+\end{demo}
+
+\begin{remarque}
+Si $f'>0$, alors $f'(c)>0$ et $f(a)<f(b)$\\
+D'où $\forall a,b \in I$, $a<b$ $\Longrightarrow$ $f(a) \leq f(b)$\\
+Si $f'>0$ : $\forall a,b \in I$, $a<b$ $\Longrightarrow$ $f(a) < f(b)$
+\end{remarque}
+
+\begin{corollaire}{\textit{Raffinement}}{}
+\begin{enumerate}
+	\item $f:I\to \R$, continue sur $I$ et dérivable sur $\Int(I)$, alors :
+	\begin{center}
+    	$f$ croissante $\Longleftrightarrow$ $f'\geq 0$
+	\end{center}
+	
+	\item $f : I \to \R$ continue sur $I$, dérivable sur $\Int(I)$ avec $f' \geq 0$. Supposons que $\{x \in I \mid f'(x) = 0 \}$ est fini ou dénombrable, alors $f$ est strictement croissante.
+\end{enumerate}
+\end{corollaire}
+
+\begin{demo}{}
+\begin{enumerate}
+	\item Reprendre la preuve précédente.
+	\item On sait déjà que $f$ est croissante. Si $f$ n'est pas strictement croissante alors il existe $a,b \in I$ avec $a<b$ tels que $f(a) \geq f(b)$, d'où en fait $f(a)= f(b)$ (car $f$ est croissante). \\
+	Pour $t \in [a,b] \subset I, f(a) \leq f(t) \leq f(b) = f(a)$. \\
+	$f$ est alors constante sur $[a,b]$ donc sur $]a,b[ \subset \Int(I)$, comme $f$ est dérivable sur $]a,b[$, on a $f'$ nulle sur $]a,b[$, mais $]a,b[$ est infini non dénombrable d'où une contradiction.
+\end{enumerate}
+\end{demo}
+
+\begin{application}{Inégalités}{}
+\textbf{Montrer que $\forall x \in \left[0, \dfrac{\pi}{2}\right[$, $\tan x \geq x$}\\
+\\
+Soit $\varphi:x \in \left[0, \dfrac{\pi}{2}\right[ \rightarrow \tan x -x \in \R$\\
+$\varphi$ est dérivable sur $\left[0, \dfrac{\pi}{2}\right[$ et pour $x\in \left[0, \dfrac{\pi}{2}\right[$
+\begin{center}
+    $\varphi'(x)=1+\tan^2 x - 1 = \tan^2 x \geq 0$, $\varphi$ est donc croissante
+\end{center}
+Donc $\forall x \in \left[0, \dfrac{\pi}{2}\right[$, $\varphi(x) \geq \varphi(0)=0$
+\end{application}
+
+\begin{remarque}[petite Histoire : Version du TVI pour $f'$]
+Soit $I$ un intervalle de $\R$, $f : I \to \R$ dérivable. \\
+\begin{itemize}
+	\item Supposons que $\forall x \in I, f'(x) \neq 0$. Soient $a,b \in I$ avec $a \neq b$ (par exemple $a < b$) \\
+	D'après le TAF, appliqué à $f_{\lvert [a,b]}$, ($f$ dérivable sur $[a,b]$), il existe $c \in ]a,b[$ tel que \\
+	$f(b)-f(a)=(b-a)f'(c) \neq 0$, donc $\forall a,b \in I, a \neq b \Longrightarrow f(a) \neq f(b)$. \\
+	$f$ est \strong{injective} et \strong{continue} (car dérivable) sur l'\strong{intervalle} $I$, donc $f$ est 	\strong{strictement monotone sur $I$}. \\
+	D'où : $(\forall x \in I, f'(x) > \geq 0)$ ou $(\forall x \in I, f'(x) \leq 0)$, et puisque $f'$ ne s'annule pas : \\
+	$(\forall x \in I, f'(x) < 0)$ ou $(\forall x \in I, f'(x) > 0)$. \\
+	
+	\item Supposons que $f'$ prend des valeurs positives et des valeurs négatives, alors $f'$ s'annule. \\
+	Si ce n'est pas le cas, d'après le point précédent, on a $\forall x \in I, f'(x) > 0$ ou $\forall x \in I, f'(x) < 0$. \\
+	
+	\item Si $f : I \to \R$ est dérivable sur l'intervalle $I$, alors $f'(I)$ est un intervalle.
+	
+	\begin{demo}
+	Soit $\alpha, \beta \in f'(I)$ avec $\alpha < \beta$, montrons que $[\alpha,\beta] \subset f'(I)$. \\
+	Soit $\gamma \in [\alpha, \beta]$. Soient $a,b \in I$ tels que $f'(a) = \alpha$ et $f'(b) = \beta$. On a $a \neq b$ car sinon $\alpha = \beta$ \\
+	$g : t \in I \mapsto f(t)-\gamma t \in \R$. est aussi dérivable sur $I$ et $g'(a) = \alpha-\gamma \leq 0$ et $g'(b)  = \beta - \gamma \geq 0$. \\
+	$g'$ prend des valeurs positives et des valeurs négatives donc s'annule (cf point précédent) : il existe $c \in I$ tel que $g'(c) = 0$ ie $f'(c) = \gamma$ donc $\gamma \in f'(I)$.
+	\end{demo}
+	
+	\begin{remarque}
+	$f:t\mapsto \mathrm{E}(t)$, $f(\R) = \Z$. $\Z$ n'est pas un intervalle, donc $f$ ne peut pas être la dérivée d'une fonction, \ie $f$ n'admet pas de primitive.
+	\end{remarque}
+\end{itemize}
+
+\end{remarque}
+
+\begin{theoreme}{Théorème de la bijection (Version dérivable)}{}
+Soit $I$ un intervalle de $\R$ \\
+$f:I \to \R$ dérivable tel que : ($\forall x \in I$, $f'(x)>0$) ou ($\forall x \in I$, $f'(x)<0$)\\
+Alors $f$ induit une bijection de $I$ sur $J=f(I)$ dont la réciproque $g$ est dérivable sur $J$ avec :
+\begin{center}
+    \textbox{$\forall y \in J$, $g'(y)=\dfrac{1}{f'(g(y))}$}
+\end{center}
+\end{theoreme}
+
+\subsubsection{Inégalités des accroissements finis - (\textit{IAF})}
+\begin{theoreme}{Inégalités des accroissements finis}{}
+Soient $a,b\in \R$ tel que $a<b$\\
+$f:[a,b]\to \C$ et $g:[a,b]\to \R$, continues sur $[a,b]$ et dérivables sur $]a,b[$\\
+On suppose : \strong{$\forall t \in ]a,b[$, $\lvert f'(t) \rvert \leq g'(t)$}, alors : 
+\begin{center}
+    \textbox{$\abs{f(b)-f(a)} \leq g(b)-g(a)$}
+\end{center}
+\end{theoreme}
+
+\begin{demo}
+\begin{itemize}
+    \item \textbf{Cas 1 : $f$ est réelle} \\
+    	Soit $\varphi : t \in [a,b] \mapsto g(t)-f(t) \in \R$. $\varphi$ est continue sur $[a,b]$, dérivable sur $]a,b[$ \\
+	et $\forall a < t < b : \varphi'(t) = g'(t) - f'(t) \geq 0$. $\varphi$ est donc croissante sur $[a,b]$ (voir raffinement) donc $\varphi(b)>\varphi(a)$ \ie $g(b)-g(a) \geq f(b)-f(a)$. \\
+	
+	$\psi : t \in [a,b] \mapsto g(t)+f(t)$ est continue sur $[a,b]$, dérivable sur $]a,b[$ et pour $t \in ]a,b[$ : \\
+	$\psi'(t) = g'(t) + f'(t) \geq 0$ (car $g'(t) \geq \abs{f'(t)}\geq -f'(t)$). \\
+	$\psi$ est donc croissante, d'où $\psi(b) \geq \psi(a)$ ie $g(b)-g(a) \geq -(f(b)-f(a))$, donc :
+	\begin{center}
+	$g(b)-g(a) \geq \max(f(b)-f(a),-(f(b)-f(a))) = \abs{f(b)-f(a)}$.
+	\end{center}
+    \item \textbf{Cas 2 : cas général} \\
+    \begin{remarque}[Rappel] Pour $z \in \C$ et $A \geq 0$, $\abs{z} \leq A \Longleftrightarrow \forall u \in \C, \abs{\Re(zu)} \leq A \abs{u}$ (voir lemme magique, ch. 3 - nombres complexes). \\
+    \end{remarque}
+  	Soit $z = f(b)-f(a), A = g(b)-g(a) \geq 0$ ($g' \geq 0$ sur $]a,b[$ donc $g$ est croissante sur $[a,b]$.) \\
+	Soit $\varphi : t \in [a,b] \mapsto \Re(uf(t))$. On a $\varphi = \Re(uf)$. $uf$ est continue sur $[a,b]$, dérivable sur $]a,b[$ donc $\varphi$ aussi. \\
+	De plus, pour $t \in ]a,b[, \abs{\varphi'(t)} = \abs{\Re(uf'(t))} \leq \abs{uf'(t)} = \abs{u} \abs{f'(t)} \leq \abs{u} g'(t) \strong{=h'(t)}$ \\
+	où $h : t \in [a,b] \mapsto \abs{u}g(t)$ est continue sur $[a,b]$, dérivable sur $]a,b[$. \\
+	D'après le cas 1, $\abs{\varphi(b)-\varphi(a)} \leq h(b)-h(a)$ ie $\abs{\Re(uf(b))-\Re(uf(a))} \leq \abs{u}(g(b)-g(a))$, \ie $\abs{\Re(zu)} \leq \abs{u}A$.
+    
+\end{itemize}
+\end{demo}
+
+\begin{application}{Approximation de $x \mapsto \ln(1+x)$}{}
+Montrer que $\forall x \in ]-1,1], \ln(1+x) = \underset{n \to +\infty}{\lim} \displaystyle{\sum_{k=1}^{n} (-1)^{k-1}\dfrac{x^k}{k}}$ \\ \\
+Soit $N \in \N, \forall x \in ]-1,1], h_N(x) = \ln(1+x)-\displaystyle{\sum_{k=1}^{N} (-1)^{k-1}\dfrac{x^k}{k}}$. \\ \\
+Il est clair que $h_N$ est dérivable et $\forall x \in ]-1,1], \\ \\
+h'_N(x) = \dfrac{1}{1+x} - \displaystyle{\sum_{k=1}^{N}(-1)^{k-1}x^{k-1}} = \dfrac{1}{1+x} - \displaystyle{\sum_{k=1}^{N} (-x)^{k-1}} = \dfrac{1}{1+x} - \dfrac{1-(-x)^N}{1+x} = \dfrac{(-x)^N}{1+x}$ \\
+et $h_N(0) = 0$. \\
+\begin{itemize}
+	\item Soit $x \in ]0,1]$. $h_N$ est dérivable sur $]0,x]$ (donc continue sur $]0,x]$ dérivable sur $]0,x[$) et \\
+	$\forall t \in [0,x], \abs{h'_N(t)} = \dfrac{\abs{-t}^N}{\abs{1+t}} = \dfrac{t^N}{1+t} \leq t^N$ ($1+t \geq 1$) $= g'(t)$ où $\forall 0 \leq t \leq x, g(t) = \dfrac{t^{N+1}}{N+1}$. \\ \\
+	D'après IAF, $\abs{h_N(x)-h_n(0)} \leq g(x)-g(0)$ \ie $\abs{h_N(x)} \leq \dfrac{x^{N+1}}{N+1} \leq \dfrac{1}{N+1} \xrightarrow[N \to +\infty]{} 0$. \\
+	(cette majoration est valable pour $0 \leq x \leq 1$ et $N \in \N^*$ et montre que $h_N(x) \xrightarrow[N \to +\infty]{} 0$). \\
+	
+	\item Soit $x \in ]-1,0]$. $h_N$ est dérivable $[x,0]$ et $\forall t \in [x,0] : \\
+	\abs{h'_N(t)} = \dfrac{\abs{t}^N}{1+t} = \underbrace{\dfrac{(-t)^N}{1+x}}_{g'(t)}$ ($1+t \geq 1+x > 0$) où $\forall x \leq t \leq 0, g(t) = - \dfrac{(-t)^{N+1}}{(N+1)(1+x)}$. \\ \\
+	Avec les IAF, $\abs{h_N(0) - h_N(x)} \leq g(0)-g(x)$ \\
+	\ie $\abs{h_N(x)} \leq \dfrac{(-x)^{N+1}}{(N+1)(1+x)} \leq \dfrac{1}{(N+1)(1+x)} \xrightarrow[N \to +\infty]{}0$. \\ \\
+	On a donc : $h_N(x) \xrightarrow[N \to +\infty]{} 0$.
+	
+	\item \textbf{Bilan :} Pour tout $x \in ]-1,1], \displaystyle{\sum_{k=1}^{n} (-1)^{k-1}\dfrac{x^k}{k}} \xrightarrow[n \to +\infty]{} \ln(1+x)$.
+\end{itemize}
+\end{application}
+
+\pagebreak
+
+\begin{theoreme}{Autres versions - \textit{IAF}}{}
+\begin{itemize}
+    \item \Strong{Variante 1 :} \\
+    Soient $a,b \in \R$ avec $a<b$, $f:[a,b]\to \R$ dérivable\\
+    On suppose $f'$ bornée : $\exists M \in \R$, $\forall t \in [a,b]$, $\abs{f'(t)} \leq M$, alors : 
+    \begin{center}
+        \textbox{$\abs{f(b)-f(a)}\leq M(b-a)$}
+    \end{center}
+    
+    \item \Strong{Variante 2 :} \\
+    $a,b\in \R$ avec $a<b$, $f:[a,b]\to \R$ dérivable tel que \\$f'$ est bornée : $\exists m,M \in \R$, $\forall t \in [a,b]$, $m\leq f'(t) \leq M$, alors :
+    \begin{center}
+        \textbox{$m(b-a)\leq f(b)-f(a)\leq M(b-a)$}
+    \end{center}
+    
+\end{itemize}
+\end{theoreme}
+
+\begin{demo}
+\begin{enumerate}
+    \item
+    Appliquer \textit{IAF} avec $g:t \mapsto Mt$
+    \item 
+    D'après le \textit{TAF}, il existe $c\in]a,b[$ tel que $f(b)-f(a)=(b-a)f'(c)$\\
+    On a $(b-a)>0$ et $m\leq f'(c)\leq M$, d'où le résultat
+    
+\end{enumerate}
+\end{demo}
+
+\subsection{Théorème "limite de la dérivée"}
+\begin{theoreme}{Théorème "limite de la dérivée"}{LimDérivée}
+Soit $I$ un intervalle de $\R$\\
+$f:I \to \R$ continue, $x_0 \in I$\\
+On suppose $f$ dérivable sur $I\setminus \lbrace x_0 \rbrace$ et que $f'$ (définie sur $I\setminus \lbrace x_0 \rbrace$) a une limite $\ell\in\R$ en $x_0$, alors :
+\begin{center}
+    $f$ est dérivable sur $x_0$, $f'(x_0)=\ell$\\
+    $f$ est donc dérivable sur $I$ et $f'$ est continue en $x_0$
+\end{center}
+\end{theoreme}
+
+\begin{demo}
+On veut montrer que : $\dfrac{f(x)-f(x_0)}{x-x_0}\xrightarrow[x\to x_0]{} \ell$\\
+Soit $\varepsilon >0$, on cherche $\alpha >0$ tel que :
+\begin{center}
+    $\forall x \in I\setminus\lbrace x_0 \rbrace \cap [x_0 - \alpha, x_0 + \alpha]$, $\abs{\dfrac{f(x)-f(x_0)}{x-x_0} - \ell}\leq \varepsilon$
+\end{center}
+On a, pour $t \in I\setminus\lbrace x_0 \rbrace$: $f'(x) \xrightarrow[t \to x_0]{} \ell$\\
+Donc il existe $\beta >0$ tel que :
+\begin{center}
+    $\forall t \in I\setminus\lbrace x_0 \rbrace$, $\abs{t-x_0}\leq \beta \Longrightarrow \abs{f'(t)-l}\leq \varepsilon$
+\end{center}
+Prenons $\alpha=\beta$\\
+Soit $x\in I\setminus\lbrace x_0 \rbrace$ tel que $\abs{x-x_0}\leq \alpha$, on a pour $x>x_0$, $[x_0,x]\subset I$, $f$ est continue sur $[x_0,x]$, dérivable sur $]x_0,x[$\\
+D'après le \textit{TAF}, il existe $t \in ]x_0,x[$ tel que : 
+\begin{center}
+    $\dfrac{f(x)-f(x_0)}{x-x_0} = f'(t)$
+\end{center}
+D'où $\abs{\dfrac{f(x)-f(x_0)}{x-x_0} - \ell}=\abs{f'(t)-\ell}\leq \varepsilon$, car $\abs{t-x_0} \leq \abs{x-x_0} \leq \alpha=\beta$
+\end{demo}
+
+\begin{remarque}
+\begin{enumerate}
+    \item Pour $t\in I\setminus \lbrace x_0 \rbrace$, si on a $f'(t) \xrightarrow[t\to x_0]{} \pm \infty$, on montre que :
+    \begin{center}
+        $\dfrac{f(x)-f(x_0)}{x-x_0} \xrightarrow[x \to x_0]{} \pm \infty$
+    \end{center}
+    \item Si on suppose $f$ à valeurs dans $\C$, sur $I$, dérivable sur $I\setminus \lbrace x_0 \rbrace$ et $f'(t)\xrightarrow[t \to x_0]{} \ell \in \C$, alors 
+    \begin{center}
+        $f$ est dérivable en $x_0$, et $f'(x_0)=\ell$
+    \end{center}
+    \item \Strong{Attention !} \\
+    Si $f$ est continue sur $I$ et dérivable sur $I\setminus\lbrace x_0 \rbrace$ et si $f'$ n'a pas de limite en $x_0$, on peut quand même avoir $f$ dérivable en $x_0$\\
+    (Considérer $f:\R \to \R$, pour $x=0$, $f(0)=0$ et pour $x\neq0$, $f(x)=x^2 \sin \frac{1}{x}$)
+\end{enumerate}
+\end{remarque}
+
+\begin{exemple}
+Soit $f:\R \to \R$, pour $x=0$, $f(0)=0$ et pour $x\neq0$, $f(x)=e^{-\frac{1}{x^2}}$\\
+Montrer que $f$ est de classe $C^1$. \\ \\
+Il est clair (théorèmes généraux) que $f$ est dérivable sur $\R_+^*$ et $\R_-^*$ (on en déduit $f$ est continue sur $\R_+^*$ et $\R_-^*$) \\
+et, pour $x \neq 0$, $f'(x) = \dfrac{2}{x^3}e^{-\frac{1}{x^2}}$ \\ \\
+On a aussi, par composition des limites, $e^{-\frac{1}{x^2}} \xrightarrow[\substack{x \to 0 \\ x \neq 0}]{} ° = f(0)$ : \\
+$f$ est continue en $0$, donc $f$ est continue sur $\R$. \\ \\
+Pour $x \neq 0, \abs{\dfrac{2}{x^3}e^{-\frac{1}{x^2}}} = 2 \dfrac{\left(\frac{1}{x^2}\right)^{\frac{3}{2} \footnotemark}}{e^{\frac{1}{x^2}}}$. \\ \\
+$\dfrac{1}{x^2} \xrightarrow[x \to 0]{} +\infty$ et on sait que $\forall \alpha \in \R, \dfrac{t^{\alpha}}{e^t} \xrightarrow[t \to +\infty]{} 0$. \\ \\
+Par composition des limites, $f'(x) \xrightarrow[\substack{x \to 0 \\ x \neq 0}]{} 0$. \\
+D'après le théorème $\ref{prop:LimDérivée}$, $f$ est dérivable en $0$ et $f'(0) = 0$. \\
+$f$ est alors dérivable sur $\R$, et $f'$ est continue en $0$. Finalement, $f$ est bien de classe $C^1$.
+\end{exemple}
+
+\footnotetext{Le misérable...}
+
+\pagebreak
+
+\section{Dérivées d'ordre supérieur}
+\begin{definition}{Dérivée d'ordre $n$}{}
+Soit $I$ un intervalle de $\R$, $f:I\to \K$\\
+Pour $n\in \N$, on définit (quand c'est possible) $f^{(n)}$ par :
+\begin{itemize}
+    \item $f^{(0)}$ est bien définie et \textbox{$f^{(0)}=f$}
+    \item Pour $k\in \N$, si $f^{(k)}$ est bien définie et dérivable sur $I$ alors \\
+    \textbox{$f^{(k+1)}$ est bien définie et $f^{(k+1)}=(f^{(k)})'$}
+\end{itemize}
+Si $f^{(n)}$ existe, on dit que $f$ est $n$ fois dérivable sur $I$\\
+On notera $\mathcal{D}^n (I,\K)$, l'ensemble des fonctions $n$ fois dérivables sur $I$\\
+\\
+Si $f^{(n)}$ existe et est continue, on dit que $f$ est de classe $C^n$ sur $I$\\
+On notera $\mathcal{C}^n (I,\K)$, l'ensemble des fonctions de classe $C^n$ sur $I$
+\end{definition}
+
+\begin{remarque}
+Pour tout $n \in \N$\\
+$\mathcal{D}^{n+1}(I,\K) \subset \mathcal{C}^{n}(I,\K) \subset \mathcal{D}^{n}(I,\K)$\\
+( On peut montrer que ces inclusions sont strictes )\\
+On en déduit : 
+\begin{center}
+    $\displaystyle\bigcap_{n \in \N} \mathcal{D}^{n}(I,\K) = \displaystyle\bigcap_{n \in \N} \mathcal{C}^{n}(I,K)$
+\end{center}
+\end{remarque}
+
+\begin{definition}{Classe $\mathcal{C}^{\infty}$}{}
+$\mathcal{C}^{\infty} (I,\K) = \displaystyle\bigcap_{n \in \N} \mathcal{D}^{n}(I,\K) = \displaystyle\bigcap_{n \in \N} \mathcal{C}^{n}(I,\K)$\\
+est l'ensemble des fonctions de classe $\mathcal{C}^{\infty}$ (ou indéfiniment dérivables )
+\end{definition}
+
+\begin{exemple}
+\begin{itemize}
+    \item Si $P$ est une fonction polynomiale alors $P$ est dérivable, et $P'$ est polynomiale.\\
+    On en déduit par récurrence que $P$ est $n$ fois dérivable, pour tout $n\in \N$
+    \item $\sin$ et $\cos$ sont de classe $\mathcal{C}^\infty$ (on peut montrer ceci par récurrence)\\
+    On a : $\forall k \in \N$, $\cos^{(2k)} = (-1)^k \cos$ et $\sin^{(2k)} = (-1)^k \sin$\\
+    $\cos^{(2k+1)} = (-1)^{k+1} \sin$ et $\sin^{(2k+1)} = (-1)^{k} \cos$
+    \item $\ln$ est de classe $\mathcal{C}^\infty$ \\ \\
+    Soit $H_n : \ln \in \mathcal{D}^n(\R_+^*,\R)$ et $\forall x > 0, \ln^{(n)}(x) = \dfrac{(-1)^{n-1}(n-1)!}{x^n}$. \\ \\
+    On sait que $H_1$ est vraie. \\
+    Soit $n \in \N$ tel que $H_n$ est vraie. On sait alors (fonctions rationnelles) que $x \overset{h}{\mapsto} \dfrac{(-1)^{n-1}(n-1)!}{x^n}$ est dérivable et que \\ \\
+    $\forall x > 0, h'(x) = (-1)^{n-1}(n-1)! \dfrac{(-n)x^{n-1}}{x^{2n}} = \dfrac{(-1)^n n!}{x^{n+1}}$
+\end{itemize}
+\end{exemple}
+
+\begin{remarque}[Remarques et notations]
+\begin{itemize}
+    \item $\mathcal{D}^0(I,\K)=\mathcal{F}(I,\K)$\\
+    $\mathcal{D}^1(I,\K)=\mathcal{D}(I,\K)$\\
+    Pour $f \in \mathcal{D}^1(I,\K)$, $f^{(1)}=f'$\\
+    Pour $n=2$, on note $f''$ (au lieu de $f^{(2)}$)\\
+    Pour $n=3$, on note $f'''$ (au lieu de $f^{(3)}$)
+    \item Soit $n \in \N$ et $f \in \mathcal{D}^n(I,\K)$. Alors, si $k \in \llbracket 0,n \rrbracket$, $f^{(k)}$ existe, $f^{(k)} \in \mathcal{D}^{n-k}(I,\K)$ \\
+    et pour $p \in \llbracket 0,n-k \rrbracket, (f^{(k)})^{(p)} = f^{(k+p)}$.
+    \item Soit $n \in \N, f : I \to \K$. $f \in \mathcal{D}^{n+1}(I,\K) \Longleftrightarrow f'$ est dérivable et $f' \in \mathcal{D}^{n}(I,\K)$. \\
+    $f \in \mathcal{C}^{n+1}(I,\K) \Longleftrightarrow f'$ est dérivable et $f' \in \mathcal{C}^n(I,\K)$.
+\end{itemize}
+\end{remarque}
+
+\subsection{Théorèmes généraux}
+
+\begin{theoreme}{Opération sur les dérivées n-ièmes}{DerivéesNThmGaux}
+Soient $f,g:I\to \K$, $n\in \N$, $\lambda\in \K$\\
+On suppose $f,g\in \mathcal{D}^n(I,K)$ (\textit{resp.} $\mathcal{C}^n(I,K)$, $\mathcal{C}^\infty(I,K)$)
+\begin{enumerate}
+    \item $\lambda f +g \in \mathcal{D}^n(I,\K)$ (\textit{resp.} $\mathcal{C}^n(I,K)$, $\mathcal{C}^\infty(I,K)$)\\
+    \textbox{$(\lambda f +g)^{(n)}=\lambda f^{(n)} +g^{(n)}$}
+    \item $fg\in \mathcal{D}^n(I,K)$ (\textit{resp.} $\mathcal{C}^n(I,K)$, $\mathcal{C}^\infty(I,K)$)\\
+    \textbox{$(fg)^{(n)}=\displaystyle\sum_{k=0}^n \dbinom{n}{k} f^{(k)} g^{(n-k)}$} (\textit{Leibniz})
+    \item On suppose de plus que $f$ ne s'annule pas, alors \textbox{$\dfrac{1}{f}\in \mathcal{D}^n(I,K)$} (\textit{resp.} $\mathcal{C}^n(I,K)$, $\mathcal{C}^\infty(I,K)$)\\
+    On a aussi \textbox{$\dfrac{g}{f}\in \mathcal{D}^n(I,K)$} (\textit{resp.} $\mathcal{C}^n(I,K)$, $\mathcal{C}^\infty(I,K)$)
+\end{enumerate}
+\end{theoreme}
+
+\begin{demo} \footnotemark
+\begin{enumerate}
+	\item Pour $n \in \N$, soit $H_n$ l'énoncé : \\
+	$\forall f,g \in \mathcal{D}^{n}(I,\K), \forall \lambda \in \K, \lambda f+g \in \mathcal{D}^n(I,\K)$ et $(\lambda f+g)^{(n)} = \lambda f^{(n)} + g^{(n)}$. \\ \\
+	$H_0$ est évident. \\ \\
+	Soit $n \in \N$ tel que $H_n$ est vrai. Alors soit $\lambda \in \K, f,g : I \to \K$ $n+1$ fois dérivables., donc $f$ et $g$ sont dérivables ($n+1 \geq 1$). \\ \\
+	D'après les théorèmes généraux sur la dérivabilité, on en déduit $(\lambda f + g)' = \lambda f' + g'$. \\ \\
+	Or $f', g' \in \mathcal{D}^n(I,\K)$. D'après $H_n$, $\lambda f' + g'$ est $n$ fois dérivable donc $\lambda f + g$ est $n+1$ fois dérivable et \\
+	$(\lambda f + g)^{n+1} = ((\lambda f + g)') ^{(n)} = \lambda (f')^{(n)} + (g')^{(n)} = \lambda f^{(n+1)} + g^{(n+1)}$, donc $H_{n+1}$ est vrai. \\
+	
+	\item Pour $n \in \N$ soit $H_n : \forall f,g \in \mathcal{D}^n(I,\K), fg \in \mathcal{D}^n(I,\K)$ et $(fg)^{(n)} = \displaystyle{\sum_{k=0}^{n} \binom{n}{k} f^{(k)}g^{(n-k)}}$. \\ \\
+	$H_0$ est vrai (vérification immédiate). \\ \\
+	Soit $n \in \N$ tel que $H_n$ est vrai. Soient $f,g \in \mathcal{D}^{n+1}(I,\K)$, $f$ et $g$ sont au moins dérivables. \\
+	On sait alors que $fg$ est déruvable et $(fg)' = f'g+fg'$. \\
+	Or $f' \in \mathcal{D}^{n}(I,\K), g \in \mathcal{D}^{n+1}(I,\K) \subset \mathcal{D}^{n}(I,\K)$ donc $f'g \in \mathcal{D}^n(I,\K)$ (cf $H_n$). \\
+	De même, $f'g \in \mathcal{D}^{n}(I,\K)$. D'après \textbf{1)}, $f'g+fg' \in \mathcal{D}^{n}(I,\K)$ donc $(fg)' \in \mathcal{D}^{n}(I,\K)$ \ie $fg \in \mathcal{D}^{n+1}(I,\K)$ \\
+	et, de plus, 
+	\begin{align*}
+	(fg)^{n+1} &= (f'g+fg')^{(n)} \\
+	&= (f'g)^{(n)} + (fg')^{(n)} \\
+	&= \displaystyle{\sum_{k=0}^{n} \binom{n}{k} \: (f')^{(k)} g^{(n-k)} + \sum_{k=0}^{n} \binom{n}{k} \: f^{(k)}(g')^{(n-k)}} \\
+	&= \displaystyle{\sum_{k=1}^{n+1} \binom{n}{k-1} \: f^{(k)} g^{(n+1-k)} + \sum_{k=0}^{n}\binom{n}{k} \: f^{(k)}g^{(n+1-k)}} \\
+	&= \displaystyle{\binom{n}{n} \: f^{(n+1)}g + \sum_{k=1}^{n}\left(\binom{n}{k-1}+\binom{n}{k}\right) \: f^{(k)}g^{(n+1-k)} + \binom{n}{0} \: f g^{(n+1)}} \\
+	&= \displaystyle{\binom{n+1}{n+1} \: f^{(n+1)}g + \sum_{k=1}^{n} \binom{n+1}{k} \: f^{(k)}g^{(n+1-k)} + \binom{n+1}{0} \: fg^{(n+1)}} \\
+	&=\displaystyle{\sum_{k=0}^{n+1} \binom{n+1}{k} \: f^{(k)}g^{(n+1-k)}} \text{, CQFD}
+	\end{align*}
+\end{enumerate}
+\end{demo}
+
+\footnotetext{"C'est un supplice, ils devraient mettre ça à Guantanamo, ça plus les endives, ils parlent c'est sûr ..." \textit{Grand Sensei O.S}}
+
+\begin{theoreme}{Composition}{}
+$I, J$ 2 intervalles de $\R$\\
+$f:I \to J$ et $g:J\to \K$, alors si \strong{$f\in \mathcal{D}^n(I,J)$} (\textit{resp.} $\mathcal{C}^n(I,J)$, $\mathcal{C}^\infty(I,J)$) \\
+et \strong{$g\in \mathcal{D}^n(J,K)$} (\textit{resp.} $\mathcal{C}^n(J,K)$, $\mathcal{C}^\infty(J,K)$)\\
+On a \strong{$g\circ f \in \mathcal{D}^n(I,K)$} (\textit{resp.} $\mathcal{C}^n(I,K)$, $\mathcal{C}^\infty(I,K)$)
+\end{theoreme}
+
+\begin{demo}
+Par récurrence, soit $H_n$ l'énoncé : $\forall f \in \mathcal{D}^n(I,J), \forall g \in \mathcal{D}^n(J,\K), g \circ f \in \mathcal{D}^n (I,\K)$. \\ \\
+$H_0$ est évident. \\ \\
+Soit $n \in \N$ tel que $H_n$ est vrai. Soit $f \in \mathcal{D}^{n+1}(I,J), g \in \mathcal{D}^{n+1}(J,\K)$. \\
+$f$ et $g$ sont au moins dérivables donc $g \circ f$ l'est, et $(g \circ f)' = f' g' \circ f$. \\
+Or $f' \in \mathcal{D}^n(I,J)$ et $g \in \mathcal{D}^{n+1}(J,\K) \subset \mathcal{D}^{n}(J,\K)$ donc, d'après $H_n$, $g' \circ f \in \mathcal{D}^n(I,\K)$. \\
+De plus, $f' \in \mathcal{D}(I,J)$ donc par produit (théorèmes généraux, théorème \ref{prop:DérivéesNThmGaux}), $f' g' \circ f \in \mathcal{D}^n(I,\K)$ \ie $g \circ f \in \mathcal{D}^{n+1}(I,\K)$.
+\end{demo}
+
+\begin{exemple}
+$P,Q$ polynomiales avec $Q$ qui ne s'annule pas sur $I$, alors :
+\begin{center}
+    $t \mapsto \dfrac{P(t)}{Q(t)}$ est de classe $C^\infty$ (Quotient)
+\end{center}
+$\Longrightarrow$ Toute fonction rationnelle définie sur $I$ est de classe $C^\infty$\\
+Par composition, $t \mapsto \sin (t^3+2)$ est de classe $C^\infty$
+\end{exemple}
+
+\begin{theoreme}{Composition par l'exponentielle complexe}{}
+$f:I \to \C$, si $f \in \mathcal{D}^n(I,\C)$, alors $\exp f \in \mathcal{D}^n(I,\C)$ (\textit{resp.} $\mathcal{C}^n(I,\C)$, $\mathcal{C}^\infty(I,\C)$)
+\end{theoreme}
+
+\begin{demo}
+Soit $H_n$ l'énoncé : $\forall f \in \mathcal{D}^{n}(I,\C)$, $\exp(f) \in \mathcal{D}^{n}(I,\C)$. \\ \\
+$H_0$ est évident. \\ \\
+Soit $n \in \N$ tel que $H_n$ est vrai. \\
+Soit $f \in \mathcal{D}^{n+1}(I,\C)$ alors $f$ est au moins dérivable donc $\exp(f)$ l'est, et $(\exp(f))' = f'\exp(f)$. \\
+Or d'après $H_n$, $\exp(f) \in \mathcal{D}^{n}(I,\C)$ et $f' \in \mathcal{D}^{n}(I,\C)$ donc d'après les théorèmes généraux, $f' \exp(f) \in \mathcal{D}^{n}(I,\C)$ \ie $\exp(f) \in \mathcal{D}^{n+1}(I,\C)$.
+\end{demo}
+
+\begin{theoreme}{}{}
+Soit $I$ un intervalle de $\R$, $f:I\to \R$ dérivable sur $I$ telle que ($\forall t \in I$, $f'(t)>0$) ou ($\forall t \in I$, $f'(t)<0$). On sait que $f$ induit une bijection de $I$ sur $J=f(I)$ dont on note $g$ la réciproque. \\
+Soit $n \in \N^*$, \textbox{$f\in \mathcal{D}^n(I,\R) \Longrightarrow g\in \mathcal{D}^n(I,\R)$}(\textit{resp.} $\mathcal{C}^n(I,\R)$, $\mathcal{C}^\infty(I,\R)$)
+\end{theoreme}
+
+\begin{demo}
+Par récurrence, $H_n : f$ de classe $\mathcal{C}^n \Longrightarrow g$ de classe $\mathcal{C}^n$ \\ \\
+$H_1$ est vrai : Supposons $f$ de classe $\mathcal{C}^1$. On sait que $g$ est dérivable avec $g' = \dfrac{1}{f'(g)}$. Or $f$ et $g$ sont continues donc $f'(g)$ aussi, puis $\dfrac{1}{f'(g)}$ aussi : $g'$ est continue. \\ \\
+Soit $n \in \N^*$, supposons $f$ de classe $\mathcal{C}^{n+1}$. $f$ est donc de classe $\mathcal{C}^n$ donc $g$ aussi ($H_n$) puis $f' \circ g$ aussi (par composition) \ie $g'$ est de classe $\mathcal{C}^n$ \ie $g$ est de classe $\mathcal{C}^{n+1}$.
+\end{demo}
+
+\begin{exemple}
+Soit $n \in \N^*, f : t \in \R_+^* \mapsto t^n$. $f$ est de classe $\mathcal{C}^{\infty}$ car polynomiale et $\forall t \in \R_+^*, f'(t)=nt^{n-1}>0$ \\ \\
+$f$ induit donc une bijection de $\R_+^*$ sur $f(\R_+^*) = \R_+^*$, dont la réciproque $g$ est de classe $\mathcal{C}^{\infty}$, \ie $t \mapsto t^{\frac{1}{n}}$ est de classe $\mathcal{C}^{\infty}$ sur $\R_+^*$. \\ \\
+$\varphi : t \in ]-\frac{\pi}{2},\frac{\pi}{2}[ \mapsto \tan t$ est de classe $\mathcal{C}^{\infty}$ (quotient) et $\forall t \in ]-\frac{\pi}{2},\frac{\pi}{2}[, \varphi'(t) = 1+\tan^2 t > 0$. \\ \\
+$\varphi$ induit une bijection de $]-\frac{\pi}{2},\frac{\pi}{2}[$ dans $\tan(]-\frac{\pi}{2},\frac{\pi}{2}[) = \R$ \\
+dont la réciproque $\arctan$ est dérivable et $\forall t \in \R, \arctan'(t) = \dfrac{1}{1+t^2}$ \\
+et $t \mapsto \dfrac{1}{1+t^2}$ est de classe $\mathcal{C}^{\infty}$ (car rationnelle).
+\end{exemple}
+
+\begin{application}{}{}
+Montrer que $\sh$ est bijective de $\R$ dans $\R$ (et donner $\mathrm{Argsh}'$). \\ \\
+$\sh$ est de classe $\mathcal{C}^{\infty}$ sur $\R$ (car $t \mapsto e^t$ l'est). \\
+Pour $t \in \R, \sh'(t) = \ch(t) >0$ donc $\sh$ induit une bijection de $\R$ dans $\sh(\R) = ]\underset{-\infty}{\lim} \: \sh, \underset{+\infty}{\lim} \: \sh[ = \R$. \\
+On note $\mathrm{Argsh}$ la réciproque. $\mathrm{Argsh}$ est, par théorème, de classe $\mathcal{C}^{\infty}$ sur $\R$, et, pour $x \in \R : \\ \\
+\mathrm{Argsh}'(x) = \dfrac{1}{\ch(\mathrm{Argsh}(x))}$. \\ \\
+Or, pour $t \in \R, \ch^2(t) - \sh^2(t) = 1$ d'où $\ch(t) = \sqrt{1+\sh^2(t)}$, d'où, pour $x \in \R, \ch(\mathrm{Argsh(x)}) = \sqrt{1+\sh^2(\mathrm{Argsh(x))}} = \sqrt{1+x^2}$, \\ \\
+donc $\forall x \in \R, \mathrm{Argsh}'(x) = \dfrac{1}{\sqrt{1+x^2}}$. \\ \\
+En résolvant l'équation $sh(t) = x$, on trouve $\forall x \in \R, \mathrm{Argsh}(x) = \ln(x+\sqrt{1+x^2})$. \\ \\
+Donc  : \textbox{Une primitive de $x \mapsto \dfrac{1}{\sqrt{1+x^2}}$ est $x \mapsto \ln(x+\sqrt{1+x^2})$}.
+\end{application}
+
+\begin{remarque}
+$\ln$ est de classe $\mathcal{C}^{\infty}$ sur $\R_+^*$ et $\forall t \in \R_+^*, \ln'(t) = \dfrac{1}{t} > 0$. \\ \\
+Donc $x \in \R \overset{\exp}{\mapsto} e^x$ est aussi de classe $\mathcal{C}^{\infty}$ ($\forall x, \exp'(x) = \dfrac{1}{\ln'(\exp(x))} = \exp(x)$). \\ \\
+Puis, pour $\alpha \in \R, p_{\alpha} : t \in \R_+^* \mapsto t^{\alpha} = e^{\alpha \ln(t)}$ est de classe $\mathcal{C}^{\infty}$ par composition.
+
+\end{remarque}
+
+\subsection{\textsc{Taylor-Lagrange} et \textit{tutti-quanti}}
+
+\subsubsection{Polynômes de \textsc{Taylor}}
+\begin{remarque}[Rappel]
+Soit $P\in \K[X]$, $a\in \K$. On a vu : $\displaystyle\sum_{k\in \N} \dfrac{P^{(k)} (a)}{k!} (X-a)^k$ (Somme finie)\\
+Si $N\geq \deg P$, on a $\forall t \in \K$, \textbox{$P(t)=\displaystyle\sum_{k=0}^N \dfrac{P^{(k)} (a)}{k!} (t-a)^k$}\\
+Si $f:I\to \K$ est $n$ fois dérivable et si $a\in I$, il est naturel de s'intéresser à 
+\begin{center}
+    $T_{n,f,a}$ : $t \mapsto \displaystyle\sum_{k=0}^n \dfrac{f^{(k)} (a)}{k!} (t-a)^k$
+\end{center}
+$T_{n,f,a}$ est le \strong{polynôme de Taylor} d'ordre $n$ en un point $a$ de $f$.\\
+Si $f$ est de classe $\mathcal{C}^\infty$, $T_{n,f,a}$ est bien défini (pour tout $n\in \N$)
+\end{remarque}
+
+\begin{definition}{Polynômes de \textsc{Taylor}}{}
+    Soient $n \in \N$, $f : I \rightarrow \K$, $n$ fois dérivable et $a \in I$, alors on définit le \Strong{polynôme de \textsc{Taylor} d'ordre $n$} de la fonction $f$ au point $a$ par :
+    $$ \mathbox{
+    \begin{array}{rrcl}
+    T_{n,f,a} : & I & \rightarrow & \K \\
+    & t & \mapsto & \displaystyle\sum_{k=0}^n f^{(k)} (a) \dfrac{(t-a)^k}{k!}
+    \end{array}
+    }
+    $$
+    Ainsi, si $f$ est de classe $\mathcal{C}^\infty$, $T_{n,f,a}$ est bien défini pour tout $n\in \N$.
+\end{definition}
+
+\begin{proposition}{Polynômes de \textsc{Taylor} de référence}{}
+    \begin{enumerate}
+        \item Pour $f : x \in \R \mapsto \strong{\exp(x)} \in \R^*_+$, on a $\forall n \in \N$ :
+        $$ T_{n,f,0} (x) = \sum_{k=0}^{n} \dfrac{x^k}{k!} = \mathbox{1 + x + \dfrac{x^2}{2} + ... + \dfrac{x^n}{n!}} $$ 
+        \item Pour $f : x \in \R \mapsto \strong{\cos(x)} \in [-1 ; 1]$, on a $\forall n \in \N$ :
+        $$ T_{2n,f,0} (x) = \sum_{k=0}^{n} (-1)^k \dfrac{x^{2k}}{(2k)!} = \mathbox{1 - \dfrac{x^2}{2} + \dfrac{x^4}{24} + ... + (-1)^n \dfrac{x^{2n}}{(2n)!}} $$
+        \item Pour $f : x \in \R \mapsto \strong{\sin(x)} \in [-1 ; 1]$, on a $\forall n \in \N$ :
+        $$ T_{2n,f,0} (x) = \sum_{k=0}^{n} (-1)^k \dfrac{x^{2k+1}}{(2k+1)!} = \mathbox{x - \dfrac{x^3}{6} + \dfrac{x^5}{120} + ... + (-1)^n \dfrac{x^{2n+1}}{(2n+1)!}} $$
+        \item Pour $f : x \in \; ]-1 ; +\infty[ \; \mapsto \strong{\ln(x + 1)} \in \R$, on a $\forall n \in \N^*$ :
+        $$ T_{n,f,0} (x) = \sum_{k=0}^{n} (-1)^{k-1} \dfrac{x^k}{k} = \mathbox{x - \dfrac{x^2}{2} + \dfrac{x^3}{3} + ... + (-1)^{n-1} \dfrac{x^n}{n}} $$ 
+        \item Pour $f : x \in \R_+ \mapsto \strong{(x + 1)^\alpha} \in \R$ (avec $\alpha > 0$), on a $\forall n \in \N$ :
+        $$ T_{n,f,0} (x) = \sum_{k=0}^{n} \left( \prod_{p=1}^k \alpha - p + 1 \right) \dfrac{x^k}{k!} =  \mathbox{1 + \alpha x + \alpha(\alpha-1)\dfrac{x^2}{2} + ... + \alpha(\alpha-1)...(\alpha-n+1)\dfrac{x^n}{n!}} $$
+    \end{enumerate}
+    
+\end{proposition}
+
+
+\subsubsection{Inégalité de Taylor-Lagrange}
+
+\begin{theoreme}{Égalité de \textsc{Taylor-Lagrange}\textsuperscript{(HP)}}{EgaliteTaylorLagrange}
+Soient $a,b \in \R, \; a < b$ et \strong{$f \in \mathcal{C}^n \left([a,b], \R\right)$}, \strong{$f \in \mathcal{D}^{n+1} \left(]a,b[, \R\right)$}. Alors, il existe \strong{$c \in ]a,b[$} tel que :
+$$ \mathbox{f(b) = T_{n,f,a} (b) + f^{(n+1)}(c) \dfrac{(b - a)^{n+1}}{(n+1)!}} $$
+\end{theoreme}
+
+\begin{principedemo}{EgaliteTaylorLagrange}
+Poser \strong{$\varphi(x) = \displaystyle \sum_{k=0}^n f^{(k)}(x) \dfrac{(b-x)^k}{k!}$} et \strong{$\psi(x) = \varphi(x) + A\dfrac{(b-x)^{n+1}}{(n+1)!}$} tel que $\psi(a) = \psi(b)$ et en déduire que \strong{$\varphi(b) = \varphi(a) + A\dfrac{(b-a)^{n+1}}{(n+1)!}$}. Appliquer \textsc{Rolle} à $\psi$ pour montrer que $\exists c \in \; ]a:b[$ tel que \strong{$A = f^{(n+1)}(c)$}.
+\end{principedemo}
+
+\begin{theoreme}{Inégalité de Taylor-Lagrange}{}
+Soient $a,b\in \R$ (avec $a\neq b$), $n \in \N$. $f:[a,b] \to \K$ de classe $\mathcal{C}^{n+1}$\\
+Soit $M$ un majorant de $\abs{f^{(n+1)}}$ sur $[a,b]$ ( existe car $\abs{f^{(n+1)}}$ est réelle et continue sur le segment d'extrémités $a$ et $b$ ), alors :
+\begin{center}
+    \textbox{$\abs{f(b)- T_{n,f,a} (b)} \leq M \dfrac{\abs{b-a}^{n+1}}{(n+1)!}$}
+\end{center}
+De façon équivalente, on peut écrire \Strong{$f(b)=T_{n,f,a} (b) + R_n$} avec $\abs{R_n} \le M \dfrac{\abs{b-a}^{n+1}}{(n+1)!}$
+\end{theoreme}
+
+\begin{demo}
+Soient $a,b \in \R, a < b, f : [a,b] \to \R$ de classe $\mathcal{C}^{n+1}$, $M$ un majorant de $\abs{f^{(n+1)}}$. \\
+$f$ est donc de classe $\mathcal{C}^{n}$ et $n+1$ fois dérivable sur $]a,b[$. D'après \textbf{1)}, il existe $c \in ]a,b[$, tel que \\
+$f(b) = T_{n,f,a}(b) + \dfrac{(b-a)^{n+1}}{(n+1)!}f^{(n+1)}(c)$, d'où $\abs{f(b)-T_{n,f,a}(b)} = \dfrac{(b-a)^{n+1}}{(n+1)!} \underbrace{\abs{f^{(n+1)}(c)}}_{\le M}$
+D'où le théorème lorsque $f$ est réelle, et $a < b$. \\ \\
+
+$a < b, f : [a,b] \to \C$ de classe $\mathcal{C}^{n+1}$, $M$ un majorant de $\abs{f^{(n+1)}}$ sur $[a,b]$. On veut montrer que : \\
+$\underbrace{\abs{f(b)-T_{n,f,a}(b)}}_{Z} \le \underbrace{M \dfrac{(b-a)^{n+1}}{(n+1)!}}_{A \ge 0}$ \\
+On rappelle le lemme magique : $\abs{Z} \le A \Longleftrightarrow \forall u \in \C, \Re(Zu) \le A \abs{u}$. \\ \\
+Soit $u \in \C, uZ = uf(b) - uT_{n,f,a}(b) = uf(b) - \displaystyle{\sum_{k=0}^{n} u \dfrac{f^{(k)}(a)}{k!}(b-a)^k}$ \\ \\
+Soit $g = uf (\forall t \in [a,b], g(t) = uf(t)), h = \Re(g)$. \\
+$g$ est aussi de classe $\mathcal{C}^{n+1}$ sur $[a,b]$ donc $h$ aussi. De plus, pour $0 \le k \le n+1$, et $t \in [a,b]$, \\ \\
+$h^{(k)}(t) = \Re(g^{(k)}(t)) = \Re(uf^{(k)}(t))$. \\
+$\abs{h^{n+1}(t)} = \abs{\Re(uf^{(n+1)}(t))} \leq \abs{uf^{(n+1)}(t)} \le M \abs{u} = M_1$. \\ \\
+$\Re(uZ) = \Re(uf(b)) - \displaystyle{\sum_{k=0}^{n} \underbrace{\Re\left(u \dfrac{f^{(k)}(a)}{k!}(b-a)^k\right)}_{\frac{(b-a)^k}{k!} \Re(uf^{(k)}(a))}}$ \\ \\
+$\Re(uZ) = h(b) - \displaystyle{\sum_{k=0}^{n} \dfrac{(b-a)^k}{k!}h^{(k)}(a)}$. \\ \\
+D'après \textbf{2)}, $h$ étant réelle, $\abs{\Re(uZ)} = \abs{h(b) - T_{n,f,a}(b)} \le M_1 \dfrac{(b-a)^{n+1}}{(n+1)!} = M \dfrac{(b-a)^{n+1}}{(n+1)!} \abs{u} = A \abs{u}$. \\ \\
+
+$a \ne b, f : [a,b] \to \K$ ($[a,b]$ est ici le segment d'extrémités $a$ et $b$), $M$ un majorant de $\abs{f^{(n+1)}}$ sur le segment d'extrémités $a$ et $b$. Montrer que : \\
+$\abs{f(b)-T_{n,f,a}(b)} \le M \dfrac{(b-a)^{n+1}}{(n+1)!}$. \\ \\
+Soit $\varphi : t \in [0,1] \mapsto tb - (1-t)a = a + t(b-a) \in [a,b]$. \\
+$\varphi$ est bijective de classe $\mathcal{C}^{\infty}$, soit $g = f \circ \varphi : [0,1] \to \K$ de classe $\mathcal{C}^{n+1}$ par composition. \\
+$g(t) = f(a+t(b-a))$. \\
+$\forall t \in [0,1], g'(t) = (b-a)f'(a+t(b-a)), \quad g''(t) = (b-a)^2 f''(a+t(b-a))$.
+$\forall t \in [0,1], 0 \le k \le n, (b-a)^k f^{(k)}(a+t(b-a))$. \\
+$g^{(k)}(0) = (b-a)^k f^{(k)}(a)$. \\ \\
+Pour $t \in [0,1], \abs{g^{(n+1)}(t)} = \abs{(b-a)^{n+1}f^{(n+1)}(a+t(b-a))} \le (b-a)^{n+1}M = M_1$.
+D'où (\textsc{Taylor-Lagrange} appliqué à $g$ : $\abs{g(1) - T_{n,g,0}(1)} \le \dfrac{M_1}{(n+1)!}(1-0)^{n+1}$ \ie $\abs{f(b) - \displaystyle{\sum_{k=0}^{n} \dfrac{g^{(k)}(0)}{k!}}} \le M \dfrac{\abs{b-a}^{n+1}}{(n+1)!}$.
+\end{demo}
+
+\section*{Démonstrations}
+\addcontentsline{toc}{section}{Démonstrations}
+
+\begin{demonstration}{EgaliteTaylorLagrange}
+    Soient $a,b \in \R, \; a < b$ et $f \in \mathcal{C}^n \left([a,b], \R\right)$, $f \in \mathcal{D}^{n+1} \left(]a,b[, \R\right)$.\\
+    Considérons dans un premier temps la fonction \strong{$\begin{array}[t]{rcl} \varphi : [a ; b] & \rightarrow & \R \\ x & \mapsto & \displaystyle\sum_{k=0}^n f^{(k)}(x) \dfrac{(b-x)^k}{k!} \end{array}$}\\
+    D'après les théorèmes généraux, $\varphi$ est continue sur $[a;b]$ et dérivable sur $]a;b[$ comme sommes et produits de fonctions continues et dérivables et $\forall x \in \; ]a;b[$ :
+    $$ \varphi'(x) = f'(x) + \sum_{k=1}^n f^{(k+1)}(x) \dfrac{(b-x)^k}{k!} - f^{(k)}(x) \dfrac{(b-x)^{k-1}}{(k-1)!} =  \mathbox{f^{(n+1)}(x) \dfrac{(b-x)^n}{n!}} $$
+    Considérons à présent la fonction \strong{$\begin{array}[t]{rcl} \psi : [a ; b] & \rightarrow & \R \\ x & \mapsto & \varphi(x) + A\dfrac{(b-x)^{n+1}}{(n+1)!} \end{array}$} pour $A \in \R$ tel que :
+    \begin{align}
+    \psi(b) = \psi(a) \; \Longleftrightarrow \; \varphi(b) + A\dfrac{(b-b)^{n+1}}{(n+1)!} = \varphi(a) + A\dfrac{(b-a)^{n+1}}{(n+1)!} \; \Longleftrightarrow \; \mathbox{\varphi(b) = \varphi(a) + A\dfrac{(b-a)^{n+1}}{(n+1)!}} \label{EgalTaylorLagrangeRelationA}
+    \end{align}
+    De plus, d'après les théorèmes généraux, $\psi$ est continue sur $[a;b]$ et dérivable sur $]a;b[$ comme sommes et produits de fonctions continues et dérivables et $\forall x \in \; ]a;b[$ :
+    $$ \psi'(x) = f^{(n+1)}(x) \dfrac{(b-x)^n}{n!} - A \dfrac{(b-x)^n}{n!} $$
+    Ainsi, d'après le théorème de \textsc{Rolle}, il existe $c \in \; ]a;b[$ tel que :
+    $$ \psi'(c) = 0 \; \Longleftrightarrow \; f^{(n+1)}(c) \dfrac{(b-c)^n}{n!} - A \dfrac{(b-c)^n}{n!} = 0 \; \Longleftrightarrow \; \mathbox{A = f^{(n+1)}(c)} $$
+    D'après la relation \ref{EgalTaylorLagrangeRelationA} en remarquant que $\varphi(a) = T_{n,f,a}(b)$ et que $\varphi(b) = f(b)$, on en déduit que :
+    $$ \mathbox{f(b) = T_{n,f,a}(b) + f^{(n+1)}(c)\dfrac{(b-a)^{n+1}}{(n+1)!}} $$
+\end{demonstration}
+
+\end{document}
