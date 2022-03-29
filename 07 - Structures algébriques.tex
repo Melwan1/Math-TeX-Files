@@ -1,0 +1,988 @@
+\documentclass[12pt,a4paper]{report}
+\input{00 - preambule}
+
+\begin{document}
+
+\section{Lois de composition interne}
+
+    \subsection{Vocabulaire}
+    
+    \begin{definition}{Loi de composition interne}{}
+    Soit $E$ un ensemble.\\
+    On appelle \Strong{loi de composition interne} (abrégée LCI) une \strong{application} de $E^2$ dans $E$.\\
+    Soient $(x, y) \in E^2$ et $\star$ une loi de composition interne sur $E$, on note $\strong{x \star y} = \star(x ,y)$.
+    \end{definition}
+    
+    \begin{definition}{Structure algébrique}{}
+    Une \Strong{structure algébrique} est un \strong{ensemble} muni d'au moins une \strong{loi de composition interne}.
+    \end{definition}
+    
+    \begin{definition}{Magma}{}
+    On appelle \Strong{magma} un ensemble muni d'\strong{une loi de composition interne}.\\
+    Soient $E$ un ensemble et $\star$ une LCI sur $E$, on note \strong{$(E, \star)$} le magma $E$ muni de $\star$.
+    \end{definition}
+    
+    \begin{definition}{Associativité}{}
+    Soit $(E, \star)$ un magma. On dit que $\star$ est \Strong{associative} lorsque $\forall a, b, c \in E$ : \strong{$a \star (b \star c) = (a \star b) \star c$}.
+    \end{definition}
+    
+    \begin{definition}{Commutativité}{}
+    Soit $(E, \star)$ un magma. On dit que $\star$ est \Strong{commutative} lorsque $\forall a, b \in E$ : \strong{$a \star b = a \star b$}. On dit alors que $a$ et $b$ commutent.
+    \end{definition}
+    
+    \begin{definition}{Élément neutre}{}
+    Soit $E$ un ensemble et $\star$ une loi de composition interne sur $E$.\\
+    On appelle \Strong{élément neutre} du magma $(E, \star)$ l'élément $e \in E$, tel que $\forall x \in E$ : $\strong{e \star x = x \star e = x}$.\\
+    Un magma contenant un élément neutre est dit \strong{unifère}.
+    \end{definition}
+    
+    \begin{proposition}{Unicité de l'élément neutre}{UniEltNtr}
+    Si un magma admet un neutre, alors ce \strong{neutre est unique}.
+    \end{proposition}
+    
+    \begin{demo}
+    Soient $(E, \star)$ un magma de neutres $e$ et $e'$, alors par définition : $ e = e \star e' = e' \star e = e' $.
+    \end{demo}
+    
+    \begin{definition}{Monoïde}{}
+    On appelle \Strong{monoïde} un \strong{magma associatif} et \strong{unifère}.
+    \end{definition}
+    
+    \begin{definition}{Élément régulier}{}
+    On dit que $x$ est \Strong{régulier} dans $(E, \star)$ si $\forall a, b \in E$ : \strong{$x \star a = x \star b \Rightarrow a = b$} et \strong{$a \star x = b \star x \Rightarrow a = b$}.
+    \end{definition}
+    
+    \vspace{-0.6cm}
+    
+    \subsection{Inverses}
+    
+    \begin{definition}{Inverse}{}
+    Soient $(E, \star)$ un monoïde de neutre $e$ et $x \in E$.\\
+    On dit que $x$ est \Strong{inversible} (ou symétrisable) s'il existe un $y \in E$ tel que : $\strong{x \star y = y \star x = e}$.\\
+    On dit alors que $y$ est l'\Strong{inverse} (ou élément symétrique) de $x$ par $\star$ et on note \strong{$x^{-1} = y$}.
+    \end{definition}
+    
+    \begin{remarque}
+    Soit $(E, +)$ un monoïde et $x \in E$.\\
+    La LCI $+$ est notée de façon additive (\ie avec un $+$), elle est donc commutative, on note 0 voire $0_E$ son élément neutre et $-x$ l'inverse de $x$ que l'on appelle alors l'opposé de $x$.
+    \end{remarque}
+    
+    \begin{propositions}{Propriétés immédiates sur les inverses}{PropInverses}
+    Soit $(E, \star)$ un monoïde de neutre $e$ et $x \in E$.
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item $e$ est inversible et \strong{$e^{-1} = e$} ;
+        \item Si $x$ admet un inverse $x^{-1}$, alors $x^{-1}$ est inversible et \strong{$\left(x^{-1}\right)^{-1} = x$} ;
+        \item\label{InversibleRegulier} Si $x$ est \strong{inversible}, alors $x$ est \strong{régulier}.
+    \end{enumerate}
+    \end{propositions}
+    
+    \begin{principedemo}{PropInverses}
+    Pour le point \ref{InversibleRegulier} partir de $x \star a = x \star b$ et multiplier par $x^{-1}$ à gauche.
+    \end{principedemo}
+    
+    \begin{proposition}{Unicité de l'inverse}{UniInverse}
+    Si un élément d'un monoïde admet un inverse, alors cet \strong{inverse est unique}.
+    \end{proposition}
+    
+    \begin{principedemo}{UniInverse}
+    Même principe que pour l'unicité du neutre en utilisant que $x \star x^{-1} = e$ (définition de l'inverse).
+    \end{principedemo}
+    
+    \begin{proposition}{Inverse d'une LCI}{InverseLCI}
+    Soit $(E, \star)$ un monoïde de neutre $e$ et $x, y \in E$.\\
+    Si $x$ et $y$ sont inversibles, alors $x \star y$ l'est aussi et \strong{$(x \star y)^{-1} = y^{-1} \star x^{-1}$}. 
+    \end{proposition}
+    
+    \begin{principedemo}{InverseLCI}
+    Montrer que $(x \star y) \star \left(y^{-1} \star x^{-1} \right) = e$ (définition de l'inverse).
+    \end{principedemo}
+    
+    \begin{proposition}{Commutativité des inverses de deux éléments commutatifs}{CommutInverses}
+    Soit $(E, \star)$ un monoïde et $x, y \in E$ deux éléments inversibles tels que $x \star y = y \star x$, alors :
+    \begin{multicols}{2}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item\label{PropInvCom1} \strong{$x^{-1} \star y = y \star x^{-1}$} ;
+        \item\label{PropInvCom2} \strong{$x^{-1} \star y^{-1} = y^{-1} \star x^{-1}$}.
+    \end{enumerate}
+    \end{multicols}
+    \smallskip
+    \end{proposition}
+    
+    \begin{principedemo}{CommutInverses}
+    Partir de $x \star y = y \star x$ et multiplier par $x^{-1}$ à droite et à gauche. Puis \textit{mutatis mutandis} pour $x \star y^{-1} = y^{-1} \star x$.
+    \end{principedemo}
+    
+    \pagebreak
+    
+    \subsection{Itérés}
+    
+    \begin{definition}{Itéré}{}
+    Soient $(E, \star)$ un monoïde de neutre $e$, $x \in E$ et $n \in \mathbb{N}$.\\
+    On appelle \Strong{itéré} de $x$ l'élément \strong{$x^n$} défini récursivement par :
+    \begin{multicols}{2}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item \strong{$x^0 = e$} ;
+        \item $\forall k \in \mathbb{N}$ : \strong{$x^{k + 1} = x^k \star x$}.
+    \end{enumerate}
+    \end{multicols}
+    \end{definition}
+    
+    \begin{remarque}
+    Soit $(E, +)$ un monoïde, $x \in E$ et $n \in \mathbb{N}$.\\
+    La LCI $+$ est notée de façon additive, on note alors $nx$ au lieu de $x^n$ l'itéré de $x$.
+    \end{remarque}
+    
+    \begin{propositions}{Itérés}{PropIteres}
+    Soit $(E, \star)$ un monoïde, $x \in E$ et $n, m \in \mathbb{N}$.
+    \begin{multicols}{2}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item \strong{$x^{n + m} = x^n \star x^m = x^m \star x^n$} ;
+        \item \strong{$x^{nm} = \left(x^n\right)^m = \left(x^m\right)^n$}.
+    \end{enumerate}
+    \end{multicols}
+    \end{propositions}
+    
+    \begin{principedemo}{PropIteres}
+    Par récurrence sur $m$ en utilisant la définition des itérés.
+    \end{principedemo}
+
+    \begin{propositions}{Itérés d'éléments commutatifs}{PropIteresCom}
+    Soit $(E, \star)$ un monoïde, $x, y \in E$ tels que \strong{$x \star y = y \star x$} et $n, m \in \mathbb{N}$.
+    \begin{multicols}{3}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item \strong{$x^n \star y = y \star x^n$} ;
+        \item \strong{$x^n \star y^m = y^m \star x^n$} ;
+        \item \strong{$(x \star y)^n = x^n \star y^n$}.
+    \end{enumerate}
+    \end{multicols}
+    \end{propositions}
+    
+    \begin{principedemo}{PropIteresCom}
+    Par récurrence sur $n$ en utilisant la définition des itérés.
+    \end{principedemo}
+    
+    \begin{definition}{Itéré d'un inverse}{}
+    Soit $(E, \star)$ un monoïde et $x \in E$.\\
+    Si $x$ est inversible, alors on définit $\forall n \in \mathbb{N}$ : \strong{$x^{-n} =  \left(x^{-1}\right)^n$}.
+    \end{definition}
+    
+    \begin{proposition}{Inverse d'un itéré}{InverseItere}
+    Soit $(E, \star)$ un monoïde, $x \in E$ et $n \in \mathbb{N}$.\\
+    Si $x$ est inversible, alors $x^n$ l'est aussi et $\strong{\left(x^n\right)^{-1} = x^{-n}}$.
+    \end{proposition}
+    
+    \begin{principedemo}{InverseItere}
+    Montrer que $x^{-n}$ convient, \ie $x^{-n} \star x^n = x^n \star x^{-n} = e$.
+    \end{principedemo}
+    
+    \begin{remarque}
+    Les \cref{prop\string:PropIteres} \cpageref{prop\string:PropIteres} et les \cref{prop\string:PropIteresCom} \cpageref{prop\string:PropIteresCom} sont donc vraies dans $\mathbb{Z}$ (si $x$ et $y$ sont inversibles).
+    \end{remarque}
+    
+    
+\section{Groupes}
+
+    \subsection{Groupes}
+
+    \begin{definition}{Groupe}{}
+    Un \Strong{groupe} est un \strong{monoïde} dont chaque élément est \strong{inversible}.
+    \end{definition}
+    
+    \begin{remarque}
+    Soit $(G, \star)$ un groupe, si $\star$ est commutative, alors on dit que $(G, \star)$ est un \strong{groupe commutatif} ou \strong{abélien}.
+    \end{remarque}
+    
+    \begin{remarque} Soit $(G, \star)$ un groupe. Tout élément de $G$ est \strong{régulier} pour $\star$.
+    \end{remarque}
+    
+    \begin{remarque} Soit $(G, \star)$ un groupe et $a \in G$.\\
+    Alors $f_a : \begin{array}[t]{rcl} G & \rightarrow & G \\ x & \mapsto & a \star x \end{array}$ est bijective de réciproque $f_{a^{-1}}$, $\forall y \in G$ :
+    $$ f_a(x) = y \Leftrightarrow a \star x = y \Leftrightarrow a^{-1} \star (a \star x) = a^{-1} \star y \Leftrightarrow \left(a^{-1} \star a\right) \star x = a^{-1} \star y \Leftrightarrow e \star x = a^{-1} \star y \Leftrightarrow x = a^{-1} \star y $$
+    Donc tout $y \in G$ admet un unique antécédent dans $G$. De plus, pour $a, b \in G$ :
+    $$ \left(f_a \circ f_b\right) (x) = f_a \left( f_b (x) \right) = f_a (b \star x) = a \star (b \star x) = (a \star b) \star x = f_{a \star b} (x) $$
+    $$ f_e (x) = e \star x = x = \text{Id}_G (x) $$
+    L'application $g_a : \begin{array}[t]{rcl} G & \rightarrow & G \\ x & \mapsto & x \star a \end{array}$ possède les mêmes propriétés.
+    \end{remarque}
+    
+    \begin{proposition}{Groupe des inversibles}{GrpInvers}
+    Soient $(E, \star)$ un monoïde et $G$ l'ensemble des éléments inversibles de $E$.\\
+    $(G, \star)$ est un groupe appelé \Strong{groupe des inversibles} du monoïde $(E, \star)$.
+    \end{proposition}
+    
+    \begin{principedemo}{GrpInvers}
+    Reprendre la définition d'un groupe.
+    \end{principedemo}
+    
+    \pagebreak
+    
+    \subsection{Sous-groupes}
+    
+    \begin{definition}{Sous-groupes}{}
+    Soient $(G, \star)$ groupe et \strong{$H \subset G$}.\\
+    On dit alors que $(H, \star)$ est un \Strong{sous-groupe} de $(G, \star)$ si \strong{$H \neq \varnothing$} et que :
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item $H$ est \strong{stable par $\star$} : $\forall x, y \in H, (x \star y) \in H$ ;
+        \item $H$ est \strong{stable par passage à l'inverse} : $\forall x \in H, x^{-1} \in H$.
+    \end{enumerate}
+    \end{definition}
+    
+    \begin{proposition}{Élément neutre d'un sous groupe}{}
+    Soient $(G, \star)$ un groupe de neutre $e$ et $(H, \star)$ un sous-groupe, alors \strong{$e \in H$}.
+    \end{proposition}
+    
+    \begin{demo}
+    Soient $(G, \star)$ un groupe de neutre $e$ et $(H, \star)$ un sous-groupe.\\
+    Soit $x \in H$, alors $x$ est inversible et $x^{-1} \in H$. Or, $H$ est stable par $\star$, donc $x \star x^{-1} = e \in H$.
+    \end{demo}
+    
+    \begin{proposition}{Autre caractérisation d'un sous-groupe}{CaracSsGrp}
+    Soit $(G, \star)$ un groupe.\\
+    $(H, \star)$ est un \strong{sous-groupe} si et seulement si \strong{$H \neq \varnothing$} et $\forall x, y \in H, \strong{x^{-1} \star y \in H}$.
+    \end{proposition}
+    
+    \begin{principedemo}{CaracSsGrp}
+    Prendre $y = x$ puis $y = e$ et enfin $x = x^{-1}$.
+    \end{principedemo}
+    
+    \begin{theoreme}{Groupe et sous-groupe}{}
+    Soient $(G, \star)$ un groupe et $(H, \star)$ un sous-groupe. Alors \strong{$(H, \star)$ est un groupe}.
+    \end{theoreme}
+    
+    \begin{demo}
+    Soient $(G, \star)$ un groupe et $(H, \star)$ un sous-groupe.\\
+    On peut restreindre la LCI $\star$ à $H$ : $\star : \begin{array}[t]{rcl} H^2 & \rightarrow & H \\ (x, y) & \mapsto & x \star y \end{array}$ car $H$ est stable par $\star$.\\
+    Ainsi $\star$ reste associative et par propriétés des sous-groupes : $e \in H$ et tout élément de $H$ est inversible par $\star$.
+    \end{demo}
+    
+    \begin{remarque}
+    Pour monter que $(G, \star)$ est un groupe, il suffit de montrer qu'il est un sous-groupe d'un groupe connu (ce qui permet notamment d'éviter de monter que $\star$ est associative).
+    \end{remarque}
+    
+    \begin{proposition}{Sous-groupes et itérés}{SsGrpIteres}
+     Soient $(G, \star)$ un groupe et $(H, \star)$ un sous-groupe. Alors pour $x \in H$ et $n \in \mathbb{Z}$ : \strong{$x^n \in H$}.
+    \end{proposition}
+    
+    \begin{principedemo}{SsGrpIteres}
+    Par récurrence sur $n$.
+    \end{principedemo}
+    
+    \begin{proposition}{Intersection de sous-groupes}{IntersectionSsGroupes}
+    Soient $(G, \star)$ un groupe et $(H_1, \star)$ et $(H_2, \star)$ deux sous-groupes.\\
+     Alors \strong{$(H_1 \cap H_2, \star)$ est un sous-groupe} de $(G, \star)$, $(H_1, \star)$ et $(H_2, \star)$.\\
+     Ainsi pour $n \in \mathbb{N}$ si $(H_1, \star), ..., (H_n, \star)$ sont $n$ sous-groupes, alors \strong{$\displaystyle \left(\bigcap_{i = 1}^n H_i, \star\right)$ est un sous-groupe}.
+    \end{proposition}
+    
+    \begin{principedemo}{IntersectionSsGroupes}
+    Utiliser la \cref{prop\string:CaracSsGrp} \cpageref{prop\string:CaracSsGrp} en remarquant que $x$ et $y$ appartiennent à l'intersection.
+    \end{principedemo}
+    
+    
+    \subsection{Parties génératrices}
+    
+    \begin{definition}{Sous groupe engendré}{}
+    Soit $(G, \star)$ un groupe, $S$ une partie de $G$ et $(H, \star)$ un sous-groupe tel que $H$ soit l'\strong{intersection de tous les sous-groupes qui contiennent $S$}.\\
+    Alors $(H, \star)$ est appelé \Strong{sous-groupe} de $(G, \star)$ \Strong{engendré} par $S$ et on note \strong{$H = \text{gr}(S)$} (voire $\langle S \rangle$).
+    \end{definition}
+    
+    \begin{remarque}
+    Si $S = \lbrace x \rbrace$ avec $x \in G$, alors on note \strong{$\text{gr}(x)$} au lieu de $\text{gr}\left(\lbrace x \rbrace\right)$.
+    \end{remarque}
+    
+    \begin{proposition}{Sous-groupe engendré}{SsGrpEngendre}
+     Soient $(G, \star)$ un groupe, $x \in G$ et $(\text{gr}(x), \star)$ le sous-groupe engendré par $\lbrace x \rbrace$ : \strong{$\text{gr}(x) = \left\lbrace x^n \,\middle|\, n \in \mathbb{Z} \right\rbrace$}.
+    \end{proposition}
+    
+    \begin{principedemo}{SsGrpEngendre}
+    Par double inclusion, en utilisant la \cref{prop\string:CaracSsGrp} \cpageref{prop\string:CaracSsGrp} pour montrer que $\{x^n \mid n \in \Z\}$ est un sous-groupe qui contient $x$.
+    \end{principedemo}
+    
+    \begin{remarque}
+    Soit $(G, +)$ un groupe, $x \in G$ et $(\text{gr}(x), \star)$ le sous-groupe engendré par $\{x\}$.\\
+    Alors $+$ est notée de façon additive et on note : $\text{gr}(x) = \left\lbrace nx \,\middle|\, n \in \mathbb{Z} \right\rbrace$.
+    \end{remarque}
+    
+    \begin{definition}{Partie génératrice}{}
+    Soient $(G, \star)$ un groupe, $S$ une partie de $G$ et $(\text{gr}(S), \star)$ le sous-groupe engendré par $S$.\\
+    On dit alors que $S$ \strong{engendre} $G$ ou que $S$ est une \Strong{partie génératrice} de $G$ lorsque \strong{$G = \text{gr}(S)$} ; autrement dit, le seul sous-groupe qui contient $S$ est $(G, \star)$.
+    \end{definition}
+    
+    \begin{definition}{Groupe monogène}{}
+    Soit $(G, \star)$ un groupe. On dit que $(G, \star)$ est un \Strong{groupe monogène} si $\exists x \in G$ tel que \strong{$G = \text{gr}(x)$}.\\
+    Ainsi \strong{$G = \left\lbrace x^n \,\middle|\, n \in \mathbb{Z} \right\rbrace$} et $x$ est appelé un \strong{générateur} de $G$.
+    \end{definition}
+    
+    \begin{definition}{Groupe cyclique}{}
+    Soit $(G, \star)$ un groupe \strong{monogène}. Si $G$ est \strong{fini}, alors $(G, \star)$ est un \Strong{groupe cyclique}.
+    \end{definition}
+    
+    
+    \subsection{Éléments de torsion (complément)}
+
+    \begin{definition}{Élément de torsion}{}
+    Soient $(G, \star)$ un groupe de neutre $e$ et $x \in G$.\\
+    On dit que $x$ est un \Strong{élément de torsion} si $\exists n \in \mathbb{N}^*$ tel que \strong{$x^n = e$}.
+    \end{definition}
+    
+    \begin{proposition}{Élément qui n'est pas de torsion}{}
+    Soient $(G, \star)$ un groupe de neutre $e$ et $x \in G$.\\
+    Si $x$ n'est \strong{pas de torsion}, alors $\forall m, n \in \mathbb{Z}$ : \strong{$m \neq n \Rightarrow x^m \neq x^n$}.
+    \end{proposition}
+    
+    \begin{demo}
+    Soient $(G, \star)$ un groupe de neutre $e$ et $x \in G$.\\
+    Par définition, si $x$ n'est pas de torsion, alors $\forall n \in \mathbb{N}^*$ : $x^n \neq e$.\\
+    Supposons qu'il existe $m, n \in \mathbb{Z}, m \neq n$ tels que $x^m = x^n$. On a par exemple $m > n$.\\
+    Donc, $x^m = x^n \Leftrightarrow x^m \star x^{-n} = x^n \star x^{-n} \Leftrightarrow x^{m-n} = e$. Ce qui est absurde car $m-n \in \mathbb{N}^*$.
+    \end{demo}
+    
+    \begin{definition}{Ordre d'un élément de torsion}{}
+    Soient $(G, \star)$ un groupe de neutre $e$ et $x \in G$ un élément de torsion.\\
+    On définit alors $m$ l'\Strong{ordre de $x$} par : \strong{$m = \min\left\{ n \in \mathbb{N}^* \,\middle|\, x^n = e \right\}$}. 
+    \end{definition}
+    
+    \begin{proposition}{Sous-groupe engendré et élément de torsion}{SsGrpEltTors}
+    Soient $(G, \star)$ un groupe et $x \in G$ un \strong{élément de torsion d'ordre $m$}.\\
+    Alors \strong{$\text{gr}(x) = \left\{ x^n \,\middle|\, n \in \llbracket 0 ; m - 1 \rrbracket \right\}$}. De plus, si $k, \ell \in \llbracket 0 ; m - 1 \rrbracket$ alors \strong{$k \neq \ell \Rightarrow x^k \neq x^\ell$}.
+    \end{proposition}
+    
+    \begin{demo}[Démonstrations]
+    Soient  $(G, \star)$ un groupe de neutre $e$ et $x \in G$ un élément de torsion d'ordre $m$.\\
+    $ \left\{ x^n \,\middle|\, n \in \llbracket 0 ; m - 1 \rrbracket \right\} \subset \text{gr}(x) = \left\lbrace x^n \,\middle|\, n \in \mathbb{Z} \right\rbrace $ car $\llbracket 0 ; m - 1 \rrbracket \subset \mathbb{Z} $.\\
+    Soient $k \in \mathbb{Z}$ et $(q, r)$ la division euclidienne de $k$ par $m$, donc : $k = qm + r$ avec $r \in \llbracket 0 ; m - 1 \rrbracket$.\\
+    Donc $x^k = x^{qm + r} = (x^m)^q \star x^r = e^q \star x^r = e \star x^r = x^r$.\\
+    Or $r \in \llbracket 0 ; m - 1 \rrbracket$, donc $x^k \in \left\{ x^n \,\middle|\, n \in \llbracket 0 ; m - 1 \rrbracket \right\}$ ; d'où $\text{gr}(x) \subset \left\{ x^n \,\middle|\, n \in \llbracket 0 ; m - 1 \rrbracket \right\}$.\\
+    On en déduit donc par double inclusion que $\text{gr}(x) =  \left\{ x^n \,\middle|\, n \in \llbracket 0 ; m - 1 \rrbracket \right\}$.\\
+    Par ailleurs, soient $0 \leqslant k < \ell \leqslant m-1$. Supposons que $x^\ell = x^k$.\\
+    Ainsi, $x^\ell \star x^{-k} = x^k \star x^{-k} = x^{\ell - k} = e$, ce qui est absurde car $\ell - k \in \llbracket 1 ; m - 1 \rrbracket$ ce qui contredit la définition de $m$, donc $x^\ell \neq x^k$.
+    \end{demo}
+    
+    \begin{corollaires}{Sous-groupe engendré et élément de torsion}{}
+    Soit $(G, \star)$ un groupe et $x \in G$.
+    \begin{multicols}{2}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item \strong{$x$ est de torsion} $\Leftrightarrow$ \strong{$\text{gr}(x)$ est fini} ;
+        \item \strong{$x$ est de torsion d'ordre $m$} $\Rightarrow$ \strong{$m = | \text{gr}(x) |$}.
+    \end{enumerate}
+    \end{multicols}
+    \end{corollaires}
+    
+    \begin{demo}
+    Soit $(G, \star)$ un groupe et $x \in G$.
+    \begin{itemize}
+        \item[$\Rightarrow$] Supposons que $x$ est de torsion d'ordre $m$.\\
+        Alors d'après la proposition \ref{prop:SsGrpEltTors} page \pageref{prop:SsGrpEltTors} : $\text{gr}(x) = \left\{ x^n \,\middle|\, n \in \llbracket 0 ; m - 1 \rrbracket \right\}$.\\
+        L'application $\varphi : \begin{array}[t]{rcl} \left\{ x^n \,\middle|\, n \in \llbracket 0 ; m - 1 \rrbracket \right\} & \rightarrow & \llbracket 1 ; m \rrbracket \\ x^n & \mapsto & n + 1 \end{array}$ est donc bijective, d'où $| \text{gr}(x) | = m \in \mathbb{N}^*$.
+        \item[$\Leftarrow$] Supposons que $\text{gr}(x) = \{ x^n \,|\, n \in \mathbb{Z}\}$ soit fini. On considère alors $a = \max\{k \in \mathbb{Z} \,|\, x^k \in \text{gr}(x)\}$.\\
+        $x^a \in \text{gr}(x)$, donc $\exists b \in \mathbb{Z}, b \leqslant a$ tel que $x^a \star x = x^b$ (car $\text{gr}(x)$ est stable).\\
+        Donc $x^a \star x = x^b \Leftrightarrow x^{a + 1}  \star x^{-b} = x^b \star x^{-b} \Leftrightarrow x^{a - b + 1} = e$.\\
+        Or, $b \leqslant a \Leftrightarrow a - b \geqslant 0 \Leftrightarrow a - b + 1 \in \mathbb{N}^*$, donc $x$ est de torsion.
+    \end{itemize}
+    \end{demo}
+    
+    \begin{corollaire}{Sous-groupe engendré fini}{}
+    Soit $(G, \star)$ un groupe \strong{fini}. Alors \strong{tout élément de $G$ est de torsion}.
+    \end{corollaire}
+    
+    \begin{demo}
+    Soit $(G, \star)$ un groupe fini.\\
+    Alors tout sous-groupe de $G$ est fini. Donc en particulier $\forall x \in G$, $\text{gr}(x)$ est fini $\Leftrightarrow x$ est de torsion.
+    \end{demo}
+    
+    \begin{proposition}{Groupe cyclique et ordre d'un élément de torsion}{}
+    Soit $(G, \star)$ un groupe fini.\\
+    \strong{$(G, \star)$ est cyclique} si et seulement si \strong{il existe un $x \in G$ d'ordre $|G|$}.
+    \end{proposition}
+    
+    \begin{demo}
+    Soit $(G, \star)$ un groupe fini.
+    \begin{itemize}
+        \item[$\Rightarrow$] Supposons que $(G, \star)$ soit cyclique, donc $\exists x$ tel que $G = \text{gr}(x) \Rightarrow |G| = |\text{gr}(x)| = m$ l'ordre de $x$.
+        \item[$\Leftarrow$] Supposons qu'il existe un $x \in G$ d'ordre $|G|$. On a donc $|G| = |\text{gr}(x)|$. Or, $\text{gr}(x) \subset G$ (car c'est un sous-groupe). Donc $\text{gr}(x) = G$ \ie $(G, \star)$ est cyclique (car il est monogène et fini).
+    \end{itemize}
+    \end{demo}
+    
+    \begin{proposition}{Ordre d'un élément de torsion et itérés}{OrdEltTorsIt}
+    Soient $(G, \star)$ un groupe et $x \in G$ un élément de torsion d'ordre $m$.\\
+    Alors pour $k \in \mathbb{Z}$ : \strong{$x^k = e \Leftrightarrow m \mid k$}.
+    \end{proposition}
+    
+    \begin{demo}
+    Soient $(G, \star)$ un groupe et $x \in G$ un élément de torsion d'ordre $m$. Soit $k \in \mathbb{Z}$.
+    \begin{itemize}
+        \item[$\Rightarrow$] Soit $(q, r)$ la division euclidienne de $k$ par $m$. Donc $k = qm + r$ avec $r \in  \llbracket 0 ; m-1 \rrbracket$.\\
+        Supposons que $x^k = e$, donc $e = x^k = x^{qm + r} = (x^m)^k \star x^r = e^k \star x^r = e \star x^r = x^r$, d'où $x^r = x^0$. Donc, d'après la contraposée de la proposition \ref{prop:SsGrpEltTors} page \pageref{prop:SsGrpEltTors}, $r = 0$ \ie $m \mid k$.
+        \item[$\Leftarrow$] Supposons que $m \mid k \Leftrightarrow \exists \ell \in \mathbb{Z}$ tel que $k = m\ell$. Donc $x^k = x^{m\ell} = (x^m)^\ell = e^\ell = e$.
+    \end{itemize}
+    \end{demo}
+    
+   \begin{theoreme}{Itéré et cardinal du groupe}{ThItCardGrp}
+    Soit $(G, \star)$ un \strong{groupe fini} de neutre $e$ et $x \in G$ un élément de torsion d'ordre $m$.\\
+    Alors \strong{$x^{|G|} = e$} et \strong{$m$ divise $|G|$}.
+    \end{theoreme}
+    
+    \begin{demo}
+    Cas où $(G, \star)$ est commutatif.\\
+    Soit $(G, \star)$ un groupe commutatif fini.\\
+    L'application $y \in G \mapsto x \star y \in G$ est une bijection. Donc lorsque $y$ décrit $G$, $x \star y$ aussi, d'où :
+    $$ \prod_{y \in G} y = \prod_{y \in G} (x \star y) = \prod_{y \in G} x \star \prod_{y \in G} y = x^{|G|} \star \prod_{y \in G} y \Leftrightarrow x^{|G|} \star \prod_{y \in G} y = \prod_{y \in G} y \Leftrightarrow x^{|G|} = e$$
+    Par ailleurs, d'après la proposition \ref{prop:OrdEltTorsIt} page \pageref{prop:OrdEltTorsIt} : $m$ divise $|G|$.
+    \end{demo}
+    
+    
+    \subsubsection*{Petite histoire}
+    
+    \begin{theoreme}{Théorème de Lagrange}{}
+    Soit $(G, \star)$ un groupe fini et $(H, \star)$ un sous-groupe. Alors $|H|$ divise $|G|$
+    \end{theoreme}
+    
+    \begin{remarque}
+    Il s'agit d'une généralisation du théorème \ref{thm:ThItCardGrp} page \pageref{thm:ThItCardGrp} qui concerne le cas particulier où $H = \text{gr}(x)$, donc $|H| = |\text{gr}(x)| = m$ l'ordre de $x$.
+    \end{remarque}
+    
+    \pagebreak
+    
+    \subsection{Morphismes de groupes}
+    
+    \begin{definition}{Morphisme de groupes}{}
+    Soient $(G, \star)$ et $(H, \ast)$ deux groupes et $f$ une application de $G$ dans $H$.\\
+    On dit alors que $f$ est un \Strong{morphisme de groupes} lorsque $\forall x, y \in G$ : \strong{$f(x \star y) = f(x) \ast f(y)$}.
+    \end{definition}
+    
+    \begin{definition}{Morphismes particuliers}{}
+    Soient $(G, \star)$ et $(H, \ast)$ deux groupes et $f$ un morphisme de $G \rightarrow H$.
+    \begin{itemize}[label=\mathversion{bold}$\cdot$]
+        \item Si \strong{$f$ est bijective}, alors $f$ est un \Strong{isomorphisme} de groupes ;
+        \item Si \strong{$(G, \star) = (H, \ast)$}, alors $f$ est un \Strong{endomorphisme} de groupes ;
+        \item Si $f$ est un \strong{isomorphisme} et un \strong{endomorphisme} de groupes, alors $f$ est un \Strong{automorphisme} de groupes.
+    \end{itemize}
+    \end{definition}
+    
+    \begin{definition}{Groupes isomorphes}{}
+    Deux groupes sont dits \Strong{isomorphes} s'il existe un \strong{isomorphisme de l'un dans l'autre}.
+    \end{definition}
+    
+    \begin{propositions}{Propriétés de groupes liés par un morphisme}{}
+     Soient $(G, \star)$ et $(H, \ast)$ deux groupes de neutres $e_G$ et $e_H$ et $f$ un morphisme de $G \rightarrow H$.\\
+     $\forall x \in G$ et $\forall n \in \mathbb{Z}$ :
+    \begin{multicols}{3}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item\label{PorpGrpIsmrph1} \strong{$e_H = f(e_G)$} ;
+        \item\label{PorpGrpIsmrph2} \strong{$(f(x))^{-1} = f\left(x^{-1}\right)$} ;
+        \item\label{PorpGrpIsmrph3} \strong{$(f(x))^n = f\left(x^n\right)$}.
+    \end{enumerate}
+    \end{multicols}
+    \end{propositions}
+    
+    \begin{demo}[Démonstrations]
+    Soient $(G, \star)$ et $(H, \ast)$ deux groupes de neutres $e_G$ et $e_H$ et $f$ un morphisme de $G \rightarrow H$. Soit $x \in G$ :
+    \begin{align*}
+        \text{\ref{PorpGrpIsmrph1}} \qquad e_G &= e_G \star e_G
+        & \text{\ref{PorpGrpIsmrph2}} \qquad e_H &= f(e_G) \\
+        f(e_G) &= f(e_G \star e_G)
+        & e_H &= f\left(x \star x^{-1}\right) \\
+        f(e_G) &= f(e_G) \ast f(e_G)
+        & e_H &= f(x) \ast f\left(x^{-1}\right) \\
+        f(e_G) \ast (f(e_G))^{-1} &= f(e_G) \ast f(e_G) \ast (f(e_G))^{-1}
+        & (f(x))^{-1} \ast e_H &= (f(x))^{-1} \ast f(x) \ast f\left(x^{-1}\right) \\
+        e_H &= f(e_G) \ast e_H
+        & (f(x))^{-1} &= e_H \ast f\left(x^{-1}\right) \\
+        e_H &= f(e_G)
+        & (f(x))^{-1} &= f\left(x^{-1}\right)
+    \end{align*}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \setcounter{enumi}{2}
+        \item $\mathcal{H}_n$ : $(f(x))^n = f\left(x^n\right)$.\\
+        $\mathcal{H}_0$ est vraie : $(f(x))^0 = e_H = f(e_G) = f\left( x^0 \right)$.\\
+        Supposons $\mathcal{H}_n$ vraie pour un certain rang $n$. Alors :
+        $$ (f(x))^{n+1} = (f(x))^n \ast f(x) = f(x^n) \ast f(x) = f(x^n \star x) = f\left( x^{n+1} \right) $$
+        Donc par récurrence $\forall n \in \mathbb{N}$, $\mathcal{H}_n$ est vraie. Par ailleurs $\forall n \in \mathbb{N}$ :
+        $$ (f(x))^{-n} = \left((f(x))^n\right)^{-1} = (f(x^n))^{-1} = f\left((x^n)^{-1}\right) = f\left(x^{-n}\right) $$
+        Donc $\forall n \in \mathbb{Z}$, $\mathcal{H}_n$ est vraie.
+    \end{enumerate}
+    \end{demo}
+    
+    \begin{propositions}{Sous-groupes de groupes liés par un morphisme}{SsGroupesImagesReciproques}
+    Soient $(G, \star)$ et $(H, \ast)$ deux groupes et $f$ un morphisme de $G \rightarrow H$.
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item Si \strong{$(G', \star)$ est un sous-groupe de $(G, \star)$}, alors \strong{$(f(G'), \ast)$ est un sous-groupe de $(H, \ast)$}.
+        \item Si \strong{$(H', \ast)$ est un sous-groupe de $(H, \ast)$}, alors \strong{$(f^{-1}(H'), \star)$ est un sous-groupe de $(G, \star)$}.
+    \end{enumerate}
+    \end{propositions}
+    
+    \begin{demo}[Démonstrations]
+    Soient $(G, \star)$ et $(H, \ast)$ deux groupes de neutres $e_G$ et $e_H$, $f$ un morphisme de $G \rightarrow H$ et $(G', \star)$ et $(H', \ast)$ deux sous-groupes respectifs de $(G, \star)$ et $(H, \ast)$.
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item $G' \neq \varnothing$ donc $f(G') \neq \varnothing$. Soient $a, b \in f(G')$.\\
+    Par définition de l'image directe, on dispose de $x, y \in G'$ tels que $a = f(x)$ et $b = f(y)$. Ainsi :
+    $$ a^{-1} \ast b = (f(x))^{-1} \ast f(y) = f\left( x^{-1} \right) \ast f(y) = f\left( x^{-1} \star y\right) $$
+    Or, $x^{-1} \star y \in G'$ (car $(G', \star)$ est un sous-groupe). D'où $f\left( x^{-1} \star y\right) = a^{-1} \ast b \in f(G')$.\\
+    Donc $(f(G'), \ast)$ est un sous-groupe.
+        \item $f(e_G) = e_H \in H'$ donc $e_G \in f^{-1}(H')$ d'où $f^{-1}(H') \neq \varnothing$. Soient $x, y \in f^{-1}(H')$. Ainsi :
+        $$ f\left(x^{-1} \star y\right) = f\left(x^{-1}\right) \ast f(y) = (f(x))^{-1} \ast f(y) $$
+        Or, par définition de l'image réciproque : $f(x), f(y) \in H'$.\\
+        Donc $(f(x))^{-1} \ast f(y) = f\left(x^{-1} \star y\right) \in H'$ car $(H', \ast)$ est un sous-groupe.\\
+        Donc $x^{-1} \star y \in f^{-1}(H')$ \ie $(f^{-1}(H'), \star)$ est un sous-groupe.
+    \end{enumerate}
+    \end{demo}
+    
+    
+    \subsection{Images et noyaux}
+    
+    \begin{definition}{Image}{}
+    Soient $(G, \star)$ et $(H, \ast)$ deux groupes et $f$ un morphisme de $G \rightarrow H$.\\
+    \strong{$(f(G), \ast)$} est un sous-groupe de $(H, \ast)$ appelé \Strong{image} de $f$ et noté \strong{$\text{Im}(f)$}.
+    \end{definition}
+    
+    \begin{definition}{Noyau}{}
+    Soient $(G, \star)$ et $(H, \ast)$ deux groupes et $f$ un morphisme de $G \rightarrow H$.\\
+    \strong{$(f^{-1}(e_H), \star)$} est un sous-groupe de $(G, \star)$ appelé \Strong{noyau} de $f$ et noté \strong{$\text{Ker}(f)$}.
+    \end{definition}
+    
+    \begin{proposition}{Morphisme et noyau}{}
+    Soient $(G, \star)$ et $(H, \ast)$ deux groupes et $f$ un morphisme de $G \rightarrow H$.
+    \begin{align*}
+        \text{Alors : } \strong{f \text{ injective}} &\Leftrightarrow \strong{\text{Ker}(f) = \{ e_G \}} \\
+        &\Leftrightarrow \forall x \in G : \strong{f(x) = e_H \Rightarrow x = e_G}
+    \end{align*}
+    \end{proposition}
+    
+    \begin{demo}
+    Soient $(G, \star)$ et $(H, \ast)$ deux groupes et $f$ un morphisme de $G \rightarrow H$.
+    \begin{itemize}
+        \item[$\Rightarrow$] Supposons que $f$ soit injective. Soit $x \in G$ tel que $f(x) = e_H$.\\
+        Alors $f(x) = f(e_G)$. Donc $x = e_G$ car $f$ est injective.
+        \item[$\Leftarrow$] Supposons que $\forall x \in G : f(x) = e_H \Rightarrow x = e_G$. Soit $x, y \in G$ tel que $f(x) = f(y)$. Ainsi :
+        \begin{align*}
+            f(x) \ast (f(y))^{-1} &= f(y) \ast (f(y))^{-1} \\
+            f(x) \ast f\left(y^{-1}\right) &= e_H \\
+            f\left(x \star y^{-1}\right) &= e_H \\
+            x \star y^{-1} &= e_G \\
+            x \star y^{-1} \star y &= e_G \star y \\
+            x &= y 
+        \end{align*}
+    \end{itemize}
+    \end{demo}
+    
+    \begin{proposition}{Composée et réciproque de morphismes}{}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item La \strong{composée} de deux morphismes est un \strong{morphisme} ;
+        \item La \strong{réciproque} d'un isomorphisme est un \strong{isomorphisme}.
+    \end{enumerate}
+    \end{proposition}
+    
+    \begin{demo}
+    Soient $(G, \star)$, $(H, \ast)$ et $(H, \bullet)$ trois groupes.
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item Soient $f$ et $g$ deux morphismes respectifs de $G \rightarrow H$ et de $H \rightarrow E$. Alors $\forall x, y \in G$ :
+        $$ (g \circ f)(x \star y) = g(f(x \star y)) = g(f(x) \ast f(y)) = g(f(x)) \bullet g(f(y)) = (g \circ f)(x) \bullet (g \circ f)(y) $$
+        \item Soit $f$ un isomorphisme de $G \rightarrow H$. Donc $f^{-1}$ est la réciproque de $f$ et $\forall a, b \in H$ :
+        $$ \left.\begin{array}{r}
+        f\left(f^{-1}(a \ast b)\right) = a \ast b \\
+        f\left(f^{-1}(a) \star f^{-1}(b)\right) = f\left(f^{-1}(a)\right) \ast f\left(f^{-1}(b)\right) = a \ast b
+        \end{array}\right\}
+        \Rightarrow f\left(f^{-1}(a \ast b)\right) = f\left(f^{-1}(a) \star f^{-1}(b)\right) $$
+        Donc $f^{-1}(a \ast b) = f^{-1}(a) \star f^{-1}(b)$ car $f$ est bijective.
+    \end{enumerate}
+    \end{demo}
+
+\pagebreak
+
+\section{Anneaux}
+
+    \subsection{Vocabulaire}
+
+    \begin{definition}{Distributivité}{}
+    Soient $\oplus$ et $\otimes$, deux lois de composition internes sur $E$.\\
+    On dit que $\otimes$ est \Strong{distributive} par rapport à $\oplus$ lorsque $\forall a, b, c \in E$ : \strong{$a \otimes (b \oplus c) = (a \otimes b) \oplus (a \otimes c)$} et \strong{$(a \oplus b) \otimes c = (a \otimes c) \oplus (b \otimes c)$}.
+    \end{definition}
+    
+    \begin{definition}{Anneau}{}
+    Un \Strong{anneau} noté $(A, +, \times)$ est un ensemble $A$ (non vide) muni de \strong{deux lois de composition internes} notées $+$ et $\times$ (en général) tel que :
+    \begin{multicols}{2}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item \strong{$(A, +)$} est un \strong{groupe commutatif} ;
+        \item \strong{$(A, \times)$} est un \strong{monoïde} ;
+        \item $\times$ est \strong{distributive} par rapport à $+$.
+    \end{enumerate}
+    \end{multicols}
+    \end{definition}
+    
+    \begin{remarque}[Notations]
+    Soit $(A, +, \times)$ un anneau. $\forall x, y \in A$ et $\forall n \in \mathbb{Z}$ :
+    \begin{multicols}{2}
+    \begin{itemize}[label=\mathversion{bold}$\cdot$]
+        \item On note 0 ou $0_A$ le neutre pour $+$ ;
+        \item On note $-x$ l'opposé de $x$ pour $+$ ;
+        \item On note $nx$ l'itéré $n$-ème pour $+$ ;
+        \item On note 1 ou $1_A$ le neutre pour $\times$ ;
+        \item On note $x^{-1}$ (ou $\dfrac{1}{x}$ pour un ensemble de nombres) l'inverse (ou unité) de $x$ pour $\times$ ;
+        \item On note $x^n$ l'itéré $n$-ème pour $\times$ ;
+        \item On note couramment $xy$ à la place de $x \times y$.
+    \end{itemize}
+    \end{multicols}
+    \end{remarque}
+    
+    \begin{definition}{Anneau commutatif}{}
+    Soit $(A, +, \times)$ un anneau. $(A, +, \times)$ est un \Strong{anneau commutatif} lorsque $\times$ est \strong{commutative}.
+    \end{definition}
+    
+    \begin{definition}{Groupe des unités d'un anneau}{}
+    Soit $(A, +, \times)$ un anneau.\\
+    On appelle \Strong{groupe des unités} de l'anneau $A$ noté \strong{$\mathcal{U}(A)$} le \strong{groupe des inversibles} de $(A, \times)$.
+    \end{definition}
+    
+    \pagebreak
+    
+    \subsection{Règles de calcul}
+    
+    \begin{propositions}{Règles de calcul}{}
+    Soit $(A, +, \times)$ un anneau. $\forall x, y \in A$ et $\forall n \in \mathbb{Z}$ :
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item $0_A$ est \Strong{absorbant} : \strong{$x \times 0_A = 0_A \times x = 0_A$} ;
+        \item Règle des signes : \strong{$x \times (-y) = (-x) \times y = -(x \times y)$} ;
+        \item Itéré $n$-ème : \strong{$x \times (ny) = (nx) \times y = n(x \times y)$}.
+    \end{enumerate}
+    \end{propositions}
+    
+    \begin{demo}[Démonstrations]
+    Soit $(A, +, \times)$ un anneau. $\forall x, y \in A$ et $\forall n \in \mathbb{Z}$ :
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item $(x \times 0_A) + (x \times 0_A) = x \times (0_A + 0_A) = x \times 0_A \Leftrightarrow (x \times 0_A) + (x \times 0_A) - (x \times 0_A) = (x \times 0_A) - (x \times 0_A) \Leftrightarrow (x \times 0_A) + 0_A = 0_A \Leftrightarrow x \times 0_A = 0_A$. \textit{Mutatis mutandis}, on trouve que $0_A \times x = 0_A$.
+        \item $(x \times y) + \left(x \times (-y)\right) = x \times (y - y) = x \times 0_A = 0_A \Leftrightarrow (x \times y) + \left(x \times (-y)\right) - (x \times y) = 0_A - (x \times y) \Leftrightarrow x \times (-y) = -(x \times y)$. \textit{Mutatis mutandis}, on trouve que $(-x) \times y = -(x \times y)$.
+        \item $\mathcal{H}_n$ : $x \times (ny) = (nx) \times y = n(x \times y)$.\\
+        $\mathcal{H}_0$ est vraie : $x \times 0y = x \times 1_A = x = 1_A \times x = 0y \times x$.\\
+        Supposons que $\mathcal{H}_n$ soit vraie pour un certain rang $n$. Alors :
+        $$ x \times (n + 1)y = x \times (ny + y) = (x \times ny) + (x \times y) = n(x \times y) + (x \times y) = (n + 1)(x \times y) $$
+        Par un raisonnement analogue, on trouve que $(n + 1)x \times y = (n + 1)(x \times y)$.\\
+        Donc par récurrence $\mathcal{H}_n$ est vraie $\forall n \in \mathbb{N}$.\\
+        Par ailleurs, $x \times (-ny) = x \times -(ny) = -\left( x \times ny \right) = -n(x \times y)$. \textit{Mutatis mutandis}, on trouve que $(-nx) \times y = -n(x \times y)$.  Donc $\forall n \in \mathbb{Z}$, $\mathcal{H}_n$ est vraie.
+    \end{enumerate}
+    \end{demo}
+    
+    \begin{remarque}
+    Soit $(A, +, \times)$ un anneau. Si $1_A = 0_A$ alors $A = \{ 0_A \}$ et on dit que $A$ est un anneau nul ou trivial. En effet : $\forall x \in A$ : $x = x \times 1_A = x \times 0_A = 0_A$.
+    \end{remarque}
+    
+    \begin{propositions}{Distributivité généralisé}{AnneauDistribution}
+    Soient $(A, +, \times)$ un anneau, $a_1, ..., a_n, b_1, ..., b_m \in A$ et $n, m \in \mathbb{N}^*$. $\forall x \in A$ :
+    \begin{multicols}{2}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item \strong{$\displaystyle x \sum_{i = 1}^n a_i = \sum_{i = 1}^n x a_i$} et \strong{$\displaystyle \left(\sum_{i = 1}^n a_i\right) x = \sum_{i = 1}^n a_i x$} ;
+        \item \strong{$\displaystyle \left(\sum_{i = 1}^n a_i\right) \left(\sum_{i = 1}^m b_i\right) = \sum_{(i, j) \in \llbracket 1 ; n \rrbracket \times \llbracket 1 ; m \rrbracket} a_i b_j$}.
+    \end{enumerate}
+    \end{multicols}
+    \end{propositions}
+    
+    \begin{demo}[Démonstrations]
+    Soient $(A, +, \times)$ un anneau, $n, m \in \mathbb{N}^*$ et $a_1, ..., a_n, b_1, ..., b_m \in A$. $\forall x \in A$ :
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item $\mathcal{H}_n$ : $\displaystyle x \sum_{i = 1}^n a_i = \sum_{i = 1}^n x a_i$. $\mathcal{H}_1$ est vraie : $\displaystyle x \sum_{i = 1}^1 a_i = xa_1$.\\
+        Supposons que $\mathcal{H}_n$ soit vraie pour un certain rang $n$. Alors :
+        $$ \displaystyle x \sum_{i = 1}^{n+1} a_i = x \left(\sum_{i = 1}^n a_i + a_{n+1} \right) = \left(x \sum_{i = 1}^n a_i \right) + x a_{n+1} = \left(\sum_{i = 1}^n x a_i \right) + x a_{n+1} = \sum_{i = 1}^{n + 1} x a_i $$
+        Donc par récurrence $\mathcal{H}_n$ est vraie $\forall n \in \mathbb{N}^*$. \textit{Mutatis mutandis} $\forall n \in \mathbb{N}^* : \displaystyle \left(\sum_{i = 1}^n a_i\right) x = \sum_{i = 1}^n a_i x$.
+        \item Soit $m \in \mathbb{N}^*$ ; $\mathcal{H}_n$ : $\displaystyle \left(\sum_{i = 1}^n a_i\right) \left(\sum_{i = 1}^m b_i\right) = \sum_{(i, j) \in \llbracket 1 ; n \rrbracket \times \llbracket 1 ; m \rrbracket} a_i b_j$.\\
+         $\mathcal{H}_1$ est vraie : $\displaystyle \left(\sum_{i = 1}^1 a_i\right) \left(\sum_{i = 1}^m b_i\right) = a_1 \left(\sum_{i = 1}^m b_i\right) = \sum_{i = 1}^m a_1b_i\ = \sum_{(i, j) \in {1} \times \llbracket 1 ; m \rrbracket} a_i \times b_j$. \\
+         Supposons que $\mathcal{H}_n$ soit vraie pour un certain rang $n$. Alors :
+         \begin{align*}
+             \left(\sum_{i = 1}^{n+1} a_i\right) \left(\sum_{i = 1}^m b_i\right) &= \left(\sum_{i = 1}^n a_i + a_{n + 1}\right) \left(\sum_{i = 1}^m b_i\right) =  \left(\sum_{i = 1}^n a_i\right) \left(\sum_{i = 1}^m b_i\right) + a_{n+1} \left(\sum_{i = 1}^m b_i\right) \\
+             & = \sum_{(i, j) \in \llbracket 1 ; n \rrbracket \times \llbracket 1 ; m \rrbracket} a_i b_j + \sum_{i = 1}^m a_{n+1}b_i = \sum_{(i, j) \in \llbracket 1 ; n+1 \rrbracket \times \llbracket 1 ; m \rrbracket} a_i b_j
+         \end{align*}
+         Donc par récurrence $\mathcal{H}_n$ est vraie $\forall n \in \mathbb{N}^*$.
+    \end{enumerate}
+    \end{demo}
+    
+    \begin{remarque}Soient $(A, +, \times)$ un anneau, $n \in \mathbb{N}^*$ et $a_1, ..., a_n \in A$.\\
+    D'après la proposition \ref{props:AnneauDistribution} page \pageref{props:AnneauDistribution}, on a en particulier : $\displaystyle \left( \sum_{i = 1}^n a_i \right)^2 = \sum_{i = 1}^n {a_i}^2 + \sum_{(i, j) \in \llbracket 1 ; n \rrbracket^2, i \neq j} a_ia_j$.\\
+    Par ailleurs si $\times$ est commutative sur $\{a_i\}_{0 \leqslant i \leqslant n}$ : $\displaystyle \left( \sum_{i = 1}^n a_i \right)^2 = \sum_{i = 1}^n {a_i}^2 + 2 \sum_{1 \leqslant i < j \leqslant n} a_ia_j$.
+    \end{remarque}
+    
+    \begin{propositions}{Identités remarquables}{}
+    Soit $(A, +, \times)$ un anneau et $a, b \in A$ tels que $ab = ba$ :
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item\label{AnneauIdRemarquables1} $\displaystyle \forall n \in \mathbb{N} : \strong{(a + b)^n = \sum_{k = 0}^n \binom{n}{k}\, a^k b^{n-k}}$ ;
+        \item\label{AnneauIdRemarquables2} $\displaystyle \forall n \in \mathbb{N}^* : \strong{a^n - b^n = (a - b)\sum_{k = 0}^{n-1} a^kb^{n-1-k} = \left(\sum_{k = 0}^{n-1} a^kb^{n-1-k}\right) (a - b)}$.
+    \end{enumerate}
+    \end{propositions}
+    
+    \begin{demo}[Démonstrations]
+    Ces relations se démontrent de la même manière que pour le cas particulier de l'anneau usuel $(\mathbb{C}, +, \times)$ en prêtant attention à l'utilisation de la propriété de commutativité de $a$ et de $b$. La proposition \ref{AnneauIdRemarquables1} se démontre par récurrence et la \ref{AnneauIdRemarquables2} par récurrence ou télescopage.
+    \end{demo}
+    
+    
+    \subsection{Anneaux intègres}
+    
+    \begin{definition}{Anneau intègre}{}
+    Soit $(A, +, \times)$ un anneau non nul.\\
+    On dit que $(A, +, \times)$ est \Strong{intègre} lorsque $\forall x, y \in A$ : \strong{$xy = 0_A \Rightarrow x = 0_A$ ou $y = 0_A$}.\\
+    D'après le programme officiel, un anneau intègre doit aussi être \strong{commutatif}.
+    \end{definition}
+    
+    \begin{definition}{Nilpotence (complément)}{}
+    Soit $(A, +, \times)$ un anneau et $x \in A^*$. On dit que $x$ est \Strong{nilpotent} lorsque $\exists n \in \mathbb{N}^*$ tel que \strong{$x^n = 0_A$}.
+    \end{definition}
+    
+    
+    
+    \begin{proposition}{Régularité d'un anneau intègre}{}
+    Tout \strong{élément non nul} d'un anneau intègre est \strong{régulier}.
+    \end{proposition}
+    
+    \begin{demo}
+    Soit $(A, +, \times)$ un anneau intègre et $a, b, c \in A, a \neq 0_A$, alors :
+    $$ ab = ac \Rightarrow ab - ac = 0_A \Rightarrow a(b - c) = 0_A \Rightarrow a = 0_A \text{ (impossible) ou } b - c = 0_A \Rightarrow b = c $$
+    \textit{Mutatis mutandis}, $ba = ca \Rightarrow b = c$.
+    \end{demo}
+    
+    \begin{remarque}
+    L'anneau $\left(\mathbb{Z}/n\mathbb{Z}, +, \times\right)$ est intègre si, et seulement si, $n$ est premier.
+    \end{remarque}
+    
+    \begin{demo}
+    Soit l'anneau $\left(\mathbb{Z}/n\mathbb{Z}, +, \times\right)$.
+    \begin{itemize}[label=\mathversion{bold}$\cdot$]
+        \item Si $n$ est premier, alors d'après le lemme d'Euclide pour $a, b \in \mathbb{Z}$ : $n\mid ab \Rightarrow n \mid a$ ou $n \mid b$.\\
+        Or, $\forall x, y \in \mathbb{Z}/n\mathbb{Z}, \exists a, b \in \mathbb{Z}$ tels que $x = \overline{a}$ et $y = \overline{b}$.\\
+        Donc, $\left( n \mid ab \Leftrightarrow xy = \overline{0} \right) \Rightarrow \left( n \mid a \Leftrightarrow x = \overline{0} \text{ ou } n \mid b \Leftrightarrow y = \overline{0}\right)$. D'où $\left(\mathbb{Z}/n\mathbb{Z}, +, \times\right)$ est intègre.
+        \item Si $n$ est composé, alors $\exists a, b \in \llbracket 2 ; n - 1 \rrbracket$ tels que $n = ab$.\\
+        Donc $\overline{a}, \overline{b} \in \left(\mathbb{Z}/n\mathbb{Z}\right)^*$ et $\overline{a}\overline{b} = \overline{ab} = \overline{n} = 0$. D'où $\left(\mathbb{Z}/n\mathbb{Z}, +, \times\right)$ n'est pas intègre.
+    \end{itemize}
+    \end{demo}
+    
+    \pagebreak
+    
+    \subsection{Corps}
+
+    \begin{definition}{Corps}{}
+    Un \Strong{corps} est un \strong{anneau commutatif} dont tout élément non nul est \strong{inversible}.
+    \end{definition}
+    
+    \begin{remarque}
+    Soit $(K, +, \times)$ un corps, alors $\mathcal{U}(K) = K^*$.
+    \end{remarque}
+    
+    \begin{proposition}{Intégrité d'un corps}{}
+    Un \strong{corps} est un \strong{anneau intègre}.
+    \end{proposition}
+    
+    \begin{demo}
+    Soit $(K, +, \times)$ un corps et $x, y \in K$ tels que $xy = 0_K$ :\\
+    Si par exemple $x \neq 0$ alors $x$ est inversible et $y = x^{1}xy = x^{-1}0_K = 0_K$. Donc $(K, +, \times)$ est intègre.
+    \end{demo}
+    
+    
+    \subsection{Sous-anneaux}
+    
+    \begin{definition}{Sous-anneau}{}
+    Soit $(A, +, \times)$ un anneau et \strong{$B \subset A$}.\\
+    On dit que $B$ est un \Strong{sous-anneau} de $(A, +, \times)$ si \strong{$B \neq \varnothing$} et que :
+    \begin{multicols}{2}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item \strong{$(B, +)$} est un \strong{sous-groupe} de $(A, +)$ ;
+        \item \strong{$B$ est stable par $\times$} (produit) ;
+        \item \strong{$1_A \in B$}.
+    \end{enumerate}
+    \end{multicols}
+    \end{definition}
+    
+    \begin{remarque}[Remarques]
+    Soient $(A, +, \times)$ un anneau et $B$ un sous-anneau :
+    \begin{itemize}[label=\mathversion{bold}$\cdot$]
+        \begin{multicols}{2}
+        \item Alors $(B, +, \times)$ est un anneau ;
+        \item Si $(A, +, \times)$ est intègre, alors $(B, +, \times)$ aussi ;
+        \end{multicols}
+    \end{itemize}
+    \end{remarque}
+    
+    \begin{definition}{Sous-corps}{}
+    Soit $(K, +, \times)$ un corps et \strong{$L \subset K$}. On dit que $L$ est un \Strong{sous-corps} de $(K, +, \times)$ si :
+    \begin{multicols}{2}
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item $L$ est un \strong{sous-anneau} ;
+        \item $L^*$ est \strong{stable par passage à l'inverse}.
+    \end{enumerate}
+    \end{multicols}
+    \end{definition}
+    
+    \begin{proposition}{Intersection de sous-anneaux}{}
+    Une \strong{intersection de sous-anneaux} est un \strong{anneau}.
+    \end{proposition}
+    
+    \begin{demo}
+    Soient $(A, +, \times)$ un anneau et pour $n \in \mathbb{N}$, $B_1, ..., B_n$ $n$ sous-anneaux.
+    \begin{itemize}[label=\mathversion{bold}$\cdot$]
+        \item $\displaystyle \bigcap_{i = 1}^n B_i$ est un sous-groupe de $(A, +)$ d'après la proposition \ref{prop:IntersectionSsGroupes} page \pageref{prop:IntersectionSsGroupes} ;
+        \item Soient $\displaystyle x, y \in  \bigcap_{i = 1}^n B_i$ donc $\displaystyle x \times y \in  \bigcap_{i = 1}^n B_i$ car $x \times y \in B_i$ étant donné que $B_i$ est un sous-anneau ;
+        \item $\displaystyle 1_A \in \bigcap_{i = 1}^n B_i$ car $\forall i \in \llbracket 1 ; n \rrbracket : 1_A \in B_i$.
+    \end{itemize}
+    \end{demo}
+    
+    
+    \subsection{Morphisme d'anneaux}
+    
+    \begin{definition}{Morphisme d'anneaux}{}
+    Soient $(A, +, \times)$ et $(B, \oplus, \otimes)$ deux anneaux et $f : A \rightarrow B$. $f$ est un \Strong{morphisme d'anneaux} si :
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item $f$ est un \strong{morphisme de groupes de $(A, +)$ dans $(B, \oplus)$} ;
+        \item $f$ est un \strong{morphisme de $(A, \times)$ dans $(B, \otimes)$} ;
+        \item \strong{$1_B = f(1_A)$}.
+    \end{enumerate}
+    \end{definition}
+    
+    \begin{remarque}
+    Tout comme pour les morphismes de groupes, on parle d'isomorphismes, d'endomorphismes, d'automorphismes d'anneaux.
+    \end{remarque}
+    
+    \begin{proposition}{Sous-anneaux liés par un morphisme}{}
+    Soient $(A, +, \times)$ et $(B, \oplus, \otimes)$ deux anneaux et \strong{$f : A \rightarrow B$ un morphisme} d'anneaux.\\
+    Alors \strong{$f(A)$ est un sous-anneau} de $B$.
+    \end{proposition}
+    
+    \begin{demo}
+    Soient $(A, +, \times)$ et $(B, \oplus, \otimes)$ deux anneaux et $f : A \rightarrow B$ un morphisme d'anneaux.
+    \begin{itemize}[label=\mathversion{bold}$\cdot$]
+        \item D'après la proposition \ref{props:SsGroupesImagesReciproques} page \pageref{props:SsGroupesImagesReciproques} $f(A)$ est un sous-groupe de $(B, +)$.
+        \item Soient $x, y \in A$ alors $f(x) \otimes f(y) = f(x \times y) \in f(A)$. Or, $f$ est surjective de $A$ dans $f(A)$ donc $\forall a, b \in f(A)$ $\exists x, y \in A$ tels que $f(x) = a$ et $f(y) = b$, d'où $a \otimes b \in f(A)$.
+        \item $1_B = f(1_A)$ car $f$ est un morphisme d'anneaux. Or $1_A \in A$ donc $1_B = f(1_A) \in f(A)$.
+    \end{itemize}
+    \end{demo}
+
+    \pagebreak
+
+\section*{Démonstrations}
+\addcontentsline{toc}{section}{Démonstrations}
+
+    \begin{demonstration}{PropInverses}
+    Soient $(E, \star)$ un monoïde et $x, a, b \in E$ tels que :
+    \begin{align*}
+        x \star a &= x \star b
+        & a \star x &= b \star x \\
+        x^{-1} \star (x \star a) &= x^{-1} \star (x \star b)
+        & (a \star x) \star x^{-1} &= (b \star x) \star x^{-1} \\
+        \left(x^{-1} \star x\right) \star a &= \left(x^{-1} \star x\right) \star a
+        & a \star \left(x \star x^{-1}\right) &= b \star \left(x \star x^{-1}\right) \\
+        e \star a &= e \star b
+        & a \star e &= b \star e \\
+        a &= b
+        & a &= b
+    \end{align*}
+    \end{demonstration}
+
+    \begin{demonstration}{UniInverse}
+    Soient $(E, \star)$ un monoïde, $e$ son neutre et $x, y, y' \in E$ tels que $y$ et $y'$ sont deux inverses de $x$, alors : $ y = e \star y = (y' \star x) \star y = y' \star (x \star y) = y' \star e = y' $
+    \end{demonstration}
+    
+    \begin{demonstration}{InverseLCI}
+    Soient $(E, \star)$ un monoïde de neutre $e$ et $x, y \in E$, deux éléments inversibles.
+    $$  (x \star y) \star \left(y^{-1} \star x^{-1}\right) = x \star \left(y \star y^{-1}\right) \star x^{-1} = x \star e \star x^{-1} = x \star x^{-1} = e $$
+    $$ \left(y^{-1} \star x^{-1}\right) \star (x \star y) = y^{-1} \star \left(x^{-1} \star x\right) \star y = y^{-1} \star e \star y = y^{-1} \star y = e $$
+    \end{demonstration}
+    
+    \begin{demonstration}{CommutInverses}
+    Soit $(E, \star)$ un monoïde de neutre $e$ et $x, y \in E$ deux éléments inversibles tels que $x \star y = y \star x$ :
+    \begin{align*}
+        \text{\ref{PropInvCom1}} \qquad y \star x &= x \star y 
+        & \text{\ref{PropInvCom2}} \qquad y \star x^{-1} &= x^{-1} \star y \\
+        x^{-1} \star (y \star x) \star x^{-1} &= x^{-1} \star (x \star y) \star x^{-1}
+        & y^{-1} \star \left(y \star x^{-1}\right) \star y^{-1} &= y^{-1} \star \left(x^{-1} \star y\right) \star y^{-1} \\
+        \left(x^{-1} \star y\right) \star \left(x \star x^{-1}\right) &= \left(x^{-1} \star x\right) \star \left(y \star x^{-1}\right)
+        & \left(y^{-1} \star y\right) \star \left(x^{-1} \star y^{-1}\right) &= \left(y^{-1} \star x^{-1}\right) \star \left(y \star y^{-1}\right) \\
+        \left(x^{-1} \star y\right) \star e &= e \star \left(y \star x^{-1}\right)
+        & e \star \left(x^{-1} \star y^{-1}\right) &= \left(y^{-1} \star x^{-1}\right) \star e \\
+        x^{-1} \star y &= y \star x^{-1}
+        & x^{-1} \star y^{-1} &= y^{-1} \star x^{-1}
+    \end{align*}
+    \end{demonstration}
+    
+    \begin{demonstration}{PropIteres}
+    Soit $(E, \star)$ un monoïde de neutre $e$ et $x \in E$.
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item $\mathcal{H}_m$ : $\forall n \in \mathbb{N}, x^{n + m} = x^n \star x^m$.\\
+        $\mathcal{H}_0$ est vraie : $\forall n \in \mathbb{N}, x^{n + 0} = x^n = x^n \star e = x^n \star x^0$.\\
+        Supposons $\mathcal{H}_m$ vraie pour un certain rang $m$ :
+            $$ \forall n \in \mathbb{N}, x^{n + (m + 1)} = x^{(n + m) + 1} = x^{n + m} \star x = \left(x^n \star x^m\right) \star x = x^n \star \left(x^m \star x\right) = x^n \star x^{m + 1} $$
+        Donc par récurrence, $\forall m \in \mathbb{N}$, $\mathcal{H}_m$ est vraie.\\
+        Par ailleurs, $\forall n, m \in \mathbb{N}$ : $x^n \star x^m = x^{n + m} = x^{m + n} = x^m \star x^n$.
+        
+        \item $\mathcal{H}_m$ : $\forall n \in \mathbb{N}, x^{nm} = \left(x^n\right)^m$.\\
+        $\mathcal{H}_0$ est vraie : $\forall n \in \mathbb{N}, x^{n \times 0} = x^0 = e = \left(x^n\right)^0$.\\
+        Supposons $\mathcal{H}_m$ vraie pour un certain rang $m$ :
+            $$ \forall n \in \mathbb{N}, x^{n(m + 1)} = x^{nm + n} = x^{nm} \star x^n = \left(x^n\right)^m \star x^n = \left(x^n\right)^{m + 1} $$
+        Donc par récurrence, $\forall m \in \mathbb{N}$, $\mathcal{H}_m$ est vraie.\\
+        Par ailleurs, $\forall n, m \in \mathbb{N}$ : $\left(x^n\right)^m = x^{nm} = x^{mn} = \left(x^m\right)^n$.
+    \end{enumerate}
+    \end{demonstration}
+    
+    \begin{demonstration}{PropIteresCom}
+    Soit $(E, \star)$ un monoïde de neutre $e$ et $x, y \in E$ tels que $x \star y = y \star x$.
+    \begin{enumerate}[label=\bfseries\arabic*)]
+        \item\label{iteres1} $\mathcal{H}_n$ : $x^n \star y = y \star x^n$.\\
+        $\mathcal{H}_0$ est vraie : $x^0 \star y = e \star y = y \star e = y \star x^0$. \\
+        Supposons $\mathcal{H}_n$ vraie pour un certain rang $n$ :
+        $$ x^{n + 1} \star y = \left(x^n \star x\right) \star y = n^n \star (x \star y) = x^n \star (y \star x) = \left(x^n \star y\right) \star x = \left(y \star x^n\right) \star x = y \left(x^n \star x\right) = y \star x^{n + 1} $$
+        Donc par récurrence, $\forall n \in \mathbb{N}$, $\mathcal{H}_n$ est vraie.
+        
+        \item D'après \ref{iteres1}, $\forall m \in \mathbb{N}, x \star y^m = y^m \star x$ (en inversant $x$ et $y$ et en prenant $m$ à la place de $n$).\\
+        Toujours d'après \ref{iteres1} en considérant que $x$ et $y^m$ commutent, on a $\forall n \in \mathbb{N}, x^n \star y^m = y^m \star x^n$.
+        
+        \item $\mathcal{H}_n$ : $(x \star y)^n = x^n \star y^n$.\\
+        $\mathcal{H}_0$ est vraie : $(x \star y)^0 = e = e \star e = x^0 \star y^0$. \\
+        Supposons $\mathcal{H}_n$ vraie pour un certain rang $n$ :
+        \begin{align*}
+            &(x \star y)^{n + 1} = (x \star y)^n \star (x \star y) = \left(x^n \star y^n\right) \star (x \star y) = x^n \star \left(y^n \star x\right) \star y = x^n \star \left(x \star y^n\right) \star y \\
+            &(x \star y)^{n + 1} = \left(x^n \star x\right) \star \left(y^n \star y\right) = x^{n + 1} \star y^{n + 1}
+        \end{align*}
+        Donc par récurrence, $\forall n \in \mathbb{N}$, $\mathcal{H}_n$ est vraie.
+    \end{enumerate}
+    \end{demonstration}
+    
+    \begin{demonstration}{InverseItere}
+    Soit $(E, \star)$ un monoïde de neutre $e$, $n \in \mathbb{N}$ et $x \in E$ tel que $x$ est inversible, donc $x \star x^{-1} = x^{-1} \star x = e$, alors :
+    $$ x^{-n} \star x^n = \left(x^{-1}\right)^n \star x^n = \left(x^{-1} \star x\right)^n = e^n = e $$
+    $$ x^n \star x^{-n} = x^n \star \left(x^{-1}\right)^n = \left(x \star x^{-1}\right)^n = e^n = e $$
+    \end{demonstration}
+    
+    \begin{demonstration}{GrpInvers}
+    Soient $(E, \star)$ un monoïde de neutre $e$ et $G$ l'ensemble des inversibles de $E$.
+    \begin{itemize}[label=\mathversion{bold}$\cdot$]
+        \item $\star$ est une LCI commutative sur $G$ : $\forall x, y \in G$, $\forall z \in E$ :\\
+        $(x \star y) \star z = x \star (y \star z) = x \star (z \star y) = (x \star z) \star y = (z \star x)  \star y = z \star (x \star y)$, donc $(x \star y) \in G$ ;
+        \item $e \in G$ : $\forall x \in E$ : $x \star e = e \star x$ ;
+        \item Par définition de $G$, chaque élément de $G$ est inversible.
+    \end{itemize}
+    \end{demonstration}
+    
+    \begin{demonstration}{CaracSsGrp}
+    Soient $(G, \star)$ groupe, $H \subset G$.
+    \begin{itemize}
+        \item[$\Rightarrow$] Supposons que $H$ soit stable par $\star$ et par passage à l'inverse.\\
+        Alors $\forall x \in H, x^{-1} \in H$ et $\forall x, y \in H, x^{-1} \star y \in H$.
+        \item[$\Leftarrow$] Supposons que $\forall x, y \in H, x^{-1} \star y \in H$.\\
+        Alors $x^{-1} \star x = e \in H$ et donc $x^{-1} \star e = x^{-1} \in H$. Ainsi $\left(x^{-1}\right)^{-1} \star y = x \star y \in H$.
+    \end{itemize}
+    \end{demonstration}
+    
+    \begin{demonstration}{SsGrpIteres}
+    Soient $(G, \star)$ un groupe, $(H, \star)$ un sous-groupe et $x \in H$.\\
+    $\mathcal{H}_n$ : $x^n \in H$.\\
+    $\mathcal{H}_0$ est vraie : $x^0 = e \in H$.\\
+    Supposons que $\mathcal{H}_n$ soit vraie pour un certain rang $n$, alors : $ x^n \star x = x^{n + 1} \in H $.\\
+    Donc par récurrence $\forall n \in \mathbb{N}$, $\mathcal{H}_n$ est vraie.\\
+    Par ailleurs, $x^{-1} \in H$, donc $\forall n \in \mathbb{N}, \left(x^{-1}\right)^n = x^{-n} \in H$.
+    \end{demonstration}
+    
+    \begin{demonstration}{IntersectionSsGroupes}
+    Soient $(G, \star)$ et pour $n \in \mathbb{N}$, $(H_1, \star), ..., (H_n, \star)$ $n$ sous-groupes.\\
+    Alors $\displaystyle \forall x, y \in \bigcap_{i = 1}^n H_i$, on a $\forall i \in \llbracket 1 ; n \rrbracket, x, y \in H_i$ donc $x^{-1} \star y \in H_i$ (car $H_i$ est un sous-groupe).\\
+    Donc $\displaystyle \forall x, y \in \bigcap_{i = 1}^n H_i, x^{-1} \star y \in \bigcap_{i = 1}^n H_i$. D'où $\displaystyle \left(\bigcap_{i = 1}^n H_i, \star\right)$ est un sous-groupe.
+    \end{demonstration}
+    
+    \begin{demonstration}{SsGrpEngendre}
+     Soient $(G, \star)$ un groupe, $x \in G$ et $(\text{gr}(x), \star)$ le sous-groupe engendré par $\lbrace x \rbrace$.\\
+     On a $x \in \text{gr}(x)$. Or, $\text{gr}(x)$ est un sous-groupe. Donc $\forall n \in \mathbb{Z}, x^n \in \text{gr}(x)$, d'où $\left\lbrace x^n \,\middle|\, n \in \mathbb{Z} \right\rbrace \subset \text{gr}(x)$.\\
+     De plus, $x \in \left\lbrace x^n \,\middle|\, n \in \mathbb{Z} \right\rbrace$ et $\forall y, z \in \left\lbrace x^n \,\middle|\, n \in \mathbb{Z} \right\rbrace$, $\exists m, n \in \mathbb{Z}$, $y = x^m$ et $z = x^n$.\\
+     D'où $y^{-1} \star z = x^{-m} \star x^n = x^{n-m} \in \left\lbrace x^n \,\middle|\, n \in \mathbb{Z} \right\rbrace$, donc $\left\lbrace x^n \,\middle|\, n \in \mathbb{Z} \right\rbrace$ est un sous-groupe qui contient $x$.\\
+     Donc $\text{gr}(x) \subset \left\lbrace x^n \,\middle|\, n \in \mathbb{Z} \right\rbrace$. D'où par double inclusion : $\text{gr}(x) = \left\lbrace x^n \,\middle|\, n \in \mathbb{Z} \right\rbrace$.
+    \end{demonstration}
+
+\end{document}
