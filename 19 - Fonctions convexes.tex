@@ -1,0 +1,225 @@
+\documentclass[12pt,a4paper]{report}
+\input{00 - preambule}
+
+\begin{document}
+
+\chapter{Fonctions convexes}
+
+\begin{definition}{Fonction convexe}{}
+Soit $I$ un intervalle de $\R$, $f:I \to \R$ pour $a,b \in I$ avec $a<b$\\
+On note $U_{ab}$ la fonction affine qui coïncide avec $f$ en $a$ et en $b$\\
+On dit que $f$ est convexe lorsque :
+\begin{center}
+    \textbox{$\forall a,b\in I$, avec $a<b$, $\forall t \in [a,b]$, $f(t) \leq U_{ab} (t)$}
+\end{center}
+\end{definition}
+
+\begin{remarque}[Illustration]
+\begin{center}
+\begin{tikzpicture}
+\begin{axis}[width=5in,axis equal image,
+    axis lines=middle,
+    xmin=0,xmax=8,
+    xlabel=$x$,ylabel=$y$,
+    ymin=-0.25,ymax=4,
+    xtick={\empty},ytick={\empty}, axis on top
+]
+
+\addplot[thick,domain=0.25:7,blue,name path = A]  {-x/3 + 2.75} coordinate[pos=0.4] (m) ;
+\draw[thick,blue, name path =B] (0.15,4) .. controls (1,1) and (4,0) .. (6,2) node[pos=0.95, color=black, right]  {$f(x)$} coordinate[pos=0.075] (a1)  coordinate[pos=0.95] (a2);
+\path [name intersections={of=A and B, by={a,b}}];
+
+
+\draw[densely dashed] (0,0) -| node[pos=0.5, color=black, label=below:$a$] {}(a);
+\draw[densely dashed] (0,0) -|node[pos=0.5, color=black, label=below:$b$] {}(b);
+
+
+\end{axis}
+\end{tikzpicture}
+\end{center}
+\end{remarque}
+
+\begin{theoreme}{}{}
+Soit $f: I \to \R$\\
+$f$ est convexe $\Longleftrightarrow$ $\forall x, y \in I, \forall t \in [0,1], \mathbox{f(tx+(1-t)y)\leq tf(x)+(1-t)f(y)}$
+\end{theoreme}
+
+\begin{demo}
+$\Longleftarrow$ Soient $a,b \in I$, avec $a<b$. Montrer que : $\forall x \in [a,b], f(x) \le U_{ab}(x)$. \\
+Soit $x \in [a,b], x$ s'écrit $x = ta + (1-t)b$ avec $t \in [0,1]$. ($t = \frac{b-x}{b-a}$) \\
+$\forall z \in \R, U_{ab}(z) = \alpha z + \beta$ avec $U_{ab}(a) = f(a), U_{ab}(b) = f(b)$. \\
+\begin{align*}
+U_{ab}(x) &= U_{ab}(ta+(1-t)b) \\
+&= \alpha(ta+(1-t)b)+\beta \\
+&= \alpha(ta + (1-t)b) + (t+(1-t))\beta \\
+&= t(\alpha a + \beta) + (1-t) (\alpha b + \beta) \\
+&= tU_{ab}(a) + (1-t)U_{ab}(b) \\
+&= tf(a) + (1-t)f(b) \\
+&\geq f(ta+(1-t)b) =f(x)
+\end{align*}
+
+$\Longrightarrow$ Soient $x,y \in I, t \in [0,1]$, montrer que $f(tx+(1-t)y) \le tf(x) + (1-t)f(y)$. \\
+\begin{itemize}
+	\item C'est vrai si $\strong{x=y}$.
+	\item Si $\strong{x < y}$, $z = tx+(1-t)y = y - t(y-x) \in [x,y]$ \\
+		On a $f(z) \le U_{xy}(tx+(1-t)y) = t U_{xy}(x) + (1-t)U_{xy}(y)$ (car $U_{xy}$ est affine) donc \\
+		$f(z) \le tf(x) + (1-t)f(y)$.
+	\item Si $\strong{x>y}$, idem.
+\end{itemize}
+\end{demo}
+
+\begin{theoreme}{Inégalité des 3 pentes \footnotemark}{}
+Soit $f:I\to \R$\\
+$f$ est convexe $\Longleftrightarrow$ Pour tout $(x,y,z)\in I^3$, avec $x<y<z$ : $\dfrac{f(y)-f(x)}{y-x}\leq \dfrac{f(z)-f(x)}{z-x} \leq \dfrac{f(z)-f(y)}{z-y}$
+\end{theoreme}
+
+\footnotetext{Le mot pente a subi la transformée de Sellès... c'est bien pente, pas \textit{peute} ... ça peut vite déraper !}
+
+\begin{remarque}[Illustration]
+\begin{center}
+Graphique à venir ...
+\end{center}
+\end{remarque}
+
+\begin{demo}
+$\Longleftarrow$ \textit{Left to the reader !} \\
+$\Longrightarrow$ Soient $x,y,z \in I$, avec $x<y<z$. On écrit $y = tx + (1-t)z$ avec $t \in [0,1]$ ($t = \frac{z-y}{z-x}$ et $1-t = \frac{y-x}{z-x}$). \\
+$f$ est convexe donc $f(y) = f(tx+(1-t)z) \le tf(x) + (1-t)f(z)$ \footnotemark \\
+D'où $ f(y)-f(z) \le t(f(x)-f(z))$ \ie $f(y)-f(z) \le \frac{z-y}{z-x}(f(x)-f(z))$. \\
+D'où ($z-y>0$) : $\frac{f(y)-f(z)}{z-y} \le \frac{f(x)-f(z)}{z-x}$ et enfin $\frac{f(z)-f(y)}{z-y} \ge \frac{f(z)-f(x)}{z-x}$. \\
+
+D'autre part, $f(y)-f(x) \le tf(x) + (1-t)f(z) - f(x)$ \ie $f(x)-f(y) \le (1-t)(f(z)-f(x)) = \frac{y-x}{z-x}(f(z)-f(x))$. \\
+Puis ($y-x>0$) : $\frac{f(y)-f(x)}{y-x} \le \frac{f(z)-f(x)}{z-x}$.
+\end{demo}
+
+\footnotetext{M. Sellès qui s'emmêle les pinceaux... \textit{"A une lettre près, c'était correct"}. Olivier S. toujours dans la rigueur mathématique.}
+
+\begin{theoreme}{Fonctions convexes dérivables}{}
+$f:I\to \R$ dérivable\\
+Les affirmations suivantes sont équivalentes - \textit{LASSE}:
+\begin{enumerate}
+    \item $f$ est convexe
+    \item $f'$ est croissante
+    \item $\forall x_0 \in I, \mathbox{\forall x \in I, f(x) \geq f(x_0)+f'(x_0)(x-x_0)}$ 
+\end{enumerate}
+\end{theoreme}
+
+\begin{demo}
+\textbf{1)}$\Longrightarrow$ \textbf{2)}\footnotemark : \\
+\\
+Soient $a,b \in I$ avec $a<b$, montrons que : $f'(a)\leq f'(b)$\\
+Pour $n\in \N^*$,
+\begin{center}
+    $a_n = a+ \dfrac{b-a}{2n}$ et $b_n = b- \dfrac{b-a}{2n}$
+\end{center} 
+On a $a_n,b_n \in I$, $a<a_n<b_n<b$, pour $n\geq 2$
+\begin{center}
+    $a_n \to a$ \: \: \: \: \: \:$b_n \to b$
+\end{center}
+On a (\textit{cf} Théorème sur l'inégalité des 3 pentes) :
+\begin{center}
+    $\dfrac{f(a_n)-f(a)}{a_n - a} \leq \dfrac{f(b_n)-f(a_n)}{b_n - a_n} \leq \dfrac{f(b)-f(b_n)}{b - b_n}$
+\end{center}
+\textsc{Donc, $\forall n \geq 2$ :}
+\begin{center}
+    $\underbrace{\dfrac{f(a_n)-f(a)}{a_n - a}}_{\xrightarrow[n \to + \infty]{}f'(a)}\leq \dfrac{f(b)-f(b_n)}{b - b_n} = \underbrace{\dfrac{f(b_n)-f(b)}{b_n - b}}_{\xrightarrow[n \to + \infty]{}f'(b)}$
+\end{center}
+Par conservation des inégalités larges par passage à la limite : \textbox{$f'(a)\leq f'(b)$} \\ 
+
+\textbf{2)}$\Longrightarrow$ \textbf{3)} : \\
+Soit $x_0 \in I$. Soit $g = x \in I \mapsto f(x)-(f(x_0)+f'(x_0)(x-x_0))$. \\
+Il est clair que $g$ est dérivable sur $I$ et $\forall x \in I, g'(x) = f'(x)-f'(x_0)$. \\
+Pour $\strong{x \ge x_0}$, comme $f'$ est croissante, $g'(x)\ge 0$. \\
+Pour $\strong{x \le x_0}$, $g'(x) \le 0$. \\ \\
+\textit{Un magnifique tableau de variation à venir de la part du merveilleux vénéré \textsc{M. Shi}...} \\ \\
+On voit que $g$ admet un minimum en $x_0 \Longrightarrow \forall x \in I, g(x) \ge g(x_0) = 0$. \\
+
+\textbf{3)}$\Longrightarrow \textbf{1)}$ : \\
+Soient $x,y \in I, t \in [0,1]$. Montrer que : $f(tx+(1-t)y) \le tf(x)+(1-t)f(y)$. \\
+Notons $x_0 = tx+(1-t)y$. \\
+On a : $\strong{f(x) \ge f(x_0) + (x-x_0)f'(x_0)}$ \\
+$\strong{f(y) \ge f(x_0) + (y-x_0)f'(x_0)}$. \\
+D'où, puisque $t \ge 0$ et $1-t \ge 0$ : \\
+\begin{align*}
+tf(x) + (1-t)f(y) &= tf(x_0) + (1-t)f(x_0) + t(x-x_0)f'(x_0) + (1-t)(t-x_0)f'(x_0) \\
+&= f(x_0) + f'(x_0)(tx-tx_0 + y -x_0 - ty + tx_0) \\
+&= f(x_0) + f'(x_0).
+\end{align*}
+\end{demo}
+
+\footnotetext{Démonstration inédite proposée par \textit{O.S.}}
+
+\begin{corollaire}{Lien entre signe de la dérivée seconde et convexité de la fonction}{ConvSignef''}
+Soit $f : I \to \R$ deux fois dérivable. Alors : $f$ convexe $\Longleftrightarrow \forall t \in I, f''(t) \ge 0$.
+\end{corollaire}
+
+\begin{exemple}[Exemples]{}
+\begin{enumerate}
+	\item $t \in \R \overset{f}{\mapsto} e^t$ est convexe ($f$ est de classe $\mathcal{C}^{\infty}$ et $\forall t, f''(t) = e^t >0$).
+	\item $t \in \R_+^*$ est concave \footnotemark
+	\item Soit $\alpha \in \R, p_\alpha : t \in \R_+^* \mapsto t^\alpha \in \R$ est de classe $\mathcal{C}^\infty$. \\
+		Pour $t >0, p_\alpha''(t) = \alpha(\alpha-1)\underbrace{t^{\alpha-2}}_{>0}$. \\
+		Donc pour $0 \le \alpha \le 1$, $p_\alpha$ est concave.
+		Pour $\alpha \ge 1$ ou $\alpha \le 0$, $p_{\alpha}$ est convexe.
+	\item $f : t \in [0,\frac{\pi}{2}] \mapsto \sin t \in \R$. \\
+		$f$ est de classe $\mathcal{C}^\infty$ et $\forall t \in [0,\frac{\pi}{2}], f''(t) = - \sin t \le 0$ donc $f$ est concave.
+\end{enumerate}
+\end{exemple}
+
+\begin{application}{}{}
+\begin{enumerate}
+	\item $t \overset{f}{\mapsto} e^t$ est convexe donc $\forall t \in \R, e^t \ge e^0 + f'(0)(t-0) \ie \mathbox{e^t \ge 1+t}$
+	\item \textbf{Inégalité de Young} \\ \\
+		Soient $p,q \in \R_+^*$ tels que $\dfrac{1}{p} + \dfrac{1}{q}=1$. Alors, pour $a,b \in \R_+$, \mathbox{ab \le \dfrac{a^p}{p} + \dfrac{b^q}{q}}.
+		\begin{demo}
+			C'est vrai si $a=0$ ou $b=0$.
+			Si $a,b \in \R_+^*, a = e^{\ln a} = e^{\frac{1}{p}\ln(a^p)}, b = e^{\ln b} = e^{\frac{1}{q}\ln(b^q)}$.
+			Donc  : 
+			\begin{align*}
+			ab &= \exp \left(\dfrac{1}{p}\ln(a^p) + \left(1-\dfrac{1}{p}\ln(b^q)\right)\right) \\
+			&\le \dfrac{1}{p}\exp(\ln(a^p)) + \left(1-\dfrac{1}{p}\right)\exp(\ln b^q) \\
+			&= \dfrac{a^p}{p} + \dfrac{b^q}{q}
+			\end{align*}
+		\end{demo}
+	\item $\sin$ est concave sur $[0,\frac{\pi}{2}]$ donc $\forall t \in [0,\frac{\pi}{2}]$, \mathbox{\sin t \ge \frac{2}{\pi}t} (équation de la droite qui joint $(0, 0)$ et $(\frac{\pi}{2},1)$.
+\end{enumerate}
+\end{application}
+
+\footnotetext{$f : I \to \R$ est \strong{concave} si $-f$ est convexe}
+
+\begin{theoreme}{Inégalité de Jensen}{InegJensen}
+Soit $f : I \to \R$ convexe. Soit $n \in \N^*, x_1,...,x_n \in I, \lambda_1,...,\lambda_n \in \R_+$ tels que $\lambda_1 + ... + \lambda_n = 1$. \\
+Alors $\lambda_1x_1+...+ \lambda_nx_n \in I$ et \mathbox{f(\lambda_1x_1+...+\lambda_nx_n) \le \lambda_1 f(x_1) + ... + \lambda_nf(x_n)}.
+\end{theoreme}
+
+\begin{demo}
+Par récurrence sur $n$. \\
+C'est vrai pour $n =1$ (si $x \in I$, alors $1\times x \in I$ et $f(1\times x) \le 1\times f(x)$). \\
+Supposons le résultat vrai pour un $n \in \N^*$. Soient $\lambda_1,...,\lambda_n,\lambda_{n+1} \in \R_+$ avec $\lambda_1+...+\lambda_n+\lambda_{n+1}=1$. \\
+Soient $x_1,...,x_n,x_{n+1} \in I$. Soient $a = \min (x_1,...x_n,x_{n+1})$ et $b = \max(x_1,...,x_n,x_{n+1})$. \\ \\
+Alors $\displaystyle{\sum_{k=1}^{n+1} \lambda_kx_k \ge \sum_{k=1}{n+1}\lambda_ka = a}$ et $\displaystyle{\sum_{k=1}^{n+1}\lambda_kx_k \le \sum_{k=1}^{n+1}\lambda_kb = b}$ et $[a,b] \subset I$. \\
+Si $\strong{\lambda_1=...=\lambda_n = 0}$, on a $\lambda_{n+1}=1$ et on a bien $f(x_{n+1}) \le f(x_{n+1})$. \\
+Si \strong{l'un des $\lambda_i$ est $>0$}, $s=\lambda_1+...+\lambda_n>0$ et $\lambda_{n+1}=1-s$. \\ \\
+$\lambda_1x_1 + ... + \lambda_nx_n + \lambda_{n+1}x_{n+1} = s\underbrace{\left(\dfrac{\lambda_1}{s}x_1 + ... + \dfrac{\lambda_n}{s}x_n\right)}_{x} + (1-s)$. \\ \\
+On a : $\dfrac{\lambda_1}{s},...,\dfrac{\lambda_n}{s} \in \R_+$ et $\dfrac{\lambda_1}{s} + ... + \dfrac{\lambda_n}{s} = \dfrac{s}{s} = 1$, donc $x \in I$. \\ \\
+et $f(\lambda_1x_1+...+\lambda_nx_n + \lambda_{n+1}x_{n+1}) = f(sx + (1-s)x_{n+1})$. On a $0 \le s \le 1$ et $f$ est convexe donc : \\
+$f(\lambda_1x_1+...+\lambda_nx_n + \lambda_{n+1}x_{n+1}) \le sf(x) + (1-s)f(x_{n+1})$. \\
+Par hypothèse de récurrence,  \\ \\
+$f(x) = f\left(\dfrac{\lambda_1}{s}x_1 + ... + \dfrac{\lambda_n}{s}x_n\right) \le \dfrac{\lambda_1}{s}f(x_1) + ... + \dfrac{\lambda_n}{s}f(x_n)$. \\ \\
+On obtient : \\ \\
+$f\left(\displaystyle{\sum_{k=1}^{n+1}\lambda_kx_k}\right) \le s \left(\dfrac{\lambda_1}{s}f(x_1) + ... + \dfrac{\lambda_n}{s}f(x_n)\right) + \lambda_{n+1}f(x_{n+1}) = \displaystyle{\sum_{k=1}^{n+1}\lambda_kf(x_k)}$ \\ \\
+d'où le résultat.
+\end{demo}
+
+\begin{application}{Inégalité arithmético-géométrique}{InegAMGM}
+Pour $n \in \N^*$ et $a_1,...,a_n \in R_+, \sqrt[n]{a_1...a_n} \le \dfrac{a_1+...+a_n}{n}$.
+	\begin{demo}
+	Soient $n \in \N^*n a_1,...a_n \in \R_+$. L'inégalité est vraie si l'un des $a_i$ est nul. \\
+	Si $a_1,...a_n \in \R_+^*$, l'inégalité équivaut à : \\ \\
+	$\dfrac{1}{n} \ln(a_1...a_n) \le \ln\left(\dfrac{a_1+...+a_n}{n}\right)$ ($\ln$ est strictement croissante). \\ \\
+	On pose : $\forall 1 \le k \le n, \lambda_k = \dfrac{1}{n}$. On a bien $\lambda_1,...,\lambda_n \in \R_+$ et $\lambda_1+...+\lambda_n = 1$. \\ \\
+	$\ln$ est concave donc d'après Jensen : $\ln(\lambda_1a_1+...+\lambda_na_n) \ge \lambda_1 \ln a_1 + ... + \lambda_n \ln a_n = \dfrac{1}{n} \ln(a_1...a_n)$.
+	\end{demo}
+\end{application}
+
+\end{document}
