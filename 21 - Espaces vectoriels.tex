@@ -1,0 +1,1383 @@
+\documentclass[12pt, a4paper]{report}
+\input{preambule}
+\usepackage{tkz-tab}
+\tikzset{point/.style={circle,draw=black,inner sep=0pt,minimum size=3pt}}
+
+\begin{document}
+
+\chapter{Espaces vectoriels}
+
+\section{Définition - Exemples - Règles de calcul}
+
+
+\subsection{Définition}
+
+\begin{definition}{Espace vectoriel}{DefEspaceVect}
+
+Soit $\K$ un corps ($\R$ ou $\C$ en pratique). Un \Strong{espace vectoriel} sur $\K$, ou $\K$-espace vectoriel ($\K$-ev en abrégé) est un triplet $(E,+,\cdot)$ où :
+
+\begin{enumerate}
+
+	\item $(E,+)$ est un groupe commutatif ;
+	
+	\item $\cdot$ est une application $(\lambda,x) \in \K \times E \mapsto \lambda \cdot x$ (loi externe de domaine d'opérateurs $\K$) telle que :
+	
+	\begin{itemize}
+		\item $\forall \lambda \in \K, \forall x,y \in E, \lambda \cdot (x+y) = \lambda \cdot x + \lambda \cdot y$ ;
+		
+		\item $\forall \lambda, \mu \in \K, \forall x \in E, (\lambda + \mu) \cdot x = \lambda \cdot x + \mu \cdot x$ ;
+		
+		\item $\forall \lambda, \mu \in \K, \forall x \in E, \lambda \cdot (\mu \cdot x) = (\lambda \mu) \cdot x$ ;
+		
+		\item $\forall x \in E, 1_\K \cdot x = x$.
+	\end{itemize}
+	
+\end{enumerate}
+
+\end{definition}
+
+
+
+\begin{remarque}[Vocabulaire]{}
+
+\begin{itemize}
+
+	\item Soit $(E,+,\cdot)$ un $\K$-ev. Les éléments de $E$ s'appellent les \strong{vecteurs}, on les note souvent avec des lettres latines minuscules $u,v,w,x,y,z,...$ parfois surmontés d'une flèche $\vec{u}, \vec{v}, \vec{w},...$
+	
+	\item $0_E$ (noté aussi $0$ ou $\vec{0}$) est l'élément neutre de $+$ et s'appelle le \strong{vecteur nul}.
+	
+	\item Pour $x\in E$, on note $-x$ l'opposé de $x$.
+	
+	\item Pour $n \in \Z$, et $x \in E, nx$ est l'\strong{itéré $n^\text{ième}$} de $x$ pour $+$.
+	
+	\item Les éléments de $\K$ s'appellent les \strong{scalaires}, on les note souvent avec des lettres grecques $\alpha, \beta, \gamma, \delta, \lambda, \mu, \nu,...$.
+	
+	\item Si on écrit $\lambda x$, il est sous-entendu que $\lambda \in \K, x \in E$, et $\lambda x $ désigne $\lambda \cdot x$.
+	
+\end{itemize}
+
+\end{remarque}
+
+\newpage
+
+\subsection{Exemples}
+
+
+\begin{exemple}[Exemples]
+
+\begin{enumerate}
+
+	\item Soit $E = \K^2 (= \K \times \K)$. Pour $x = (\alpha,\beta), y = (\gamma, \delta) \in \K^2, \lambda \in \K$, on pose : \\
+	$x+y = (\alpha+\delta;\beta+\delta)$ et $\lambda x = (\lambda \alpha, \lambda \beta)$. \\
+	Alors $(\K^2,+,\cdot)$ est un $\K$-ev (le vecteur nul est $(0,0)$ et $-(\alpha, \beta) = (-\alpha, -\beta)$.
+	
+	\item Soit $n \in \N^*, E = \K^n$. Pour $x = (\alpha_1,...,\alpha_n), y = (\beta_1,...,\beta_n) \in \K^n$ et $\lambda \in \K$, on pose : \\
+	$x+y = (\alpha_1 + \beta_1,...,\alpha_n+\beta_n)$ et $\lambda x = (\lambda \alpha_1,...,\lambda_n \alpha_n)$. \\
+	On obtient un $\K$-ev $(\K^n,+,\cdot)$
+	
+	\item Soient $\K, \mathbb{L}$ deux corps, tel que $\mathbb{L}$ est un surcorps de $\K$ (\ie $\K$ est un sous-anneau de $\mathbb{L}$), alors $\mathbb{L}$ est minu d'une structure de $\K$-ev de la façon suivante : pour $x,y \in \mathbb{L}$, $\lambda \in \K$, \\
+	$x+y =$ somme de $x$ et $y$ dans $\mathbb{L}$ ;
+	$\lambda x$ = produit de $\lambda$ et $x$ dans $\mathbb{L}$. \\
+	
+	Ainsi, $\C$ est un $\R$-ev, $\C$ est un $\Q$-ev, $\C$ est un $\C$-ev.
+	
+	\item $(\K[X], + \cdot)$ est un $\K$-ev : $+$ est l'addition habituelle dans $\K[X]$, et pour $P = \displaystyle{\sum_{k} \alpha_k X^k}$ et $\lambda \in \K$,  \\ \\
+	$\lambda P = \lambda \cdot P = \displaystyle{\sum_k \lambda \alpha_k X^k}$ (produit du polynôme constant $\lambda$ et de $P$.
+	
+	\item Soit $\Omega$ un ensemble non vide, $E = \mathcal{F}(\Omega,\K)$. Pour $f,g \in E$, et $\lambda \in \K$ : \\
+	$f+g \in E$ est définie par : $\forall \omega \in \Omega, (f+g)(\omega) = f(\omega) + g(\omega)$.
+	$\lambda \cdot f \in E$ est définie par : $\forall \omega \in \Omega, (\lambda \cdot f)(\omega) = \lambda \cdot f(\omega)$. \\
+	Alors $(E,+,\cdot)$ est un $\K$-ev (le vecteur nul est la fonction nulle de $\Omega$ dans $\K$) \\ 
+	
+	Ainsi, $\R^\N$ est un $\R$-ev, $\C^\N$ est un $\C$-ev, $\mathcal{F}([a,b], \R)$ est un $\R$-ev.
+	
+	\item Une proposition :
+	
+	\begin{proposition}{}{}
+	
+	Soit $(E,+,\cdot)$ un $\K$-ev, $\Omega$ un ensemble non vide. On considère $\mathcal{F}(\Omega,E)$. \\
+	Pour $f,g \in \mathcal{F}(\Omega,E)$ et $\lambda \in \K$, \\
+	$f +' g : \omega \in \Omega \mapsto f(\omega) + g(\omega) \in E$, $(\lambda) \cdot' f) : \omega \in \Omega \mapsto \lambda \cdot f(\omega) \in E$. \\
+	Alors \strong{($\mathcal{F}(\Omega,E),+',\cdot')$ est un $\K$-ev}.
+	
+	\end{proposition}
+	
+	\item $(\mathcal{M}_2(\R), + \cdot)$ est un $\R$-ev :
+	
+	$\begin{pmatrix} a & c \\ b & d \end{pmatrix} + \begin{pmatrix} a' & c' \\ b' & d' \end{pmatrix} = \begin{pmatrix} a+a' & c+c' \\ b+b' & d+d' \end{pmatrix}$ \\ \\
+	et $\lambda \cdot \begin{pmatrix} a & c \\ b & d \end{pmatrix} = \begin{pmatrix} \lambda a & \lambda c \\ \lambda b & \lambda d \end{pmatrix}$.
+	
+	\item Produit cartésien : $(E,+,\cdot), (F,+,\cdot)$ deux $\K$-ev. Pour $(x,u),(y,v) \in E \times F$ et $\lambda \in \K$, on pose : \\
+	$(x,u)+(y,v) = (x+u,y+v)$ et $\lambda \cdot (x,u) = (\lambda x, \lambda u)$. \\
+	$(E \times F, +, \cdot)$ est alors $\K$-ev.
+	
+	
+\end{enumerate}
+
+\end{exemple}
+
+
+
+\subsection{Règles de calcul dans un $\K$-ev}
+
+
+Soit $(E,+,\cdot)$ un $\K$-ev.
+
+\begin{enumerate}
+
+	\item Pour $\lambda \in \K$ et $x \in E$, \textbox{$\lambda x = 0_E \Longleftrightarrow \lambda = 0_\K$ ou $x = 0_E$}
+	
+	\begin{demo}
+
+	$\Longleftarrow$ Soit $\mu \in \K$, $\varphi_\mu : x \in E \mapsto \mu x \in E$ est un morphisme de groupes de $(E,+)$ dans $(E,+)$ \\
+	($\mu \cdot (x+y) = \mu x + \mu y$) donc $\varphi_\mu (0_E) = 0_E$ \ie \mathbox{\mu \cdot 0_E = 0_E}
+	Soit $y \in E$, et $\psi_y : \lambda \in \K \mapsto \lambda \cdot y \in E$. $\psi_y$ est un morphisme de groupes de $(\K,+)$ dans $(E,+)$ \\
+	($(\lambda + \mu) \cdot y = \lambda \cdot y + \mu \cdot y$) donc $\psi_y(0_\K) = 0_E$ \ie \mathbox{0_\K \cdot y = 0_E}. \\
+	
+	$\Longrightarrow$ Supposons $\lambda \cdot x = 0_E$. Si $\lambda \ne 0$ alors :
+	
+	\begin{align*}
+	0_E &= \dfrac{1}{\lambda} \cdot 0_E \\
+	&= \dfrac{1}{\lambda} (\lambda \cdot x) \\
+	&= \dfrac{1}{\lambda} \lambda x \\
+	&= 1_\K x = x
+	\end{align*}
+	
+	\ie \mathbox{x = 0_E}
+	
+	\end{demo}
+	
+	\item Avec les notations de la preuve $\Longleftarrow$ de $\textbf{1)}$ : si $\mu \in \K$, $\varphi_u$ est un morphisme de groupes. Donc : \\
+	
+	$\forall n \in \Z, \forall x \in E, \varphi_u(nx) = n \varphi_u(x)$ \ie \mathbox{\mu \cdot (nx) = n (\mu \cdot x)} \quad $(1)$ \\
+	
+	De même, si $y \in E$, $\psi_y$ est un morphisme de groupes donc : \\
+	$\forall n \in \Z, \forall \lambda \in \K, \psi_y(n\lambda) = n \psi_y(\lambda)$ \ie \\
+	\mathbox{(n\lambda) \cdot y = n (\lambda \cdot y)} \quad $(2)$. \\
+	Donc, $\forall n \in \Z, \forall x \in E, \forall \lambda \in \K$ : \mathbox{(n\lambda) \cdot x = \lambda \cdot (nx) = n (\lambda x)} \\
+	
+	En particulier, pour $\lambda = 1_\K$, \mathbox{nx = (n 1_\K) \cdot x \text{ et } -x = (-1_\K) \cdot x}
+	
+	
+	\item Pour $n \in \N^*$,
+	
+	\begin{itemize}
+		
+		\item Si $\lambda \in \K, x_1,...,x_n \in E, \lambda \cdot \displaystyle{\sum_{k=1}^n x_k = \sum_{k=1}^n (\lambda x_k)}$
+		
+		\item Si $\lambda_1,...,\lambda_n \in \K, x \in E, \left(\displaystyle{\sum_{k=1}^n \lambda_k }\right) \cdot x = \displaystyle{\sum_{k=1}^n (\lambda_k \cdot x)}$.
+
+	\end{itemize}
+
+\end{enumerate}
+
+\section{Notions fondamentales}
+\subsection{Familles libres, familles génératrices, bases}
+Dans la suite, $E$ est un $\K$-ev (les lois $+$ et $\cdot$ sont sous entendues)
+
+\begin{definition}{Combinaison linéaire}{}
+Pour $n\in \N^*$ et $x_1$,...,$x_n \in E$, on appelle \strong{combinaison linéaire} de $x_1,..., x_n$ tout vecteur de $E$ de la forme $\lambda_1 x_1 + ... + \lambda_n x_n$, avec $\lambda_1, ..., \lambda_n \in \K$
+\end{definition}
+
+\begin{definition}{Famille libre et liée}{}
+Soit $u\in \N^*$, $x_1,...,x_n \in E$\\
+On dit que la famille ($x_1,...,x_n$) est \strong{libre} lorsque :
+\begin{center}
+    $\forall \lambda_1, ..., \lambda_n \in \K$, $\lambda_1 x_1+...+\lambda_n x_n = 0_E \Longrightarrow \lambda_1 = ... = \lambda_n = 0_K$
+\end{center}
+\ie la seule façon d'exprimer $0_E$ comme combinaison linéaire de $x_1, ... , x_n$ est la combinaison linéaire $0x_1 + ... + 0x_n$\\
+\\
+On dit aussi que les vecteurs $x_1,...,x_n$ sont \strong{linéairement indépendants}.\\
+\\
+Si $(x_1,...,x_n)$ n'est pas libre, on dit que $(x_1,...,x_n)$ est \strong{liée}, ou que les vecteurs $x_1,...,x_n$ sont \strong{linéairement dépendants} :
+\begin{center}
+    $(x_1,...,x_n)$ liée $\Longleftrightarrow$ il existe $\lambda_1,...,\lambda_n \in \K$ non tous nuls tels que $\lambda_1 x_1 + ... + \lambda_n x_n = 0_E$
+\end{center}
+\end{definition}
+
+\begin{remarque}[Vocabulaire]
+Toute relation $\lambda_1 x_1 + ... + \lambda_n x_n = 0_E$ avec au moins l'un des $\lambda_i$ non nul s'appelle une relation de dépendance linéaire non triviale entre $x_1,..., x_n$
+\end{remarque}
+
+\begin{remarque}
+\begin{itemize}
+    \item Pour une famille $(x_1,...,x_n)$ de vecteurs de $E$, le fait d'être libre ou liée ne dépend pas de l'ordre d'énumération ($(u,v,w)$ libre $\Longleftrightarrow$ $(w,v,u)$ libre)
+    \item Soit $(x_1,...,x_n) \in E^n$\\
+    \begin{enumerate}
+        \item Si l'un des $x_i$ est nul, la famille $(x_1,..,x_n)$ est liée
+        \begin{demo}
+        Si $x_1 = 0_E$ alors $1_K x_1 + 0_K x_2 + ... + 0_K x_n = 0_E$ (et $1_K \neq 0_K$)
+        \end{demo}
+        \item Si $n \geq 2$ et s'il existe $i \neq j$ avec $x_i = x_j$ alors $(x_1 , ... , x_n)$ est liée. 
+        \begin{demo}
+        Supposons $x_1 = x_2$, alors $0_E = 1 x_1 + (-1)x_2 + 0x_3 + ...+ 0x_n$ et $1\neq 0$
+        \end{demo}
+        \item $(x_1,...,x_n)$ liée $\Longleftrightarrow$ il existe $i \in \lbrace 1,...,n \rbrace$ tel que $x_i$ est CL de $x_1 , ..., x_{i-1}, x_{i+1}, ..., x_n$
+        \begin{demo}
+        $\Longrightarrow$ il existe $\lambda_1,...,\lambda_n \in \K$ non tous nuls tel que $\lambda_1 x_1 + ... + \lambda_n x_n = 0_E$\\
+        On peut supposer que $\lambda_n \neq 0$ alors : 
+        \begin{center}
+            $\lambda_n x_n = -\lambda_1 x_1 - ... - \lambda_{n-1} x_{n-1}$\\
+            $x_n = \dfrac{1}{\lambda_n} (-\lambda_1 x_1 - ... - \lambda_{n-1} x_{n-1}) = - \dfrac{\lambda_1}{\lambda_n} x_1 + ... + -\dfrac{\lambda_{n-1}}{\lambda_n} x_{n-1}$
+        \end{center}
+        
+        $\Longleftarrow$ Supposons par exemple que $x_n$ est CL de $x_1 , ... , x_{n-1}$ :
+        \begin{center}
+            $x_n = \lambda_1 x_1 + ... + \lambda_{n-1} x_{n-1}$ avec $\lambda_1 , ..., \lambda_{n-1} \in \K$
+        \end{center}
+        Alors :
+        \begin{center}
+            $0_E = \lambda_1 x_1 + ... + \lambda_{n-1} x_{n-1} + (-1)x_n$ et $-1\neq 0$
+        \end{center}
+        \end{demo}
+    \end{enumerate}
+\end{itemize}
+\end{remarque}
+
+\begin{exemple}[Exemples]
+\begin{enumerate}
+    \item \strong{Soit $E=\R^3$, $u=(1,1,-1)$, $v=(2,1,0)$, $w=(1,1,1)$\\
+    Montrer que $(u,v,w)$ est libre\\}
+    \\
+    Soient $\alpha$, $\beta$, $\gamma \in \R$ tel que $\alpha u + \beta v + \gamma w = 0_{\R^3} = (0,0,0)$\\
+    Montrons que $\alpha = \beta = \gamma = 0$\\
+    On a donc : $(\alpha + 2 \beta + \gamma ,  \alpha + \beta + \gamma , -\alpha + \gamma) = (0,0,0)$
+    \begin{center}
+    $\ie (S) =
+    \begin{cases}
+    \hfill \alpha + 2\beta + \gamma &=0\\
+    \hfill \alpha + \beta + \gamma &=0 \\
+    \hfill -\alpha + \gamma &=0
+    \end{cases}
+    $
+    \end{center}
+    Or avec le pivot de \textsc{Gauss}:
+    \begin{center}
+    $(S) \Longleftrightarrow
+    \begin{cases}
+    \hfill \alpha + \gamma + 2\beta  &=0\\
+    \hfill  - \beta  &=0 \: \: \: L_2 \leftarrow L_2 - L_1\\
+    \hfill 2\gamma + 2\beta &=0 \: \: \: L_3 \leftarrow L_3 + L_1
+    \end{cases}
+    $
+    \end{center}
+    $\Longleftrightarrow$ $\beta = 0$, puis $\gamma = 0$, puis $\alpha = 0$
+    \\
+    \item \strong{Soit $E = \R^3$, $u = (1,1,-1)$, $v = (2,1,0)$, $w=(1,1,a)$ ($a\in \R$) \\
+    A quelle condition sur $a$ la famille est-elle libre ?\\}
+    \\
+    Soient $\alpha$, $\beta$, $\gamma \in \R$ 
+    \begin{center}
+     $\alpha u + \beta v + \gamma w = 0_{\R^3}$ $\Longleftrightarrow
+    \begin{cases}
+    \hfill \alpha + 2\beta + \gamma   &=0\\
+    \hfill \alpha + \beta + \gamma   &=0\\
+    \hfill -\alpha + a\gamma   &=0
+    \end{cases}
+    $
+    \end{center}
+    
+    \begin{center}
+    $\Longleftrightarrow
+    \begin{cases}
+    \hfill \alpha + 2\beta + \gamma   &=0\\
+    \hfill - \beta  &=0 \: \: \: L_2 \leftarrow L_2 - L_1\\
+    \hfill (a+1)\gamma + 2\beta &=0 \: \: \: L_3 \leftarrow L_3 + L_1
+    \end{cases}
+    $
+    \end{center}
+    
+    \begin{center}
+    $\Longleftrightarrow
+    \begin{cases}
+    \hfill \alpha  + \gamma  + 2\beta &=0\\
+    \hfill (a+1)\gamma + 2\beta &=0  \\
+    \hfill - \beta  &=0
+    \end{cases}
+    $
+    \end{center}
+    
+    \begin{itemize}
+        \item Si $a+1 \neq 0$ alors on trouve $\alpha u + \beta v + \gamma w = 0_{\R^3}$\\
+        $\Longrightarrow \beta =0$ puis $\gamma =0$ puis $\alpha =0$\\
+        La famille est libre \\
+        \item Si $a+1 = 0$ 
+        \begin{center}
+        $\alpha u + \beta v + \gamma w = 0_{\R^3}$ $\Longleftrightarrow
+        \begin{cases}
+        \hfill \alpha  + \gamma  + 2\beta &=0\\
+        \hfill 2\beta &=0  \\
+        \hfill - \beta  &=0
+        \end{cases}
+        $
+        \end{center}
+    On voit qu'il y a des solutions non nulles (par exemple : $\alpha =1 = - \gamma$, $\beta =0$)\\
+    On a donc $1u+0v-w=0$, la famille est liée\\
+    \\
+    \Strong{Bilan} $(u,v,w)$ libre $\Longleftrightarrow$ $a\neq -1 $
+    \end{itemize}
+    
+    \item $E= \K^2, x=(a,b), y=(c,d) \in E$, alors \textbox{$(x,y)$ libre $\Longleftrightarrow ad-bc \neq 0$}
+    \begin{itemize}
+    \item Si $ad-bc=0$, alors $dx-by = (ad-bc,bd-bd) = (0,0) \quad (1)$ \\
+    	et $cx-ay = (ac-ac,bc-ad)=(0,0) \quad (2)$ \\
+    	Si $a,b,c$ ou $d$ n'est pas nul, $(1)$ ou $(2)$ est une relation de dépendance linéaire non triviale entre $x$ et $y$. \\
+    	Si $a=b=c=d=0$, alors $x=y=0_E$ donc \textbox{$(x,y)$ est liée}.
+    \item Si $ad-bc \neq 0$, montrer que $(x,y)$ est libre. Soient $\lambda, \mu \in \R$ tels que $\lambda x + \mu y = 0_{\R^2} = (0,0)$. \\
+    	On a donc :  \\
+		$(1) \quad \lambda a + \mu c = 0$ \\
+		$(2) \quad \lambda b + \mu d = 0$. \\
+		$d (1) - c (2) : \quad (ad-bc)\lambda = 0$ d'où $\lambda = 0$ \\
+		$b (1) - a (2) : \quad (bc-ad)\mu = 0$ d'où $\mu = 0$. \\
+		Donc \textbox{$(x,y)$ est libre}
+	\end{itemize}
+	
+	\item $E = \K[X]$. Soient $P_1,...,P_n (n \in \N^*)$ tels que $0 \le \deg P_1 < \deg P_2 < ... < \deg P_n$, montrer que $(P_1,...,P_n)$ est libre. \\
+	\begin{demo}{}
+	Soient $\lambda_1,...,\lambda_n \in \K, \lambda_1P_1+...+\lambda_nP_n = 0$. Si l'un des $\lambda_i$ n'est pas nul, soit $m = \max \{i \in \llbracket 0,n \rrbracket \mid \lambda_i \ne 0\}$. \\ \\
+	Alors $\lambda_1P_1+...+\lambda_mP_m = 0$ avec $\lambda_m \ne 0$. \\
+	$\lambda_m \ne 0$ donc $\deg(\lambda_mP_m) = \deg P_m$. \\ \\
+	Pour $k < m, \deg (\lambda_kP_k) \le \deg P_k < \deg P_m$ d'où $\deg (\lambda_1P_1+...+\lambda_mP_m) = \deg P_m > 0$, c'est absurde.
+	\end{demo}
+	
+	\item $E = \mathcal{F}(\R,\R), n \in \N^*, \forall 1 \le k \le n, f_k : t \in \R \mapsto e^{kt}$. Montrer que $(f_1,...,f_n)$ est libre. \\
+	Soient $\lambda_1,...,\lambda_n \in \R$ tels que $\lambda_1f_1+...+\lambda_nf_n = 0_E$ (\ie $\forall t \in \R, \lambda_1e^t + ...+\lambda_n e^{nt} = 0$) \\ \\
+	Supposons qu'il existe $i \in \llbracket 1,n \rrbracket$ tel que $\lambda_i = 0$. Soit $m = \max \{k \in \llbracket 1,n \rrbracket \mid \lambda_k \ne 0 \}$. \\
+	On a : $\forall t, \lambda_1 e^t + ... + \lambda_{m-1}e^{(m-1)t} + \lambda_m e^{mt} = 0$ donc \\
+	$\lambda_m e^{mt} = \underbrace{- \lambda_1e^t - ... - \lambda_{m-1}e^{(m-1)t}}_{\underset{t \to +\infty}{=} o(e^{mt})}$. \\ \\
+	\textbf{Autre solution} \\
+	Soit $P = \lambda_1 X + ... + \lambda_n X_n \in \R[X]$, alors $P(e^t) = 0 (\forall t \in \R)$. \\
+	$\{e^t \mid t \in \R \} = \R_+^*$ est infini, $P$ a donc une infinité de racines d'où $P = 0_{\R[X]}$ ie $\lambda_1=...=\lambda_n=0$.
+	
+	\item Soit $E$ un $\K$-ev. Soit $x \in E$. $(x)$ est libre $\Longleftrightarrow x \ne 0_E$. \\
+	Soient $x,y \in E$. On dit que $y$ est \strong{proportionnel} à $x$ ou \strong{colinéaire} à $x$, s'il existe $\lambda \in \K$ tel que $y = \lambda x$. \\
+	\begin{remarque}{}
+	Si $x,y \in E \setminus \{0_E\}$, $y$ colinéaire à $x \Longrightarrow x$ colinéaire à $y$. Dans ce cas, $(x,y)$ liée $\Longleftrightarrow y$ colinéaire à $x$ ($\Longleftrightarrow x$ colinéaire à $y$). \\
+	En effet, si $y = \lambda x$ alors $1\cdot y - \lambda \cdot x= 0$ (c'est une relation de dépendance linéaire non triviale). \\
+	Si $(x,y)$ est liée, on a l'existence de $\alpha, \beta \in \K$ non tous deux nuls tels que $\alpha x + \beta y = 0_E$. \\
+	Si $\alpha = 0$ alors $\beta y = 0$ d'où $\beta = 0$ (car $y \ne 0_E$), c'est absurde. Donc $\alpha \ne 0$. \\
+	De même, $\beta \ne 0$ et on a alors : $y = - \dfrac{\beta}{\alpha}x$.
+	\end{remarque}
+\end{enumerate}
+\end{exemple}
+
+\begin{definition}{Familles génératrices, bases}{FamGenBases}
+Soient $n \in \N^*, x_1,...,x_n \in E$.
+\begin{enumerate}
+	\item La famille $(x_1,...,x_n)$ \Strong{engendre} $E$ si tout vecteur de $E$ est combinaison linéaire de $(x_1,...,x_n)$. On dit aussi que $(x_1,...,x_n)$ est une \Strong{famille génératrice}.
+	\item $(x_1,...,x_n)$ est une \Strong{base} de $E$ si elle est \strong{à la fois libre et génératrice}.
+\end{enumerate}
+\end{definition}
+
+\begin{exemple}[Exemples]
+\begin{enumerate}
+	\item Soit $E=\K^n$. Pour $1 \le i \le n$, soit $e_i = (\delta_{ij})_{1 \le j \le n}) = (0,...,0,\underset{i}{1},0,...,0)$. \\
+	Alors $\strong{bc_n} = (e_1,...,e_n)$ est une base de $\K^n$, appelée \Strong{base canonique}.
+	\begin{demo}{}
+	Pour $x = (\alpha_1,...,\alpha_n) \in \K^n$, $x = (\alpha_1,0,...,0) + ... + (0,...,0,\alpha_n)$, donc $x= \alpha_1e_1+...+\alpha_ne_n$, d'où le résultat.
+	\end{demo}
+	
+	\item Soit $E=\K^2, x=(a,b), y=(c,d) \in \K^2$ tels que $ad-bc \ne 0$. Montrer que $(x,y)$ est une base de $E$. \\
+	On sait que $(x,y)$ est libre. \\
+	Soit $u = (\alpha,\beta) \in \K^2$. On cherche $\lambda, \mu \in \K$ tels que $u = \lambda x + \mu y$, \ie tels que : \\
+	$(1) \quad \lambda a + \mu c = \alpha \\
+	(2) \quad \lambda b + \mu d = \beta$.
+	\Strong{Si} $\lambda$ et $\mu$ vérifient $(1)$ et $(2)$, \\
+	$d(1)-c(2)$ donne $(ad-bc)\lambda = \alpha d - \beta c$, d'où $\lambda = \dfrac{\alpha d - \beta c}{ad-bc}$ \\
+	
+	$-b(1)+a(2)$ donne $(ad-bc)\mu = -\alpha b + \beta a$, d'où $\mu = \dfrac{\beta a - \alpha b}{ad-bc}$. \\ 
+	
+	Vérifions que $\dfrac{-\beta c + \alpha d}{ad-bc} x + \dfrac{\beta a- \alpha d}{ad-bc} y = u$ : \\
+	
+	D'une part, $\dfrac{a(-\beta c+\alpha d)}{ad-bc} + \dfrac{c(\beta a - \alpha b)}{ad-bc} = \dfrac{\alpha(ad-bc)}{ad-bc} = \alpha$ \\
+	
+	D'autre part, $\dfrac{b(-\beta c+ \alpha d)}{ad-bc} + \dfrac{d(\beta a - \alpha b)}{ad-bc} = \dfrac{\beta(ad-bc)}{ad-bc} = \beta$.
+\end{enumerate}
+\end{exemple}
+
+\begin{proposition}{}{}
+Supposons que le $\K$-ev $E$ admet une base (finie) $\mathcal{B} = (e_1,...e_n)$. Alors, pour tout $x \in E$, il existe un unique $(\alpha_1,...,\alpha_n) \in \K^n$ tel que $x = \alpha_1e_1+...+\alpha_ne_n$. \\
+Le $n$-uplet $(\alpha_1,...,\alpha_n)$ s'appelle le \strong{$n$-uplet des coordonnées} de $x$ dans $\mathcal{B}$ ; \\
+Pour $1 \le i \le n$, $\alpha_i$ est la $i^\text{ème}$ coordonnée de $x$ dans $\mathcal{B}$.
+\end{proposition}
+
+\begin{demo}{}
+Si $x \in E$, on peut trouver $(\alpha_1,...,\alpha_n) \in \K^n$ tel que $x = \alpha_1e_1+...+\alpha_ne_n$ ($\mathcal{B}$ est une famille génératrice) \\
+Si $x$ s'écrit aussi $x = \beta_1e_1+...+\beta_ne_n$ avec $(\beta_1,...,\beta_n) \in \K^n$, alors \\
+$0_E = x-x = \displaystyle{\sum_{k=1}^{n} (\beta_i-\alpha_i)e_i}$ \\
+Or $(e_1,...,e_n)$ est libre donc $\forall 1 \le i \le n, \beta_i - \alpha_i = 0$.
+\end{demo}
+
+\begin{remarque}{}
+Soient $x,y \in E, \lambda \in \K, (\alpha_1,...,\alpha_n)$ le $n$-uplet des coordonnées de $x$ dans $\mathcal{B}$, ($\beta_1,...,\beta_n)$ le $n$-uplet des coordonnées de $y$ dans $\mathcal{B}$. \\
+Alors $\lambda x + y = \lambda \displaystyle{\sum_{k=1}^{n} \alpha_i e_i + \sum_{k=1}^{n} \beta_i e_i = \sum_{k=1}^{n}(\lambda \alpha_i + \beta_i)e_i}$ \\
+Donc le $n$-uplet des coordonnées de $\lambda x + y$ est $(\lambda \alpha_1 + \beta_1,...,\lambda \alpha_n + \beta_n) = \lambda (\alpha_1,...,\alpha_n) + (\beta_1,...,\beta_n)$.
+\end{remarque}
+
+\begin{remarque}[Cas de familles quelconques]{}
+
+\begin{remarque}{}
+Si $(x_1,...,x_n)$ est une famille libre de vecteurs de $E$, alors $\forall k \in \llbracket 1,n \rrbracket, (x_1,...,x_k)$ est libre donc (indépendance par rapport à la numérotation) : si $I$ est une partie finie de $\llbracket 1, n \rrbracket$ alors $(x_i)_{i \in I}$ est libre. (convention si $I = \varnothing$.)
+\end{remarque}
+
+\begin{definition}{Familles libres, génératrices, bases pour des familles quelconques}{FamGenBasesQcq}
+Soit $I$ un ensemble, $(x_i)_{i \in I}$ une famille de vecteurs de $E$.
+\begin{enumerate}
+	\item On dit que la famille $(x_i)_{i \in I}$ est libre si pour toute partie finie $J$ de $I$, $(x_i)_{i \in J}$ est libre.
+	\item On dit que $(x_i)_{i \in I}$ est génératrice si pour tout $y \in E$, il existe une partie finie $J = {i_1,...,i_n}$ de $I$ telle que $y$ est combinaison linéaire de $x_{i_1},...,x_{i_n}$.
+	\item $(x_i)_{i \in I}$ est une base si elle est à la fois libre et génératrice.
+\end{enumerate}
+\end{definition}
+
+\begin{exemple}[Exemples]{}
+\begin{enumerate}
+	\item $f_{\alpha} : t \in \R \mapsto e^{\alpha t}$. Alors $(f_\alpha)_{\alpha \in \R}$ est libre dans $E = \mathcal{F}(\R,\R)$. \\
+	Soit $J = {\alpha_1,...,\alpha_n} \subset \R$ avec $\alpha_1<...<\alpha_n$, montrer que $(f_{\alpha_1},...,f_{\alpha_n})$ est libre.
+	
+	\item Cas où $I = \N$, on a $(x_n)_{n \in \N}$ est libre $\Longleftrightarrow \forall n \in \N, (x_0,...,x_n)$ est libre. \\
+	$\Longleftarrow$ Facile. \\
+	$\Longrightarrow$ soit $J \subset \N$ fini, il existe $n \in \N$ tel que $J \subset \llbracket 0,n \rrbracket$, $(x_0,...x_n)$ est libre donc $(x_i)_{i \in J}$ aussi.
+	
+	\item $(X^n)_{n \in \N}$ est une base de $\K[X]$. \\
+	Pour $n \in \N, (1,X,...,X^n)$ est libre car $0 = \deg 1 < \deg X < ... < \deg X^n$. \\
+	Tout $P \in \K[X]$ s'écrit $P = \displaystyle{\sum_{i=0}^{d} \lambda_i X^i}$ où $d \in \N \Longrightarrow (X^n)_{n \in \N}$ est génératrice. \\ \\
+	Pour $a \in \K$, $((X-a)^n)_{n \in \N}$ est aussi une base de $\K[X]$ (elle est en effet libre (car degrés échelonnés) et génératrice (cf la formule de Taylor pour les polynômes).
+\end{enumerate}
+\end{exemple}
+
+\begin{exemple}[Exercice]{}
+$\forall k \in \N, f_k : t \mapsto \cos kt, g_k : t \mapsto \sin kt$. Montrer que : $\forall n \in \N, (f_0,...,f_n,g_0,...f_n)$ est libre dans $\mathcal{F}(\R,\R)$.
+\end{exemple}
+
+\begin{remarque}{}
+Soit $E$ un $\K$-ev. Supposons que $(e_i)_{i \in I}$ est une base de $E$ (avec $I$ infini), \\
+$\K^{(I)}=$ ensemble des familles $(\lambda_i)_{i \in I}$ d'éléments de $\K$ \strong{à support fini} \ie tels que \\
+$\{ i \in I, \lambda_i \ne 0\}$ est fini. \\
+Alors, pour tout $x \in E$, il existe un unique $(\lambda_i)_{i \in I} \in \K^{(I)}$ tel que $x = \displaystyle{\sum_{i \in I} \lambda_i e_i}$ (cette somme a un sens car il n'y a qu'un nombre fini de termes non nuls).
+\end{remarque}
+
+\end{remarque}
+
+
+\subsection{Sous-espaces vectoriels}
+
+\begin{definition}{Sous-espace vectoriel}{DefSev}
+Soit $E$ un $\K$-ev, $F \subset E$. On dit que $F$ est un \Strong{sous-espace vectoriel} de $E$ si : 
+\begin{enumerate}
+	\item $\forall x,y \in F, -x \in F$ et $x+y \in F$ ($F$ est un sous-groupe de $(E,+)$)
+	\item $\forall x \in F, \forall \lambda \in \K, \lambda x \in F$.
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}{Caractérisation condensée d'un sous-espace vectoriel}{DefSevRapide}
+$F \subset E$. $F$ est un sous-espace vectoriel du $\K$-ev $E \Longleftrightarrow \forall x,y \in F, \lambda x + y \in F$.
+\end{proposition}
+
+\begin{demo}{}
+$\Longrightarrow$ Soient $x,y \in F, \lambda \in \K$ alors $\lambda x \in F$ (cf \textbf{2)}), puis $\lambda x + y \in F$ (cf \textbf{1)}). \\
+$\Longleftarrow F \ne \varnothing$ : Soit $u \in F$, on a $(-1)u + u \in F$ ie $0_E \in F$. D'où, pour $x,y \in F$ et $\lambda \in \K$, \\
+$\lambda x = \lambda x + 0_E \in F, -x = (-1)x + 0_E \in F, x+y = 1x+y \in F$.
+\end{demo}{}
+
+\begin{remarque}{}
+Si $F$ est un sous-espace vectoriel du $\K$-ev $E$ alors :
+\begin{enumerate}
+	\item $0_E \in F$, $F$ est en effet un sous-groupe de $(E,+)$ ;
+	\item $F$ est stable par combinaison linéaire : pour $n \in \N^*, x_1,...,x_n \in F, \lambda_1,...,\lambda_n \in \K, \\
+	\lambda_1x_1+...+\lambda_nx_n \in F$ (par récurrence sur $n$) ;
+	\item $(F,+,\cdot)$ est alors un $\K$-ev.
+\end{enumerate}
+\end{remarque}
+
+\begin{exemple}[Exemples]
+\begin{enumerate}
+	\item Soit $I$ un intervalle de $\R$, $E = \mathcal{F}(I,\R)$, on a $\mathcal{C}^0(I,\R), \mathcal{D}(I,\R), \mathcal{C}^n(I,\R), \mathcal{C}^\infty(I,\R)$ sont des sous-espaces vectoriels de $E$. \\
+	$B(I,\R)$ (fonctions bornées) et $\mathrm{Lip}(I,\R)$ (fonctions lipschitziennes) sont aussi des sous-espaces vectoriels de $E$.
+	
+	\item $E = \R^\N$ (suites réelles) : $\ell_\infty$ (suites bornées), $C$ (suites convergentes), $C_0$ (suites tendant vers $0$) sont des sous-espaces vectoriels.
+	
+	\item Soit $E$ un $\K$-ev quelconque : \\
+	Si $x \in E \setminus \{0\}, \K x = \{\alpha x \mid \alpha \in \K \}$ est un sous-espace vectoriel de $E$, appelé \strong{droite vectorielle engendrée par $x$}. \\
+	Si $x,y$ sont libres dans $E$, $\mathcal{P} = \{\alpha x + \beta y \mid \alpha, \beta \in \K \}$ est un sous-espace vectoriel engendré par $x$ et $y$.
+	
+	\item $E = \K[X]$, pour $n \in \N$, $\K_n[X] = \{ P \in \K[X] \mid \deg P \le n \}$ \\
+	$\K_n$ est un sous-espace vectoriel de $\K[X]$ : $0 \in \K[X]$ et si $P,Q \in \K_n[X]$ et $\lambda \in \K$, \\
+	$\deg (\lambda P + Q) \le \max( \underbrace{\deg \lambda P}_{\le \deg P \le n}, \underbrace{\deg Q}_{\le n}) \le n$ donc $\lambda P + Q \in \K_n[X]$.
+	
+	\item $E = \R^3, F = \{(x,y,z) \in \R^3 \mid x-y+z=0 \}$. \\
+	$F$ est un sous-espace vectoriel de $E$ d'équation cartésienne $x-y+z = 0$, relativement à $bc_3$. \\
+	En effet, $(0,0,0) \in F$ et si $a = (x,y,z), (a') = (x',y',z') \in F$ et \\
+	$\lambda \in \K, \lambda a + a' = (\lambda x + x', \lambda y + y', \lambda z + z')$ \\
+	et $\lambda x + x' - (\lambda y + y') + (\lambda z + z') = \lambda \underbrace{(x-y+z)}_{=0} + \underbrace{x'-y'+z'}_{=0}$ \\
+	donc $\lambda a + a' \in F$.
+	
+\end{enumerate}
+\end{exemple}
+
+\begin{remarque}{}
+Soit $e = (x,y,z) \in \R^3, e \in F \Longleftrightarrow z = y-x \Longleftrightarrow \exists s,t \in \R, e = (t,s,t-s) = s\underbrace{(1,0,-1)}_{u} + \underbrace t{(0,1,1)}_{v}$, \\
+d'où $F = \{ su+tv \mid s,t \in \R \}$. \\
+$F$ est le plan engendré par $u$ et $v$. ($(u,v)$ est libre car $u$ et $v$ sont non nuls et non colinéaires). \\
+
+
+Soit $a = (1,1,-1), b=(2,1,3)$. $(a,b)$ est libre et $\mathcal{P} = \{ \alpha a + \beta b \mid \alpha, \beta \in \R \}$. \\
+Soit $e = (x,y,z) \in \R^3$. \\
+$e \in \mathcal{P} \Longleftrightarrow \exists \alpha, \beta \in \R, \alpha a + \beta b  \\
+\Longleftrightarrow \exists \alpha, \beta \in \R, 
+\begin{cases}
+\alpha + 2\beta &= x \\
+\alpha + \beta &= y \\
+-\alpha + 3\beta &= z
+\end{cases}
+\Longleftrightarrow$ le système linéaire $(S)
+\begin{cases}
+\alpha + 2\beta &= x \\
+\alpha + \beta &= y \\
+-\alpha + 3\beta &= z
+\end{cases}$ d'inconnues $\alpha,\beta$ a des solutions. \\
+
+Or, avec le pivot de Gauss, $(S) \sim (S') 
+\begin{cases}
+\alpha + 2\beta = x \\
+ - \beta &= y-x \quad L_2 \leftarrow L_2 - L_1 \\
+ 5\beta &= z+x  \quad L_3 \leftarrow L_3+L_1
+\end{cases}
+\sim (S'')
+\begin{cases}
+\alpha  + 2\beta &= x \\
+ -\beta &= y-x \\
+0 &=  z+x + 5(y-x) \quad L_3 \leftarrow L_3 + 5L_2
+\end{cases}$
+
+Si $-4x + 5y + z \ne 0$, alors $(S'')$ n'a pas de solution, donc $(S)$ non plus. \\
+Si $-4x+5y+z = 0$, $(S'')
+\begin{cases}
+\alpha +  2\beta &= x \\
+ -\beta &= y-x
+\end{cases}$
+et on voit que $(S'')$ a des solutions donc $(S)$ aussi. \\
+On voit donc que : \mathbox{e \in \mathcal{P} \Longleftrightarrow -4x + 5y + z = 0}. \\
+$\mathcal{P}$ est donc le sous-espace vectoriel de $\R^3$ d'équation cartésienne $-4x + 5y + z = 0$ (dans $bc_3$).
+\end{remarque}
+
+\begin{theoreme}{Intersection de sous-espaces vectoriels}{IntersectSev}
+Soit $E$ un $\K$-ev. Une intersection quelconque de sous-espaces vectoriels de $E$ est un sous-espace vectoriel de $E$.
+\end{theoreme}
+
+\begin{demo}{}
+Soit $(F_i)_{i \in I}$ une famille de sous-espaces vectoriels de $E$, \\
+et $H = \displaystyle {\underset{i \in I}{\bigcap} F_i} = \{ x \in E \mid \forall i, x \in F_i \}$. \\ \\
+Soient $x,y \in H, \lambda \in \K$. Pour $i \in I, x,y \in F_i$ (donc $F_i$ est un sous-espace vectoriel), $\lambda x + y \in F_i$ d'où : \\
+$\lambda x + y \in H$.
+\end{demo}
+
+\begin{remarque}
+Une réunion de sous-espaces vectoriels n'est pas un sous-espace vectoriel en général. \\
+$E = \K^2, e_1 = (1,0), e_2 = (0,1), e_1+e_2 = (1,1) \not \subset F \cup G$ alors que $e_1, e_2 \in F \cup G$.
+\end{remarque}
+
+\begin{remarque}[Petite Histoire : sous-espaces vectoriels engendrés]{}
+Soit $E$ un $\K$-ev, $S$ une partie de $E$. Il y a au moins un sous-espace vectoriel de $E$ qui contient $S$ : $E$ lui-même. \\
+Soit $H$ l'intersection de tous les sous-espaces vectoriels de $E$ qui contiennent $S$, \\
+$H = \displaystyle{\underset{\substack{F \text{sev} \\ S \subset F}}{\bigcap F}}$. \\
+Alors $H$ est un sous-espace vectoriel de $E$ (par intersection) alors $H \subset F$. \\
+
+\begin{definition}{Sous-espace vectoriel engendré}{}
+$H$ est le plus petit (au sens de l'inclusion) sous-espace vectoriel de $E$ qui contient $S$, on l'appelle le \strong{sous-espace vectoriel} de $E$ engendré par $S$, on le note \strong{Vect$(S)$}.
+\end{definition}
+
+Par définition, $S \subset \text{Vect}(S), \text{Vect}(S)$ est un sous-espace vectoriel qui contient $S$, alors $\text{Vect}(S) \subset F$.
+
+\begin{exemple}[Exemples]
+\begin{enumerate}
+	\item $\text{Vect}(\varnothing) = \{ 0_E \}$, c'est bien un sous-espace vectoriel.
+	\item Si $S$ est un sous-espace vectoriel, alors $\text{Vect}(S) = S$.
+\end{enumerate}
+\end{exemple}
+
+\end{remarque}
+
+\begin{remarque}{}
+\strong{Cas où $S = \{ x_1,...,x_n \}$ avec $n \in \N^*, x_1,...,x_n \in E$} \\
+Montrer que \mathbox{\text{Vect}(S) = \{\alpha_1x_1+...+\alpha_nx_n \mid \alpha_1,...,\alpha_n \in \K \} = \text{CL}(x_1,...,x_n)} \\
+
+\begin{itemize}
+	\item $\text{Vect}(S)$ est un sous-espace vectoriel de $E$ et $x_1,...,x_n  \in S \subset \text{Vect}(S)$, donc \\
+		$\forall \alpha_1,...,\alpha_n \in \K, \alpha_1x_1+...+\alpha_nx_n \in \text{Vect}(S)$ (car $\text{Vect}(S)$ est stable par combinaison linéaire) \\
+		D'où \mathbox{\text{CL}(x_1,...,x_n) \subset \text{Vect}(S)}. \\
+	\item Pour $1 \le i \le n, x_i = \displaystyle{\sum_{j=1}^n \delta_{ij}x_j \in \text{CL}(x_1,...,x_n)}$. \\
+		$\text{CL}(x_1,...,x_n)$ est un sous-espace vectoriel de $E$ : \\
+	Soient $x,y \in \text{CL}(x_1,...,x_n), \lambda \in \K$, on peut écrire \\ \\
+	$x = \displaystyle{\sum_{i=1}^n\alpha_ix_i, y = \sum_{i=1}^n \beta_ix_i}$ où $\alpha_1,...,\alpha_n,\beta_1,...,\beta_n \in \K$. \\ \\
+	D'où $\lambda x + y = \displaystyle{\sum_{i=1}^n (\lambda \alpha_i + \beta_i)x_i} \in \text{CL}(x_1,...,x_n)$. \\ \\
+	$\text{CL}(x_1,...,x_n)$ est un sous-espace vectoriel de $E$ qui contient $S$, d'où \mathbox{\text{Vect}(S) \subset \text{CL}(x_1,...,x_n)}. \\
+	Dans ce cas, on note $\text{Vect}(x_1,...,x_n)$ au lieu de $\text{Vect}(\{x_1,...,x_n\})$.
+
+\end{itemize}
+\end{remarque}
+
+\begin{remarque}{}
+\begin{itemize}
+	\item Si $x \in E, \text{Vect}(x) = \{\alpha x \mid \alpha \in \K \} = \K x$. Si $x \ne 0_E, \text{Vect}(x)$ est la droite engendrée par $x$.
+	\item Si $(x,y)$ est une famille libre, alors $\text{Vect}(x,y)$ est le plan engendré par $x$ et $y$.
+	\item Soient $x_1,...,x_n \in E$. \\
+	Pour toute permutation $\sigma$ de $\{1,...,n \}$, $\text{Vect}(x_1,...,x_n) = \text{Vect}(x_{\sigma(1)}, ..., x_{\sigma(n)})$ \\
+	(car $\{ x_1,...,x_n \} = \{ x_{\sigma(1)},...,x_{\sigma(n)} \}$) \\ \\
+	Si $x_n \in \text{Vect}(x_1,...,x_{n-1})$ alors \mathbox{\text{Vect}(x_1,...,x_n) = \text{Vect}(x_1,...,x_{n-1})}
+	
+	\begin{demo}{}
+	$\text{Vect}(x_1,...,x_{n-1})$ est en effet un sous-espace vectoriel qui contient $x_1,...,x_n$ donc $\text{Vect}(x_1,...,x_n) \subset \text{Vect}(x_1,...,x_{n-1})$ \\
+	De plus, si $A \subset B$ alors $\text{Vect}(A) \subset \text{Vect}(B)$ ($\text{Vect}(B)$ est un sous-espace vectoriel qui contient $B$, donc qui contient $A$). \\
+	Donc ici, $\text{Vect}(x_1,...,x_{n-1}) \subset \text{Vect}(x_1,...,x_n)$. \\
+	En particulier, \\
+	Si $x_n = 0$ alors $\text{Vect}(x_1,...,x_n) = \text{Vect}(x_1,...,x_{n-1})$ \\
+	Si $x_n = x_i$ avec $1 \le i \le n-1$ alors $\text{Vect}(x_1,...,x_n) = \text{Vect}(x_1,...,x_{i-1},x_{i+1},...,x_n)$
+	\end{demo}
+\end{itemize}
+\end{remarque}
+
+\begin{remarque}{}
+\begin{enumerate}
+	\item On vient de parler sans le dire du sous-espace vectoriel engendré par une famille $(x_1,...,x_n)$ (c'est $\text{Vect}(x_1,...,x_n)$)
+	\item Cas où $S$ est une famille (ou partie) quelconque de $E$. Dans ce cas, $\text{Vect}(S)$ est l'ensemble des combinaisons linéaires d'un nombre fini de vecteurs de $S$. \\
+	On a, pour $S$ une partie, \\
+	$x \in \text{Vect}(S) \Longleftrightarrow \exists n \in \N^*, \exists x_1,...,x_n \in S$ tels que $x$ est combinaison linéaire de $x_1,...,x_n$. \\
+	Si $S = (x_i)_{i \in I}$ : $x \in \text{Vect}(S) \Longleftrightarrow \exists J \in I, J$ fini et $x$ est combinaison linéaire des $x_i (i \in I)$.
+	\item La famille $(x_1,...,x_n)$ est génératrice $\Longleftrightarrow E = \text{Vect}(x_1,...,x_n)$
+\end{enumerate}
+\end{remarque}
+
+\begin{exemple}[Exercice]{}
+Soit $E$ un $\K$-ev, $n \in \N^*, x_1,...,x_n \in E, y_1,...,y_{n+1} \in \text{Vect}(x_1,...,x_n)$, montrer que $(y_1,...,y_{n+1})$ est liée. \\ \\
+On montre par récurrence sur $n$ l'énoncé $H_n : \forall (x_1,...,x_n) \in E, \forall y_1,...,y_{n+1} \in \text{Vect}(x_1,...,x_n), (y_1,...,y_{n+1})$ est liée. \\
+Pour $n=1$, $x \in E, y, z \in \text{Vect}(x)$. On peut écrire $y = \alpha z, z = \beta x$ avec $\beta \in \K$. \\
+Si $z=0$, alors la famille $(y,0)$ est liée. \\
+Si $z \ne 0$, alors $\beta \ne 0$ et $\beta y - \alpha z = 0$, ce qui constitue une relation de dépendance non triviale. \\
+
+Soit $n \ge 1$, supposons $H_{n-1}$ vraie. Soient $x_1,...,x_n \in E$, soient $y_1,...,y_n,y_{n+1} \in \text{Vect}(x_1,...,x_n)$, montrer que $(y_1,...,y_{n+1})$ est liée. \\
+Si pour tout $i \in \llbracket 1,n+1 \rrbracket, y_i \in \text{Vect}(x_1,...,x_{n-1})$ alors par hypothèse de récurrence $(y_1,...,y_n)$ est liée donc $(y_1,...,y_{n+1})$ aussi. \\
+Supposons qu'il existe $i \in \llbracket 1,n+1 \rrbracket$ tel que $y_i \not \in \text{Vect}(x_1,...,x_{n-1})$. Quitte à renuméroter, on peut supposer $y_{n+1} \not \in \text{Vect}(x_1,...,x_{n+1})$. \\
+Montrons que $\text{Vect}(x_1,...,x_n) = \text{Vect}(x_1,...,x_n,y_{n+1})$ (c'est un sous-espace vectoriel). \\
+En effet, $x_1,...,x_{n-1}, y_{n+1} \in \text{Vect}(x_1,...,x_n)$ donc $\text{Vect}(x_1,...,x_{n-1},y_{n+1}) \subset \text{Vect}(x_1,...,x_n)$ \\
+On en déduit $y_{n+1} = \alpha x_n + \displaystyle{\sum_{k=1}^{n-1} \beta_ix_i}$ avec $\alpha \ne 0$ car $y_{n+1} \not \in \text{Vect}(x_1,...,x_{n-1})$ \\
+d'où $x_n = \dfrac{1}{\alpha}y_{n+1} + \displaystyle{\sum_{k=1}^{n-1}\dfrac{\beta_i}{\alpha}x_i}\in \text{Vect}(x_1,...,x_{n-1},y_{n+1})$. \\
+
+Donc, $\forall i \in \llbracket 1,n \rrbracket, x_i \in \text{Vect}(x_1,...,x_{n-1},y_{n+1})$ \\
+Donc $\text{Vect}(x_1,...,x_n) \subset \text{Vect}(x_1,...,x_{n-1}, y_{n+1})$. \\
+Pour $1 \le i \le n, y_i \in \text{Vect}(x_1,...,x_n) = \text{Vect}(x_1,...,x_{n-1},y_{n+1})$ \\
+D'où $y_i = \alpha_i y_{n+1}+z_i$ où $z_i \in \text{Vect}(x_1,...,x_{n-1})$ \\
+$\forall 1\le i \le n, z_i = y_i - \alpha_iy_{n+1}$. \\
+$z_1,...,z_n \in \text{Vect}(x_1,...,x_{n-1})$ donc la famille $(z_1,...,z_n)$ est liée. \\
+Il existe $\lambda_1,...,\lambda_n \in \K$ non tous nuls tels que \\
+$\lambda_1z_1+...+\lambda_nz_n = 0_E$ donc $\lambda_1y_1+...+\lambda_ny_n+\beta y_{n+1} = 0$ \\
+où $\beta. = -\lambda_1\alpha_1-...-\lambda_n\alpha_n$ \\
+et $\lambda_1,...,\lambda_n,\beta$ ne sont pas tous nuls, donc $(y_1,...,y_{n+1})$ est liée.
+\end{exemple}
+
+\begin{remarque}[Petite Histoire : Réunion de deux sous-espaces vectoriels]{}
+Soient $F,G$ deux sous-espaces vectoriels du $\K$-ev $E$. Quid $\text{Vect}(F \cup G)$ ? \\
+Si $x \in F$ et $y \in G$, alors $x,y \in F \cup G \subset \text{Vect}(F \cup G)$, donc $x+y \in \text{Vect}(F \cup G)$.
+
+\begin{definition}{Somme de deux sous-espaces vectoriels}{AddSev}
+$F+G = \{a+b \mid a \in F, b \in G\}$
+\end{definition}
+
+On a donc toujours $F+G \in \text{Vect}(F \cup G)$ \\
+D'autre part, $F \subset F+G$ (si $x \in F, x = \underbrace{x}_{\in F}+\underbrace{0_E}_{\in G}$). De même, $G \subset F +G$, donc \mathbox{F \cup G \subset F + G} \\
+$F+G$ est un sous-espace vectoriel de $E$ : soient $z,z' \in F+G, \lambda \in \K$. On dispose de $x,x' \in F, y,y' \in G$ tels que $z=x+y$ et $z' = x'+y'$. \\
+D'où $\lambda z + z' = \underbrace{(\lambda x + x')}_{\in F} + \underbrace{(\lambda y + y')}_{\in G} \in F + G$ car $F$ et $G$ sont des sous-espaces vectoriels. \\
+$F+$ est un sous-espace vectoriel de $E$ qui contient $F \cup G$ donc : \mathbox{\text{Vect}(F \cup G) \subset F+G} \\
+\begin{remarque}[Vocabulaire]{}
+$F+G$ est le \strong{sous-espace vectoriel somme} des sous-espaces vectoriels $F$ et $G$. \\
+$F+E = E, F + \{0\} = F, F+F = F$.
+\end{remarque}
+
+\begin{proposition}{Ensemble des combinaisons linéaires d'une réunion de deux parties}{}
+Soient $A,B$ des parties de $E$, alors $\text{Vect}(A \cup B) = \text{Vect}(A) + \text{Vect}(B)$
+\end{proposition}
+
+On a donc : 
+\begin{enumerate}
+	\item Si $A = \{x_1,...,x_n \}, B = \{y_1,...,y_n\}$, alors $\text{Vect}(x_1,...,x_n,y_1,...,y_n) = \text{Vect}(x_1,...,x_n) + \text{Vect}(y_1,...,y_n)$
+	\item Même chose avec des familles $(x_1,...,x_n),(y_1,...,y_n)$.
+\end{enumerate}
+
+\begin{demo}{}
+\begin{itemize}
+	\item $A \subset A \cup B$ donc $\text{Vect}(A) \subset \text{Vect}(A \cup B)$, de même $\text{Vect}(B) \subset \text{Vect}(A \cup B)$. \\
+	$\text{Vect}(A \cup B)$ est un sous-espace vectoriel de $E$ qui contient $\text{Vect}(A) \cup \text{Vect}(B)$ \\
+	donc contient $\text{Vect}(\text{Vect}(A) \cup \text{Vect}(B)) = \text{Vect}(A) + \text{Vect}(B)$
+	
+	\item $A \subset \text{Vect}(A) \subset \text{Vect}(A) + \text{Vect}(B)$, de même $B \subset \text{Vect}(A) + \text{Vect}(B)$ \\
+	donc $A \cup B \subset \text{Vect}(A) + \text{Vect}(B)$, c'est un sous-espace vectoriel de $E$, d'où $\text{Vect}(A \subset B) \subset \text{Vect}(A) + \text{Vect}(B)$.
+\end{itemize}
+\end{demo}
+\end{remarque}
+
+\begin{remarque}[Généralisation]
+\begin{enumerate}
+	\item Soient $F_1,...,F_n (n \in \N^*)$ des sous-espaces vectoriels de $E$. Alors $\text{Vect}\left(\displaystyle{\bigcup_{i=1}^nF_i}\right) = F_1+...+F_n$ \\
+	où $F_1+...+F_n = \{\displaystyle{\sum_{i=1}^nx_i} \mid (x_1,...,x_n) \in F_1 \times ... \times F_n \}$
+	(c'est le sous-espace vectoriel somme des sous-espaces vectoriels $F_i$).
+	
+	\item Si $A_1,...,A_n \in E$ (parties de $E$), alors $\text{Vect} \left(\displaystyle{\bigcup_{i=1}^nA_i}\right) = \displaystyle{\sum_{k=1}^n \text{Vect}(A_i)}$
+	
+	\item Si $F_1,...,F_n$ sont des familles finies de vecteurs de $E$, alors \\
+	$\text{Vect}(F_1 \text{v} ... \text{v} F_n) = \displaystyle{\sum_{k=1}^n \text{Vect}(F_i)}$ \\
+	où $(x_1,...,x_n) \text{v} (y_1,...,y_n) = (x_1,...,x_n,y_1,...,y_n)$ (opération de concaténation de deux familles finies) 
+\end{enumerate}
+\end{remarque}
+
+\begin{definition}{Somme directe}{}
+Soit $E$ un $\K$-ev, $F_1,...,F_n$ des sous-espaces vectoriels de $E$ ($n \in \N^*$). Les assertions suivantes sont équivalentes :
+\begin{enumerate}
+	\item $\forall (x_1,...,x_n) \in F_1 \times ... \times F_n, x_1+...+x_n = 0_E \Longrightarrow \forall 1 \le i \le n, x_i = 0_E$.
+	\item Pour tout $x \in \displaystyle{\sum_{k=1}^n F_i}$, il existe un unique $(x_1,...,x_n) \in \F_1 \times ... \times F_n$ tel que $x = x_1+...x_n$.
+	\item Pour tout $j \in \{1,...,n\}, F_j \cap \left(\displaystyle{\sum_{\substack{i=1 \\ i \ne j}}^n F_i}\right) = \{0_E \}$.
+\end{enumerate}
+Lorsque $1)$, $2)$, $3)$ sont vraies, on dit que la somme $\displaystyle{\sum_{k=1}^nF_i}$ est \strong{directe}, ou que les sous-espaces vectoriels $F_1,...,F_n$ sont en somme directe.
+\end{definition}
+
+\begin{demo}{}
+$1) \Longrightarrow 2)$. \\
+Soit $x \in \displaystyle{\sum_{i=1}^n F_i}$. On sait que $x$ s'écrit $x=\displaystyle{\sum_{i=1}^nx_i}$, avec $\forall 1 \le i \le n, x_i \in F_i$. \\
+Supposons qu'on ait aussi $x = \displaystyle{\sum_{i=1}^n y_i}$, avec $y_i \in F_i$. \\
+Alors $0_E = \displaystyle{\sum_{i=1}^n (x_i-y_i)}$, et pour $1 \le i \le n, x_i - y_i \in F_i$, \\
+donc d'après $1)$, $\forall 1 \le n \le n, x_i-y_i = 0_E$ \ie $x_i = y_i$. \\
+
+$2) \Longrightarrow 3)$. \\
+Soit $j \in \llbracket 1,n \rrbracket$. Soit $x \in F_j \cap \displaystyle{\sum_{\substack{i=1 \\ i \ne j}}^n F_i}$. \\
+$x$ s'écrit $x = x_1+...+x_{j-1}+x_{j+1} + ... + x_n$ avec $\forall i \ne j, x_i \in F_i$,\\
+mais aussi $x = \underbrace{0_E}_{\in F_1} + ... + \underbrace{0_E}_{\in F_{j-1}} + x + \underbrace{0_E}_{\in F_{j+1}} + ... + \underbrace{0_E}_{\in F_n}$. \\
+Donc, d'après $2)$, $(x_1,...,x_{j-1},0_E,x_{j+1},...,x_n) = (0_E,...,0_E,\underbrace{x}_{j},0_E,...,0_E)$ d'où $x = 0_E$. \\
+
+$3) \Longrightarrow 1)$. \\
+Soit $(x_1,...,x_n) \in F_1 \times ... \times F_n$ tels que $x_1+...+x_n = 0_E$. \\
+Soit $j \in \llbracket 1,n \rrbracket$, alors $x_j = \underbrace{\displaystyle{\sum_{i \ne j} \underbrace{(-x_i)}_{\in F_i}}}_{\in \displaystyle{\sum_{i \ne j} F_i}}$ \\
+d'où $x_j \in F_j \cap \displaystyle{\sum_{i \ne j} F_i} = \{0_E \}$, \ie $x_j = 0_E$.
+
+\end{demo}
+
+\begin{remarque}[Cas de deux sous-espaces vectoriels]{}
+D'après $3)$, \textbox{la somme $F+G$ est directe $\Longleftrightarrow F \cap G = \{0_E \}$}.
+\end{remarque}
+
+\begin{exemple}{}
+\begin{itemize}
+	\item $E=\K[X], F=X\K[X] = \{ XS \mid S \in \K[X] \}, G = \K_0[X]$ (polynômes constants) \\
+	$F$ est un sous-espace vectoriel, et la somme $F+G$ est directe : si $P \in F \cup G$, on a $P = \lambda \in \K$ et $X$ divise $P$ d'où $\lambda = 0$ donc $F \cap G = \{ 0 \}$. \\
+	De plus, ici, $F+G = \K[X]$ : \\
+	Si $A = \displaystyle{\sum_{k \in \N} a_kX^k} \in \K[X]$ alors $A = \underbrace{a_0}_{\in F} + X \displaystyle{\sum_{k \ge 1}a_kX^{k-1}} \Longrightarrow A \in F + G$.
+	
+	\begin{remarque}[Attention !]{}
+	$F,G,H$ trois sous-espaces vectoriels, si $F \cap G = F \cap H = G \cap H = \{ 0 \}$, la somme $F+G+H$ n'est pas forcément directe. \\
+	$E = \K^2, e_1 = (1,0), e_2 = (0,1), F = \text{Vect}(e_1), G = \text{Vect}(e_2), H = \text{Vect}(e_1+e_2)$ \\
+	On a bien, $F \cap G = G \cap H = F \cap H = \{0\}$ mais la somme $F+G+H$ n'est pas directe car $e_1+e_2-(e_1+e_2) = 0$ et $e_1 \ne 0$...
+	\end{remarque}
+	
+	\item $E=\R^3, F = \{(x,y,z) \in \R^3 \mid x+y+z = 0 \}, G = \text{Vect}((1,2,1))$, alors $f \cap G = \{0\}$.
+	
+	\begin{exemple}[Exercice]{}
+	Avec les notations de l'exemple, montrer que $\R^3 = F+G$.
+	\end{exemple}
+\end{itemize}
+\end{exemple}
+
+\begin{proposition}{Somme directe et liberté}{}
+$F_1,...,F_n$ des sous-espaces vectoriels de $E$ tels que $\displaystyle{\sum_{i=1}^nF_i}$ est directe. Pour $1 \le i \le n$, soit $\mathcal{L}_i$ une famille libre finie de vecteurs de $F_i$. Alors $\mathcal{L}_1 \text{ v }...\text{ v } \mathcal{L}_n$ est une famille libre de vecteurs de $E$. \\
+En particulier, si $x_i \in \F_i \setminus \{0\} (1 \le i \le n)$ alors $(x_1,...,x_n)$ est une famille libre de vecteurs de $E$.
+\end{proposition}
+
+\begin{demo}{}
+Pour $n = 2$, $F,G$ des sous-espaces vectoriels de $E$ tels que $F+G$ est directe. \\
+$(x_1,...,x_p)$ une famille libre de vecteurs de $F$ et $(y_1,...,y_p)$ une famille libre de vecteurs de $G$. \\
+Montrer que $(x_1,...,x_p, y_1,...,y_q)$ est libre. \\
+Soient $\lambda_1,...,\lambda_p, \mu_1,...,\mu_q \in \K$ tels que $\underbrace{\lambda_1x_1+...+\lambda_px_p}_{x} + \underbrace{\mu_1y_1+...+\mu_qy_q}_{y} = 0_E$. \\
+On a $x \in F, y \in G$ et $x+y = 0_E$ \\
+La somme $F+G$ est directe, donc $x=y=0_E$, ainsi $0_E = x = \lambda_1x_1+...+\lambda_px_p$, la famille $(x_1,...,x_p)$ est libre \\
+donc $\lambda_1=...=\lambda_p = 0$, de même $\mu_1=...=\mu_q = 0$
+\end{demo}
+
+\begin{definition}{Sous-espaces vectoriels supplémentaires}{}
+Soient $E$ un $\K$-ev, $F_1,...F_n$ des sous-espaces vectoriels de $E$. On dit que les sous-espaces vectoriels $F_1,...,F_n$ sont \strong{supplémentaires} si :
+\begin{enumerate}
+	\item La somme $\displaystyle{\sum_{i=1}^nF_i}$ est directe ;
+	\item $E = \displaystyle{\sum_{i=1}^nF_i}$.
+\end{enumerate}
+Si c'est le cas, on écrira $E = \displaystyle{\bigoplus_{i=1}^nF_i}$
+\end{definition}
+
+En particulier, on a $E = F \oplus G \Longleftrightarrow
+\begin{cases}
+F \cap G = \{0_E\} \\
+F+G = E
+\end{cases}$.
+
+\begin{proposition}{}
+Avec les notations de la définition, $E = \displaystyle{\bigoplus_{i=1}^nF_i} \Longleftrightarrow$ Pour tout $x \in E$, il existe un unique $(x_1,...,x_n) \in F_1 \times ... \times F_n$ tel que 
+\begin{center}
+$x = x_1+...+x_n$
+\end{center}
+\end{proposition}
+
+\begin{demo}{}
+Laissé en exercice au courageux lecteur ...
+\end{demo}
+
+\begin{exemple}[Exemples]
+\begin{enumerate}
+	\item $E = \mathcal{F}(\R,\R), F = \{ \text{Fonctions paires} \}, G = \{ \text{Fonctions impaires} \}$, montrer que $F$ et $G$ sont des sous-espaces vectoriels de $E$, et que $E = F \oplus G$. \\
+	$F \cap G = \{ 0_E = \text{fonction nulle}\}$. Si $f \in F \cap G$, $f$ est à la fois paire et impaire donc \\
+	pour $x \in \R, f(-x) = -f(x) = f(x)$ d'où $2 f(x) = 0$ donc $f(x)=0$. \\ \\
+	$E = F+G$. Soit $f \in E$, montrer que $\exists \varphi \in F, \psi \in G$ telles que $f = \varphi + \psi$. \\
+	Supposons l'existence de $\varphi$ et de $\psi$. $\forall x,$\\
+	\begin{align*}
+	f(x) &= \varphi(x) + \psi(x) \quad (1) \\
+	f(-x) &= \varphi(-x) - \psi(x) \quad (2)
+	\end{align*}
+	$(1)+(2) : \varphi(x) = \dfrac{f(x)+f(-x)}{2}$ \\
+	$(1)-(2) : \psi(x) = \dfrac{f(x)-f(-x)}{2}$. \\
+	Posons donc, pour $x \in \R, \varphi(x) = \dfrac{f(x)+f(-x)}{2}, \psi(x) = \dfrac{f(x)-f(-x)}{2}$. \\ \\
+	$\varphi$ est paire : $\forall x, \varphi(-x) = \dfrac{f(x)+f(-x)}{2} = \varphi(x)$. \\
+	$\psi$ est impaire : $\forall x, \psi(-x) = \dfrac{f(-x)-f(x)}{2} = -\psi(x)$. \\
+	On a bien : $f = \varphi + \psi$. \\
+	
+	\item $E = \K[X]$, soit $B \in \K[X]$ de degré $d \ge 1$. \\
+	Montrer que $\K[X] = B \K[X] \oplus \underbrace{\K_{d-1}[X]}_{\{P \in \K[X] \mid \deg P \le d-1 \}}$
+\end{enumerate}
+\end{exemple}
+
+\begin{theoreme}{Recollement}{}
+Soit $E$ un $\K$-ev, $F_1,...,F_n$ des sous-espaces vectoriels de $E$ tels que $E=\displaystyle{\bigoplus_{k=1}^n F_k}$ \
+Supposons que $F_k$ admet une base finie $\mathcal{B}_k (1 \le k \le n)$. \\
+Alors $\mathcal{B} = \mathcal{B}_1 \text{ v } ... \text{ v } \mathcal{B}_n$ est une base finie de $E$.
+\end{theoreme}
+
+\begin{demo}{}
+\begin{itemize}
+	\item Pour $1 \le k \le n, \mathcal{B}_k$ est une famille libre de $F_k$ et la somme $\displaystyle{\sum_{k=1}^n F_k}$ est directe donc $\mathcal{B}$ est libre. 
+	\item $\mathcal{B}$ engendre $E$ : 
+	\begin{align*}
+	E &= F_1 + ... + F_n
+	&= \text{Vect}(\mathcal{B}_1) + ... + \text{Vect}(\mathcal{B}_n) ( \mathcal{B}_k \text{ engendre } F_k, 1 \le k \le n)
+	&= \text{Vect}(\mathcal{B}_1 \text{ v } ... \text{ v } \mathcal{B}_n)
+	&= \text{Vect}(B)
+	\end{align*}
+	Donc $\mathcal{B}$ engendre $E$.
+\end{itemize}
+\end{demo}
+
+
+\subsection{Applications linéaires}
+
+\begin{definition}{Application linéaire}{}
+Soient $E,F$ deux $\K$-ev, $f$ une application de $E$ vers $F$. \\
+On dit que $f$ est \strong{linéaire} si :
+\begin{enumerate}
+	\item $\forall x,y \in E, f(x+y) = f(x)+f(y)$ ($f$ est un morphisme de groupes de $(E,+)$ dans $(F,+)$)
+	\item $\forall \lambda \in \K, \forall x \in E, f(\lambda x) = \lambda f(x)$
+\end{enumerate}
+\end{definition}
+
+\begin{remarque}[Notation]{}
+On notera $\mathcal{L}(E,F)$ l'ensemble ds applications linéaires de $E$ dans $F$.
+\end{remarque}
+
+\begin{proposition}{Condensation de la définition}{}
+$f : E \Longrightarrow F$. \\
+$f$ linéaire $\Longleftrightarrow \forall x,y \in E, \forall \lambda \in \K, f(\lambda x + y) = \lambda f(x) + f(y)$
+\end{proposition}
+
+\begin{exemple}[Exemples]{}
+\begin{enumerate}
+	\item $E,F$ deux $\K$-ev. Alors $\theta : x \in E \mapsto 0_F \in F$ est linéaire de $E$ dans $F$. 
+	
+	\item $E$ un $\K$-ev. Soit $\alpha \in \K, h_\alpha = x \in E \mapsto \alpha x \in E$ est linéaire de $E$ dans $E$ ($h_\alpha$ est l'homothétie de rapport $\alpha$).
+	\begin{remarque}[Vocabulaire]{}
+	Une application de $E$ dans $E$ s'appelle un \strong{endomorphisme} de $E$. On notera $\mathcal{L}(E)$ (au lieu de $\mathcal{L}(E,E)$) l'ensemble des endomorphismes de $E$.
+	\end{remarque}
+	
+	\item $E = \R^2$ \\
+	$(x,y) \in \R^2 \mapsto x \in \R$ est linéaire de $E$ dans $\R$.
+	\begin{remarque}[Vocabulaire]{}
+	Soit $E$ un $\K$-ev. Une application linéaire de $E$ dans $\K$ s'appelle une \strong{forme linéaire}.
+	Par exemple :
+	\begin{itemize}
+		\item $f \in \mathcal{F}(\R,\R) \mapsto f(\pi)$ est une forme linéaire.
+		\item $f \in \mathcal{C}([a,b],\R) \mapsto \displaystyle{\int_{a}^b f}$ est une forme linéaire.
+		\item $u \in C \text{(suites réelles convergentes \footnotemark)} \mapsto  \underset{n \to +\infty}u_n$ est une forme linéaire.
+	\end{itemize}
+	\end{remarque}
+	
+	\item \strong{Formes linéaires sur $\K^n$}
+	
+	$bc_n = (e_1,...e_n), e_i = (0,...,0,\underbrace{1}_{i},0,...,0)$. \\
+	Soit $f$ une forme linéaire sur $\K^n$. Pour $x = (x_1,...,x_n) = x_1e_1+...+x_ne_n \in \K^n$, \\
+	$f(x) = f(x_1e_1+...+x_ne_n) = f(x_1e_1)+ ...+f(x_ne_n)$ (car $f$ est additive)
+	donc $f(x) = x_1\underbrace{f(e_1)}_{\in \K}+...+x_n\underbrace{f(e_n)}_{\in \K}$. \\
+	Donc il existe $a_1,...,a_n \in \K$ tels que $\forall (x_1,...,x_n) \in \K^n, f(x_1,...,x_n) = a_1x_1+...+a_nx_n$. \\
+	Réciproquement, si $a_1,...,a_n \in \K$ alors $(x_1,...,x_n) \in \K^n \mapsto a_1x_1+...+a_nx_n \in \K$ est bien linéaire de $\K^n$ dans $\K$. \\
+	En particulier pour $n = 1$, les applications linéaires de $\K$ dans $\K$ sont celles du type $x \in \K \mapsto ax$ (avec $a \in \K$).
+	
+	\item \strong{Applications linéaires de $R^2$ dans $R^2$}
+	
+	$bc_2 = (e_1,e_2), e_1 = (1,0),e_2 = (0,1)$. \\
+	Soit $f \in \mathcal{L}(\R^2)$. Pour $x,y \in \R^2, f((x,y)) = f(xe_1+ye_2) = xf(e_1)+yf(e_2)$ car $f$ est linéaire. \\
+	Notons $f(e_1) = (a,b)$ et $f(e_2) = (c,d)$. \\
+	Alors $f(x,y) = (ax+cy,bx+dy)$, donc il existe $a,b,c,d\in \R$ tels que $\forall (x,y) \in \R^2, f(x,y) = (ax+cy,bx+dy)$. \\
+	Réciproquement, si $a,b,c,d \in \R$, alors $(x,y) \in \R^2 \mapsto (ax+cy,bx+dy)$ est linéaire.
+	
+	\begin{remarque}{}
+	$M = 
+	\begin{pmatrix}
+	a & c \\
+	b & d
+	\end{pmatrix} \in \mathcal{M}_2(\R), 
+	M \begin{pmatrix}
+	x \\ y
+	\end{pmatrix}
+	= 
+	\begin{pmatrix}
+	ax+cy \\ bx + dy
+	\end{pmatrix}$.
+	\end{remarque}
+	
+	\item $E = \R[X], P \mapsto P'$ est un endormorphisme de $\R[X]$. \\
+	Si $A \in \R[X], P \mapsto AP$ est aussi un endomorphisme de $\R[X]$.
+	
+\end{enumerate}
+\end{exemple}
+
+\footnotetext{"La notion de suites 'tout court' n'existe pas" - Le grand Sensei qui refuse catégoriquement toute discrimination entre les suites...}
+
+\begin{remarque}[Propriétés des applications linéaires]{}
+\begin{proposition}{Propriété 1}{}
+$E,F$ deux $\K$-ev, $f \in \mathcal{L}(E,F)$
+$f(0_E) = 0_F$ et $\forall x \in E, f(-x) = -f(x)$ (en particulier, $f$ est un morphisme de groupes de $(E,+)$ dans $(F,+)$)
+\end{proposition}
+
+\begin{proposition}{Propriété 2}{}
+	Pour $n \in \N^*, x_1,...,x_n \in E, \lambda_1,...,\lambda_n \in \K, \\
+	f\left(\displaystyle{\sum_{k=1}^n \lambda_kx_k}\right) = \displaystyle{\sum_{k=1}^n \lambda_k f(x_k)}$. (immédiat par récurrence) \\
+	
+	Pour toute partie $S$ de $E$, $f(\text{Vect}(S)) = \text{Vect}(f(S))$. \\
+	Pour toute famille $\mathcal{F} = (x_i)_{i \in I}$ de vecteurs de $E$, $f(\text{Vect}(\mathcal{F})) = \text{Vect}(f(\mathcal{F}))$, où $f(\mathcal{F}) = (f(x_i))_{i \in I}$. 
+\end{proposition}
+
+\begin{proposition}{Propriété 3}{}
+	\begin{enumerate}
+	\item Si $E_1$ est un sous-espace vectoriel de $E$ alors $f(E_1)$ est un sous-espace vectoriel de $F$. \\
+	En particulier, $f(E)$ est un sous-espace vectoriel de $F$ appelé \strong{image} de $f$, noté $\text{Im}(f)$. On a : \\
+	\begin{center}
+	\textbox{$f$ surjective $\Longleftrightarrow Im(f) = F$}
+	\end{center}
+	\item Si $F_1$ est un sous-espace vectoriel de $F$ alors $f^{-1}(F_1)$ est un sous-espace vectoriel de $E$. \\
+	En particulier, $f^{-1}(0_F)$ est un sous-espace vectoriel de $E$, appelé \strong{noyau} de $F$ et noté $\text{Ker}(f) = \{ x \in E \mid f(x) = 0_F \}$. On a : \\
+	\begin{center}
+	\textbox{$f$ injective $\Longleftrightarrow \text{Ker} f = \{0_E\} \Longleftrightarrow \forall x \in E, f(x) = 0_F \Longrightarrow x = 0_E$}
+	\end{center}
+	\end{enumerate}
+\end{proposition}
+
+\begin{demo}{}
+\begin{enumerate}
+	\item Soit $E_1$ un sous-espace vectoriel de $E$. $E_1 \ne \varnothing$ donc $f(E_1) \ne \varnothing$ \\
+	Soient $u,v \in f(E_1), \lambda \in \K$, montrer que $\lambda u + v \in f(E_1)$. \\
+	Par définition de l'image directe, on dispose de $x,y \in E_1$ tel que $u = f(x), v = f(y)$ \\
+	$\lambda x + y \in E_1$ car $E_1$ est un sous-espace vectoriel, et $f$ étant linéaire, $f(\lambda x + y) = \lambda f(x)+f(y) = \lambda u+v$ et $	\lambda u + v \in f(E_1)$. \\
+
+	\item Soit $F_1$ un sous-espace vectoriel de $F$. \\
+	$0_F \in F_1$ et $0_F = f(0_E)$ ($f$ est linéaire) donc $0_E \in f^{-1}(F_1)$ et donc $f^{-1}(F_1) \ne \varnothing$. \\
+	$Soient x,y \in f^{-1}(F_1), \lambda \in \K$, on a : $f(\lambda x + y) = \lambda f(x) + f(y)$ (car $f$ est linéaire). \\
+	On a $f(x) \in F_1, f(y) \in F_1$ et $F_1$ est un sous-espace vectoriel donc $\lambda f(x) + f(y) \in F_1$\\
+	d'où $\lambda x + y \in f^{-1}(F_1)$ \\
+	$\{0_F\}$ est un sous-espace vectoriel de $F$ donc $f^{-1}(0_F) = \{x \in E \mid f(x) = 0_F \}$ est un sous-espace vectoriel de $E$. \\
+	\begin{itemize}
+		\item Si $f$ est injective, \\
+		soit $x \in \text{Ker}(f), f(x) =0_F = f(0_E)$ donc $x=0_E$ (car $f$ injective) donc $\text{Ker}(f) \subset \{0_E\}$ puis $\text{Ker}(f) = 0_E$.
+		\item Si $f$ n'est pas injective, \\
+		il existe $x,y \in E$ avec $x \ne y$ et $f(x) = f(y)$. \\
+		d'où $0_F = f(y)-f(x) = f(y-x)$ (car $f$ est linéaire) \\
+		d'où $y-x \in \text{Ker}(f)$, et $y-x \ne 0_E$ donc $\text{Ker}(f) \ne \{0_E\}$.
+	\end{itemize}
+\end{enumerate}
+\end{demo}
+
+\begin{proposition}{Propriété 4}{}
+\begin{enumerate}
+	\item Soit $(x_1,...,x_n)$ une famille libre de vecteurs de $E$. \\
+	Si $f$ est injective alors $(f(x_1),...,f(x_n))$ est libre. \\
+	\ie l'image par une application linéaire injective d'une famille libre est libre.
+	
+	\item Soit $\mathcal{G}$ une famille (ou partie) génératrice de $E$. Alors \\
+	\begin{center}
+	\textbox{$f$ surjective $\Longleftrightarrow f(\mathcal{G})$ engendre $F$}
+	\end{center}
+\end{enumerate}
+\end{proposition}
+
+\begin{demo}{}
+\begin{enumerate}
+	\item Supposons $f$ injective. Soient $\lambda_1,...,\lambda_n \in \K$ tels que $\lambda_1f(x_1)+...+\lambda_nf(x_n) = 0_F$.
+	D'où $0_F = f\left(\displaystyle{\sum_{i=1}^n \lambda_i x_i}\right)$ d'où $\displaystyle{\sum_{i=1}^n \lambda_ix_i} = 0_E$ \\
+	or $(x_1,...,x_n)$ est libre donc $\lambda_1=...=\lambda_n = 0$.
+	\item $f(E) = f(\text{Vect}(\mathcal{G})) = \text{Vect}(f(\mathcal{G}))$ \\
+	$f$ surjective $\Longleftrightarrow f(E) = F \Longleftrightarrow \text{Vect}(f(\mathcal{G})) = F$.
+\end{enumerate}
+\end{demo}
+
+\begin{proposition}{Propriété 5 - Composition}{}
+Soient $E,F,G$ trois $\K$-ev, $f \in \mathcal{L}(E,F), g \in \mathcal{L}(F,G)$. Alors $g\circ f \in \mathcal{L}(E,G)$.
+\end{proposition}
+
+\begin{demo}{}
+Soient $x,y \in E, \lambda \in \K$, alors
+\begin{align*}
+g \circ f(\lambda x + y) &= g(f(\lambda x + y)) \\
+&= g(\lambda f(x) + f(y)) (f \text{ est linéaire}) \\
+&= \lambda g(f(x))+g(f(y)) (g \text{ est linéaire}) \\
+&= \lambda g \circ f (x) + g \circ f(y).
+\end{align*}
+\end{demo}
+
+\begin{remarque}[Vocabulaire]{}
+\begin{itemize}
+	\item Une application linéaire bijective s'appelle un \strong{isomorphisme} de $\K$-ev.
+	\item Si $E$ est un $\K$-ev, un isomorphisme de $E$ dans $E$ s'appelle un \strong{automorphisme}.
+\end{itemize}
+\end{remarque}
+
+\begin{remarque}{}
+\begin{enumerate}
+	\item Si $\alpha \ne 0, h_\alpha$ (homothétie de rapport $\alpha$) est un automorphisme du $\K$-ev $E$ (et $h_\alpha^-1 = h_{\frac{1}{\alpha}}$)
+	
+	\item Soient $a,b,c,d \in \R$ et $f : (x,y) \in \K^2 \mapsto (ax+cy,bx+dy) \in \K^2$. \\
+	$f$ est un automorphisme $\Longleftrightarrow ad-bc \ne 0$. \\
+	$bc_2 = (e_1,e_2)$. \\
+	
+	$\Longrightarrow f$ est injective et $(e_1,e_2)$ est libre donc $(f(e_1),f(e_2))$ est libre \\
+	$f(e_1)=(a,b), f(e_2)=(c,d)$ donc $((a,b),(c,d))$ est libre donc $ad-bc \ne 0$. \\
+	
+	$\Longleftarrow$ On sait que $((a,b),(c,d))$ est libre et aussi génératrice. \\
+	Ainsi, $(f(e_1),f(e_2))$ est génératrice donc $f$ est surjective. \\
+	$(f(\K^2) = f(\text{Vect}(e_1,e_2)) = \text{Vect}(f(e_1),f(e_2)) = \K^2)$ \\
+	
+	Montrer que $f$ est injective. \\
+	Soit $e = (\alpha,\beta) = \alpha e_1 + \beta e_2 \in \K^2$. \\
+	Si $f(e) = 0_{\K^2}$ alors $0 = f(\alpha e_1 + \beta e_2)$ donc $0 = \alpha f(e_1) + \beta f(e_2)$ d'où $\alpha = \beta = 0$ \\
+	(car $(f(e_1),f(e_2))$ est libre). \\
+	donc $\forall e \in \K^2, f(e) = 0 \Longrightarrow e = 0$.
+\end{enumerate}
+\end{remarque}
+
+\begin{proposition}{Propriété 6}{}
+Soient $E,F$ deux $\K$-ev. Si $f : E \longrightarrow F$ est un isomorphisme alors $f^{-1}$ est linéaire  (donc $f^{-1}$ est un isomorphisme).
+\end{proposition}
+
+\begin{demo}{}
+Soient $u,v \in F, \lambda \in \K$, montrer que $f^{-1}(\lambda u+v) = \lambda f^{-1}(u) + f^{-1}(v) \in E$. \\
+Or, pour $a,b \in E, a = b  \Longleftrightarrow f(a) = f(b)$ car $f$ est injective. \\
+Ici, $f(f^{-1}(\lambda u + v)) = \lambda u + v$ et $f(\lambda f^{-1}(u) + f^{-1}(v)) = \lambda f(f^{-1}(u)) + f(f^{-1}(v)) = \lambda u + v$, d'où le résultat.
+\end{demo}
+\end{remarque}
+
+\begin{remarque}[Petite Histoire]{}
+\strong{Le $\K$-ev $\mathcal{L}(E,F)$, la $\K$-algèbre $\mathcal{L}(E)$}
+
+\begin{proposition}{Structure de l'ensemble des applications linéaires}{}
+Soient $E,F$ deux $\K$-ev, on a $\mathcal{L}(E,F) \subset \mathcal{F}(E,F)$ qui est un $\K$-ev, donc $\mathcal{L}(E,F)$ est un sous-espace vectoriel du $\K$-ev $\mathcal{F}(E,F)$, donc $\mathcal{L}(E,F)$ devient aussi un $\K$-ev (muni des lois induites).
+\end{proposition}
+
+\begin{remarque}[Rappel]{}
+Pour $f,g \in \mathcal{F}(E,F)$ et $\lambda \in \K, f+g : x \in E \mapsto f(x) + g(x) \in \F$ et $\lambda f : x \in E \mapsto \lambda f(x) \in F$ \\
+$0_{\mathcal{F}(E,F)} : x \in E \mapsto 0_F \in F$.
+\end{remarque}
+
+\begin{demo}{}
+\begin{itemize}
+	\item $\mathcal{L}(E,F) \ne \varnothing$ (car l'application nulle de $E$ dans $F$ est linéaire)
+	
+	\item Soient $f,g \in \mathcal{L}(E,F), \lambda \in \K$, montrer que $\lambda f + g$ est linéaire. \\
+	Soient $x,y \in E, \alpha \in \K$. \\
+	\begin{align*}
+	(\lambda f+g)(\alpha x + y) &= \lambda f(\alpha x + y) + g(\alpha x + y) \quad \text{lois sur } \mathcal{F}(E,F)  \\
+	&= \lambda (\alpha f(x) + f(y)) + \alpha g(x) + g(y) \quad f,g \text{ linéaires} \\
+	&= \alpha (\lambda f(x) + g(x)) + \lambda f(y) + g(y) \\
+	&= \alpha (\lambda f+g)(x) + (\lambda f + g)(y) \quad \text{lois sur } \mathcal{F}(E,F)
+	\end{align*}
+\end{itemize}
+\end{demo}
+
+\begin{proposition}{Pseudo-associativité}{}
+Soit $G$ un autre $\K$-ev.
+\begin{enumerate}
+	\item Pour $f \in \mathcal{L}(E,F), g_1,g_2 \in \mathcal{L}(F,G)$ et $\alpha \in \K, (\alpha g_1 + g_2) \circ f = \alpha g_1 \circ f + g_2 \circ f$
+	
+	\item Pour $f_1,f_2 \in \mathcal{L}(E,F), \alpha \in \K, g \in \mathcal{L}(F,G), g \circ (\alpha f_1+f_2) = \alpha g \circ f_1 + g \circ f_2$
+	
+	\item Pour $\alpha \in \K, f \in \mathcal{L}(E,F), g \in \mathcal{L}(F,G), \alpha (g \circ f) = (\alpha g) \circ f = g \circ (\alpha f)$
+\end{enumerate}
+\end{proposition}
+
+\begin{demo}{}
+\begin{enumerate}
+	\item Soit $x \in E$,
+	\begin{align*}
+	((\alpha g_1 + g_2) \circ f)(x) &= (\alpha g_1 + g_2)(f(x)) \quad \text{définition de } \circ \\
+	&= \alpha g_1 (f(x)) + g_2 (f(x)) \quad \text{lois sur } \mathcal{L}(F,G) \\
+	&= \alpha g_1 \circ f(x) + g_2 \circ f(x) \\
+	&= (\alpha g_1 \circ f + g_2 \circ f)(x)  \quad \text{lois sur } \mathcal{L}(E,G)
+	\end{align*}
+	
+	\item Soit $x \in E$,
+	\begin{align*}
+	(g \circ (\alpha f_1 + f_2))(x) &= g((\alpha f_1 + f_2)(x)) \quad \text{définition de } \circ \\
+	&= g(\alpha f_1(x) + f_2(x)) \quad \text{lois sur } \mathcal{L}(E,F) \\
+	&= \alpha g(f_1(x)) + g(f_2(x)) \quad g \text{ est linéaire} \\
+	&= \alpha g \circ f_1(x) + g \circ f_2(x) \\
+	&= (\alpha g \circ f_1 + g \circ f_2)(x) \quad \text{lois sur } \mathcal{L}(E,G)
+	\end{align*}
+	
+	\item Soit $x \in E, \alpha (g \circ f)(x) = \alpha g \circ f (x) = \alpha g(f(x)) = (\alpha g)(f(x)) = (\alpha g \circ f)(x)$ \\
+	mais aussi $\alpha (g \circ f)(x) = \alpha g(f(x)) = g(\alpha f(x))$ car $g$ est linéaire, donc \\
+	$\alpha (g \circ f)(x) = g((\alpha f)(x)) = (g \circ (\alpha f))(x)$.
+\end{enumerate}
+\end{demo}
+
+Prenons à présent $F=E$. Alors, dans ce cas, si $f$ et $g$ sont deux endomorphismes de $E$ alors $f \circ g$ aussi. \\
+Donc $\circ$ devient une LCI (loi de composition interne) sur $\mathcal{L}(E)$. \\
+Alors :
+\begin{enumerate}
+	\item $(\mathcal{L}(E), + \circ)$ est un anneau : $(\mathcal{L}(E), +)$ est bien un groupe commutatif, $\circ$ est associative admet un neutre $(\text{Id}_E)$ et distributive par rapport à $+$ (cf $\textbf{1)}$ et $\textbf{2)}$ de la propriété précédente)
+	
+	\item $(\mathcal{L}(E), + \cdot)$ est un $\K$-ev.
+	
+	\item Pour $\alpha \in \K, f,g \in \mathcal{L}(E); \alpha \cdot (f \circ g) = (\alpha \cdot f) \circ g  = f \circ (\alpha \cdot g)$.
+\end{enumerate}
+
+\begin{definition}{$\K$-algèbre}
+Une \strong{$\K$-algèbre} est un quadruplet $(A,+,\times, \cdot)$ où $A$ est un ensemble non vide, $+$ et $\times$ deux LCI sur $A$, $\cdot$ une loi externe sur $A$ de domaine $\K$ telle que :
+\begin{enumerate}
+	\item $(A,+,\times)$ est un anneau (s'il est commutatif, on parlera de \strong{$\K$-algèbre commutative})
+	
+	\item $(A,+,\cdot)$ est un $\K$-ev.
+	
+	\item $\forall a,b \in A, \forall \alpha \in \K, \alpha \cdot (a \times b) = \alpha \times (a \cdot b)$
+\end{enumerate}
+\end{definition}
+
+On vient de voir que si $E$ est un $\K$-ev, alors $(\mathcal{L}(E), +, \circ, \cdot)$ est une $\K$-algèbre.
+
+\begin{exemple}[Autres exemples de $\K$-algèbres]{}
+\begin{enumerate}
+	\item $(\K[X], +, \times)$ est une $\K$-algèbre commutative (pour $\lambda \in \K$ et $P \in \K[X], \lambda P = \lambda \times P$)
+	
+	\item $(\mathcal{M}_2(\R),+,\times, \cdot)$ est une $\R$-algèbre non commutative : $\lambda \cdot \begin{pmatrix} a & c \\ b & d \end{pmatrix} = \begin{pmatrix} \lambda a & \lambda c \\ \lambda b & \lambda d \end{pmatrix}$
+	
+	\item Soit $\Omega$ un ensemble, $(\mathcal{F}(\Omega,\R),+,\times,\cdot)$ est une $\R$-algèbre commutative. 
+	
+	\item $\mathbb{L}, \K$ deux corps tel que $\K$ est un sous-corps de $\mathbb{L}$, alors $(\mathbb{L}, + \times, \cdot)$ est une $\K$-algèbre (pour $x \in \mathbb{L}, \lambda \in \K, \lambda \cdot x  = \lambda \times x$). \\
+	En particulier, $\K$ est une $\K$-algèbre.
+\end{enumerate}
+\end{exemple}
+\end{remarque}
+
+\begin{application}{Retour sur $\mathcal{L}(E)$}{}
+\begin{itemize}
+	\item En général, $\circ$ n'est pas commutative. \\
+	$\longrightarrow \quad E : \R^2, f : (x,y) \in \R^2 \mapsto (x,-y) \in \R^2, g : (x,y) \in \R^2 \mapsto (x+y,y) \in \R^2$. \\
+	$f$ et $g$ sont linéaires, mais $g \circ f ((0,1)) = (-1,-1)$ et $f \circ g((0,1)) = (1,-1)$.
+	
+	\item L'anneau $(\mathcal{L}(E), +, \circ)$ n'est pas intègre en général. \\
+	$\longrightarrow \quad E = \R^2, f : (x,y) \in \R^2 \mapsto (y,0) \in \R^2$, \; $f$ n'est pas nulle mais $f \circ f = 0_{\mathcal{L}(E)}$ : \\
+	$\forall x,y \in \R^2, (f \circ f)(x,y) = f(y,0) = (0,0)$. \\
+	Cet exemple montre aussi qu'il peut y avoir des endomorphismes \strong{nilpotents}
+	
+	\begin{definition}{Elément nilpotent}{DefNilpotent}
+	$f \in \mathcal{L}(E)$ est \strong{nilpotent} s'il existe $n \in \N^*$ tel que $f^n = 0_{\mathcal{L}(E)}$ où $f^n = f \circ ... \circ f$ ($n$ fois).
+	\end{definition}
+	
+	\item Eléments inversibles :
+	\begin{definition}{Elément inversible dans $\mathcal{L}(E)$}{DefInversible}
+	Soit $f \in \mathcal{L}(E), f$ est \strong{inversible} dans $(\mathcal{L}(E), +, \circ)$ si et seulement s'il existe $g \in \mathcal{L}(E)$ telle que $f \circ g = g \circ f = \text{Id}_{E}$.
+	\end{definition}
+	
+	Ceci équivaut à : $f$ est un automorphisme du $\K$-ev $E$. \\
+	
+	\begin{definition}{Groupe linéaire}{DefGrpLin}
+	On note $\text{GL}(E)$ le groupe des inversibles de l'anneau $(\mathcal{L}(E), +, \circ)$, on l'appelle le \strong{groupe linéaire} de $E$. Les éléments de $\text{GL}(E)$ sont les automorphismes du $\K$-ev $E$.
+	\end{definition}
+	
+	Pour $\alpha \ne 0, h_\alpha \in \text{GL}(E)$. \\
+	Si $E = \R^2$, et $f : (x,y) \in \R^2 \mapsto (ax+cy,bx+dy) \in \R^2, f \in \text{GL}(\R^2) \Longleftrightarrow ad-bc \ne 0$
+	
+	\begin{remarque}[Rappel]{}
+	$(\text{GL}(E), +, \circ)$ est un groupe (neutre $\text{Id}_E$) non commutatif en général.
+	\end{remarque}
+\end{itemize}
+\end{application}
+
+\begin{theoreme}{}{}
+$(A,+,\times,\cdot)$ une $\K$-algèbre, $a \in A$. Il existe un unique morphisme de $\K$-algèbres $\varphi$ de $\K[X]$ dans $A$ tel que $\varphi(X) = a$.
+\end{theoreme}
+
+Un morphisme de $K$-algèbres de $A$ dans $B$ est une application $f : A \longrightarrow B$ telle que : 
+\begin{enumerate}
+	\item $f(\alpha x + y) = \alpha f(x) + f(y) (\forall \alpha \in \K, \forall x,y \in A)$.
+	
+	\item $f(x \times y) = f(x) \times f(xy) (\forall x,y \in A)$.
+	
+	\item $f(1_A) = 1_B$.
+
+\end{enumerate}
+
+\begin{demo}{}
+Supposons l'existence de $\varphi_a$ alors pour $P = \displaystyle{\sum_{k=0}^n \lambda_kX^k} \in \K[X], \\
+\varphi_a(P) = \varphi_a \left(\displaystyle{\sum_{k=0}^{n} \lambda_k X^k}\right)= \displaystyle{\sum_{k=0}^n \lambda_k \varphi_a(X^k)}$. \\
+
+Or, vu que $\varphi_a$ est un morphisme d'anneaux, on a $\forall U,V \in \K[X], \varphi(UV) = \varphi(U) \varphi(V)$ \\
+puis $\forall n \in \N^*, \forall U_1,...,U_n \in \K[X], \varphi(U_1...U_n) = \varphi(U_1)...\varphi(U_n)$ \\
+puis $\forall U \in \K[X], \forall n \in \N, \varphi(U^n) = \varphi(U)^n$. \\
+
+D'où $\varphi_a(P) = \displaystyle{\sum_{k=0}^n \lambda_k \varphi_a(X)^k = \sum_{k=0}^n \lambda_ka^k}$. \\
+Ainsi, $\varphi_a$ est nécessairement $P = \displaystyle{\sum_{k \ge 0} \lambda_k X^k \in \K[X] \mapsto \sum_{k \ge 0} \lambda_k a^k}$. \\
+
+Posons donc, pour $P = \displaystyle{\sum_{k \ge 0}\lambda_kX^k} \in \K[X]$ (somme finie), $\varphi_a(P) = \displaystyle{\sum_{k \ge 0} \lambda_ka^k} \in A$. \\
+
+On a bien $\varphi_a(X) = 1a^1 = a$. \\
+$\varphi_a$ est un morphisme de $\K$-algèbres :
+\begin{enumerate}
+	\item $\varphi_a(1) = a^0 = 1_\K$. \\
+	Soient $P = \displaystyle{\sum_k \lambda_kX^k, Q = \sum_k \mu_kX^k} \in \K[X], \alpha \in \K$.
+	
+	\item $\varphi_a (\alpha P + Q) = \varphi_a \left(\displaystyle{\sum_k (\alpha \lambda_k +\mu_k)X^k}\right) \underset{\varphi_a \text{linéaire}}{=}\displaystyle{\sum_k \alpha \varphi(\lambda_k X^k) + \varphi(\mu_kX^k)} = \alpha \varphi_a(P) + \varphi_a(Q)$
+	
+	\item Avec $PQ = \displaystyle{\sum_n\left(\sum_{k+\ell = n} \lambda_k \mu_\ell\right)X^n}$ : \\
+	
+	\begin{align*}
+	\varphi_a(P) \times \varphi_a(Q) &= \left(\displaystyle{\sum_k \lambda_ka^k}\right) \times \left(\displaystyle{\sum_k \mu_k a^k}\right) \\
+	&= \displaystyle{\sum_{k,\ell}\lambda_k \cdot (a^k \times (\mu_\ell \cdot \alpha^\ell))} \\
+	&= \displaystyle{\sum_{k,\ell} \lambda_k \cdot (\mu_\ell \cdot (a^k \times a^\ell))} \\
+	&= \displaystyle{\sum_{k,\ell} \lambda_k \cdot (\mu_\ell \cdot a^{k+\ell})} \\
+	&= \displaystyle{\sum_{k,\ell} (\lambda_k \mu_\ell a^{k+\ell})} \\
+	&= \displaystyle{\sum_{k,\ell}(\lambda_k\mu_ell)\cdot a^{k+\ell}} \\
+	&= \displaystyle{\sum_n \left(\sum_{k+\ell = n} (\lambda_k \mu_\ell)\cdot a^{k + \ell} \right)} \\
+	&= \displaystyle{\sum_n \left(\sum_{k+\ell = n}(\lambda_k \mu_\ell) \right) a^n} \\
+	&= \displaystyle{\sum_{k,\ell}(\lambda_ka^k)(\mu_\ell a^\ell)} \\
+	&= \varphi_a(PQ)
+	\end{align*}
+
+\end{enumerate}
+
+\end{demo}
+
+\begin{remarque}{}
+Très souvent, pour $P = \displaystyle{\sum_k \lambda_k X^k} \in \K[X]$ et $a \in A$, on notera $P(a)$ l'expression $\displaystyle{\sum_k \lambda_k a^k}$. \\
+Donc, $\forall P \in \K[X], \varphi_a(P) = P(a)$.
+\end{remarque}
+
+\begin{exemple}[Exemples]{}
+\begin{enumerate}
+	\item Prenons $A = \K$ ($\K$ est bien une $\K$-algèbre). Si $a \in \K$, l'application $P \in \K[X] \mapsto P(a)$ est un morphisme de $\K$-algèbres. \\
+	Dans ce cas, si $P = \displaystyle{\sum_k \lambda_k X^k}, P(a) = \displaystyle{\sum_k \lambda_k a^k} =$ valeur en $a$ de $\overset{\sim}{P}$ (fonction polynomiale associée à $P$). \\
+	
+	On sait que $\forall P,Q \in \K[X], \forall  \lambda \in \K, (\lambda P + Q)(a) = \lambda P(a) + Q(a), (PQ)(a) = P(a)Q(a)$, valable pour tout $a \in \K$. \\
+	D'où $\overset{\sim}{\lambda P + Q} = \lambda \overset{\sim}{P}+\overset{\sim}{Q}, \overset{\sim}{PQ} = \overset{\sim}{P} \overset{\sim}{Q}$ et $\overset{\sim}{1} = t \mapsto 1_\K$. \\
+	On en déduit que $P \in \K[X] \mapsto \overset{\sim}{P} \in \mathcal{F}(\K,\K)$ est aussi un morphisme de $\K$-algèbres. \\
+	
+	\item Prenons $A = \K[X]$, soit $Q \in \K[X]$, pour $P = \displaystyle{\sum_k \lambda_k X^k}, \\
+	P(Q) = \displaystyle{\sum_k \lambda_k Q^k} = P \circ Q. \varphi_Q(P)$. \\
+	On a alors, $\forall P_1,P_2 \in \K[X], \\
+	\forall \alpha \in \K, (\alpha P_1 + P_2) \circ Q = \alpha P_1 \circ Q + P_2 \circ Q$ et $(P_1P_2) \circ Q = P_1 \circ Q \: P_2 \circ Q$ \\
+	
+	\item Prenons $A = \mathcal{L}(E)$ ($E$ est un $\K$-ev), la multiplication dans $A$ est la composition des endomorphismes. \\
+	Pour $f \in \mathcal{L}(E)$, on a $f^0 = \text{Id}_E$ (neutre de $\circ$). \\
+	$\forall k \in \N, f^{k+1} = f^k \circ f$ (pour $k \ge 1, f^k = f \circ ... \circ f$, $k$ fois). \\
+	Pour $x \in E, f^k(x) =$ image de $x$ par l'endomorphisme $f^k$ \\
+	$f((x))^k$ n'a aucun sens : $f(x)$ est un vecteur, il n'y a pas de produit défini pour les vecteurs. \\
+	
+	Pour $P = a_0 + ... + a_NX^N \in \K[X], P(f) \in \mathcal{L}(E)$ est défini par $P(f) = a_0f^0 + a_1f + ... + a_nf^N = a_0 \text{Id}_E + a_1 f + ... + a_N f^N$. \\
+	Par exemple, si $P = 2 + 3X + X^2$, alors $P(f) = 2\text{Id}_E + 3f + f\circ f$ \\
+	
+	$P \in \K[X] \mapsto P(f) \in \mathcal{L}(E)$ est un morphisme de $\K$-algèbres donc $\forall \alpha \in \K, \forall P,Q \in \K[X]$ :
+	\begin{itemize}
+		\item $(\alpha P + Q)(f) = \alpha P(f) + Q(f)$
+		\item $(PQ)(f) = P(f)Q(f)$.
+	\end{itemize}
+	
+	\begin{remarque}{}
+	$\K[X]$ est un anneau commutatif donc $(PQ)(f) = P(f) = (QP)(f) = P(f) Q(f) = Q(f) P(f)$.
+	\end{remarque}
+\end{enumerate}
+\end{exemple}
+
+\newpage
+
+\section{Projecteurs et symétries}
+
+Soit $E$ un $\K$-ev. On suppose disposer de sous-espaces vectoriels $F$ et $G$ tels que $E = F \oplus G$.\\
+Si $x \in E$, il existe un unique $(y,z) \in F \times G$ tel que $x = y+z$. \\
+
+On pose alors $p_{F,G}(x) = y$ et $s_{F,G}(x)=y-z$. \\
+$p_{F,G}$ est le \strong{projecteur} sur $F$, parallèlement à $G$, $s_{F,G}$ est la \strong{symétrie} par rapport à $F$, parallèlement à $G$. \\
+
+$p_{F,G}$ et $s_{F,G}$ sont des endomorphismes de $E$ : \\
+Soient $x,x' \in E, \alpha \in \K$, on écrit $x = y + z$ avec $y \in F, z \in G$, $x' = y' + z'$ avec $y' \in F, z' \in G$. \\
+Alors $\alpha x + x' = \underbrace{\alpha y + y'}_{\in F, F \text{ sev}} + \underbrace{\alpha z + z'}_{\in G, G \text{ sev}}$ \\
+donc $p_{F,G}(\alpha x + x') = \alpha y + y' = \alpha p_{F,G}(x) + p_{F,G}(x')$ \\
+et $s_{F,G}(\alpha x + x') = \alpha y + y' - \alpha z + z' =\alpha (y-z) + (y'-z') = \alpha s_{F,G}(x) + s_{F,G}(x')$
+
+\begin{proposition}{Propriétés des projecteurs et des symétries}{}
+\begin{enumerate}
+	\item On a \mathbox{\text{Im} p_{F,G} = F \quad \text{et} \quad F = \text{Ker}(p_{F,G}-\text{Id}_E}).
+	\item \mathbox{G = \text{Ker} p_{F,G}}. 
+	\item \mathbox{p_{F,G} \circ p_{F,G} = p_{F,G}}.
+\end{enumerate}
+\end{proposition}
+
+\begin{demo}{}
+\begin{enumerate}
+	\item Il est clair que si $x \in E$ alors $p_{F,G}(x) \in F$. Si $x \in F$, alors on a $x = \underbrace{x}_{\in F}+\underbrace{0_E}_{\in G}$ donc \\
+	$p_{F,G}(x) = x$ et $x \in \text{Im} p_{F,G}$. \\
+	
+	On vient de voir : si $x \in F$, alors $p_{F,G} (x) = x$ \ie $(p_{F,G} - \text{Id}_E)(x) = 0_E$ donc $x \in \text{Ker}(p_{F,G} - \text{Id}_E)$. \\
+	Réciproquement, si $x = p_{F,G}(x)$, alors $x \in F$ (car $\forall a, p_{F,G}(a) \in F$).
+	
+	\item Si $x \in G, x  = 0_E + x$ d'où $p_{F,G}(x) = 0_E$. \\
+	Soit $x \in \text{Ker}(p_{F,G})$. On écrit $x = y+z$ avec $y \in F, z \in G$. \\
+	$0_E = p_{F,G}(x) = y$ d'où $x =z \in G$.
+	
+	\item Si $x \in E, y = p_{F,G}(x) \in F$ donc $p_{F,G}(p_{F,G}(x)) = p_{F,G}(y) = y = p_{F,G}(x)$.
+\end{enumerate}
+\end{demo}
+
+\begin{proposition}{}{}
+Soit $f \in \mathcal{L}(E)$, telle que $f \circ f = f$, alors il existe des sous-espaces vectoriels $F,G$ tels que $E = F \oplus G$ et $f = p_{F,G}$.
+\end{proposition}
+
+\begin{definition}{Projecteur}{}
+On appelle alors \strong{projecteur} tout endomorphisme $f$ de $E$ tel que $f \circ f = f$.
+\end{definition}
+
+\begin{demo}{}
+D'après ce qui précède, si $F$ et $G$ existent, et que $f = p_{F,G}$, on doit avoir $F = \text{Im}(f)$, $G = \text{Ker}(f)$. 
+Montrer que $E = \text{Im}(f) \oplus \text{Ker}(f)$ \\
+\begin{itemize}
+	\item $\text{Im}(f) \cap \text{Ker}(f) = \{0_E\}$ : soit $x \in \Im_f \cap \text{Ker}(f)$. \\
+		$x \in \text{Im}(f)$ donc il existe $a \in E$ tel que $x = f(a)$.
+		$x \in \text{Ker}(f)$ donc $f(x) = 0_E$ d'où $0_E = f(f(a)) = f \circ f(a) = f(a) = x$.
+	
+	\item $E = \text{Im}(f) + \text{Ker}(f)$ : soit $x \in E$, on cherche $y \in \text{Im}(f), z \in \text{Ker}(f)$ tels que $x = y+z$. \\
+	Si $y$ et $z$ existent, alors $f(x) = f(y+z) = f(y)+f(z)$ \\
+	$f(z) = 0_E$, et $y$ s'écrit $f(a)$ avec $a \in E$, donc $f(y) = f(f(a)) = f \circ f(a) = f(a) = y$ \\
+	d'où $f(x) = y$, puis $z = x-y = x-f(x)$. \\
+	
+	On écrit donc $x = f(x) + x-f(x)$, on a bien $f(x) \in \text{Im}(f)$ et $f(x-f(x)) = f(x) - f \circ f(x) = f(x) - f(x) = 0_E$. \\
+	donc $x-f(x) \in \text{Ker}(f)$\\
+	
+	On a bien $E = \text{Im}(f) + \text{Ker}(f)$. De plus, on a vu que pour $x \in E, x = \underbrace{f(x)}_{\in \text{Im}(f) = F} + \underbrace{x-f(x)}_{\in \text{Ker}(f) = G}$. \\
+	Donc $p_{F,G}(x) = f(x)$.
+\end{itemize}
+\end{demo}
+
+\end{document}
