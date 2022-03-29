@@ -1,0 +1,688 @@
+\documentclass[12pt,a4paper]{report}
+\input{00 - preambule}
+
+\begin{document}
+
+\chapter{Limites}
+
+\section{Préliminaire : droite numérique achevée $\overline{\R}$} 
+
+\begin{definition}{$\overline{\mathbb{R}}$}{}
+\begin{center}
+    $\overline{\mathbb{R}}=\mathbb{R}\cup\left\{ +\infty,-\infty\right\} $\\
+    $+\infty$ et $-\infty$ sont des objets non élément de $\R$.
+\end{center}
+
+On prolonge à $\overline{\mathbb{R}}$ l'ordre sur $\mathbb{R}$ en posant :
+\begin{center}
+    $\forall x\in\mathbb{R}$, $-\infty<x<+\infty$
+\end{center}
+
+On obtient un ordre total sur $\overline{\R}$
+\end{definition}
+
+\begin{application}{Exercice}{}
+Toute partie non vide de $\overline{\mathbb{R}}$ admet une borne supérieure et une borne inférieure 
+\end{application}
+
+\begin{definition}{Intervalles de $\overline{\R}$ - 4 types}{}
+Avec $a,b \in \overline{\R}$, $a \leq b$ : 
+\begin{multicols}{4}
+\begin{itemize}
+    \item $[a,b]$
+    \item $]a,b]$
+    \item $[a,b[$
+    \item $]a,b[$
+\end{itemize}
+\end{multicols}
+\end{definition}
+
+\begin{definition}{Voisinages}{}
+Soit $x \in \overline{\R}$ et $V \subset \overline{\R}$ 
+\begin{itemize}
+    \item Si \strong{$x$ est un réel}, $V$ est un voisinage de $x$ s'il existe $r>0$ tel que : $[x-r,x+r]\subset V$
+    \item Si \strong{$x = + \infty$}, on dit que $V$ est un voisinage de $+ \infty$ s'il existe $M \in \R$ tel que : $[M,+\infty]\subset V$
+    \item Si \strong{$x = - \infty$}, on dit que $V$ est un voisinage de $- \infty$ s'il existe $M \in \R$ tel que : $[-\infty , M]\subset V$
+    \item Si $w \in \overline{\R}$, on note $\mathcal{V}_{\overline{\R}} (w)$ l'ensemble des voisinages de $w$ dans $\overline{\R}$
+\end{itemize}
+\end{definition}
+
+\begin{remarque}
+Si $x\in \R$, A$\subset \R$, alors $A \in \mathcal{V}_{\R} (x) \Longleftrightarrow A \in \mathcal{V}_{\overline{\R}} (x)$ 
+\end{remarque}
+
+\begin{proposition}{}{}
+\begin{itemize}
+    \item $V \in \mathcal{V}_{\overline{\R}} (w)$ et $V \in W \Longrightarrow W \in \mathcal{V}_{\overline{\R}} (w)$
+    \item Si $(V_i)_{i\in I}$ est une famille de voisinages de $w$ alors $\bigcup_{i\in I} V_i \in \mathcal{V}_{\overline{\R}} (w)$
+    \item Si $n \in \N, V_1 , ..., V_n \in \mathcal{V}_{\overline{\mathbb{R}}}(w)$ alors : \\
+    $V_1 \cap ... \cap V_n \in \mathcal{V}_{\overline{\mathbb{R}}}(w)$
+    \item Si $w,w'\in\overline{\mathbb{R}}$ avec $w\neq w'$, alors : \\
+    $\exists V\in\mathcal{V}_{\overline{\mathbb{R}}}(w)$ \\
+    $\exists V'\in\mathcal{V}_{\overline{\mathbb{R}}}(w')$ avec $V\cap V'=\emptyset$.
+\end{itemize}
+\end{proposition}
+
+\begin{definition}{Adhérence dans $\overline{\R}$}{}
+$w \in \overline{\R}$ est adhérent à $A \subset \overline{\R}$ dans $\overline{\R}$ si : 
+\begin{center}
+    $\forall V \in \mathcal{V}_{\overline{\mathbb{R}}}(w), A\cap V \neq \emptyset$
+\end{center}
+\end{definition}
+
+\section{Définitions et exemples}
+\subsection{Topologique, Epsilonnesque, Séquentielle}
+
+Dans la suite, $D$ est une partie de $\R$, $a$ est un point de $\overline{\R}$ adhérent à $D$ dans $\overline{\R}$. \\
+(On peut avoir $a=\pm \infty ...$)\\
+
+\begin{definition}{Notion de limite - Topologique}{}
+Soit $f:D \rightarrow \R$, $\ell\in \overline{\R}$\\
+On dit que $f(x)$ tend vers $\ell$ lorsque $x$ tend vers $a$, et on écrit $f(x) \xrightarrow[x\rightarrow a (x\in D)]{} \ell$, lorsque : 
+\begin{center}
+\Strong{$\forall V \in \mathcal{V}_{\overline{\R}} (\ell), \exists U\in \mathcal{V}_{\overline{\R}} (a), f(U\cap D) \subset V$}
+\end{center}
+
+\begin{remarque}
+$U\cap D$ n'est jamais vide si $U \in \mathcal{V}_{\overline{\R}} (a)$
+\end{remarque}
+
+Soit $fD \rightarrow \C$, $\ell\in \overline{\C}$\\
+Par définition,$f(x) \xrightarrow[x\rightarrow a]{} \ell$, lorsque : 
+\begin{center}
+    \Strong{$\forall V \in \mathcal{V}_{\C} ( \ell), \exists U\in \mathcal{V}_{\overline{\R}} (a), f(U\cap D) \subset V$}
+\end{center}
+\end{definition}
+
+\pagebreak
+
+\begin{definition}{Traductions concrètes - Epsilon}{}
+$f:D \rightarrow \R, \ell \in \overline{\R}$
+\begin{enumerate}
+    \item $a\in\mathbb{R}$, $\ell\in \R$.
+    \begin{center}
+        $f(x) \xrightarrow[x\rightarrow a]{} \ell \Longleftrightarrow \forall \varepsilon>0, \exists \alpha >0, \forall x \in D$ : \strong{$\lvert x-a \rvert \leq \alpha \Longrightarrow \lvert f(x) - l \rvert \leq \varepsilon$} 
+    \end{center}
+    
+    \item $a=+\infty$, $\ell\in \R$.
+    \begin{center}
+        $f(x) \xrightarrow[x\rightarrow +\infty]{} \ell \Longleftrightarrow \forall \varepsilon>0, \exists M \in \R, \forall x \in D$ : \strong{$x \geq M \Longrightarrow \lvert f(x) - l \rvert \leq \varepsilon$} 
+    \end{center}
+    
+    \item $a=-\infty$, $\ell\in \R$.
+    \begin{center}
+        $f(x) \xrightarrow[x\rightarrow -\infty]{} \ell \Longleftrightarrow \forall \varepsilon>0, \exists M \in \R, \forall x \in D$ : \strong{$x \leq M \Longrightarrow \lvert f(x) - l \rvert \leq \varepsilon$} 
+    \end{center}
+    
+    \item $a\in\mathbb{R}$, $\ell=+\infty$.
+    \begin{center}
+        $f(x) \xrightarrow[x\rightarrow a]{} +\infty \Longleftrightarrow \forall M \in R, \exists \alpha >0, \forall x \in D$ : \strong{$\lvert x-a \rvert \leq \alpha \Longrightarrow f(x) \geq M$} 
+    \end{center}
+    
+    \item $a = +\infty$, $\ell=+\infty$.
+    \begin{center}
+        $f(x) \xrightarrow[x\rightarrow +\infty]{} +\infty \Longleftrightarrow \forall M\in \R, \exists A \in \R, \forall x \in D$ : \strong{$x \geq A \Longrightarrow f(x) \geq M$} 
+    \end{center}
+    
+    \item $a = -\infty$, $\ell=+\infty$.
+    \begin{center}
+        $f(x) \xrightarrow[x\rightarrow -\infty]{} +\infty \Longleftrightarrow \forall M\in \R, \exists A \in \R, \forall x \in D$ : \strong{$x \leq A \Longrightarrow f(x) \geq M$} 
+    \end{center}
+
+    \item $a\in\mathbb{R}$, $\ell=-\infty$.
+    \begin{center}
+        $f(x) \xrightarrow[x\rightarrow a]{} -\infty \Longleftrightarrow \forall M \in R, \exists \alpha >0, \forall x \in D$ : \strong{$\lvert x-a \rvert \leq \alpha \Longrightarrow f(x) \leq M$} 
+    \end{center}
+
+    \item $a = +\infty$, $\ell=-\infty$.
+    \begin{center}
+        $f(x) \xrightarrow[x\rightarrow +\infty]{} -\infty \Longleftrightarrow \forall M \in R, \exists A \in \R, \forall x \in D$ : \strong{$x \geq A \Longrightarrow f(x) \leq M$} 
+    \end{center}
+    
+    \item $a = -\infty$, $\ell=-\infty$.
+    \begin{center}
+        $f(x) \xrightarrow[x\rightarrow -\infty]{} -\infty \Longleftrightarrow \forall M \in R, \exists A \in \R, \forall x \in D$ : \strong{$x \leq A \Longrightarrow f(x) \leq M$} 
+    \end{center}
+    
+\end{enumerate}
+\end{definition}
+
+\begin{principedemo}{}
+Utiliser dans chaque cas la définition des valeurs de $a$ et de $\ell$.
+\end{principedemo}
+
+\begin{demo}
+\textbf{Cas 3} \\
+	$\Longrightarrow$ Soit $\varepsilon > 0$. Alors $V=[\ell-\varepsilon,\ell+\varepsilon]$ est voisinage de $\ell \in \R$ dans $\overline{\R}$. \\
+Donc il existe $U \in \mathcal{V}_{\overline{\R}}(-\infty)$ tel que $f(U \cap D) \subset V$. \\
+On dispose de $M \in \R$ tel que $[-\infty,M] \subset U$. \\
+Donc, pour $x \in D$ tel que $x \leq M$ alors $x \in U \cap D$, donc $f(x) \in V$ ie $\lvert f(x)-\ell \rvert \leq \varepsilon$ \\
+
+	$\Longleftarrow$ Soit $V \in \mathcal{V}_{\overline{\R}}(\ell)$, il existe $\varepsilon > 0$ tel que $[\ell-\varepsilon, \ell + \varepsilon] \subset V$. \\
+D'où l'existence de $M \in \R$ tel que $\forall x \in D, x \leq M \Longrightarrow \lvert f(x)-\ell \rvert \leq \varepsilon$. \\
+Soit $U = [-\infty, M]$. On a $U \in \mathcal{V}_{\overline{\R}}(-\infty)$, et pour $x \in U \cap D$, on a $x \in D$ et $x \leq M$ donc $\lvert f(x)-\ell \rvert \leq \varepsilon$ \\
+ie $f(x) \in [\ell-\varepsilon,\ell + \varepsilon] \subset V$, donc $f(U \cap D) \in V$.
+
+\end{demo}
+\begin{definition}{Limite}{}
+\begin{enumerate}
+    \item $f:D \rightarrow \R$\\
+    Alors il existe au plus un $\ell \in \overline{\R}$ tel que : \strong{$f(x) \xrightarrow[x \rightarrow a]{} \ell$}\\
+    Lorsque c'est le cas, $\ell$ s'appelle la limite de $f$ en $a$ et se note $\lim\limits_a f$ ou $\lim\limits_{x \rightarrow a} f(x)$
+    \item Énoncé identique pour $f:D \rightarrow \C$
+\end{enumerate}
+\end{definition}
+
+\begin{principedemo}{}
+Raisonner par l'absurde et utiliser les définitions des limites utilisant les voisinages.
+\end{principedemo}
+
+\begin{demo}
+Soient $\ell_1, \ell_2 \in \R$, supposons $f(x) \xrightarrow[x \rightarrow a]{} \ell_1$ et $f(x) \xrightarrow[x \rightarrow a]{} \ell_2$. \\
+Si $\ell_1 \neq \ell_2$, il existe $V_1 \in \mathcal{V}_{\overline{\R}}(\ell_1), V_2 \in \mathcal{V}_{\overline{\R}}(\ell_2)$ tel que $V_1 \cap V_2 = \varnothing$. \\
+$f(x) \xrightarrow[x \rightarrow a]{} \ell_1$ donc on peut trouver $U_1 \in \mathcal{V}_{\overline{\R}}(a)$ tel que $f(U_1 \cap D) \subset V_1$ \\
+De même il existe $U_2 \in \mathcal{V}_{\overline{\R}}(a)$ tel que $f(U_2 \cap D) \subset V_2$. \\
+Soit $U = U_1 \cap U_2$. \\
+$U$ est voisinage de $a$, on a donc $U \cap D \neq \varnothing$ ($a$ est adhérent à $D$) \\
+or $f(U \cap D) \subset f(U_1 \cap D) \subset V_1, \quad f(U \cap D) \subset f(U_2 \cap D) \subset V_2$ \\
+donc $f(U \cap D) \subset V_1 \cap V_2 = \varnothing$, absurde.
+
+\end{demo}
+
+\begin{definition}{Notion de limite - Séquentielle}{}
+\begin{enumerate}
+    \item $f:D \rightarrow \R$, $\ell \in \overline{\R}$\\
+    Alors $f(x) \xrightarrow[x \rightarrow a]{} \ell \Longleftrightarrow \forall u \in D^\N$ tel que $u \rightarrow a$, la suite $(f(U_n))_{n \in \N}$ tend vers $\ell$
+    \item $f:D \rightarrow \C$, $\ell \in \C$\\
+    Alors $f(x) \xrightarrow[x \rightarrow a]{} \ell \Longleftrightarrow \forall u \in D^\N$ tel que $u \rightarrow a$, la suite $(f(U_n))_{n \in \N}$ tend vers $\ell$
+\end{enumerate}
+\end{definition}
+
+\begin{lemme}{}{}
+Soit $u \in \R^\N$, $\ell\in \overline{\R}$\\
+Alors $u$ tend vers $\ell$ $\Longleftrightarrow \forall V \in \mathcal{V}_{\overline{\R}} (\ell), \exists n_0 \in \N, \forall n \geq n_0, U_n \in V$
+\end{lemme}
+
+\begin{demo}
+$\Longrightarrow$ Déjà vu si $\ell \in \R$. \\
+Supposons $\ell = +\infty$. Soit $V \in \mathcal{V}_{\overline{\R}}(+\infty) : \exists M \in \R, [M, +\infty] \subset V$. \\
+$u$ tend vers $+\infty$ donc $\exists n_0 \in \N, \forall n \geq n_0, u_n \geq M$ d'où $u_n \in V$.\\
+$\Longleftarrow$ Déjà vu si $\ell \in \R$. \\
+Supposons $\ell = +\infty$. Soit $M \in \R$. $V = [M,+\infty]$ est un voisinage de $+\infty$, donc \\ $\exists n_0 \in \N, u_n \in V$ \ie $u_n \geq M$.
+\end{demo}
+
+\begin{application}{Exercice}{}
+Montrer que $\sin$ n'a pas de limite en $+ \infty$
+\end{application}
+
+\subsection{Lien entre limite et continuité}
+
+Soit $f: D \rightarrow \K$ et $x_0 \in D$\\
+Supposons $f$ admet une limite $\ell$ en $x_0$ \\
+Alors $\ell=f(x_0)$ et $f$ est alors continue en $x_0$ \\
+\\
+En effet, si $\ell \neq f(x_0)$ : il existe $V$ voisinage de $\ell$ tel que $f(x_0) \notin V$\\
+On dispose de $U\in \mathcal{V}_{\overline{\R}} (x_0)$ tel que $f(U\cap D) \subset V $\\
+Or $x_0 \in U\cap D$ d'où $f(x_0) \in V ...$\\
+De plus, $f(x) \xrightarrow[x \to x_0]{} f(x_0)$\\
+$\Longleftrightarrow$ $\forall \varepsilon >0, \exists \alpha > 0, \forall x \in D$, $\lvert x-x_0 \rvert \leq \alpha \Longrightarrow \lvert f(x) - f(x_0) \rvert \leq \varepsilon$\\
+$\Longleftrightarrow f$ est continue en $x_0$
+
+\begin{proposition}{Bilan}{}
+$f$ continue en $x_0$ $\Longleftrightarrow f$ admet une limite en $x_0$ $\Longleftrightarrow f(x) \xrightarrow[x\rightarrow x_0]{} f(x_0)$ 
+\end{proposition}
+
+\subsection{Prolongement par continuité}
+Ici $D = I$ (intervalle de $\R$), $x_0 \in I$. \\
+$f : I \setminus \{x_0\} \to \K$ continue. On suppose que $f$ admet une limite $\ell \in \K$. \\
+
+Alors $\overset{\sim}{f} : I \to \K$ définie par : $\forall x \neq x_0 : \overset{\sim}{f}(x) = f(x)$ et $\overset{\sim}{f}(x_0) = \ell$ est l'unique \Strong{prolongement par continuité de $f$ à $I$} continu en $x_0$. \\
+
+\begin{demo}
+
+Soit $V \in \mathcal{V}_{\overline{\R}}(\ell)$ \quad ($\ell = \overset{\sim}{f}(x_0)$) \\
+Il existe $U \in \mathcal{V}_{\overline{\R}}(x_0)$ tel que $f(U \cap I \setminus \{x_0\}) \subset V$ (car $f(x) \xrightarrow[\substack{x \to a \\ x \neq a}]{} \ell$) \\
+Or $x_0 \in U$ et $f(x_0) = \ell \in V$, donc $\overset{\sim}{f}(U \cap I) \subset V$, d'où $\overset{\sim}{f}(x) \xrightarrow[x \to x_0]{} \overset{\sim}{f}(x_0) \Longrightarrow$ \strong{$f$ est continue en $x_0$}.
+\end{demo}
+
+\begin{exemple}
+On a $x \ln x \xrightarrow[\substack{x \to 0 \\ x \neq 0}]{} 0$. \\
+Soit $f : t \in \R_+^* \mapsto t \ln t \in \R$. On peut prolonger $f$ par continuité en $0$ en posant $f(0)=0$.
+\end{exemple}
+
+\subsection{Limites à gauche et à droite}
+Soit $D$ une partie de $\R$, $a \in \R$. \\
+$D^+ = D \:\cap \:]a,+\infty[$ \\
+$D^- = D \: \cap \: ]-\infty,a[$ \\
+On suppose $a$ adhérent à $D^+$ et à $D^-$ \\
+(\strong{exemple :} $D = \R^*, a=0$ ou $D$ est un intervalle, $a \in \Int(D)$ ou encore \\
+$I$ est un intervalle, $a \in \Int(I)$, $D = I \setminus \{a\}$) \\
+
+$f_+ = f_{\: \lvert D^+} : t \in D^+ \mapsto f(t) \in \K$ , \quad $f_- = f_{\: \lvert D^-} : t \in D^- \mapsto f(t) \in \K$ \\
+On a $a \not \in D^+, a \not \in D^-$.
+
+\begin{definition}{Limites à gauche et à droite}{LimGaucheDroite}
+On dit que $f$ admet une limite à gauche (respectivement à droite) en $a$ lorsque $f_-$ (respectivement $f_+$) admet une limite en $a$. \\
+Si c'est le cas, on la note : $\underset{a^-}{\lim} f = \underset{\substack{x \to a \\ x < a}}{\lim} f(x)$ (respectivement $\underset{a^+}{\lim} f = \underset{\substack{x \to a \\ x > a}}{\lim} f(x)$)
+\end{definition}
+
+\begin{exemple}
+$t \mapsto E(t)$ admet $0$ pour limite à droite en $0$, $-1$ pour limite à gauche en $0$.
+\end{exemple}
+
+\begin{demo}
+\begin{enumerate}
+	\item Supposons $f$ a une limite $\ell$ en $a$. \\
+	Soit $V$ un voisinage de $\ell$, il existe $U$ voisinage de $a$ tel que $f(U \cap D) \subset V$. \\
+	D'où, pour $t \in U \cap D^+$ on a $t \in U \cap D$ donc $f_+(t) = f(t) \in V$ \\
+	$\Longrightarrow f_+(U \cap D^+) \subset V$ \\
+	Donc $f_+(t) \xrightarrow[\substack{t \to a \\ (t \in D^+)}]{} \ell$ : $f$ admet $\ell$ comme limite à droite en $a$. \\
+	De même, $f_-(t) \xrightarrow[\substack{t \to a \\ (t \in D^-)}]{} \ell$ : $f$ admet $\ell$ comme limite à gauche en $a$. \\
+	$\Longrightarrow f$ admet en $a$ des limites à droite et à gauche égales à $\ell$.
+	
+	\item Supposons que $f$ admet des limites à droite et à gauche égales, et notons $\ell = \underset{a^+}{\lim} f = \underset{a^-}{\lim} f$
+		$\longrightarrow$ Si $a \not \in D$, montrer que $f(x) \xrightarrow[x \to a]{} \ell$ : Soit $V$ voisinage de $\ell$, il existe $U_1,U_2$ voisinage de $a$ tel que $f(U_1 \cap D^+) \subset V$, \quad $f(U_2 \cap D^-) \subset V$. \\
+		Soit $U = U_1 \cap U_2$. On a $U$ voisinage de $a$. \\
+		Si $t \in U \cap D$, on a $t \neq a$ car $a \not \in D$, donc $t > a$ ou $t < a$. \\
+			Si $t > a$ alors $t \in U \cap D^+ \subset U_1 \cap D^+$ donc $f_+(t) = f(t) \in V$ \\
+			Si $t < a$ alors $t \in U \cap D^- \subset U_2 \cap D^-$ donc $f_-(t) = f(t) \in V$ \\
+		$\longrightarrow$ Si $a \in D$, la seule limite possible pour $f$ en $a$ est $f(a)$. \\
+		Donc, si $\ell \neq f(a)$, $f$ n'a pas de limite en $a$. \\
+		Mais si $\ell = f(a)$, alors $f$ est continue en $a$. \\
+		On a en fait : \strong{$f$ continue en $a \Longleftrightarrow f$ admet des limites à gauche et à droite égales à $f(a)$} \\
+		ce qu'on écrit $f(x) \xrightarrow[\substack{x \to a \\ x < a}]{} f(a)$ et $f(x) \xrightarrow[\substack{x \to a \\ x > a}]{} f(a)$.
+\end{enumerate}
+\end{demo}
+
+\section{Théorèmes généraux}
+\subsection{Cas des limites finies}
+
+\begin{theoreme}{Théorèmes généraux sur les limites de fonctions}{ThmGauxFct}
+$f,g : D \to \K$. On suppose $f(x) \xrightarrow[x \to a]{} \ell \in \K, \quad g(x) \xrightarrow[x \to a]{} \ell' \in \K$. \\
+Alors : \\
+\begin{enumerate}
+	\item $\alpha f(x)+g(x) \xrightarrow[x \to a]{} \alpha \ell + \ell'$
+	\item $f(x)g(x) \xrightarrow[x \to a]{} \ell \ell'$
+	\item $\abs{f(x)} \xrightarrow[x \to a]{} \abs{\ell}$
+	\item Si $f$ ne s'annule pas, et si $\ell \neq 0$, alors $\frac{1}{f(x)} \xrightarrow[x \to a]{} \frac{1}{\ell}$
+	\item Si $\K = \R, \ell, \ell' \in \R$ \\
+		$\inf(f(x),g(x)) \xrightarrow[x \to a]{} \min(\ell, \ell')$ \\
+		$\sup(f(x),g(x)) \xrightarrow[x \to a]{} \max(\ell, \ell')$ \\
+	\item Si $\K = \C$ \\
+		$\Re(f(x)) \xrightarrow[x \to a]{} \Re(\ell)$ \\
+		$\Im(f(x)) \xrightarrow[x \to a]{} \Im(\ell)$ et \\
+		$\overline{f(x)} \xrightarrow[x \to a]{} \overline{\ell}$
+\end{enumerate}
+\end{theoreme}
+
+\begin{principedemo}{}
+Appliquer la définition séquentielle de la limite d'une fonction puis utiliser les théorèmes généraux sur la limite de suites.
+\end{principedemo}
+
+\begin{demo}
+Preuve de \textbf{4)} \\
+Soit $(u_n)_{n \in \N}$ une suite de points de $D$ qui tend vers $a$. \\
+Comme $f(x) \xrightarrow[x \to a]{} \ell$, on sait que $f(u_n) \xrightarrow[n \to +\infty]{} \ell$. \\
+On a $\ell \neq 0$ et $f(u_n) \neq 0$ pour tout $n$, donc on sait que $\strong{\frac{1}{f(u_n)} \xrightarrow[n \to +\infty]{} \frac{1}{\ell}}$.
+\end{demo}
+
+\begin{remarque}{}
+\begin{enumerate}
+	\item Si $f(x) \xrightarrow[x \to a]{} \ell \neq 0$, alors $f$ est non nulle au voisinage de $a$ : \\
+		$\exists U \in \mathcal{V}_{\overline{\R}} (a), \forall x \in U \cap D, f(x) \neq 0$. \\
+		En effet, on peut trouver dans ce cas un voisinage $V$ de $\ell$ tel que $0 \not \in V$, d'où l'existence de $U \in \mathcal{V}_{\overline{\R}} (a)$ tel que $f(U \cap D) \subset V$ \\
+		(d'où $f(b) \neq 0$ si $t \in U \cap D$) \\
+	\item $f : D \to \R$. Supposons $f(x) \xrightarrow[x \to a]{} \ell \in \overline{\R}$.
+	\begin{enumerate}
+		\item Si $\alpha \in \R$ est tel que $\strong{\alpha < \ell}$ (ce qui suppose $\ell \neq -\infty$) \\
+			Alors $f(x) \geq \alpha$ au voisinage de $a$ : il existe $U$ voisinage de $a$ tel que $\forall t \in U \cap D, f(t) \geq \alpha$.
+			En effet, $[\alpha , +\infty]$ est un voisinage de $\ell$, donc il existe $U \in \mathcal{V}_{\overline{\R}}(a)$ tel que $f(U \cap D) \subset [\alpha,+\infty]$. \\
+			En particulier, si $\ell > 0$, on aura $f > 0$ au voisinage de $a$ (en prenant $\alpha \in ]0,\ell[$, on a même $f \geq \alpha > 0$ au voisinage de $a$).
+		\item De même, si $\beta \in \R$ est tel que $\strong{\ell < \beta}$ alors $f \leq \beta$ au voisinage de $a$. Donc, si $\ell < 0$, on aura $f < 0$ au voisinage de $a$ (en prenant $\beta \in ]\ell, 0[$, on a même $f \leq \beta < 0$ au voisinage de $a$).
+	\end{enumerate}
+		
+\end{enumerate}
+\end{remarque}
+
+\subsection{Cas des limites infinies}
+
+\begin{theoreme}{Limite de sommes et produits de fonctions}{SommeProdLimInf}
+Soient $f,g : D \to \R$ ($a \in \overline{\R}$ adhérent à $D$), on suppose $f(x) \xrightarrow[x \to a]{} +\infty$.
+\begin{enumerate}
+	\item Si $g$ est minorée au voisinage de $a$ c'est notamment le cas lorsque $g$ admet en $a$ une limite $\ell \in \overline{\R} \setminus \{-\infty\}$), alors $f(x)+g(x) \xrightarrow[x \to a]{} +\infty$
+	\item Si $g$ est minorée au voisinage de $a$ par une constante $m > 0$ (c'est notamment le cas lorsque $g$ admet en $a$ une limite $\ell > 0$), alors $f(x)g(x) \xrightarrow[x \to a]{} +\infty$.
+	\item Si $f$ ne s'annule pas alors $\frac{1}{f(x)} \xrightarrow[x \to a]{} 0$.
+	\item Si $g > 0$ au voisinage de $a$ et $g(x) \xrightarrow[x \to a]{} 0$ alors $\frac{1}{g(x)} \xrightarrow[x \to a]{} +\infty$.
+\end{enumerate}
+\end{theoreme}
+
+\begin{demo}
+Par hypothèse, il existe $m > 0$ tel qu'il existe $U_1 \in \mathcal{V}_{\overline{\R}} (a)$ tel que $\forall x \in U_1 \cap D, g(x) \geq m$. \\
+Soit $V \in \mathcal{V}_{\overline{\R}} (+\infty)$ et $f(x) \xrightarrow[x \to a]{} +\infty$, donc $\exists U_2 \in \mathcal{V}_{\overline{\R}}(a)$ tel que $f(U_2 \cap D) \subset [\frac{M}{m},+\infty]$. \\
+Soit $U = U_1 \cap U_2$. $U$ est un voisinage de $a$ et pour $t \in U \cap D : g(t) \geq m > 0, \; f(t) \geq \frac{M}{m} > 0$. \\
+D'où $f(t)g(t) \geq M > 0$ puis $f(t)g(t) \in V$
+\end{demo}
+
+\begin{remarque}
+Attention aux formes indéterminées :$\infty - \infty$, $0 \cdot \infty$
+\begin{enumerate}
+	\item $\infty-\infty$.
+		On peut avoir : 
+		\begin{enumerate}
+			\item Limite finie : Pour $x, \ell \in \R$, $f(x) = x+\ell$, $g(x) = x$, $\underset{x \to +\infty}{\lim f(x)-g(x)}=\ell$
+			\item Limite infinie : Pour $x \in \R$, $f(x) = 2x, g(x) = x$, $\underset{x \to +\infty}{\lim f(x)-g(x)}=+\infty$
+			\item Pas de limite : Pour $x \in \R$, $f(x) = x+\sin x, g(x) = x$, $\sin$ n'a pas de limite au voisinage de l'infini.
+		\end{enumerate}
+	\item $0 \cdot \infty$.
+		On peut avoir : 
+		\begin{enumerate}
+			\item Limite finie : Pour $x,\ell \in \R^*$, $f(x) = \frac{\ell}{x}$, $g(x) = x$, $\underset{x \to +\infty}{\lim f(x)g(x)} = \ell$.
+			\item Limite infinie : Pour $x \in \R^*$, $f(x) = \frac{1}{x}, g(x) = x^2$, $\underset{x \to +\infty}{\lim f(x)g(x)} = +\infty$.
+			\item Pas de limite : Pour $x \in \R^*, f(x) = x\left(1+\abs{\sin x}\right), g(x) = \frac{1}{x}$, pas de limite de la fonction $fg(x) = 1+\abs{\sin x}$ lorsque $x$ tend vers $+\infty$.
+		\end{enumerate}
+\end{enumerate}
+\end{remarque}
+
+\begin{theoreme}{Composition}{CompositionLimites}
+Soient $D,\Delta$ deux parties de $\R$, $a \in \overline{\R}$ adhérent à $D$, \\
+$f : D \to \R$ telle que $f(D) \subset \Delta$ \\
+$g : \Delta \to \R$. \\
+On suppose que $g$ admet une limite $b \in \overline{\R}$ en $a$, et que $g$ admet une limite $\ell \in \overline{\R}$ en $b$. \\
+Alors $\mathbox{g\left(f(x)\right) \xrightarrow[x \to a]{} \ell}$.
+\end{theoreme}
+
+\begin{remarque}
+\begin{enumerate}
+	\item Même théorème pour $g : \Delta \to \C$ (avec $\ell \in \C$)
+	\item Avec les hypothèses du théorème, on a \strong{$b$ adhérent à $\Delta$ dans $\overline{\R}$} : \\
+		Soit $V$ un voisinage de $b$ dans $\overline{\R}$, il existe $U \in \mathcal{V}_{\overline{\R}}(a)$ tel que $f(U \cap D) \subset V$. \\
+		Or $U \cap D \neq \varnothing$ ($a$ adhérent à $D$), donc $f(U \cap D) \neq \varnothing$ et $f(U \cap D) \subset \Delta$ donc $\Delta \cap V \neq \varnothing$.
+\end{enumerate}
+\end{remarque}
+
+\begin{principedemo}
+Exploiter d'abord la limite de $g$ en $b$ puis la limite de $f$ en $a$ en utilisant la définition de la limite d'une fonction.
+\end{principedemo}
+
+\begin{demo}
+Soit $W \in \mathcal{V}_{\overline{\R}}(\ell)$ : $g(y) \xrightarrow[y \to b]{} \ell$, donc il existe $V \in \mathcal{V}_{\overline{\R}}(b)$ tel que $g(V \cap \Delta) \subset W$ \\
+$V \in \mathcal{V}_{\overline{\R}}(b)$ et $f(x) \xrightarrow[x \to a]{} b$ donc il existe $U \in \mathcal{V}_{\overline{\R}}(a)$ tel que $f(U \cap D) \subset V$ d'où pour $t \in U \cap D$ : \\
+$f(t) \in V \cap \Delta$, donc $g(f(t)) \in W$ \ie $g \circ f(U \cap D) \subset W$
+\end{demo}
+
+
+\begin{exemple}
+On sait que $\frac{\sin t}{t} \xrightarrow[t \to 0]{} 1$, d'où $x\sin\left(\frac{1}{x}\right) \xrightarrow[x \to +\infty]{} 1$. \\
+En effet, $\frac{1}{x} \xrightarrow[x \to \infty]{} 0$, \quad $\frac{\sin t}{t} \xrightarrow[t \to 0]{} 1$ \quad et $\forall x > 0, x\sin\left(\frac{1}{x}\right) = \frac{\sin\left(\frac{1}{x}\right)}{\frac{1}{x}}$.
+\end{exemple}
+
+\begin{proposition}{Limites à connaître}{}
+On a :
+\begin{enumerate}
+	\item $\ln t \xrightarrow[t \to +\infty]{} +\infty$
+	\item $\ln t \xrightarrow[t \to 0]{} -\infty$
+	\item $t \ln t \xrightarrow[t \to 0]{} 0$
+	\item $\frac{\ln x}{x-1} \xrightarrow[x \to 1]{} 1$ soit $\frac{\ln(1+t)}{t} \xrightarrow[t \to 0]{} 1$
+	\item $e^t \xrightarrow[t \to +\infty]{} +\infty$
+	\item $e^t \xrightarrow [t \to -\infty]{} 0$
+	\item $te^t \xrightarrow [t \to -\infty]{} 0$
+	\item $\frac{t}{e^t} \xrightarrow[t \to +\infty]{} 0$
+	\item $\frac{e^t-1}{t} \xrightarrow[t \to 0]{} 1$ \\
+	
+	Pour $\alpha > 0$ :
+	\item $t^\alpha \ln t \xrightarrow[t \to 0]{} 0$
+	\item $\abs{t}^\alpha e^t \xrightarrow[t \to -\infty]{} 0$
+	\item $\frac{\ln t}{t^\alpha} \xrightarrow[t \to +\infty]{} 0$
+	\item $\frac{t^\alpha}{e^t} \xrightarrow[t \to +\infty]{} 0$
+	\item $\frac{\sin t}{t} \xrightarrow[t \to 0]{} 1$
+	\item $\frac{\tan t}{t} \xrightarrow[t \to 0]{} 1$
+	\item $\frac{1-\cos t}{t^2} \xrightarrow[t \to 0]{} \frac{1}{2}$
+\end{enumerate}
+\end{proposition}
+
+\begin{demo}
+Preuve de \textbf{16)}. \\
+Pour $t \neq 0, \frac{1-\cos t}{t^2} = 2 \frac{\sin^2\left(\frac{t}{2}\right)}{t^2} = \frac{1}{2} \frac{\sin^2 \left(\frac{t}{2}\right)}{\left(\frac{t}{2}\right)^2}$ \\
+Or $\frac{\sin u}{u} \xrightarrow[t \to 0]{} 1, \quad \frac{t}{2} \xrightarrow[t \to 0]{} 0$, \quad donc \\
+$\frac{\sin\left(\frac{t}{2}\right)}{\frac{t}{2}} \xrightarrow[t \to 0]{} 1$, d'où le résultat.
+\end{demo}
+
+\section{Ordre et limites}
+Cette section est spécifique aux \strong{fonctions réelles}.
+
+\subsection{Quelques théorèmes intermédiaires sur les limites d'applications}
+
+\begin{theoreme}{Comparaison}{CompFct}
+$f,g : D \to \R (a \in \overline{\R}$ adhérent à $D$). On suppose $f \leq g$ au voisinage de $a$ : \\
+$\exists U \in \mathcal{V}_{\overline{\R}}(a), \forall t \in U \cap D, f(t) \leq g(t)$.
+\begin{enumerate}
+	\item Si $f(x) \xrightarrow[x \to +\infty]{} +\infty$, alors $\mathbox{g(x) \xrightarrow[x \to \infty]{} +\infty}$.
+	\item Si $g(x) \xrightarrow[x \to +\infty]{} -\infty$, alors $\mathbox{f(x) \xrightarrow[x \to \infty]{} -\infty}$.
+\end{enumerate}
+\end{theoreme}
+
+\begin{principedemo}{}
+Pour \textbf{1)}, appliquer la définition de "tendre vers $+\infty$ au voisinage de $+\infty$" 
+\end{principedemo}
+
+\begin{demo}{}
+Preuve de \textbf{1)}. \\
+Supposons $f(x) \xrightarrow[x \to +\infty]{} +\infty$. \\
+Soit $V \in \mathcal{V}_{\overline{\R}}(+\infty)$, soit $M \in \R$ tel que $[M, +\infty] \subset V$. \\
+$[M,+\infty] \in \mathcal{V}_{\overline{\R}}(+\infty)$, donc il existe $U_2 \in \mathcal{V}_{\overline{\R}}(a)$ tel que $f(U_2 \cap D) \subset [M,+\infty]$ \\
+Soit \strong{$U = U_1 \cap U_2$}. \\
+$U \in \mathcal{V}_{\overline{\R}}(a)$ et pour $t \in U \cap D, M \leq f(t) \leq g(t)$ donc $g(t) \in [M,+\infty] \subset V$ : $\strong{g(U \cap D) \subset V}$
+\end{demo}
+
+\begin{theoreme}{Conservation des inégalités larges par passage à la limite}{ConsInegLimFct}
+$f,g : D \to \R$, $f \leq g$ au voisinage de $a$. On suppose que $f,g$ ont des limites $\ell,\ell' \in \overline{\R}$ en $a$, \\ 
+alors $\ell \leq \ell'$.
+\end{theoreme}
+
+\begin{principedemo}{}
+Raisonner par l'absurde et considérer un réel $\alpha$ tel que $\ell' < \alpha < \ell$
+\end{principedemo}
+
+\begin{demo}{}
+Supposons par l'absurde $\ell' < \ell$, soit $\alpha \in \R$ tel que $\ell' < \alpha \ell$. \\
+$[-\infty, \alpha[$ est voisinage de $\ell'$ donc il existe $U_1 \in \mathcal{V}_{\overline{\R}}(\ell')$ tel que $f(U_1 \cap D) \subset [-\infty,\alpha[$. \\
+De même, $]\alpha,+\infty[$ est voisinage de $\ell$ donc il existe $U_2 \in \mathcal{V}_{\overline{\R}}$ tel que $f(U_2 \cap D) \subset ]\alpha,+\infty[$.
+Par hypothèse, il existe $U_3 \in \mathcal{V}_{\overline{\R}}(a)$ tel que $\forall t \in U_3 \cap D, f(t) \leq g(t)$.
+Mais alors, avec $U = U_1 \cap U_2 \cap U_3$ (voisinage de $a$), et $t \in U \cap D$ ($U \cap D \neq \varnothing$ car $a$ adhérent à $D$) \\
+on a $f(t) \leq g(t)$ et $g(t) < \alpha f(t)$ : absurde.
+\end{demo}
+
+\begin{theoreme}{Théorème des gendarmes}{ThmGendarmesFct}
+$f,g,h : D \to \R$, On suppose $f \leq g \leq h$ au voisinage de $a$ \\
+Si $f$ et $h$ ont une limite $\ell \in \overline{\R}$ en $a$, alors $g(x) \xrightarrow[x \to +\infty]{} \ell$.
+\end{theoreme}
+
+\begin{demo}{}
+Si $\ell = +\infty$ ou $\ell = -\infty$, c'est vrai, cf théorème \ref{prop:CompFct}. \\
+Supposons $\ell \in \R$. Soit $V \in \mathcal{V}_{\overline{\R}}, r>0$ tel que $[\ell-r,\ell+r] \subset V$. \\
+$[\ell-r,\ell+r]$ est aussi au voisinage de $\ell$. \\
+$f(x) \xrightarrow[x \to a] \ell$ donc $\exists U_1 \in \mathcal{V}_{\overline{\R}}(a), f(U_1 \cap D) \subset [\ell-r,\ell+r]$. \\
+De même, $\exists U_2 \in \mathcal{V}_{\overline{\R}}(a), h(U_2 \cap D) \subset [\ell-r,\ell+r]$. \\
+Enfin, $\exists U_3 \in \mathcal{V}_{\overline{\R}}(a), \forall t \in U_3 \cap D, f(t) \leq g(t) \leq h(t)$. \\
+Soit $U = U_1 \cap U_2 \cap U_3$ : $U \in \mathcal{V}_{\overline{\R}}(a)$, et pour $t \in U \cap D, \ell-r \leq f(t) \leq g(t) \leq h(t) \leq \ell+r$ \\
+Donc $g(t) \in [\ell-r,\ell+r] \subset V$, donc $g(U \cap D) \subset V$
+\end{demo}
+
+\begin{theoreme}{Limite d'une fonction croissante sur un intervalle (1)}{LimIntervalle1}
+Soient $a \in \R, b \in \overline{\R}$, avec $a<b$, $f : [a,b[ \to \R$ croissante.
+\begin{enumerate}
+	\item Si \strong{$f$ est majorée}, $f$ admet en $b$ une limite finie $\ell \in \R$ ($\ell = \underset{[a,b[}{\sup} f$).
+	\item Si \strong{$f$ n'est pas majorée}, alors $f(x) \xrightarrow[x \to b]{} +\infty$
+\end{enumerate}
+\end{theoreme}
+
+\begin{demo}{}
+\begin{enumerate}
+	\item Supposons \strong{$f$ majorée}, soit $\ell = \underset{[a,b[}{\sup} f \in \R$. \\
+	Montrer que $f(t) \xrightarrow[x \to b]{} \ell$. \\
+	Soit $V \in \mathcal{V}_{\overline{\R}}(b), \varepsilon >0$, tel que $[\ell-\varepsilon, \ell +\varepsilon] \subset V$. \\
+	$\ell-\varepsilon < \ell = \underset{[a,b[}{\sup} f$ donc $\ell-\varepsilon$ ne majore pas $f$ : il existe $x \in [a,b[$ tq $f(x) > \ell-\varepsilon$. \\
+	Soit $U = [x,+\infty]$. $U$ est un voisinage de $b$ dans $\overline{\R}$ (car $x<b$) et, pour $t \in U \cap [a,b[ = [x,b[$, on a \\
+	$\ell = \underset{[a,b[}{\sup} f \geq f(t) \geq f(x) > \ell-\varepsilon$. \\
+	Donc $f(t) \in ]\ell-\varepsilon,\ell] \subset V$ : $f(U \cap [a,b[) \subset V$.
+	\item Supposons \strong{$f$ non majorée}, montrer que $f(t) \xrightarrow[t \to b]{} +\infty$. \\
+	Soit $V \in \mathcal{V}_{\overline{\R}}(+\infty), M \in \R$ tq $[M,+\infty] \subset V$. \\
+	$f$ n'est pas majorée donc il existe $x \in [a,b[$ tel que $f(x) \geq M$. \\
+	Soit $U = [x,+\infty]$, on a $U \in \mathcal{V}_{\overline{\R}}(b)$, et pour $t \in U \cap [a,b[ = [x,b[, f(t) \geq f(x) \geq M$, donc $f(t) \in V$.
+\end{enumerate}
+\end{demo}
+
+\begin{corollaire}{Limite d'une fonction décroissante sur un intervalle (1)}{LimIntervalle2}
+$a \in \R, b \in \overline{\R}$ tels que $a<b$, $f : [a,b[ \to \R$ décroissante.
+\begin{enumerate}
+	\item Si \strong{$f$ est minorée}, alors $f(x) \xrightarrow[x \to b]{} \ell = \underset{[a,b[}{\inf} f \in \R$.
+	\item Si \strong{$f$ n'est pas minorée}, alors $f(x) \xrightarrow[x \to b]{} -\infty$.
+\end{enumerate}
+\end{corollaire}
+
+\begin{principedemo}{}
+Appliquer le théorème \ref{prop:LimIntervalle1} à $-f$.
+\end{principedemo}
+
+\begin{corollaire}{Limite d'une fonction croissante sur un intervalle (2)}{LimIntervalle3}
+$a \in \R, b \in \overline{\R}$ tels que $b<a$, $f : ]b,a] \to \R$ croissante.
+\begin{enumerate}
+	\item Si \strong{$f$ est minorée} alors $f(x) \xrightarrow[x \to b]{} \ell = \underset{]b,a]}{\inf f} \in \R$.
+	\item Si \strong{$f$ n'est pas minorée} alors $f(x) \xrightarrow[x \to b]{} -\infty$.
+\end{enumerate}
+\end{corollaire}
+
+\begin{principedemo}{}
+Appliquer le corollaire \ref{prop:LimIntervalle2} à $t \in [-a,-b[ \; \mapsto f(-t)$.
+\end{principedemo}
+
+\begin{corollaire}{Limite d'une fonction décroissante sur un intervalle (2)}{LimIntervalle4}
+$a \in \R, b \in \overline{\R}$ tels que $b<a$, $f : ]b,a] \to \R$ décroissante.
+\begin{enumerate}
+	\item Si \strong{$f$ est majorée} alors $f(x) \xrightarrow[x \to b]{} \ell = \underset{]b,a]}{\sup f} \in \R$.
+	\item Si \strong{$f$ n'est pas majorée} alors $f(x) \xrightarrow[x \to b]{} +\infty$.
+\end{enumerate}
+\end{corollaire}
+
+\begin{principedemo}{}
+Appliquer le théorème \ref{prop:LimIntervalle1} à $-f$ ou le corollaire \ref{prop:LimIntervalle3} à $t \mapsto f(-t)$.
+\end{principedemo}
+
+\begin{theoreme}{Limites à droite et à gauche d'une application croissante sur un intervalle}{LimIntervalle5}
+Soit $I$ un intervalle non trivial de $\R$, $f : I \to \R$ croissante. 
+\begin{enumerate}
+	\item Soit $x_0 \in \Int(I)$. Alors $f$ admet en $x_0$ des limites à droite et à gauche finies et $\mathbox{\underset{x_0^-}{\lim} f \leq f(x_0) \leq \underset{x_0^+}{\lim f}}$. \\
+	$f$ continue en $x_0 \Longleftrightarrow \underset{x_0^-}{\lim} f = \underset{x_0^+}{\lim} f$.
+	\item Si $I$ est du type $[a,...$ avec $a \in \R$, $f$ admet une limite à droite et $f(a) \leq \underset{a^+}{\lim} f$. \\
+	$f$ est continue en $a \Longleftrightarrow f(a) = \underset{a^+}{\lim} f$.
+	\item Si $I$ est du type $...,,b]$ avec $b \in \R$, $f$ admet une limite à gauche et $f(b) \leq \underset{b^-}{\lim} f$. \\
+	$f$ est continue en $b \Longleftrightarrow f(b) = \underset{b^-}{\lim} f$.
+\end{enumerate}
+\end{theoreme}
+
+\begin{demo}{}
+$I_+ = I \cap ]x_0,+\infty[$ est un intervalle du type $]x_0,...$ \\
+$f_+ : t \in I_+ \mapsto f(t) \in \R$. \\
+$f_+$ est croissante et minorée (par $f(x_0)$). D'après le corollaire \ref{prop=LimIntervalle3}, $f$ admet une limite $\ell \in \R$ en $x_0$, \\
+et $\ell = \underset{I_+}{\inf} f_+ \geq f(x_0)$ car $f$ est croissante et $f(x_0)$ est un minorant de $f_+$. \\
+Donc $f$ admet en $x_0$ une limite à droite réelle, et $\underset{x_0^+}{\lim} f \geq f(x_0)$.
+De même, $f$ admet en $x_0$ une limite à gauche réelle, et $\underset{x_0^-}{\lim} f \leq f(x_0)$.
+\end{demo}
+
+\begin{theoreme}{Limites à droite et à gauche d'une application décroissante sur un intervalle}{LimIntervalle6}
+Soit $I$ un intervalle non trivial de $\R$, $f : I \to \R$ décroissante. 
+\begin{enumerate}
+	\item Soit $x_0 \in \Int(I)$. Alors $f$ admet en $x_0$ des limites à droite et à gauche finies et $\mathbox{\underset{x_0^-}{\lim} f \geq f(x_0) \geq \underset{x_0^+}{\lim f}}$. \\
+	$f$ continue en $x_0 \Longleftrightarrow \underset{x_0^-}{\lim} f = \underset{x_0^+}{\lim} f$.
+	\item Si $I$ est du type $[a,...$ avec $a \in \R$, $f$ admet une limite à droite et $f(a) \geq \underset{a^+}{\lim} f$. \\
+	$f$ est continue en $a \Longleftrightarrow f(a) = \underset{a^+}{\lim} f$.
+	\item Si $I$ est du type $...,,b]$ avec $b \in \R$, $f$ admet une limite à gauche et $f(b) \geq \underset{b^-}{\lim} f$. \\
+	$f$ est continue en $b \Longleftrightarrow f(b) = \underset{b^-}{\lim} f$.
+\end{enumerate}
+\end{theoreme}
+
+\begin{principedemo}{}
+Même démonstration à peu de choses près que pour le théorème \ref{prop:LimIntervalle5}.
+\end{principedemo}
+
+\begin{theoreme}{Lien entre continuité et image directe par une application monotone}{MonotoneIntervalleImage}
+Soit $I$ un intervalle non trivial de $\R$, $f : I \to \R$ monotone. \\
+$f$ est continue $\Longleftrightarrow f(I)$ est un intervalle.
+\end{theoreme}
+
+\begin{principedemo}{}
+Raisonner par contraposée et utiliser le théorème \ref{prop=LimIntervalle5}
+\end{principedemo}
+
+\begin{demo}{}
+Le TVI (cours $14$, théorème ??) donne immédiatement le sens direct. \\
+$\Longleftarrow$ \strong{Par contraposée}, (pour $f$ croissante), supposons $f$ non continue. \\
+Soit $x_0 \in I$ tel que $f$ n'est pas continue en $x_0$.
+\begin{enumerate}
+	\item Si $x_0 \in \Int(I)$. On a d'après le théorème \ref{prop:LimIntervalle5}, $\underset{x_0^-}{\lim} f < \underset{x_0^+}{\lim} f$.
+	On a : $\forall t > x_0, f(t) \geq \underset{x_0^+}{\lim} f$, et $\forall t < x_0, f(t) \leq \underset{x_0^-}{\lim} f$.
+	Aucun point de $]\underset{x_0^-}{\lim} f, \underset{x_0^+}{\lim} f[ \setminus \{f(x_0)\}$ n'est une valeur prise par $f$. \\
+	Or $f$ prend des valeurs $> \underset{x_0^-}{\lim} f$ et des valeurs $< \underset{x_0^+}{\lim} f$. \\
+	Si $f(I)$ est un intervalle, $f$ devrait prendre toute valeur de $]\underset{x_0^-}{\lim} f, \underset{x_0^+}{\lim} f[$, ce qui est faux.
+	\item $x_0$ est l'extrémité gauche de $I$ (Si $I$ a une extrémité gauche). \\
+	On a $\underset{x_0^+}{\lim} f > f(x_0)$.
+	\item $x_0$ est l'extrémité droite de $I$ (Si $I$ a une extrémité droite). \\
+	On a $\underset{x_0^-}{\lim} f < f(x_0)$.
+\end{enumerate}
+\end{demo}
+
+
+\subsection{Théorème de la bijection}
+
+\begin{theoreme}{Théorème de la bijection}{ThmBij}
+Soit $I$ un intervalle non trivial de $\R$, $f : I \to \R$ \textbf{continue strictement monotone}.
+\begin{enumerate}
+	\item $J = f(I)$ est un intervalle non trivial de $\R$, plus précisément :
+	\begin{enumerate}
+		\item Si $I = [a,b]$ avec $a,b\in \R, a<b$ alors $J = [f(a),f(b)]$.
+		\item Si $I = [a,b[$ avec $a \in \R,b \in \overline{\R}, a<b$ alors $J = [f(a),\underset{b}{\lim} f[$.
+		\item Si $I = ]a,b]$ avec $a \in \overline{\R}, b \in \R, a<b$ alors $J = ]\underset{a}{\lim} f, f(b)]$.
+		\item Si $I = ]a,b[$ avec $a,b \in \overline{\R}, a<b$ alors $J = ]\underset{a}{\lim} f, \underset{b}{\lim} f[$.
+	\end{enumerate}
+	\item $f$ induit une bijection $\overset{\sim}{f}$ de $I$ dans $J$ et $\overset{\sim}{f}^{-1}$ est continue strictement croissante.
+\end{enumerate}
+\end{theoreme}
+
+\begin{demo}{}
+cas où $f$ est strictement croissante. \\
+On sait que $J$ est un intervalle car $f$ est continue. Supposons $I = ]a,b]$, avec $a \in \overline{\R}, b \in \R, a<b$. \\
+On sait que $f$ admet en $a$ une limite $\ell \in \overline{\R} (\ell = -\infty$ si $f$ n'est pas minorée, $\ell \in \R$ si $f$ est minorée).
+\begin{enumerate}
+	\item Si $\ell = -\infty$ ($f$ n'est pas minorée), montrer que $J = ]-\infty,f(b)]$.
+		Si $x \in I$ alors $f(x) \leq f(b) (x \leq b$ et $f$ strictement croissante), donc $f(x) \in ]-\infty,f(b)]$ (\strong{$J \subset ]-\infty,f(b)]$}).\\
+		Soit $y \in ]-\infty,f(b)]$. $f$ n'est pas minorée donc il existe $x \in I$ tel que $f(x) < y$. \\
+		On a : $f(x) < y \leq f(b)$ et $J$ est un intervalle donc $[f(x),f(b] \subset f(I)$, d'où $y \in f(I)$ \\
+		(\strong{$]-\infty,f(b) \subset J$}).
+	\item  Si $\ell \in \R$ ($f$ est minorée), on a vu que $\ell = \underset{]a,b]}{\inf} f$.
+		Montrer que $J = ]\ell,f(b)]$.
+		Soit $x \in I = ]a,b]$, soit $y \in ]a,x[ \subset I$. Alors $\ell \leq f(y) < f(x) \leq f(b)$ ($f$ est strictement croissante), \\
+		donc $\ell < f(x) \leq f(b)$ : $J \subset ]\ell,f(b)]$. \\
+		Soit $z \in ]\ell, f(b)]. z > \ell = \underset{]a,b]}{\inf} f$ donc $z$ ne minore pas $f$, donc il existe $x \in ]a,b]$ tel que $f(x)>z$. \\
+		On a $f(x),f(b) \in J$, et $J$ est un intervalle, donc $[f(x),f(b)] \subset J$ et $z \in [f(x),f(b)]$ donc $z \in J$, ce qui entraîne : \\
+		\strong{$]\ell,f(b)] \subset J$} \\ \\
+$f$ esr strictement croissante, donc injective. Donc $f$ induit une bijection de $I$ sur $J = f(I)$ \ie \textbox{$\overset{\sim}{f} : t \in I \mapsto f(t) \in J$ est bijective.} \\
+$\overset{\sim}{f}^{-1}$ est strictement croissante : soient $z,z' \in J$ tels que $z<z'$. \\
+Si $\overset{\sim}{f}^{-1}(z) \geq \overset{\sim}{f}^{-1}(z')$, on aurait : $f\left(\overset{\sim}{f}^{-1}(z)\right) \geq f\left(\overset{\sim}{f}^{-1}(z')\right)$ d'où $z\geq z'$, absurde. \\
+\end{enumerate}
+\end{demo}
+
+\begin{application}{Existence et unicité des racines $n$-ièmes}{ExistenceUnicitéRacinesNièmesBijection}
+Soit $n \in \N^*, f : t \in \R_+ \mapsto t^n \in \R_+$. \\
+$f$ est continue car polynomiale et strictement croissante.
+On a $f(t) \xrightarrow[t \to +\infty]{} +\infty$ (on a $t \xrightarrow[t \to +\infty]{} +\infty$ et, par récurrence immédiate, $\forall n \in \N^*, t^n \xrightarrow[t \to +\infty]{} +\infty$. \\
+$f$ induit donc une bijection de $\R_+ = [0,+\infty[$ sur $f(\R_+) = [f(0), \underset{+\infty}{\lim} f[ = \R_+$ (notée encore $f$). \\
+donc $g = f^{-1} : \R_+ \to \R_+$ est continue strictement croissante. \\
+$f$ est bijective, donc pour tout $x \in \R_+$, il existe un unique $t \in \R_+$ tel que $x=f(t)=t^n$. Ce $t$ se note $\sqrt[n]{x}$. \\
+On a alors : $x \overset{g}{\mapsto} \sqrt[n]{x}$ est continue, strictement croissante.
+\end{application}
+
+\begin{application}{Exercice}{}
+$I$ un intervalle de $\R$, $f : I \to \R$ continue. \textbox{$f$ injective $\Longleftrightarrow f$ strictement monotone}.
+\end{application}
+
+\end{document}
